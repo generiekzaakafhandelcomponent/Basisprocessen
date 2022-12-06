@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.5.1" camunda:diagramRelationId="5a8154d3-9833-4e45-b6d1-72f4e8782553">
+  <bpmn:collaboration id="Collaboration_1di385c">
+    <bpmn:participant id="StatusupdateProcesParticipant" name="Statusupdate proces" processRef="StatusupdateProces" />
+    <bpmn:participant id="AanvragerParticipant" name="aanvrager" />
+    <bpmn:messageFlow id="NotificatieStatusupdateMessageFlow" name="notificatie statusupdate" sourceRef="VersturenEmailNotificatieTask" targetRef="AanvragerParticipant" />
+  </bpmn:collaboration>
+  <bpmn:process id="StatusupdateProces" name="Statusupdate proces" isExecutable="true">
+    <bpmn:laneSet id="LaneSet_07nf471">
+      <bpmn:lane id="Lane_1wde2x0">
+        <bpmn:flowNodeRef>StartStatusupdateStartEvent</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>OpvragenEmailadresAanvragerTask</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>ZetZaakStatusTask</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EmailAdresAanwezigGateway</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>VersturenEmailNotificatieTask</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>RegistreerKlantcontactTypeMailTask</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_0bx7ril</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>StatusUpdateAfgehandeldEndEvent</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="StartStatusupdateStartEvent" name="Start statusupdate">
+      <bpmn:outgoing>Flow_0ephy3l</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0ephy3l" sourceRef="StartStatusupdateStartEvent" targetRef="ZetZaakStatusTask" />
+    <bpmn:serviceTask id="OpvragenEmailadresAanvragerTask" name="Opvragen emailadres aanvrager" camunda:asyncBefore="true" camunda:expression="${execution.setVariable(&#34;emailadres&#34;, processKlantService.getKlant(execution).emailadres)}">
+      <bpmn:incoming>Flow_0q3iwkz</bpmn:incoming>
+      <bpmn:outgoing>Flow_17mdblp</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="ZetZaakStatusTask" name="Zet zaak status" camunda:asyncBefore="true" camunda:expression="${zaakProcessService.setStatus(execution, status)}">
+      <bpmn:incoming>Flow_0ephy3l</bpmn:incoming>
+      <bpmn:outgoing>Flow_0q3iwkz</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_17mdblp" sourceRef="OpvragenEmailadresAanvragerTask" targetRef="EmailAdresAanwezigGateway" />
+    <bpmn:sequenceFlow id="Flow_0q3iwkz" sourceRef="ZetZaakStatusTask" targetRef="OpvragenEmailadresAanvragerTask" />
+    <bpmn:exclusiveGateway id="EmailAdresAanwezigGateway" name="E-mail adres aanwezig?" default="NeeSequenceFlow">
+      <bpmn:incoming>Flow_17mdblp</bpmn:incoming>
+      <bpmn:outgoing>JaSequenceFlow</bpmn:outgoing>
+      <bpmn:outgoing>NeeSequenceFlow</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sendTask id="VersturenEmailNotificatieTask" name="Versturen email notificatie" camunda:asyncBefore="true" camunda:expression="${mailService.sendElementTemplateTaskMail(execution)}">
+      <bpmn:extensionElements>
+        <camunda:properties>
+          <camunda:property name="mailSendTaskFrom" value="placeholder@local" />
+          <camunda:property name="mailSendTaskTemplate" value="placeholder-mail-template" />
+          <camunda:property name="mailSendTaskSubject" value="Placeholder Subject" />
+          <camunda:property name="mailSendTaskTo" value="${emailadres}" />
+        </camunda:properties>
+        <camunda:failedJobRetryTimeCycle>R5/PT10M</camunda:failedJobRetryTimeCycle>
+      </bpmn:extensionElements>
+      <bpmn:incoming>JaSequenceFlow</bpmn:incoming>
+      <bpmn:outgoing>Flow_0lb4tpu</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:serviceTask id="RegistreerKlantcontactTypeMailTask" name="Registreer klantcontact type: mail" camunda:asyncBefore="true" camunda:expression="${connectorFluentBuilder.builder().withConnector(&#39;ContactMoment&#39;).createContactMoment(&#34;MAIL&#34;,&#39;De status van uw aanvraag is gewijzigd&#39;)}">
+      <bpmn:incoming>Flow_0lb4tpu</bpmn:incoming>
+      <bpmn:outgoing>Flow_0sti55v</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="JaSequenceFlow" name="Ja" sourceRef="EmailAdresAanwezigGateway" targetRef="VersturenEmailNotificatieTask">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${emailadres != ''}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="NeeSequenceFlow" name="Nee" sourceRef="EmailAdresAanwezigGateway" targetRef="Gateway_0bx7ril" />
+    <bpmn:sequenceFlow id="Flow_0lb4tpu" sourceRef="VersturenEmailNotificatieTask" targetRef="RegistreerKlantcontactTypeMailTask" />
+    <bpmn:sequenceFlow id="Flow_0sti55v" sourceRef="RegistreerKlantcontactTypeMailTask" targetRef="Gateway_0bx7ril" />
+    <bpmn:exclusiveGateway id="Gateway_0bx7ril">
+      <bpmn:incoming>Flow_0sti55v</bpmn:incoming>
+      <bpmn:incoming>NeeSequenceFlow</bpmn:incoming>
+      <bpmn:outgoing>Flow_1n48g3q</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:endEvent id="StatusUpdateAfgehandeldEndEvent" name="Status update afgehandeld">
+      <bpmn:incoming>Flow_1n48g3q</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1n48g3q" sourceRef="Gateway_0bx7ril" targetRef="StatusUpdateAfgehandeldEndEvent" />
+  </bpmn:process>
+  <bpmn:message id="Message_0z1ny7x" name="Message_1upt7sk" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1di385c">
+      <bpmndi:BPMNShape id="Participant_0ze2hs4_di" bpmnElement="StatusupdateProcesParticipant" isHorizontal="true">
+        <dc:Bounds x="160" y="220" width="1020" height="390" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_1wde2x0_di" bpmnElement="Lane_1wde2x0" isHorizontal="true">
+        <dc:Bounds x="190" y="220" width="990" height="390" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_12mcs6t_di" bpmnElement="StartStatusupdateStartEvent">
+        <dc:Bounds x="232" y="392" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="205" y="435" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_06izxz5_di" bpmnElement="OpvragenEmailadresAanvragerTask">
+        <dc:Bounds x="460" y="370" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_18evmh3_di" bpmnElement="ZetZaakStatusTask">
+        <dc:Bounds x="320" y="370" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1ftgbie_di" bpmnElement="EmailAdresAanwezigGateway" isMarkerVisible="true">
+        <dc:Bounds x="605" y="385" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="599" y="348" width="62" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1hvjig0_di" bpmnElement="VersturenEmailNotificatieTask">
+        <dc:Bounds x="710" y="370" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_18m5jev_di" bpmnElement="RegistreerKlantcontactTypeMailTask">
+        <dc:Bounds x="850" y="370" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0bx7ril_di" bpmnElement="Gateway_0bx7ril" isMarkerVisible="true">
+        <dc:Bounds x="995" y="385" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0av49wz_di" bpmnElement="StatusUpdateAfgehandeldEndEvent">
+        <dc:Bounds x="1092" y="392" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1077" y="435" width="68" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0ephy3l_di" bpmnElement="Flow_0ephy3l">
+        <di:waypoint x="268" y="410" />
+        <di:waypoint x="320" y="410" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_17mdblp_di" bpmnElement="Flow_17mdblp">
+        <di:waypoint x="560" y="410" />
+        <di:waypoint x="605" y="410" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0q3iwkz_di" bpmnElement="Flow_0q3iwkz">
+        <di:waypoint x="420" y="410" />
+        <di:waypoint x="460" y="410" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1yai587_di" bpmnElement="JaSequenceFlow">
+        <di:waypoint x="655" y="410" />
+        <di:waypoint x="710" y="410" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="677" y="392" width="12" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0uzdrs5_di" bpmnElement="NeeSequenceFlow">
+        <di:waypoint x="630" y="435" />
+        <di:waypoint x="630" y="520" />
+        <di:waypoint x="1020" y="520" />
+        <di:waypoint x="1020" y="435" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="639" y="454" width="21" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0lb4tpu_di" bpmnElement="Flow_0lb4tpu">
+        <di:waypoint x="810" y="410" />
+        <di:waypoint x="850" y="410" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0sti55v_di" bpmnElement="Flow_0sti55v">
+        <di:waypoint x="950" y="410" />
+        <di:waypoint x="995" y="410" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1n48g3q_di" bpmnElement="Flow_1n48g3q">
+        <di:waypoint x="1045" y="410" />
+        <di:waypoint x="1092" y="410" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Participant_05qvvmm_di" bpmnElement="AanvragerParticipant" isHorizontal="true">
+        <dc:Bounds x="160" y="80" width="1020" height="60" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0xx0zwo_di" bpmnElement="NotificatieStatusupdateMessageFlow">
+        <di:waypoint x="760" y="370" />
+        <di:waypoint x="760" y="140" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="768" y="156" width="63" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
