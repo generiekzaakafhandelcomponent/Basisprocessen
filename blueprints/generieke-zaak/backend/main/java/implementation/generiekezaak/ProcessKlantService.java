@@ -7,10 +7,13 @@ import lombok.RequiredArgsConstructor;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.springframework.stereotype.Component;
 
-@RequiredArgsConstructor
 @Component
 public class ProcessKlantService {
     private final KlantService klantService;
+
+    public ProcessKlantService(KlantService klantService) {
+        this.klantService = klantService;
+    }
 
     public Klant getKlant(DelegateExecution execution) {
         //assuming business key is document id

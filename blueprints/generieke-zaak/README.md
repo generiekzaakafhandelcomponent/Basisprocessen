@@ -5,6 +5,17 @@ It automatically creates a case in OpenZaak when a product has been requested by
 
 This blueprint was tested on Valtimo `9.24.0.RELEASE`.
 
+**Included process models:**
+<details>
+  <summary>Generiek proces</summary>
+  <img src="generiek-proces.png" alt="Generiek proces"/>
+</details>
+<details>
+  <summary>Zet zaak status</summary>
+  <img src="zaakstatus-update.png" alt="Zet zaak status"/>
+</details>
+
+
 ## Adjusting the BPMN models
 Please use the Camunda modeler to make the changes as described below:  
 * `resources/bpmn/generiek-proces.bpmn`
@@ -23,10 +34,12 @@ Some tasks in the model have an empty implementation. These rely on form or proc
 to perform a task. Detailed documentation can be found [here](https://docs.valtimo.nl/using-valtimo)
 
 The following changes need to be made in the web-interface of GZAC:
-* `Genereren brief` uses the SmartDocuments- or any other document plugin.
-* `Opslaan Document in Documenten API` uses the Documenten API.
-* `Linken Document aan Zaak` uses 'Link document to zaak' action on the Zaken API.
+
+**Generiek proces**
+* `Genereren brief` uses the `SmartDocuments - Document genereren`.
+* `Opslaan Document in Documenten API` uses the `Documenten API - Document opslaan`.
+* `Linken Document aan Zaak` uses 'Link document to zaak' action on the `Zaken API - Koppel document aan zaak`.
 * `Behandelen zaak` should already be linked to the `generiek-proces.behandelen-zaak` form at deployment.
 * `Burger taak: Upload geldig legitimatiebewijs` No form has been provided. A custom form should be created.
-* `Maak besluit` uses the Besluiten connector with action `Create besluit`.
-* `Zet zaak resultaat` uses the Besluiten connector with action `Set resultaat`.
+* `Maak besluit` uses the OpenZaak connector with action `Create besluit`.
+* `Zet zaak resultaat` uses the OpenZaak connector with action `Set resultaat`.
