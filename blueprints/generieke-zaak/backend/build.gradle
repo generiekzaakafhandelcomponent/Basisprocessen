@@ -16,7 +16,4 @@ dependencies {
     implementation "com.ritense.valtimo:smartdocuments:${valtimo_version}"
     implementation "com.ritense.valtimo:wordpress-mail:${valtimo_version}"
     implementation "com.ritense.valtimo:zaken-api:${valtimo_version}"
-
-    annotationProcessor "org.projectlombok:lombok"
-    compileOnly "org.projectlombok:lombok"
 }
