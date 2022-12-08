@@ -9,7 +9,7 @@
     <bpmn:laneSet id="LaneSet_07nf471">
       <bpmn:lane id="Lane_1wde2x0">
         <bpmn:flowNodeRef>SysteemNotificatieProductaanvraagOntvangenStartEvent</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Activity_0vr3xj8</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>GenererenBriefTask</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>ZetZaakStatusCallActivity</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Gateway_0zya3u5</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>GeselecteerdeStatusGateway</bpmn:flowNodeRef>
@@ -23,8 +23,8 @@
         <bpmn:flowNodeRef>EmailAdresAanwezigGateway</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>VersturenEmailNotificatieTask</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>MaakBesluitTask</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Activity_02rj9rl</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Activity_1pwgh5o</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>OpslaanDocumentInDocumentenAPITask</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>LinkenDocumentAanZaakTask</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
     <bpmn:dataStoreReference id="OpenZaakAPIDataStoreReference" name="OpenZaak API" />
@@ -35,7 +35,7 @@
     <bpmn:sequenceFlow id="Flow_0vihvrx" sourceRef="ZetZaakStatusCallActivity1" targetRef="BurgerTaakUploadGeldigLegitimatiebewijsTask" />
     <bpmn:sequenceFlow id="Flow_0s9up30" sourceRef="BehandelenZaakTask" targetRef="GeselecteerdeStatusGateway" />
     <bpmn:sequenceFlow id="Flow_1p534rh" sourceRef="Gateway_0zya3u5" targetRef="BehandelenZaakTask" />
-    <bpmn:serviceTask id="Activity_0vr3xj8" name="Genereren brief" camunda:asyncBefore="true" camunda:expression="${true}">
+    <bpmn:serviceTask id="GenererenBriefTask" name="Genereren brief" camunda:asyncBefore="true" camunda:expression="${true}">
       <bpmn:extensionElements>
         <camunda:properties>
           <camunda:property name="Voornaam" value="doc:/voorlettersAanvrager" />
@@ -45,7 +45,7 @@
       <bpmn:incoming>Flow_1om711d</bpmn:incoming>
       <bpmn:outgoing>Flow_0twmlyy</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:sequenceFlow id="Flow_0twmlyy" sourceRef="Activity_0vr3xj8" targetRef="Activity_02rj9rl" />
+    <bpmn:sequenceFlow id="Flow_0twmlyy" sourceRef="GenererenBriefTask" targetRef="OpslaanDocumentInDocumentenAPITask" />
     <bpmn:callActivity id="ZetZaakStatusCallActivity" name="Zet zaak status" camunda:asyncBefore="true" calledElement="StatusupdateProces">
       <bpmn:extensionElements>
         <camunda:in sourceExpression="Geregistreerd" target="status" />
@@ -57,7 +57,7 @@
         <bpmn:targetRef>OpenZaakAPIDataStoreReference</bpmn:targetRef>
       </bpmn:dataOutputAssociation>
     </bpmn:callActivity>
-    <bpmn:sequenceFlow id="Flow_1om711d" sourceRef="ZetZaakStatusCallActivity" targetRef="Activity_0vr3xj8" />
+    <bpmn:sequenceFlow id="Flow_1om711d" sourceRef="ZetZaakStatusCallActivity" targetRef="GenererenBriefTask" />
     <bpmn:sequenceFlow id="Flow_0ephy3l" sourceRef="SysteemNotificatieProductaanvraagOntvangenStartEvent" targetRef="ZetZaakStatusCallActivity" />
     <bpmn:sequenceFlow id="InBehandelingSequenceFlow" name="in behandeling" sourceRef="GeselecteerdeStatusGateway" targetRef="ZetZaakStatusCallActivity1">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${status == 'IN_BEHANDELING'}</bpmn:conditionExpression>
@@ -174,13 +174,13 @@
         <bpmn:targetRef>DataStoreReference_02ivejj</bpmn:targetRef>
       </bpmn:dataOutputAssociation>
     </bpmn:serviceTask>
-    <bpmn:sequenceFlow id="Flow_1x4ftr3" sourceRef="Activity_02rj9rl" targetRef="Activity_1pwgh5o" />
-    <bpmn:sequenceFlow id="Flow_0hq0wny" sourceRef="Activity_1pwgh5o" targetRef="Gateway_0zya3u5" />
-    <bpmn:serviceTask id="Activity_02rj9rl" name="Opslaan Document in Documenten API" camunda:asyncBefore="true" camunda:expression="${true}">
+    <bpmn:sequenceFlow id="Flow_1x4ftr3" sourceRef="OpslaanDocumentInDocumentenAPITask" targetRef="LinkenDocumentAanZaakTask" />
+    <bpmn:sequenceFlow id="Flow_0hq0wny" sourceRef="LinkenDocumentAanZaakTask" targetRef="Gateway_0zya3u5" />
+    <bpmn:serviceTask id="OpslaanDocumentInDocumentenAPITask" name="Opslaan Document in Documenten API" camunda:asyncBefore="true" camunda:expression="${true}">
       <bpmn:incoming>Flow_0twmlyy</bpmn:incoming>
       <bpmn:outgoing>Flow_1x4ftr3</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:serviceTask id="Activity_1pwgh5o" name="Linken Document aan Zaak" camunda:asyncBefore="true" camunda:expression="${true}">
+    <bpmn:serviceTask id="LinkenDocumentAanZaakTask" name="Linken Document aan Zaak" camunda:asyncBefore="true" camunda:expression="${true}">
       <bpmn:incoming>Flow_1x4ftr3</bpmn:incoming>
       <bpmn:outgoing>Flow_0hq0wny</bpmn:outgoing>
     </bpmn:serviceTask>
@@ -230,7 +230,7 @@
           <dc:Bounds x="229" y="420" width="83" height="53" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0vr3xj8_di" bpmnElement="Activity_0vr3xj8">
+      <bpmndi:BPMNShape id="Activity_0vr3xj8_di" bpmnElement="GenererenBriefTask">
         <dc:Bounds x="510" y="355" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0ugfuos_di" bpmnElement="ZetZaakStatusCallActivity">
@@ -305,10 +305,10 @@
       <bpmndi:BPMNShape id="Activity_1einhg2_di" bpmnElement="MaakBesluitTask">
         <dc:Bounds x="1470" y="355" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0k6s3wk_di" bpmnElement="Activity_02rj9rl">
+      <bpmndi:BPMNShape id="Activity_0k6s3wk_di" bpmnElement="OpslaanDocumentInDocumentenAPITask">
         <dc:Bounds x="660" y="355" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1t3biqg_di" bpmnElement="Activity_1pwgh5o">
+      <bpmndi:BPMNShape id="Activity_1t3biqg_di" bpmnElement="LinkenDocumentAanZaakTask">
         <dc:Bounds x="800" y="355" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="TextAnnotation_1y6x42i_di" bpmnElement="TextAnnotation_1y6x42i">
