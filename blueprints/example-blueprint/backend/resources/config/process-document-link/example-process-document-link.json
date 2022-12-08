@@ -1,6 +1,6 @@
 [
   {
-    "processDefinitionKey": "exampleProcess",
+    "processDefinitionKey": "example-process",
     "canInitializeDocument": true,
     "startableByUser": true,
     "processIsVisibleInMenu": true

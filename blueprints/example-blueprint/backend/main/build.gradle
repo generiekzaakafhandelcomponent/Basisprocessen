@@ -1,0 +1,8 @@
+repositories {
+    maven { url "https://oss.sonatype.org/content/repositories/releases" }
+}
+
+dependencies {
+    implementation "com.ritense.valtimo:form:${valtimo_version}"
+    implementation "com.ritense.valtimo:form-link:${valtimo_version}"
+}
