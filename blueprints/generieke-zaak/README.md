@@ -81,13 +81,18 @@ Documentation about plugins can be found [here](https://docs.valtimo.nl/using-va
 * `Zet zaak resultaat` uses the OpenZaak connector with action `Set resultaat`.
 
 ### Process links (v2, Plugins)
-* `Genereren brief` uses [SmartDocuments - Generate document](https://docs.valtimo.nl/using-valtimo/plugins/configure-smartdocuments-plugin#generate-document).
-* `Opslaan Document in Documenten API` uses [Documenten API - Save document](https://docs.valtimo.nl/using-valtimo/plugins/configure-documenten-api-plugin#save-document)
-* `Linken Document aan Zaak` uses [Zaken API - Link document to zaak](https://docs.valtimo.nl/using-valtimo/plugins/configure-zaken-api-plugin#link-document-to-zaak)
+* Generiek proces
+  * `Genereren brief` uses [SmartDocuments - Generate document](https://docs.valtimo.nl/using-valtimo/plugins/configure-smartdocuments-plugin#generate-document).
+  * `Opslaan Document in Documenten API` uses [Documenten API - Save document](https://docs.valtimo.nl/using-valtimo/plugins/configure-documenten-api-plugin#save-document)
+  * `Linken Document aan Zaak` uses [Zaken API - Link document to zaak](https://docs.valtimo.nl/using-valtimo/plugins/configure-zaken-api-plugin#link-document-to-zaak)
+* Upload document
+  * `Upload document` uses [Documenten API - Save uploaded document](https://docs.valtimo.nl/using-valtimo/plugins/configure-documenten-api-plugin#save-uploaded-document)
+  * `Link document to zaak` uses [Zaken API - Link document to zaak](https://docs.valtimo.nl/using-valtimo/plugins/configure-zaken-api-plugin#link-document-to-zaak)
 
 ### Forms
-* `Behandelen zaak` should already be linked to the `generiek-proces.behandelen-zaak` form at deployment.
-* `Burger taak: Upload geldig legitimatiebewijs` This task uses a form provided by TaakConnector: 'upload-legitimatiebewijs-form'
+* Generiek proces
+  * `Behandelen zaak` should already be linked to the `generiek-proces.behandelen-zaak` form at deployment.
+  * `Burger taak: Upload geldig legitimatiebewijs` This task uses a form provided by TaakConnector: 'upload-legitimatiebewijs-form'
 
 ### Other
 * Admin -> Cases -> Generieke zaak 
