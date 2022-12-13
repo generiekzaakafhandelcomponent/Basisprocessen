@@ -21,7 +21,7 @@ Almost all the files in `backend` can be copied into the back-end of an implemen
 * `build.gradle` or `pom.xml`. This only includes the dependencies required by the process blueprint. These should be
   merged with the `build.gradle` or `pom.xml` you already have.
 
-Almost all files in `frontend` can be copied into the front-end of an implementation project. The exceptions is
+Almost all files in `frontend` can be copied into the front-end of an implementation project. The exception is
 `package.json`. This only includes the dependencies required by the process blueprint. These should be merged with
 the `package.json` you already have.
 

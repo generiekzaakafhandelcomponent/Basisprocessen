@@ -100,6 +100,10 @@ Enhancement suggestions are tracked as [GitHub issues](https://github.com/generi
 - Follow the instructions as listed [here](https://docs.valtimo.nl/valtimo-implementation/process-blueprints#how-to-import-a-process-blueprint) when
 adding a new process blueprint.
 
+### Adding a new process blueprint
+
+For general guidelines on how to add process blueprints, please see [this page](https://docs.valtimo.nl/valtimo-implementation/process-blueprints#creating-process-blueprints-for-gzac).
+
 ### Improving the documentation
 
 If you want to contribute to the documentation please see [this repository](https://github.com/valtimo-platform/valtimo-documentation).
