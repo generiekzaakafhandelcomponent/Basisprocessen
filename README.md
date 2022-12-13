@@ -12,16 +12,17 @@ Importing a process blueprint and customizing it for a specific use case can be 
 this page. Additionally, specific instructions for a blueprint can be found on GitHub for that particular process
 blueprint. These always take precedent over these general instructions.
 
-### Copying over the files
+### Copying files
 
 Almost all the files in `backend` can be copied into the back-end of an implementation project. The exceptions are:
+
 * `application.yml`. This only includes the configurations required by the process blueprint. These should be merged
   with the `application.yml` you already have.
 * `build.gradle` or `pom.xml`. This only includes the dependencies required by the process blueprint. These should be
   merged with the `build.gradle` or `pom.xml` you already have.
 
-Almost all files in `frontend` can be copied into the front-end of an implementation project. The exceptions are:
-*`package.json`. This only includes the dependencies required by the process blueprint. These should be merged with
+Almost all files in `frontend` can be copied into the front-end of an implementation project. The exceptions is
+`package.json`. This only includes the dependencies required by the process blueprint. These should be merged with
 the `package.json` you already have.
 
 ### Configuring and customizing the process blueprint
@@ -39,4 +40,4 @@ process blueprint to be used. In addition to this, consider the following checkl
 
 > Be sure to follow the specific instructions that are included in the README of the process blueprint.
 
-For instructions on how to add new blueprints to this repository can be found [here](https://github.com/generiekzaakafhandelcomponent/Basisprocessen/blob/feature/generieke-zaak/CONTRIBUTING.md).
+For instructions on how to contribute to this repository can be found [here](https://github.com/generiekzaakafhandelcomponent/Basisprocessen/blob/feature/generieke-zaak/CONTRIBUTING.md).
