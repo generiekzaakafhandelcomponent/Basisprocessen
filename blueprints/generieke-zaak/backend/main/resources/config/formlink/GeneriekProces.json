@@ -1,0 +1,12 @@
+[
+    {
+        "formName": "generiek-proces.start",
+        "formLinkElementId": "SysteemNotificatieProductaanvraagOntvangenStartEvent",
+        "formAssociationType": "start-event"
+    },
+    {
+        "formName": "generiek-proces.behandelen-zaak",
+        "formLinkElementId": "BehandelenZaakTask",
+        "formAssociationType": "user-task"
+    }
+]

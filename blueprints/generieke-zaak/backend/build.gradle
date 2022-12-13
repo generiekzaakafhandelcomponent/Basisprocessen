@@ -1,0 +1,19 @@
+repositories {
+    maven { url "https://oss.sonatype.org/content/repositories/releases" }
+}
+
+dependencies {
+
+    implementation "com.ritense.valtimo:besluit:${valtimo_version}"
+    implementation "com.ritense.valtimo:connector:${valtimo_version}"
+    implementation "com.ritense.valtimo:contactmoment:${valtimo_version}"
+    implementation "com.ritense.valtimo:documenten-api:${valtimo_version}"
+    implementation "com.ritense.valtimo:form:${valtimo_version}"
+    implementation "com.ritense.valtimo:form-link:${valtimo_version}"
+    implementation "com.ritense.valtimo:klant:${valtimo_version}"
+    implementation "com.ritense.valtimo:openzaak:${valtimo_version}"
+    implementation "com.ritense.valtimo:plugin-valtimo:${valtimo_version}"
+    implementation "com.ritense.valtimo:smartdocuments:${valtimo_version}"
+    implementation "com.ritense.valtimo:wordpress-mail:${valtimo_version}"
+    implementation "com.ritense.valtimo:zaken-api:${valtimo_version}"
+}

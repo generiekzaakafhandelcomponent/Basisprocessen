@@ -1,0 +1,8 @@
+[
+    {
+        "processDefinitionKey": "GeneriekProces",
+        "canInitializeDocument": true,
+        "startableByUser": false,
+        "processIsVisibleInMenu": true
+    }
+]
