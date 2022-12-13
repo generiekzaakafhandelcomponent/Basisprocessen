@@ -1,12 +1,12 @@
 <!-- omit in toc -->
 # Contributing to process blueprints
 
-First off, thanks for taking the time to contribute! ❤️
+First off, thanks for taking the time to contribute!
 
 All types of contributions are encouraged and valued. Please make sure to read relevant sections before making your
 contribution. It will smooth out the experience for all involved. The community looks forward to your contributions.
 
-## I Have a Question
+## I have a question
 
 > If you want to ask a question, we assume that you have read the available [documentation](https://docs.valtimo.nl/valtimo-implementation/process-blueprints).
 
@@ -36,7 +36,7 @@ A good bug report should not leave others needing to chase you up for more infor
 investigate carefully, collect information and describe the issue in detail in your report. Please complete the
 following steps in advance to help us fix any potential bug as fast as possible:
 
-- Make sure that you are using the latest version.
+- Make sure that you are using the latest version of the process blueprint.
 - Determine if your bug is really a bug and not an error on your side e.g. using incompatible environment
 components/versions (Make sure that you have read the
 [documentation](https://docs.valtimo.nl/valtimo-implementation/process-blueprints). If you are looking for support, you
@@ -52,7 +52,7 @@ discussed the issue.
   - Possibly your input and the output.
   - Can you reliably reproduce the issue?
 
-#### How do I Submit a Good Bug Report?
+#### How do I submit a good bug report?
 
 > You must never report security related issues, vulnerabilities or bugs including sensitive information to the issue
 tracker, or elsewhere in public. Sensitive bugs should instead be sent by email to [support@ritense.com](mailto:support@ritense.com).
@@ -76,13 +76,13 @@ the `needs-repro` tag will not be addressed until they are reproduced.
 - If the team is able to reproduce the issue, it will be marked `needs-fix`, as well as possibly other tags (such as
 `critical`), and the issue will be left to be implemented by someone.
 
-### Suggesting Enhancements
+### Suggesting enhancements
 
 This section guides you through submitting an enhancement suggestion for process blueprints, **including completely new 
 process blueprints and minor improvements to existing process blueprints**. Following these guidelines will help
 maintainers and the community to understand your suggestion and find related suggestions.
 
-#### Before Submitting an Enhancement
+#### Before submitting an enhancement
 
 - Make sure that you are using the latest version of Valtimo.
 - Read the [documentation](https://docs.valtimo.nl/valtimo-implementation/process-blueprints#creating-process-blueprints-for-gzac)
@@ -91,7 +91,7 @@ carefully.
 - Perform a [search](https://github.com/generiekzaakafhandelcomponent/Basisprocessen/issues) to see if the enhancement
 has already been suggested. If it has, add a comment to the existing issue instead of opening a new one.
 
-#### How Do I Submit a Good Enhancement Suggestion?
+#### How do I submit a good enhancement suggestion?
 
 Enhancement suggestions are tracked as [GitHub issues](https://github.com/generiekzaakafhandelcomponent/Basisprocessen/issues).
 
@@ -100,6 +100,6 @@ Enhancement suggestions are tracked as [GitHub issues](https://github.com/generi
 - Follow the instructions as listed [here](https://docs.valtimo.nl/valtimo-implementation/process-blueprints#how-to-import-a-process-blueprint) when
 adding a new process blueprint.
 
-### Improving The Documentation
+### Improving the documentation
 
 If you want to contribute to the documentation please see [this repository](https://github.com/valtimo-platform/valtimo-documentation).

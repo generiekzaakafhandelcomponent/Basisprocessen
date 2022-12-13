@@ -37,6 +37,6 @@ process blueprint to be used. In addition to this, consider the following checkl
 * Does every user task have a form or form flow associated with it?
 * If there are form flows, are all the forms it references present?
 
-Be sure to follow the specific instructions that are included in the README of the process blueprint.
+> Be sure to follow the specific instructions that are included in the README of the process blueprint.
 
 For instructions on how to add new blueprints to this repository can be found [here](https://github.com/generiekzaakafhandelcomponent/Basisprocessen/blob/feature/generieke-zaak/CONTRIBUTING.md).
