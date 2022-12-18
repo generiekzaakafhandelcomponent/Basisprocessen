@@ -3,7 +3,6 @@ package com.ritense.valtimo.implementation.generiekezaak;
 import com.ritense.klant.domain.Klant;
 import com.ritense.klant.service.KlantService;
 import java.util.UUID;
-import lombok.RequiredArgsConstructor;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.springframework.stereotype.Component;
 
