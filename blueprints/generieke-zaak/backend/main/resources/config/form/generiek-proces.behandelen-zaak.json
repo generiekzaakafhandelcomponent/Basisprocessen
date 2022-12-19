@@ -172,9 +172,9 @@
                 "onlyAvailableItems": false
             },
             "conditional": {
-                "show": null,
-                "when": null,
-                "eq": ""
+                "show": true,
+                "when": "zaak.status",
+                "eq": "AFGEROND"
             },
             "overlay": {
                 "style": "",
