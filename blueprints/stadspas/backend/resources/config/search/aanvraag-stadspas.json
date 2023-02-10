@@ -1,0 +1,60 @@
+{
+    "searchFields": [
+        {
+            "key": "volledigeNaamAanvrager",
+            "path": "doc:aanvrager.volledigeNaam",
+            "dataType": "text",
+            "fieldType": "single",
+            "matchType": "like",
+            "title": ""
+        },
+        {
+            "key": "telefoonnummerAanvrager",
+            "path": "doc:aanvrager.telefoonnummer",
+            "dataType": "text",
+            "fieldType": "single",
+            "matchType": "like",
+            "title": ""
+        },
+        {
+            "key": "emailadresAanvrager",
+            "path": "doc:aanvrager.emailadres",
+            "dataType": "text",
+            "fieldType": "single",
+            "matchType": "like",
+            "title": ""
+        },
+        {
+            "key": "assigneeFullName",
+            "path": "case:assigneeFullName",
+            "dataType": "text",
+            "fieldType": "single",
+            "matchType": "like",
+            "title": ""
+        },
+        {
+            "key": "statusOmschrijving",
+            "path": "doc:openzaak.statusOmschrijving",
+            "dataType": "text",
+            "fieldType": "single",
+            "matchType": "like",
+            "title": ""
+        },
+        {
+            "key": "resultaatOmschrijving",
+            "path": "doc:openzaak.resultaatOmschrijving",
+            "dataType": "text",
+            "fieldType": "single",
+            "matchType": "like",
+            "title": ""
+        },
+        {
+            "key": "isGeescaleerd",
+            "path": "doc:escalatie.isGeescaleerd",
+            "dataType": "boolean",
+            "fieldType": "single",
+            "matchType": "exact",
+            "title": ""
+        }
+    ]
+}

@@ -1,0 +1,7 @@
+[
+    {
+        "formName": "aanvraag-stadspas.vastleggen-besluit.selecteren-besluit-document",
+        "formLinkElementId": "SelecterenBesluitDocumentTask",
+        "formAssociationType": "user-task"
+    }
+]

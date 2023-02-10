@@ -1,0 +1,154 @@
+{
+    "startStep": "start",
+    "steps": [
+        {
+            "key": "start",
+            "type": {
+                "name": "form",
+                "properties":  {
+                    "definition": "aanvraag-stadspas.stadspas-afhandelen-aanvraag.beoordelen-afhandelen-aanvraag.situatie-klant"
+                }
+            },
+            "nextSteps": [
+                {
+                    "step": "step2"
+                }
+            ]
+        },
+        {
+            "key": "step2",
+            "type": {
+                "name": "form",
+                "properties":  {
+                    "definition": "aanvraag-stadspas.stadspas-afhandelen-aanvraag.beoordelen-afhandelen-aanvraag.inkomen-klant"
+                }
+            },
+            "nextSteps": [
+                {
+                    "step": "step3"
+                }
+            ]
+        },
+        {
+            "key": "step3",
+            "type": {
+                "name": "form",
+                "properties":  {
+                    "definition": "aanvraag-stadspas.stadspas-afhandelen-aanvraag.beoordelen-afhandelen-aanvraag.inkomen-klant-vervolg"
+                }
+            },
+            "nextSteps": [
+                {
+                    "step": "step4"
+                }
+            ]
+        },
+        {
+            "key": "step4",
+            "type": {
+                "name": "form",
+                "properties":  {
+                    "definition": "aanvraag-stadspas.stadspas-afhandelen-aanvraag.beoordelen-afhandelen-aanvraag.inkomen-partner"
+                }
+            },
+            "nextSteps": [
+                {
+                    "step": "step5"
+                }
+            ]
+        },
+        {
+            "key": "step5",
+            "type": {
+                "name": "form",
+                "properties":  {
+                    "definition": "aanvraag-stadspas.stadspas-afhandelen-aanvraag.beoordelen-afhandelen-aanvraag.inkomen-partner-vervolg"
+                }
+            },
+            "nextSteps": [
+                {
+                    "step": "step6"
+                }
+            ]
+        },
+        {
+            "key": "step6",
+            "type": {
+                "name": "form",
+                "properties":  {
+                    "definition": "aanvraag-stadspas.stadspas-afhandelen-aanvraag.beoordelen-afhandelen-aanvraag.step5"
+                }
+            },
+            "nextSteps": [
+                {
+                    "step": "step7"
+                }
+            ]
+        },
+        {
+            "key": "step7",
+            "type": {
+                "name": "form",
+                "properties":  {
+                    "definition": "aanvraag-stadspas.stadspas-afhandelen-aanvraag.beoordelen-afhandelen-aanvraag.step6"
+                }
+            },
+            "nextSteps": [
+                {
+                    "step": "step8"
+                }
+            ]
+        },
+        {
+            "key": "step8",
+            "type": {
+                "name": "form",
+                "properties":  {
+                    "definition": "aanvraag-stadspas.stadspas-afhandelen-aanvraag.beoordelen-afhandelen-aanvraag.step7"
+                }
+            },
+            "nextSteps": [
+                {
+                    "step": "step9"
+                }
+            ]
+        },
+        {
+            "key": "step9",
+            "type": {
+                "name": "form",
+                "properties":  {
+                    "definition": "aanvraag-stadspas.stadspas-afhandelen-aanvraag.beoordelen-afhandelen-aanvraag.step8"
+                }
+            },
+            "nextSteps": [
+                {
+                    "step": "step10"
+                }
+            ]
+        },
+        {
+            "key": "step10",
+            "type": {
+                "name": "form",
+                "properties":  {
+                    "definition": "aanvraag-stadspas.stadspas-afhandelen-aanvraag.beoordelen-afhandelen-aanvraag.informatieverzoeken"
+                }
+            },
+            "nextSteps": [
+                {
+                    "step": "end"
+                }
+            ]
+        },
+        {
+            "key": "end",
+            "type": {
+                "name": "form",
+                "properties":  {
+                    "definition": "aanvraag-stadspas.stadspas-afhandelen-aanvraag.beoordelen-afhandelen-aanvraag.eindconclusie"
+                }
+            }
+        }
+    ]
+}

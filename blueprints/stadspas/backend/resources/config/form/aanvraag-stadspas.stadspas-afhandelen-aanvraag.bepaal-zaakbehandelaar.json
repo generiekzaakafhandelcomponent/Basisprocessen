@@ -1,0 +1,30 @@
+{
+    "display": "form",
+    "components": [
+        {
+            "content": "<strong> Wijs een zaakbehandelaar toe aan deze aanvraag. Vink onderstaande checkbox wanneer dit gebeurd is en handel deze taak af.</strong>",
+            "tableView": true,
+            "key": "zaakbehandelaarToewijzen",
+            "type": "htmlelement",
+            "input": false
+        },
+        {
+            "label": "Zaakbehandelaar is toegewezen",
+            "tableView": false,
+            "key": "isZaakbehandelaarToegewezen",
+            "type": "checkbox",
+            "input": false
+        },
+        {
+            "type": "button",
+            "label": "Submit",
+            "action": "custom",
+            "custom": "form.submit(); component.disabled = true;",
+            "showValidations": false,
+            "disableOnInvalid": true,
+            "tableView": false,
+            "key": "submit",
+            "input": true
+        }
+    ]
+}

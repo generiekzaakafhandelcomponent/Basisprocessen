@@ -1,0 +1,52 @@
+[
+    {
+        "formName": "aanvraag-stadspas.stadspas-afhandelen-aanvraag.beoordelen-afhandelen-aanvraag.situatie-klant",
+        "formLinkElementId": "BeoordelenSituatieKlantTask",
+        "formAssociationType": "user-task"
+    },
+    {
+        "formName": "aanvraag-stadspas.stadspas-afhandelen-aanvraag.beoordelen-afhandelen-aanvraag.inkomen-klant",
+        "formLinkElementId": "BeoordelenInkomenKlantTask",
+        "formAssociationType": "user-task"
+    },
+    {
+        "formName": "aanvraag-stadspas.stadspas-afhandelen-aanvraag.beoordelen-afhandelen-aanvraag.inkomen-klant-vervolg",
+        "formLinkElementId": "BeoordelenInkomenKlantVervolgTask",
+        "formAssociationType": "user-task"
+    },
+    {
+        "formName": "aanvraag-stadspas.stadspas-afhandelen-aanvraag.beoordelen-afhandelen-aanvraag.inkomen-partner",
+        "formLinkElementId": "BeoordelenInkomenPartnerTask",
+        "formAssociationType": "user-task"
+    },
+    {
+        "formName": "aanvraag-stadspas.stadspas-afhandelen-aanvraag.beoordelen-afhandelen-aanvraag.inkomen-partner-vervolg",
+        "formLinkElementId": "BeoordelenInkomenPartnerVervolgTask",
+        "formAssociationType": "user-task"
+    },
+    {
+        "formName": "aanvraag-stadspas.stadspas-afhandelen-aanvraag.beoordelen-afhandelen-aanvraag.conclusie-obv-inkomen",
+        "formLinkElementId": "ConclusieOpBasisVanInkomenTask",
+        "formAssociationType": "user-task"
+    },
+    {
+        "formName": "aanvraag-stadspas.stadspas-afhandelen-aanvraag.beoordelen-afhandelen-aanvraag.vermogen-en-schulden",
+        "formLinkElementId": "BeoordelenVermogenTask",
+        "formAssociationType": "user-task"
+    },
+    {
+        "formName": "aanvraag-stadspas.stadspas-afhandelen-aanvraag.beoordelen-afhandelen-aanvraag.conclusie-obv-vermogen",
+        "formLinkElementId": "ConclusieOpBasisVanVermogenTask",
+        "formAssociationType": "user-task"
+    },
+    {
+        "formName": "aanvraag-stadspas.stadspas-afhandelen-aanvraag.beoordelen-afhandelen-aanvraag.informatieverzoeken",
+        "formLinkElementId": "InformatieverzoekenTask",
+        "formAssociationType": "user-task"
+    },
+    {
+        "formName": "aanvraag-stadspas.stadspas-afhandelen-aanvraag.beoordelen-afhandelen-aanvraag.eindconclusie",
+        "formLinkElementId": "EindconclusieTask",
+        "formAssociationType": "user-task"
+    }
+]

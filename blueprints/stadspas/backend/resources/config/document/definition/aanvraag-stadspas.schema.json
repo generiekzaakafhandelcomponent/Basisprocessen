@@ -1,0 +1,482 @@
+{
+    "$id": "aanvraag-stadspas.schema",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Aanvraag stadspas",
+    "type": "object",
+    "additionalProperties": true,
+    "properties": {
+        "datumAanvraagOntvangen": {
+            "type": "string"
+        },
+        "besluit": {
+            "type": "string"
+        },
+        "toelichtingGenomenBesluit": {
+            "type": "string"
+        },
+        "aanvrager": {
+            "anyOf": [
+                {
+                    "$ref": "persoonsgegevens.schema.json#/definitions/persoonsgegevens"
+                },
+                {
+                    "$ref": "contactgegevens.schema.json#/definitions/contactgegevens"
+                },
+                {
+                    "$ref": "adresgegevens.schema.json#/definitions/adresgegevens"
+                }
+            ]
+        },
+        "partner": {
+            "$ref": "persoonsgegevens.schema.json#/definitions/persoonsgegevens"
+        },
+        "kinderen": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/kind"
+            }
+        },
+        "aanvraaggegevens": {
+            "type": "object",
+            "$ref": "#/definitions/aanvraaggegevens"
+        },
+        "inkomenKlant": {
+            "type": "object",
+            "$ref": "#/definitions/inkomen"
+        },
+        "inkomenPartner": {
+            "type": "object",
+            "$ref": "#/definitions/inkomen"
+        },
+        "vermogen": {
+            "type": "object",
+            "$ref": "#/definitions/vermogen"
+        },
+        "openzaak": {
+            "$ref": "openzaak.schema.json#/definitions/openzaakgegevens"
+        },
+        "beoordelingEnAfhandeling": {
+            "type": "object",
+            "properties": {
+                "aanvraaggegevens": {
+                    "$ref": "#/definitions/aanvraaggegevens"
+                },
+                "inkomenKlant": {
+                    "type": "object",
+                    "$ref": "#/definitions/inkomen"
+                },
+                "inkomenPartner": {
+                    "type": "object",
+                    "$ref": "#/definitions/inkomen"
+                },
+                "vermogen": {
+                    "type": "object",
+                    "$ref": "#/definitions/vermogen"
+                },
+                "inkomenNorm": {
+                    "type": "object",
+                    "properties": {
+                        "isInkomenBovenNorm": {
+                            "type": "boolean"
+                        },
+                        "normOpBasisVanGezinssituatie": {
+                            "type": "number"
+                        }
+                    }
+                },
+                "vermogenNorm": {
+                    "type": "object",
+                    "properties": {
+                        "isVermogenBovenNorm": {
+                            "type": "boolean"
+                        },
+                        "normOpBasisVanGezinssituatie": {
+                            "type": "number"
+                        }
+                    }
+                },
+                "informatieverzoeken": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/informatieverzoek"
+                    }
+                },
+                "informatieReacties": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/informatieReactie"
+                    }
+                },
+                "informatieOpvragenBijKlant": {
+                    "type": "boolean"
+                },
+                "besluit": {
+                    "type": "object",
+                    "properties": {
+                        "eindconclusie": {
+                            "type": "string"
+                        },
+                        "toelichting": {
+                            "type": "string"
+                        },
+                        "besprokenMetKlant": {
+                            "type": "boolean"
+                        },
+                        "toelichtingNaContactMetKlant": {
+                            "type": "string"
+                        },
+                        "redenAfwijzing": {
+                            "type": "string"
+                        },
+                        "datumAanvraagToekenning": {
+                            "type": "string"
+                        },
+                        "dagtekeningBeschikkingsbrief": {
+                            "type": "string"
+                        },
+                        "stadspasJaartal": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "toelichtingenBehandelaar": {
+                    "type": "object",
+                    "properties": {
+                        "situatieKlant": {
+                            "type": "string"
+                        },
+                        "inkomenKlant": {
+                            "type": "string"
+                        },
+                        "inkomenPartner": {
+                            "type": "string"
+                        },
+                        "conclusieOpBasisVanInkomen": {
+                            "type": "string"
+                        },
+                        "vermogenKlant": {
+                            "type": "string"
+                        },
+                        "conclusieOpBasisVanVermogen": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "totaalInkomenTBVAanvraagStadsspas": {
+                    "type": "number"
+                },
+                "totaalVermogenTBVAanvraagStadspas": {
+                    "type": "number"
+                }
+            }
+        },
+        "escalatie": {
+            "type": "object",
+            "properties": {
+                "isGeescaleerd": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "communicatievoorkeuren": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        }
+    },
+    "definitions": {
+        "kind": {
+            "$ref": "persoonsgegevens.schema.json#/definitions/persoonsgegevens"
+        },
+        "aanvraaggegevens": {
+            "type": "object",
+            "properties": {
+                "heeftBijstandsuitkering": {
+                    "type": "string"
+                },
+                "heeftSchuldhulpverlening": {
+                    "type": "string"
+                },
+                "heeftInwonendePartner": {
+                    "type": "string"
+                },
+                "heeftInwonendeKinderen": {
+                    "type": "string"
+                },
+                "aanvragerIsStudent": {
+                    "type": "string"
+                },
+                "aanvragerIsOndernemer": {
+                    "type": "string"
+                },
+                "partnerIsStudent": {
+                    "type": "string"
+                },
+                "partnerIsOndernemer": {
+                    "type": "string"
+                },
+                "heeftHuurinkomsten": {
+                    "type": "string"
+                },
+                "heeftPartnerHuurinkomsten": {
+                    "type": "string"
+                },
+                "heeftWerkgever": {
+                    "type": "string"
+                },
+                "heeftPartnerWerkgever": {
+                    "type": "string"
+                },
+                "heeftPensioen": {
+                    "type": "string"
+                },
+                "heeftPartnerPensioen": {
+                    "type": "string"
+                },
+                "heeftKinderalimentatie": {
+                    "type": "string"
+                },
+                "heeftPartnerKinderalimentatie": {
+                    "type": "string"
+                },
+                "heeftSchulden": {
+                    "type": "string"
+                }
+            }
+        },
+        "inkomen": {
+            "type": "object",
+            "properties": {
+                "werkgevers": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/werkgever"
+                    }
+                },
+                "uitkeringen": {
+                    "type": "object",
+                    "properties": {
+                        "anw": {
+                            "$ref": "#/definitions/uitkering"
+                        },
+                        "aow": {
+                            "$ref": "#/definitions/uitkering"
+                        },
+                        "bijstand": {
+                            "$ref": "#/definitions/uitkering"
+                        },
+                        "wajong": {
+                            "$ref": "#/definitions/uitkering"
+                        },
+                        "wao": {
+                            "$ref": "#/definitions/uitkering"
+                        },
+                        "wia": {
+                            "$ref": "#/definitions/uitkering"
+                        },
+                        "ww": {
+                            "$ref": "#/definitions/uitkering"
+                        },
+                        "ziektewet": {
+                            "$ref": "#/definitions/uitkering"
+                        }
+                    }
+                },
+                "pensioenen": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/pensioen"
+                    }
+                },
+                "nettoKinderalimentatie": {
+                    "type": "number"
+                },
+                "bedragOnderhuur": {
+                    "type": "number"
+                },
+                "totaalMaandinkomenWerkgevers": {
+                    "type": "number"
+                },
+                "totaalMaandinkomenUitkeringen": {
+                    "type": "number"
+                },
+                "totaalMaandinkomenPensioenen": {
+                    "type": "number"
+                }
+            }
+        },
+        "vermogen": {
+            "type": "object",
+            "properties": {
+                "bezittingen": {
+                    "type": "object",
+                    "properties": {
+                        "bankrekeningen": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/bankrekening"
+                            }
+                        },
+                        "aandelenObligaties": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/aandeelObligatie"
+                            }
+                        },
+                        "cryptoCurrencies": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/cryptoCurrency"
+                            }
+                        },
+                        "contantGeld": {
+                            "type": "number"
+                        }
+                    }
+                },
+                "schulden": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/schuld"
+                    }
+                }
+            }
+        },
+        "werkgever": {
+            "type": "object",
+            "properties": {
+                "naam": {
+                    "type": "string"
+                },
+                "nettoloon": {
+                    "type": "number"
+                },
+                "periode": {
+                    "type": "string"
+                }
+            }
+        },
+        "uitkering": {
+            "type": "object",
+            "properties": {
+                "actief": {
+                    "type": "boolean"
+                },
+                "naam": {
+                    "type": "string"
+                },
+                "nettobedrag": {
+                    "type": "number"
+                },
+                "periode": {
+                    "type": "string"
+                }
+            }
+        },
+        "pensioen": {
+            "type": "object",
+            "properties": {
+                "naam": {
+                    "type": "string"
+                },
+                "nettobedrag": {
+                    "type": "number"
+                }
+            }
+        },
+        "bankrekening": {
+            "type": "object",
+            "properties": {
+                "iban": {
+                    "type": "string"
+                },
+                "tegoed": {
+                    "type": "number"
+                }
+            }
+        },
+        "aandeelObligatie": {
+            "type": "object",
+            "properties": {
+                "omschrijving": {
+                    "type": "string"
+                },
+                "waarde": {
+                    "type": "number"
+                }
+            }
+        },
+        "cryptoCurrency": {
+            "type": "object",
+            "properties": {
+                "omschrijving": {
+                    "type": "string"
+                },
+                "waarde": {
+                    "type": "number"
+                }
+            }
+        },
+        "schuld": {
+            "type": "object",
+            "properties": {
+                "schuldeiser": {
+                    "type": "string"
+                },
+                "bedrag": {
+                    "type": "number"
+                }
+            }
+        },
+        "informatieverzoek": {
+            "type": "object",
+            "properties": {
+                "opTeVragenBenodigdeInformatie": {
+                    "type": "object"
+                },
+                "hersteltermijn": {
+                    "type": "boolean"
+                },
+                "startHersteltermijn": {
+                    "type": "string"
+                },
+                "eindeHersteltermijn": {
+                    "type": "string"
+                },
+                "toelichting": {
+                    "type": "string"
+                },
+                "deadline": {
+                    "type": "string"
+                },
+                "opleiding": {
+                    "type": "string"
+                },
+                "specifiekeBankrekeningNummers": {
+                    "type": "string"
+                },
+                "bankrekeningNummersSpecifiekePeriode": {
+                    "type": "string"
+                }
+            }
+        },
+        "informatieReactie": {
+            "type": "object",
+            "properties": {
+                "reactiedatum": {
+                    "type": "string"
+                },
+                "toelichting": {
+                    "type": "string"
+                },
+                "ontvangenBestanden": {
+                    "$ref": "valtimo-file.schema.json#/definitions/valtimoFile"
+                },
+                "verzoekAfgehandeld": {
+                    "type": "boolean"
+                }
+            }
+        }
+    }
+}

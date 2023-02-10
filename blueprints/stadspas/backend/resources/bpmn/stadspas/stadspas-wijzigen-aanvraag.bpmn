@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0q7bqd0" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.0.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.17.0">
+  <bpmn:collaboration id="Collaboration_0y05wt1">
+    <bpmn:participant id="WijzigenAanvraagParticipant" name="Wijzigen aanvraag" processRef="stadspas-wijzigen-aanvraag" />
+  </bpmn:collaboration>
+  <bpmn:process id="stadspas-wijzigen-aanvraag" name="Stadspas: Wijzigen aanvraag" isExecutable="true">
+    <bpmn:startEvent id="StartWijzigenAanvraagStartEvent" name="Start wijzigen aanvraag">
+      <bpmn:outgoing>Flow_1yab9mm</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1yab9mm" sourceRef="StartWijzigenAanvraagStartEvent" targetRef="AanvraagGewijzigdEndEvent" />
+    <bpmn:endEvent id="AanvraagGewijzigdEndEvent" name="Aanvraag gewijzigd" camunda:asyncBefore="true">
+      <bpmn:incoming>Flow_1yab9mm</bpmn:incoming>
+    </bpmn:endEvent>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0y05wt1">
+      <bpmndi:BPMNShape id="Participant_1fe44hu_di" bpmnElement="WijzigenAanvraagParticipant" isHorizontal="true">
+        <dc:Bounds x="160" y="52" width="310" height="250" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1yab9mm_di" bpmnElement="Flow_1yab9mm">
+        <di:waypoint x="275" y="177" />
+        <di:waypoint x="372" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartWijzigenAanvraagStartEvent">
+        <dc:Bounds x="239" y="159" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="224" y="202" width="66" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1bwvf80_di" bpmnElement="AanvraagGewijzigdEndEvent">
+        <dc:Bounds x="372" y="159" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="369" y="202" width="48" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

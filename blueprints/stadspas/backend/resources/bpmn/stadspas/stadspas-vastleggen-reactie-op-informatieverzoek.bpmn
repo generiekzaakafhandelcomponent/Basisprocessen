@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0q7bqd0" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.0.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.17.0">
+  <bpmn:collaboration id="Collaboration_0y05wt1">
+    <bpmn:participant id="VastleggenReactieOpInformatieverzoekParticipant" name="Vastleggen reactie op informatieverzoek" processRef="stadspas-vastleggen-reactie-op-informatieverzoek" />
+  </bpmn:collaboration>
+  <bpmn:process id="stadspas-vastleggen-reactie-op-informatieverzoek" name="Stadspas: Vastleggen reactie op informatieverzoek" isExecutable="true">
+    <bpmn:startEvent id="StartVastleggenReactieStartEvent" name="Start vastleggen reactie">
+      <bpmn:outgoing>Flow_02mop46</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="ReactieIsVastgelegdEndEventEndEvent" name="Reactie is vastgelegd" camunda:asyncBefore="true">
+      <bpmn:incoming>Flow_02mop46</bpmn:incoming>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_1exh3yv" camunda:expression="${messageCorrelationService.sendCorrelationMessageByBusinessKey(&#34;MESSAGE_STADSPAS_INFORMATIE_REACTIE_ONTVANGEN&#34;, execution.businessKey)}" />
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_02mop46" sourceRef="StartVastleggenReactieStartEvent" targetRef="ReactieIsVastgelegdEndEventEndEvent" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0y05wt1">
+      <bpmndi:BPMNShape id="Participant_1nv3dq9_di" bpmnElement="VastleggenReactieOpInformatieverzoekParticipant" isHorizontal="true">
+        <dc:Bounds x="160" y="80" width="350" height="250" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_02mop46_di" bpmnElement="Flow_02mop46">
+        <di:waypoint x="278" y="200" />
+        <di:waypoint x="392" y="200" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_0zho5du_di" bpmnElement="StartVastleggenReactieStartEvent">
+        <dc:Bounds x="242" y="182" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="222" y="225" width="80" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0lx1yh6" bpmnElement="ReactieIsVastgelegdEndEventEndEvent">
+        <dc:Bounds x="392" y="182" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="385" y="225" width="54" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

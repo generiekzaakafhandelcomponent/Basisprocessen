@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0a3cy01" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.0.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.17.0">
+  <bpmn:collaboration id="Collaboration_17efitx">
+    <bpmn:participant id="VastleggenBesluitParticipant" name="Vastleggen besluit" processRef="stadspas-vastleggen-besluit" />
+  </bpmn:collaboration>
+  <bpmn:process id="stadspas-vastleggen-besluit" name="Stadspas: Vastleggen besluit" isExecutable="true">
+    <bpmn:startEvent id="StartEvent">
+      <bpmn:outgoing>Flow_1q1y3nf</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1q1y3nf" sourceRef="StartEvent" targetRef="UpdateZaakstatusCallActivity" />
+    <bpmn:sequenceFlow id="Flow_093mk6p" sourceRef="UpdateZaakstatusCallActivity" targetRef="SelecterenBesluitDocumentTask" />
+    <bpmn:sequenceFlow id="Flow_09z4p8k" sourceRef="SelecterenBesluitDocumentTask" targetRef="VastleggenBesluitTask" />
+    <bpmn:dataStoreReference id="OpenZaakDataStoreReference" name="Open Zaak" />
+    <bpmn:serviceTask id="VastleggenBesluitTask" name="vastleggen besluit" camunda:expression="${besluitCreateService.createBesluitAndInformatieobjectRelatie(execution.businessKey, besluitType)}">
+      <bpmn:extensionElements />
+      <bpmn:incoming>Flow_09z4p8k</bpmn:incoming>
+      <bpmn:outgoing>Flow_0epga6h</bpmn:outgoing>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_1v1tc5q">
+        <bpmn:targetRef>OpenZaakDataStoreReference</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="EndEvent">
+      <bpmn:incoming>Flow_0epga6h</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0epga6h" sourceRef="VastleggenBesluitTask" targetRef="EndEvent" />
+    <bpmn:userTask id="SelecterenBesluitDocumentTask" name="Selecteren besluit document" camunda:candidateGroups="ROLE_USER">
+      <bpmn:incoming>Flow_093mk6p</bpmn:incoming>
+      <bpmn:outgoing>Flow_09z4p8k</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="UpdateZaakstatusCallActivity" name="Update zaakstatus" camunda:expression="${true}">
+      <bpmn:incoming>Flow_1q1y3nf</bpmn:incoming>
+      <bpmn:outgoing>Flow_093mk6p</bpmn:outgoing>
+    </bpmn:serviceTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_17efitx">
+      <bpmndi:BPMNShape id="Participant_1h0eeom_di" bpmnElement="VastleggenBesluitParticipant" isHorizontal="true">
+        <dc:Bounds x="160" y="80" width="700" height="260" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0epga6h_di" bpmnElement="Flow_0epga6h">
+        <di:waypoint x="740" y="160" />
+        <di:waypoint x="792" y="160" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_09z4p8k_di" bpmnElement="Flow_09z4p8k">
+        <di:waypoint x="580" y="160" />
+        <di:waypoint x="640" y="160" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_093mk6p_di" bpmnElement="Flow_093mk6p">
+        <di:waypoint x="420" y="160" />
+        <di:waypoint x="480" y="160" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1q1y3nf_di" bpmnElement="Flow_1q1y3nf">
+        <di:waypoint x="268" y="160" />
+        <di:waypoint x="320" y="160" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_1tyne5g_di" bpmnElement="StartEvent">
+        <dc:Bounds x="232" y="142" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataStoreReference_1aq0u7j_di" bpmnElement="OpenZaakDataStoreReference">
+        <dc:Bounds x="665" y="235" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="663" y="292" width="55" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0fa54ep_di" bpmnElement="VastleggenBesluitTask">
+        <dc:Bounds x="640" y="120" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_06lajy0_di" bpmnElement="EndEvent">
+        <dc:Bounds x="792" y="142" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_07xdwgo_di" bpmnElement="SelecterenBesluitDocumentTask">
+        <dc:Bounds x="480" y="120" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1416dji_di" bpmnElement="UpdateZaakstatusCallActivity">
+        <dc:Bounds x="320" y="120" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_1v1tc5q_di" bpmnElement="DataOutputAssociation_1v1tc5q">
+        <di:waypoint x="690" y="200" />
+        <di:waypoint x="690" y="235" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
