@@ -41,7 +41,7 @@ OpenZaak, Objects-api, Objecttypes-api, Open-notifications, Smart documents, Wor
 
 As we don't want to commit secrets/passwords. A solution to work with secrets should already be there, either through the AWS parameter store or in Kubernetes with environment variables like below:
 
-The following environment variables should be defined:
+The following environment variables should be defined for Backend:
 
 * VALTIMO_CONNECTOR-ENCRYPTION_SECRET= any secrets at least 16 characters
 * VALTIMO_JWT_SECRET= keycloak jwt secret
@@ -52,6 +52,20 @@ The following environment variables should be defined:
 * KEYCLOAK_RESOURCE= keycloak m2m client resource
 * KEYCLOAK_CREDENTIALS_SECRET= keycloak credentials secret
 * IMPLEMENTATION_STADSPAS_BESLUITTYPE=Besluit i.h.k.v. aanvraag stadspas
+
+The following environment variables should be defined for Frontend:
+* SWAGGER_URI
+* MOCK_API_URI
+* API_URI
+* KEYCLOAK_URL
+* KEYCLOAK_REALM
+* KEYCLOAK_CLIENT_ID
+* KEYCLOAK_REDIRECT_URI
+* KEYCLOAK_LOGOUT_REDIRECT_URI
+* WHITELISTED_DOMAIN
+* BEARER_EXCLUDED_URLS
+* OPEN_ZAAK_CATALOGUS
+
 
 **Wordpress mail**
 
