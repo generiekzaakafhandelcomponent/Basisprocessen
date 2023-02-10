@@ -1,5 +1,5 @@
 export const customDefinitionColumns = {
-    'aanvraag-ooievaarspas': [
+    'aanvraag-stadspas': [
         {
             propertyName: '$.aanvrager.volledigeNaam',
             translationKey: 'sd.naamAanvrager',

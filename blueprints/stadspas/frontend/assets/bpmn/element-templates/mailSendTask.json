@@ -56,7 +56,7 @@
     },
     {
       "label": "Template",
-      "description": "Mandrill slug voor de template ID",
+      "description": "Email template slug voor de template ID",
       "type": "String",
       "value": "",
       "binding": {
