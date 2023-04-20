@@ -19,8 +19,9 @@ class BesluitCreateService(
     private val documentService: DocumentService,
     private val connectorService: ConnectorService,
     private val besluitService: BesluitService,
-    private val openZaakService: OpenZaakService
-    ) {
+    private val openZaakService: OpenZaakService,
+    private val besluitDocumentRequired: Boolean
+) {
 
     fun createBesluitAndInformatieobjectRelatie(businessKey: String, besluitTypeOmschrijving: String) {
         val besluitType = besluitService.getBesluittypen().first {
@@ -80,10 +81,26 @@ class BesluitCreateService(
     private fun getBesluitResourceUuid(document: Document): UUID? {
         val besluitResourceUuidNode = document.content().asJson().at(JsonPointer.valueOf("/besluit"))
 
-        return if (!besluitResourceUuidNode.isMissingNode || besluitResourceUuidNode != null) {
-            UUID.fromString(besluitResourceUuidNode.textValue())
+        return if (
+            besluitResourceUuidNode.isMissingNode
+            || besluitResourceUuidNode.isNull
+            || besluitResourceUuidNode.textValue().equals("")
+        ) {
+            if (besluitDocumentRequired) {
+                throw IllegalStateException("Dossier /besluit is empty. But valtimo.besluitDocumentRequired: true")
+            } else {
+                null
+            }
         } else {
-            null
+            if (!besluitResourceUuidNode.isTextual) {
+                throw RuntimeException("Dossier /besluit doesn't contain UUID: `${besluitResourceUuidNode.toPrettyString()}`")
+            } else {
+                try {
+                    UUID.fromString(besluitResourceUuidNode.textValue())
+                } catch (e: IllegalArgumentException) {
+                    throw RuntimeException("Dossier /besluit contains malformed UUID", e)
+                }
+            }
         }
     }
 

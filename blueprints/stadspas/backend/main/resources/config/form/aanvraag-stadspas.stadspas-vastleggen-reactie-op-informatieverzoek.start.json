@@ -1,0 +1,88 @@
+{
+    "display": "form",
+    "components": [
+        {
+            "content": "<strong>Upload hieronder de ontvangen bestanden en geef eventueel een toelichting</strong>",
+            "tableView": true,
+            "key": "instructie",
+            "type": "htmlelement",
+            "input": true
+        },
+        {
+            "label": "Toelichting",
+            "autoExpand": true,
+            "tableView": true,
+            "properties": {
+                "container": "/beoordelingEnAfhandeling/informatieReacties/-/"
+            },
+            "key": "toelichting",
+            "type": "textarea",
+            "input": true
+        },
+        {
+            "label": "Ontvangen bestanden",
+            "type": "documenten-api-file",
+            "key": "ontvangenBestanden",
+            "properties": {
+                "container": "/beoordelingEnAfhandeling/informatieReacties/-/"
+            },
+            "customOptions": {
+                "title": "",
+                "hideTitle": false,
+                "subtitle": "",
+                "maxFileSize": 5,
+                "hideMaxFileSize": false,
+                "camera": false,
+                "documentTitle": "",
+                "disableDocumentTitle": false,
+                "filename": "",
+                "disableFilename": false,
+                "author": "",
+                "disableAuthor": false,
+                "status": "",
+                "disableStatus": false,
+                "language": "",
+                "disableLanguage": false,
+                "documentType": "",
+                "disableDocumentType": false,
+                "description": "",
+                "disableDescription": false,
+                "confidentialityLevel": "",
+                "disableConfidentialityLevel": false
+            },
+            "input": true,
+            "tableView": false
+        },
+        {
+            "label": "Reactiedatum",
+            "properties": {
+                "container": "/beoordelingEnAfhandeling/informatieReacties/-/"
+            },
+            "key": "reactiedatum",
+            "type": "hidden",
+            "customDefaultValue": "value = moment()",
+            "input": true,
+            "tableView": false
+        },
+        {
+            "label": "Verzoek afgehandeld",
+            "properties": {
+                "container": "/beoordelingEnAfhandeling/informatieReacties/-/"
+            },
+            "key": "verzoekAfgehandeld",
+            "type": "hidden",
+            "defaultValue": true,
+            "input": true,
+            "tableView": false
+        },
+        {
+            "type": "button",
+            "label": "Submit",
+            "showValidations": false,
+            "disableOnInvalid": true,
+            "tableView": false,
+            "key": "submit",
+            "input": true
+        }
+    ]
+}

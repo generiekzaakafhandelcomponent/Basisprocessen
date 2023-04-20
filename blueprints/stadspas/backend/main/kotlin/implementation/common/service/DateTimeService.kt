@@ -12,9 +12,4 @@ class DateTimeService {
         val dateTimeFormatter = DateTimeFormatter.ISO_INSTANT
         return ZonedDateTime.now().format(dateTimeFormatter)
     }
-
-    fun getEuropePatternDate(timeStamp: String): String {
-        val dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
-        return dateTimeFormatter.format(ZonedDateTime.parse(timeStamp))
-    }
 }

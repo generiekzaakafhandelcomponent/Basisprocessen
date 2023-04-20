@@ -11,7 +11,11 @@ import org.camunda.bpm.engine.runtime.Job
 class JobService {
     lateinit var processEngine: ProcessEngine
 
-    fun addOffsetInMillisToTimerDueDateByActivityId(millisecondsToAdd: Long, activityId: String, execution: DelegateExecution) {
+    fun addOffsetInMillisToTimerDueDateByActivityId(
+        millisecondsToAdd: Long,
+        activityId: String,
+        execution: DelegateExecution
+    ) {
         processEngine = execution.processEngine
 
         getJobByActivityIdAndProcessInstanceId(activityId, execution.processInstanceId).apply {
@@ -25,7 +29,7 @@ class JobService {
             ).also {
                 logger.debug {
                     "Changing the date of timer ${this.id} from ${this.duedate} to $dueDate " +
-                        "for process instance $processInstanceId"
+                            "for process instance $processInstanceId"
                 }
             }
         }
@@ -43,7 +47,7 @@ class JobService {
             ).also {
                 logger.debug {
                     "Changing the date of timer ${this.id} from ${this.duedate} to $dueDate " +
-                        "for process instance $processInstanceId"
+                            "for process instance $processInstanceId"
                 }
             }
         }

@@ -33,16 +33,24 @@ plugins {
 }
 
 java.sourceCompatibility = JavaVersion.VERSION_17
+java.targetCompatibility = JavaVersion.VERSION_17
 
 repositories {
     mavenCentral()
-    maven { url = uri("https://repo.ritense.com/repository/maven-snapshot/") }
+    maven { url = uri("https://repo.ritense.com/repository/maven-snapshots/") }
     maven { url = uri("https://repo.ritense.com/repository/maven-releases/") }
     maven { url = uri("https://s01.oss.sonatype.org/content/groups/staging/") }
     maven { url = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/") }
 }
 
-val valtimoVersion: String by project
+val valtimo_version: String by project
+val jacksonVersion: String by project
+
+dependencyManagement {
+    imports {
+        mavenBom ("com.fasterxml.jackson:jackson-bom:$jacksonVersion")
+    }
+}
 
 dependencies {
 
@@ -51,30 +59,37 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
     // Valtimo
+    implementation("com.ritense.valtimo:audit:$valtimo_version")
+    implementation("com.ritense.valtimo:besluit:$valtimo_version")
+    implementation("com.ritense.valtimo:case:$valtimo_version")
+    implementation("com.ritense.valtimo:catalogi-api:$valtimo_version")
     implementation("com.ritense.valtimo:connector:$valtimo_version")
     implementation("com.ritense.valtimo:contract:$valtimo_version")
     implementation("com.ritense.valtimo:core:$valtimo_version")
-    implementation("com.ritense.valtimo:keycloak-iam:$valtimo_version")
-    implementation("com.ritense.valtimo:web:$valtimo_version")
-    implementation("com.ritense.valtimo:audit:$valtimo_version")
     implementation("com.ritense.valtimo:document:$valtimo_version")
-    implementation("com.ritense.valtimo:objects-api:$valtimo_version")
-    implementation("com.ritense.valtimo:openzaak:$valtimo_version")
-    implementation("com.ritense.valtimo:openzaak-resource:$valtimo_version")
-    implementation("com.ritense.valtimo:process-document:$valtimo_version")
-    implementation("com.ritense.valtimo:form:$valtimo_version")
+    implementation("com.ritense.valtimo:documenten-api:$valtimo_version")
     implementation("com.ritense.valtimo:form-flow-valtimo:$valtimo_version")
     implementation("com.ritense.valtimo:form-link:$valtimo_version")
-    implementation("com.ritense.valtimo:wordpress-mail:$valtimo_version")
+    implementation("com.ritense.valtimo:form:$valtimo_version")
+    implementation("com.ritense.valtimo:keycloak-iam:$valtimo_version")
+    implementation("com.ritense.valtimo:notes:$valtimo_version")
+    implementation("com.ritense.valtimo:notificaties-api-authentication:$valtimo_version")
+    implementation("com.ritense.valtimo:notificaties-api:$valtimo_version")
+    implementation("com.ritense.valtimo:object-management:$valtimo_version")
+    implementation("com.ritense.valtimo:objecten-api-authentication:$valtimo_version")
+    implementation("com.ritense.valtimo:objecten-api:$valtimo_version")
+    implementation("com.ritense.valtimo:objects-api:$valtimo_version")
+    implementation("com.ritense.valtimo:openzaak-resource:$valtimo_version")
+    implementation("com.ritense.valtimo:openzaak:$valtimo_version")
+    implementation("com.ritense.valtimo:plugin-valtimo:$valtimo_version")
+    implementation("com.ritense.valtimo:portaaltaak:$valtimo_version")
+    implementation("com.ritense.valtimo:process-document:$valtimo_version")
+    implementation("com.ritense.valtimo:smartdocuments:$valtimo_version")
     implementation("com.ritense.valtimo:test-utils-common:$valtimo_version")
-    implementation ("com.ritense.valtimo:smartdocuments:$valtimo_version")
-    implementation ("com.ritense.valtimo:besluit:$valtimo_version")
-    implementation ("com.ritense.valtimo:plugin-valtimo:$valtimo_version")
-    implementation ("com.ritense.valtimo:zaken-api:$valtimo_version")
-    implementation ("com.ritense.valtimo:objecten-api:$valtimo_version")
-    implementation ("com.ritense.valtimo:documenten-api:$valtimo_version")
-    implementation ("com.ritense.valtimo:case:$valtimo_version")
-    implementation ("com.ritense.valtimo:notes:$valtimo_version")
+    implementation("com.ritense.valtimo:verzoek:$valtimo_version")
+    implementation("com.ritense.valtimo:web:$valtimo_version")
+    implementation("com.ritense.valtimo:wordpress-mail:$valtimo_version")
+    implementation("com.ritense.valtimo:zaken-api:$valtimo_version")
 
     // Postgresql
     implementation("org.postgresql:postgresql:42.4.1")
@@ -92,6 +107,7 @@ dependencies {
     testImplementation("org.camunda.bpm.extension.mockito:camunda-bpm-mockito:5.16.0")
     testImplementation("org.mockito:mockito-core:4.4.0")
     testImplementation("org.mockito.kotlin:mockito-kotlin:4.1.0")
+    testImplementation("com.h2database:h2")
 }
 
 tasks.withType<KotlinCompile> {

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="StadspasBepalenBeschikkingTemplateId" name="Stadspas: Bepalen beschikking template " namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.0.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.17.0">
+  <decision id="stadspas-bepalen-beschikking-template" name="Bepalen beschikking template">
+    <decisionTable id="DecisionTable_167devb" hitPolicy="FIRST">
+      <input id="Input_1" label="Eindconclusie" camunda:inputVariable="eindconclusie">
+        <inputExpression id="InputExpression_1" typeRef="string" expressionLanguage="juel">
+          <text></text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="Beschikking template" name="beschikkingTemplate" typeRef="string" />
+      <rule id="DecisionRule_1rw9t5i">
+        <inputEntry id="UnaryTests_0ypwos7">
+          <text>"Aanvraag toekennen"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_009711l">
+          <text>"Besluit over uw aanvraag Stadspas - Toekenning 1e keer"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0mzo0x3">
+        <inputEntry id="UnaryTests_16hp11p">
+          <text>"Aanvraag afwijzen"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1pps1zd">
+          <text>"Besluit over uw aanvraag Stadspas - Afwijzing"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1y2l3vz">
+        <inputEntry id="UnaryTests_0nque5y">
+          <text>"Aanvraag buiten behandeling stellen"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0pllacd">
+          <text>"Aanvraag Stadspas buiten behandeling"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0eu96jd">
+        <inputEntry id="UnaryTests_0l3pxs6">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1ubdvzk">
+          <text>""</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="stadspas-bepalen-beschikking-template">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

@@ -65,6 +65,10 @@ class StadspasProductObjectsApiService(
 
         val aanvragerData = mapOf(
             "naam" to aanvrager.get("volledigeNaam").asText(),
+
+            // temporarily not required
+//            "geslacht" to aanvrager.get("geslacht").asText(),
+//            "geboortedatum" to aanvrager.get("geboortedatum").asText(),
         )
 
         aanvragerData.forEach { data -> paseigenaarNode.put(data.key, data.value) }
@@ -79,7 +83,7 @@ class StadspasProductObjectsApiService(
 
         val pasgeldigheidData = mapOf(
             "begindatum" to datumAanvraagToekenningNode.asText(),
-            "einddatum" to getPasgeldigheidEinddatum(datumAanvraagToekenningNode)
+            "einddatum" to getPasgeldigheidEinddatum(documentContent)
         )
 
         pasgeldigheidData.forEach { data -> pasgeldigheidNode.put(data.key, data.value) }
@@ -87,11 +91,14 @@ class StadspasProductObjectsApiService(
         return pasgeldigheidNode
     }
 
-    private fun getPasgeldigheidEinddatum(datumAanvraagToekenningNode: JsonNode): String {
-        val datumAanvraagToekenning = ZonedDateTime.parse(datumAanvraagToekenningNode.asText())
-        val dateTimeFormatter = DateTimeFormatter.ISO_INSTANT
+    private fun getPasgeldigheidEinddatum(documentContent: ObjectNode): String {
+        val stadspasJaartalNode =
+            documentContent.get("beoordelingEnAfhandeling").get("besluit").get("stadspasJaartal")
+        val stadspasJaartal = stadspasJaartalNode.asText().substring(6, 10).toInt()
 
-        return datumAanvraagToekenning.plusYears(1).format(dateTimeFormatter)
+        val einddatumStadspas = ZonedDateTime.of(stadspasJaartal, 12, 31, 0, 0, 0, 0, ZoneId.systemDefault())
+
+        return einddatumStadspas.format(DateTimeFormatter.ISO_INSTANT)
     }
 
     companion object {

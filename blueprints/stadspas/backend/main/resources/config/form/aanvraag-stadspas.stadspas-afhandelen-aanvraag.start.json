@@ -1,0 +1,119 @@
+{
+    "display": "form",
+    "components": [
+        {
+            "content": "<strong>Aanvrager gegevens</strong></br>",
+            "tableView": true,
+            "key": "aanvragerGegevens",
+            "type": "htmlelement",
+            "input": false,
+            "label": "HTML"
+        },
+        {
+            "label": "Voornaam",
+            "tableView": true,
+            "key": "aanvrager.voornaam",
+            "type": "textfield",
+            "input": true,
+            "disabled": false
+        },
+        {
+            "label": "Tussenvoegsel",
+            "tableView": true,
+            "key": "aanvrager.tussenvoegsel",
+            "type": "textfield",
+            "input": true,
+            "disabled": false
+        },
+        {
+            "label": "Achternaam",
+            "tableView": true,
+            "key": "aanvrager.achternaam",
+            "type": "textfield",
+            "input": true,
+            "disabled": false
+        },
+        {
+            "label": "Volledige naam",
+            "tableView": true,
+            "key": "aanvrager.volledigeNaam",
+            "calculateValue": "value = data.aanvrager.voornaam + ' ' + data.aanvrager.tussenvoegsel + (data.aanvrager.tussenvoegsel != '' ? ' ' : '') + data.aanvrager.achternaam",
+            "type": "hidden",
+            "input": true,
+            "disabled": false
+        },
+        {
+            "label": "Straat",
+            "tableView": true,
+            "key": "aanvrager.adres.straat",
+            "type": "textfield",
+            "input": true
+        },
+        {
+            "label": "Huisnummer",
+            "tableView": true,
+            "type": "number",
+            "input": true
+        },
+        {
+            "label": "Huisletter",
+            "tableView": true,
+            "key": "aanvrager.adres.huisletter",
+            "type": "textfield",
+            "input": true
+        },
+        {
+            "label": "Postcode",
+            "tableView": true,
+            "key": "aanvrager.adres.postcode",
+            "inputMask": "9999 AA",
+            "type": "textfield",
+            "input": true
+        },
+        {
+            "label": "Plaats",
+            "tableView": true,
+            "key": "aanvrager.adres.woonplaats",
+            "type": "textfield",
+            "input": true
+        },
+        {
+            "label": "Volledig adres",
+            "tableView": true,
+            "key": "aanvrager.adres.volledigAdres",
+            "calculateValue": "value = data.aanvrager.adres ? (( data.aanvrager.adres?.straat ? data.aanvrager.adres?.straat + ' ' : '') + ( data.aanvrager?.adres?.huisnummer ? data.aanvrager?.adres?.huisnummer + ' ' : '') + ( data.aanvrager?.adres?.huisletter || '') + ( data.aanvrager?.adres?.huisnummertoevoeging || '') + ( ( data.aanvrager?.adres?.postcode || data.aanvrager?.adres?.woonplaats) ? ',' : '') + ( ' ' + data.aanvrager?.adres?.postcode || '') ) + ( ' ' + (data.aanvrager?.adres?.woonplaats || '')) : '-'",
+            "type": "hidden",
+            "input": true
+        },
+        {
+            "label": "Telefoonnummer",
+            "tableView": true,
+            "key": "aanvrager.telefoonnummer",
+            "inputMask": "9999999999",
+            "type": "phoneNumber",
+            "input": true
+        },
+        {
+            "label": "Email",
+            "tableView": true,
+            "key": "aanvrager.emailadres",
+            "type": "textfield",
+            "validate": {
+                "required": true
+            },
+            "input": true,
+            "disabled": false
+        },
+        {
+            "label": "Doorgaan",
+            "action": "custom",
+            "showValidations": false,
+            "disableOnInvalid": true,
+            "tableView": false,
+            "key": "submit",
+            "type": "button",
+            "input": true,
+            "custom": "form.submit(); component.disabled = true;"
+        }
+    ]
+}

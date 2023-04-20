@@ -38,23 +38,18 @@ class StadspasAutoConfiguration {
             besluitTypeOmschrijving
         )
     }
-
-    @Bean
-    fun stadspasCasePropertiesInitService(
-        documentService: DocumentService,
-        dateTimeService: DateTimeService
-    ): StadspasCasePropertiesInitService {
-        return StadspasCasePropertiesInitService(
-            documentService,
-            dateTimeService
-        )
-    }
-
     @Bean
     fun stadspasAanvraagMapper(
         documentService: DocumentService,
         documentReaderService: DocumentReaderService
     ): StadspasAanvraagMapper {
         return StadspasAanvraagMapper(documentService, documentReaderService)
+    }
+
+    @Bean
+    fun stadspasOpgegevenDataToBeoordelingService(
+        documentService: DocumentService
+    ): StadspasOpgegevenDataToBeoordelingService {
+        return stadspasOpgegevenDataToBeoordelingService(documentService)
     }
 }

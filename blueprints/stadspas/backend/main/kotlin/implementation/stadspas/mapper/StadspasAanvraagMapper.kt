@@ -52,10 +52,10 @@ class StadspasAanvraagMapper(
     private fun mapAanvraag(jsonNode: JsonNode): StadspasAanvraag {
 
         return jsonNode.let {
-            val persoonsgegevens: JsonNode? = when (val digidNode = it.at("/persoonsgegevens-stadspas/digid")) {
+            val persoonsgegevens: JsonNode? = when (val digidNode = it.at("/uw-gegevens-standaard-na/digid")) {
                 is MissingNode -> null
                 else -> digidNode
-            } ?: when (val anoniemNode = it.at("/persoonsgegevens-stadspas/anoniem")) {
+            } ?: when (val anoniemNode = it.at("/uw-gegevens-standaard-na/anoniem")) {
                 is MissingNode -> null
                 else -> anoniemNode
             }
@@ -82,18 +82,18 @@ class StadspasAanvraagMapper(
                         woonplaats = persoonsgegevens?.getNodeValueByPathOrNull("/adresgegevens1/plaatsPrefill")
                             ?: persoonsgegevens?.getNodeValueByPathOrNull("/adresgegevens/plaats")
                     ),
-                    telefoonnummer = it.getNodeValueByPathOrNull("/persoonsgegevens-stadspas/contactgegevens/telefoonnummer"),
-                    emailadres = it.getNodeValueByPathOrNull("/persoonsgegevens-stadspas/contactgegevens/emailadres"),
+                    telefoonnummer = it.getNodeValueByPathOrNull("/uw-gegevens-standaard-na/contactgegevens/telefoonnummer"),
+                    emailadres = it.getNodeValueByPathOrNull("/uw-gegevens-standaard-na/contactgegevens/emailadres"),
                 ),
                 partner = Partner(
-                    bsn = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-gezinssamenstelling/uwGezinssituatie/gegevensVanUwPartner/burgerservicenummerPartner"),
-                    geboortedatum = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-gezinssamenstelling/uwGezinssituatie/gegevensVanUwPartner/geboortedatumPartner"),
-                    voorletters = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-gezinssamenstelling/uwGezinssituatie/gegevensVanUwPartner/voorletterPartner"),
-                    tussenvoegsel = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-gezinssamenstelling/uwGezinssituatie/gegevensVanUwPartner/voorvoegselPartner"),
-                    achternaam = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-gezinssamenstelling/uwGezinssituatie/gegevensVanUwPartner/achternaamPartner"),
-                    identiteitsbewijs = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-gezinssamenstelling/uwGezinssituatie/gegevensVanUwPartner/idPartner")
+                    bsn = it.getNodeValueByPathOrNull("/stadspas-gezinssamenstelling/uwGezinssituatie/gegevensVanUwPartner/burgerservicenummerPartner"),
+                    geboortedatum = it.getNodeValueByPathOrNull("/stadspas-gezinssamenstelling/uwGezinssituatie/gegevensVanUwPartner/geboortedatumPartner"),
+                    voorletters = it.getNodeValueByPathOrNull("/stadspas-gezinssamenstelling/uwGezinssituatie/gegevensVanUwPartner/voorletterPartner"),
+                    tussenvoegsel = it.getNodeValueByPathOrNull("/stadspas-gezinssamenstelling/uwGezinssituatie/gegevensVanUwPartner/voorvoegselPartner"),
+                    achternaam = it.getNodeValueByPathOrNull("/stadspas-gezinssamenstelling/uwGezinssituatie/gegevensVanUwPartner/achternaamPartner"),
+                    identiteitsbewijs = it.getNodeValueByPathOrNull("/stadspas-gezinssamenstelling/uwGezinssituatie/gegevensVanUwPartner/idPartner")
                 ),
-                kinderen = it.getNodeValueByPathOrNull<List<JsonNode>?>("/aanvraag-formulier-stadspas-gezinssamenstelling/uwGezinssituatie/gegevensVanUwKinderen/kinderen")
+                kinderen = it.getNodeValueByPathOrNull<List<JsonNode>?>("/stadspas-gezinssamenstelling/uwGezinssituatie/gegevensVanUwKinderen/kinderen")
                     ?.map {
                         Kind(
                             voorletters = it.getNodeValueByPathOrNull("/voorletterKind"),
@@ -106,43 +106,41 @@ class StadspasAanvraagMapper(
                     }
                     ?: listOf(),
                 aanvraaggegevens = Aanvraaggegevens(
-                    heeftBijstandsuitkering = it.getNodeValueByPathOrNull<String?>("/aanvraag-formulier-stadspas-uw-situatie/OntvangtBijstandsuitkering")
+                    heeftBijstandsuitkering = it.getNodeValueByPathOrNull<String?>("/stadspas-uw-situatie/OntvangtBijstandsuitkering")
                         .asJaNeeOrNvt(),
-                    heeftSchuldhulpverlening = it.getNodeValueByPathOrNull<String?>("/aanvraag-formulier-stadspas-uw-situatie/inSchuldhulpverlening")
+                    heeftSchuldhulpverlening = it.getNodeValueByPathOrNull<String?>("/stadspas-uw-situatie/inSchuldhulpverlening")
                         .asJaNeeOrNvt(),
-                    heeftInwonendePartner = it.getNodeValueByPathOrNull<String?>("/aanvraag-formulier-stadspas-gezinssamenstelling/uwGezinssituatie/inwonendePartner")
+                    heeftInwonendePartner = it.getNodeValueByPathOrNull<String?>("/stadspas-gezinssamenstelling/uwGezinssituatie/inwonendePartner")
                         .asJaNeeOrNvt(),
-                    heeftInwonendeKinderen = it.getNodeValueByPathOrNull<String?>("/aanvraag-formulier-stadspas-gezinssamenstelling/uwGezinssituatie/inwonendeKinderen18")
+                    heeftInwonendeKinderen = it.getNodeValueByPathOrNull<String?>("/stadspas-gezinssamenstelling/uwGezinssituatie/inwonendeKinderen18")
                         .asJaNeeOrNvt(),
-                    aanvragerIsStudent = it.getNodeValueByPathOrNull<String?>("/aanvraag-formulier-stadspas-gezinssamenstelling/HOStudent")
+                    aanvragerIsStudent = it.getNodeValueByPathOrNull<String?>("/stadspas-gezinssamenstelling/uwStudiesituatie/HOStudent")
                         .asJaNeeOrNvt(),
-                    aanvragerIsOndernemer = it.getNodeValueByPathOrNull<String?>("/aanvraag-formulier-stadspas-uw-inkomsten/ondernemer/bentUOndernemer")
+                    partnerIsStudent = it.getNodeValueByPathOrNull<String?>("/stadspas-gezinssamenstelling/uwStudiesituatie/HOStudentPartner")
                         .asJaNeeOrNvt(),
-                    partnerIsStudent = it.getNodeValueByPathOrNull<String?>("/aanvraag-formulier-stadspas-gezinssamenstelling/HOStudentPartner")
+                    aanvragerIsOndernemer = it.getNodeValueByPathOrNull<String?>("/stadspas-uw-inkomsten/ondernemer/bentUOndernemer")
                         .asJaNeeOrNvt(),
-                    partnerIsOndernemer = it.getNodeValueByPathOrNull<String?>("/aanvraag-formulier-stadspas-inkomsten-partner/OndernemerPartner/isUwPartnerOndernemer")
+                    heeftHuurinkomsten = it.getNodeValueByPathOrNull<String?>("/stadspas-uw-inkomsten/inkomenUitOnderhuur/heeftUInkomenUitOnderhuur")
                         .asJaNeeOrNvt(),
-                    heeftHuurinkomsten = it.getNodeValueByPathOrNull<String?>("/aanvraag-formulier-stadspas-uw-inkomsten/inkomenUitOnderhuur/heeftUInkomenUitOnderhuur")
+                    heeftWerkgever = it.getNodeValueByPathOrNull<String?>("/stadspas-uw-inkomsten/heeftUEenWerkgever")
                         .asJaNeeOrNvt(),
-                    heeftPartnerHuurinkomsten = it.getNodeValueByPathOrNull<String?>("/aanvraag-formulier-stadspas-inkomsten-partner/inkomenUitOnderhuurPartner/heeftUwPartnerInkomenUitOnderhuur")
+                    heeftPensioen = it.getNodeValueByPathOrNull<String?>("/stadspas-uw-inkomsten/pensioenenVeldenGroep/krijgtUPensioen")
                         .asJaNeeOrNvt(),
-                    heeftWerkgever = it.getNodeValueByPathOrNull<String?>("/aanvraag-formulier-stadspas-uw-inkomsten/heeftUEenWerkgever")
+                    heeftKinderalimentatie = it.getNodeValueByPathOrNull<String?>("/stadspas-uw-inkomsten/alimentatie/krijgtUKinderalimentatie")
                         .asJaNeeOrNvt(),
-                    heeftPartnerWerkgever = it.getNodeValueByPathOrNull<String?>("/aanvraag-formulier-stadspas-inkomsten-partner/inkomstenVanUwPartner/heeftUwPartnerEenWerkgever")
+                    partnerIsOndernemer = it.getNodeValueByPathOrNull<String?>("/stadspas-inkomsten-partner/OndernemerPartner/isUwPartnerOndernemer")
                         .asJaNeeOrNvt(),
-                    heeftPensioen = it.getNodeValueByPathOrNull<String?>("/aanvraag-formulier-stadspas-uw-inkomsten/pensioenenVeldenGroep/krijgtUPensioen")
+                    heeftPartnerHuurinkomsten = it.getNodeValueByPathOrNull<String?>("/stadspas-inkomsten-partner/inkomenUitOnderhuurPartner/heeftUwPartnerInkomenUitOnderhuur")
                         .asJaNeeOrNvt(),
-                    heeftPartnerPensioen = it.getNodeValueByPathOrNull<String?>("/aanvraag-formulier-stadspas-inkomsten-partner/pensioenenPartnerVeldenGroep/krijgtUwPartnerPensioen")
+                    heeftPartnerWerkgever = it.getNodeValueByPathOrNull<String?>("/stadspas-inkomsten-partner/inkomstenVanUwPartner/heeftUwPartnerEenWerkgever")
                         .asJaNeeOrNvt(),
-                    heeftKinderalimentatie = it.getNodeValueByPathOrNull<String?>("/aanvraag-formulier-stadspas-uw-inkomsten/alimentatie/krijgtUKinderalimentatie")
+                    heeftPartnerPensioen = it.getNodeValueByPathOrNull<String?>("/stadspas-inkomsten-partner/pensioenenPartnerVeldenGroep/krijgtUwPartnerPensioen")
                         .asJaNeeOrNvt(),
-                    heeftPartnerKinderalimentatie = it.getNodeValueByPathOrNull<String?>("/aanvraag-formulier-stadspas-inkomsten-partner/alimentatiePartnerGroep/krijgtUwPartnerKinderAlimentatie")
-                        .asJaNeeOrNvt(),
-                    heeftSchulden = it.getNodeValueByPathOrNull<String?>("/aanvraag-formulier-stadspas-bezit-en-schulden/schuldenGroep/heeftUSchulden")
-                        .asJaNeeOrNvt(),
+                    heeftPartnerKinderalimentatie = it.getNodeValueByPathOrNull<String?>("/stadspas-inkomsten-partner/alimentatiePartnerGroep/krijgtUwPartnerKinderAlimentatie")
+                        .asJaNeeOrNvt()
                 ),
                 inkomenKlant = Inkomen(
-                    werkgevers = it.getNodeValueByPathOrNull<List<JsonNode>?>("/aanvraag-formulier-stadspas-uw-inkomsten/loondienstWerkgevers/werkgevers")
+                    werkgevers = it.getNodeValueByPathOrNull<List<JsonNode>?>("/stadspas-uw-inkomsten/loondienstWerkgevers/werkgevers")
                         ?.map {
                             Werkgever(
                                 naam = it.getNodeValueByPathOrNull("/naamWerkgever"),
@@ -153,78 +151,78 @@ class StadspasAanvraagMapper(
                         ?: listOf(),
                     uitkeringen = Uitkeringen(
                         aow = Uitkering(
-                            actief = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-uw-inkomsten/uitkeringenVeldenGroep/uitkeringen/aow"),
+                            actief = it.getNodeValueByPathOrNull("/stadspas-uw-inkomsten/uitkeringenVeldenGroep/uitkeringen/aow"),
                             naam = "AOW",
-                            periode = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-uw-inkomsten/inkomenGroepAOW/periodeBedragAOW"),
-                            nettobedrag = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-uw-inkomsten/inkomenGroepAOW/nettoBedragAOW")
+                            periode = it.getNodeValueByPathOrNull("/stadspas-uw-inkomsten/inkomenGroepAOW/periodeBedragAOW"),
+                            nettobedrag = it.getNodeValueByPathOrNull("/stadspas-uw-inkomsten/inkomenGroepAOW/nettoBedragAOW")
                         ),
                         anw = Uitkering(
-                            actief = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-uw-inkomsten/uitkeringenVeldenGroep/uitkeringen/anw"),
+                            actief = it.getNodeValueByPathOrNull("/stadspas-uw-inkomsten/uitkeringenVeldenGroep/uitkeringen/anw"),
                             naam = "ANW",
-                            periode = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-uw-inkomsten/inkomenGroepANW/periodeBedragANW"),
-                            nettobedrag = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-uw-inkomsten/inkomenGroepANW/nettoBedragANW")
+                            periode = it.getNodeValueByPathOrNull("/stadspas-uw-inkomsten/inkomenGroepANW/periodeBedragANW"),
+                            nettobedrag = it.getNodeValueByPathOrNull("/stadspas-uw-inkomsten/inkomenGroepANW/nettoBedragANW")
                         ),
                         bijstand = Uitkering(
-                            actief = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-uw-inkomsten/uitkeringenVeldenGroep/uitkeringen/bijstand"),
+                            actief = it.getNodeValueByPathOrNull("/stadspas-uw-inkomsten/uitkeringenVeldenGroep/uitkeringen/bijstand"),
                             naam = "Bisjstand",
-                            periode = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-uw-inkomsten/inkomenGroepBijstand/periodeBedragBijstand"),
-                            nettobedrag = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-uw-inkomsten/inkomenGroepBijstand/nettoBedragBijstand")
+                            periode = it.getNodeValueByPathOrNull("/stadspas-uw-inkomsten/inkomenGroepBijstand/periodeBedragBijstand"),
+                            nettobedrag = it.getNodeValueByPathOrNull("/stadspas-uw-inkomsten/inkomenGroepBijstand/nettoBedragBijstand")
                         ),
                         wao = Uitkering(
-                            actief = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-uw-inkomsten/uitkeringenVeldenGroep/uitkeringen/wao"),
+                            actief = it.getNodeValueByPathOrNull("/stadspas-uw-inkomsten/uitkeringenVeldenGroep/uitkeringen/wao"),
                             naam = "WAO",
-                            periode = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-uw-inkomsten/inkomenGroepWAO/periodeBedragWAO"),
-                            nettobedrag = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-uw-inkomsten/inkomenGroepWAO/nettoBedragWAO")
+                            periode = it.getNodeValueByPathOrNull("/stadspas-uw-inkomsten/inkomenGroepWAO/periodeBedragWAO"),
+                            nettobedrag = it.getNodeValueByPathOrNull("/stadspas-uw-inkomsten/inkomenGroepWAO/nettoBedragWAO")
                         ),
                         ww = Uitkering(
-                            actief = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-uw-inkomsten/uitkeringenVeldenGroep/uitkeringen/ww"),
+                            actief = it.getNodeValueByPathOrNull("/stadspas-uw-inkomsten/uitkeringenVeldenGroep/uitkeringen/ww"),
                             naam = "WW",
-                            periode = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-uw-inkomsten/inkomenGroepWW/periodeBedragWW"),
-                            nettobedrag = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-uw-inkomsten/inkomenGroepWW/nettoBedragWW")
+                            periode = it.getNodeValueByPathOrNull("/stadspas-uw-inkomsten/inkomenGroepWW/periodeBedragWW"),
+                            nettobedrag = it.getNodeValueByPathOrNull("/stadspas-uw-inkomsten/inkomenGroepWW/nettoBedragWW")
                         ),
                         wajong = Uitkering(
-                            actief = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-uw-inkomsten/uitkeringenVeldenGroep/uitkeringen/wajong"),
+                            actief = it.getNodeValueByPathOrNull("/stadspas-uw-inkomsten/uitkeringenVeldenGroep/uitkeringen/wajong"),
                             naam = "Wajong",
-                            periode = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-uw-inkomsten/inkomenGroepWajong/periodeBedragWajong"),
-                            nettobedrag = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-uw-inkomsten/inkomenGroepWajong/nettoBedragWajong")
+                            periode = it.getNodeValueByPathOrNull("/stadspas-uw-inkomsten/inkomenGroepWajong/periodeBedragWajong"),
+                            nettobedrag = it.getNodeValueByPathOrNull("/stadspas-uw-inkomsten/inkomenGroepWajong/nettoBedragWajong")
                         ),
                         wia = Uitkering(
-                            actief = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-uw-inkomsten/uitkeringenVeldenGroep/uitkeringen/wia"),
+                            actief = it.getNodeValueByPathOrNull("/stadspas-uw-inkomsten/uitkeringenVeldenGroep/uitkeringen/wia"),
                             naam = "WIA",
-                            periode = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-uw-inkomsten/inkomenGroepWIA/periodeBedragWIA"),
-                            nettobedrag = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-uw-inkomsten/inkomenGroepWIA/nettoBedragWIA")
+                            periode = it.getNodeValueByPathOrNull("/stadspas-uw-inkomsten/inkomenGroepWIA/periodeBedragWIA"),
+                            nettobedrag = it.getNodeValueByPathOrNull("/stadspas-uw-inkomsten/inkomenGroepWIA/nettoBedragWIA")
                         ),
                         ziektewet = Uitkering(
-                            actief = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-uw-inkomsten/uitkeringenVeldenGroep/uitkeringen/ziektewet"),
+                            actief = it.getNodeValueByPathOrNull("/stadspas-uw-inkomsten/uitkeringenVeldenGroep/uitkeringen/ziektewet"),
                             naam = "Ziektewet",
-                            periode = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-uw-inkomsten/inkomenGroepZiektewet/periodeBedragZiektewet"),
-                            nettobedrag = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-uw-inkomsten/inkomenGroepZiektewet/nettoBedragZiektewet")
+                            periode = it.getNodeValueByPathOrNull("/stadspas-uw-inkomsten/inkomenGroepZiektewet/periodeBedragZiektewet"),
+                            nettobedrag = it.getNodeValueByPathOrNull("/stadspas-uw-inkomsten/inkomenGroepZiektewet/nettoBedragZiektewet")
                         )
                     ),
-                    pensioenen = it.getNodeValueByPathOrNull<List<JsonNode>?>("/aanvraag-formulier-stadspas-uw-inkomsten/pensioenenVeldenGroep/pensioenenGroep/pensioenen")
+                    pensioenen = it.getNodeValueByPathOrNull<List<JsonNode>?>("/stadspas-uw-inkomsten/pensioenenVeldenGroep/pensioenenGroep/pensioenen")
                         ?.map {
                             Pensioen(
                                 nettobedrag = it.getNodeValueByPathOrNull("/nettoPensioen")
                             )
                         }
                         ?: listOf(),
-                    nettoKinderalimentatie = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-uw-inkomsten/alimentatie/nettoKinderalimentatie"),
-                    bedragOnderhuur = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-uw-inkomsten/inkomenUitOnderhuur/bedragOnderhuur"),
+                    nettoKinderalimentatie = it.getNodeValueByPathOrNull("/stadspas-uw-inkomsten/alimentatie/nettoKinderalimentatie"),
+                    bedragOnderhuur = it.getNodeValueByPathOrNull("/stadspas-uw-inkomsten/inkomenUitOnderhuur/bedragOnderhuur"),
                     bedrijfsDocumenten = BedrijfsDocumenten(
                         aanwezigeDocumenten = AanwezigeDocumenten(
-                            jaarrekening = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-uw-inkomsten/ondernemer/uploadBedrijfsDocumenten/a"),
-                            balans = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-uw-inkomsten/ondernemer/uploadBedrijfsDocumenten/b"),
-                            aangifte = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-uw-inkomsten/ondernemer/uploadBedrijfsDocumenten/c"),
-                            aanslag = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-uw-inkomsten/ondernemer/uploadBedrijfsDocumenten/d")
+                            jaarrekening = it.getNodeValueByPathOrNull("/stadspas-uw-inkomsten/ondernemer/uploadBedrijfsDocumenten/a"),
+                            balans = it.getNodeValueByPathOrNull("/stadspas-uw-inkomsten/ondernemer/uploadBedrijfsDocumenten/b"),
+                            aangifte = it.getNodeValueByPathOrNull("/stadspas-uw-inkomsten/ondernemer/uploadBedrijfsDocumenten/c"),
+                            aanslag = it.getNodeValueByPathOrNull("/stadspas-uw-inkomsten/ondernemer/uploadBedrijfsDocumenten/d")
                         ),
-                        jaarrekening = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-uw-inkomsten/ondernemer/jaarrekening"),
-                        balans = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-uw-inkomsten/ondernemer/balans"),
-                        aangifte = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-uw-inkomsten/ondernemer/aangifte"),
-                        aanslag = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-uw-inkomsten/ondernemer/aanslag")
+                        jaarrekening = it.getNodeValueByPathOrNull("/stadspas-uw-inkomsten/ondernemer/jaarrekening"),
+                        balans = it.getNodeValueByPathOrNull("/stadspas-uw-inkomsten/ondernemer/balans"),
+                        aangifte = it.getNodeValueByPathOrNull("/stadspas-uw-inkomsten/ondernemer/aangifte"),
+                        aanslag = it.getNodeValueByPathOrNull("/stadspas-uw-inkomsten/ondernemer/aanslag")
                     )
                 ),
                 inkomenPartner = Inkomen(
-                    werkgevers = it.getNodeValueByPathOrNull<List<JsonNode>?>("/aanvraag-formulier-stadspas-inkomsten-partner/loondienstWerkgeverSPartner/werkgeversPartner")
+                    werkgevers = it.getNodeValueByPathOrNull<List<JsonNode>?>("/stadspas-inkomsten-partner/loondienstWerkgeverSPartner/werkgeversPartner")
                         ?.map {
                             Werkgever(
                                 naam = it.getNodeValueByPathOrNull("/naamWerkgeverPartner"),
@@ -235,85 +233,85 @@ class StadspasAanvraagMapper(
                         ?: listOf(),
                     uitkeringen = Uitkeringen(
                         aow = Uitkering(
-                            actief = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-inkomsten-partner/uitkeringenPartnerVeldenGroep/uitkeringenPartner/aow"),
+                            actief = it.getNodeValueByPathOrNull("/stadspas-inkomsten-partner/uitkeringenPartnerVeldenGroep/uitkeringenPartner/aow"),
                             naam = "AOW",
-                            periode = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-inkomsten-partner/uitkeringenPartnerVeldenGroep/aowPartner/periodeBedragAOWPartner"),
-                            nettobedrag = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-inkomsten-partner/uitkeringenPartnerVeldenGroep/aowPartner/nettoBedragAOWPartner")
+                            periode = it.getNodeValueByPathOrNull("/stadspas-inkomsten-partner/uitkeringenPartnerVeldenGroep/aowPartner/periodeBedragAOWPartner"),
+                            nettobedrag = it.getNodeValueByPathOrNull("/stadspas-inkomsten-partner/uitkeringenPartnerVeldenGroep/aowPartner/nettoBedragAOWPartner")
                         ),
                         anw = Uitkering(
-                            actief = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-inkomsten-partner/uitkeringenPartnerVeldenGroep/uitkeringenPartner/anw"),
+                            actief = it.getNodeValueByPathOrNull("/stadspas-inkomsten-partner/uitkeringenPartnerVeldenGroep/uitkeringenPartner/anw"),
                             naam = "ANW",
-                            periode = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-inkomsten-partner/uitkeringenPartnerVeldenGroep/ANWPartner/periodeBedragANWPartner"),
-                            nettobedrag = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-inkomsten-partner/uitkeringenPartnerVeldenGroep/ANWPartner/nettoBedragANWPartner")
+                            periode = it.getNodeValueByPathOrNull("/stadspas-inkomsten-partner/uitkeringenPartnerVeldenGroep/ANWPartner/periodeBedragANWPartner"),
+                            nettobedrag = it.getNodeValueByPathOrNull("/stadspas-inkomsten-partner/uitkeringenPartnerVeldenGroep/ANWPartner/nettoBedragANWPartner")
                         ),
                         bijstand = Uitkering(
-                            actief = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-inkomsten-partner/uitkeringenPartnerVeldenGroep/uitkeringenPartner/bijstand"),
+                            actief = it.getNodeValueByPathOrNull("/stadspas-inkomsten-partner/uitkeringenPartnerVeldenGroep/uitkeringenPartner/bijstand"),
                             naam = "Bisjstand",
-                            periode = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-inkomsten-partner/uitkeringenPartnerVeldenGroep/BijstandPartner/periodeBedragBijstandPartner"),
-                            nettobedrag = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-inkomsten-partner/uitkeringenPartnerVeldenGroep/BijstandPartner/nettoBedragBijstandPartner")
+                            periode = it.getNodeValueByPathOrNull("/stadspas-inkomsten-partner/uitkeringenPartnerVeldenGroep/BijstandPartner/periodeBedragBijstandPartner"),
+                            nettobedrag = it.getNodeValueByPathOrNull("/stadspas-inkomsten-partner/uitkeringenPartnerVeldenGroep/BijstandPartner/nettoBedragBijstandPartner")
                         ),
                         wao = Uitkering(
-                            actief = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-inkomsten-partner/uitkeringenPartnerVeldenGroep/uitkeringenPartner/wao"),
+                            actief = it.getNodeValueByPathOrNull("/stadspas-inkomsten-partner/uitkeringenPartnerVeldenGroep/uitkeringenPartner/wao"),
                             naam = "WAO",
-                            periode = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-inkomsten-partner/uitkeringenPartnerVeldenGroep/WAOPartner/periodeBedragWAOPartner"),
-                            nettobedrag = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-inkomsten-partner/uitkeringenPartnerVeldenGroep/WAOPartner/nettoBedragWAOPartner")
+                            periode = it.getNodeValueByPathOrNull("/stadspas-inkomsten-partner/uitkeringenPartnerVeldenGroep/WAOPartner/periodeBedragWAOPartner"),
+                            nettobedrag = it.getNodeValueByPathOrNull("/stadspas-inkomsten-partner/uitkeringenPartnerVeldenGroep/WAOPartner/nettoBedragWAOPartner")
                         ),
                         ww = Uitkering(
-                            actief = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-inkomsten-partner/uitkeringenPartnerVeldenGroep/uitkeringenPartner/ww"),
+                            actief = it.getNodeValueByPathOrNull("/stadspas-inkomsten-partner/uitkeringenPartnerVeldenGroep/uitkeringenPartner/ww"),
                             naam = "WW",
-                            periode = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-inkomsten-partner/uitkeringenPartnerVeldenGroep/WWPartner/periodeBedragWWPartner"),
-                            nettobedrag = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-inkomsten-partner/uitkeringenPartnerVeldenGroep/WWPartner/nettoBedragWWPartner")
+                            periode = it.getNodeValueByPathOrNull("/stadspas-inkomsten-partner/uitkeringenPartnerVeldenGroep/WWPartner/periodeBedragWWPartner"),
+                            nettobedrag = it.getNodeValueByPathOrNull("/stadspas-inkomsten-partner/uitkeringenPartnerVeldenGroep/WWPartner/nettoBedragWWPartner")
                         ),
                         wajong = Uitkering(
-                            actief = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-inkomsten-partner/uitkeringenPartnerVeldenGroep/uitkeringenPartner/wajong"),
+                            actief = it.getNodeValueByPathOrNull("/stadspas-inkomsten-partner/uitkeringenPartnerVeldenGroep/uitkeringenPartner/wajong"),
                             naam = "Wajong",
-                            periode = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-inkomsten-partner/uitkeringenPartnerVeldenGroep/WajongPartner/periodeBedragWajongPartner"),
-                            nettobedrag = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-inkomsten-partner/uitkeringenPartnerVeldenGroep/WajongPartner/nettoBedragWajongPartner")
+                            periode = it.getNodeValueByPathOrNull("/stadspas-inkomsten-partner/uitkeringenPartnerVeldenGroep/WajongPartner/periodeBedragWajongPartner"),
+                            nettobedrag = it.getNodeValueByPathOrNull("/stadspas-inkomsten-partner/uitkeringenPartnerVeldenGroep/WajongPartner/nettoBedragWajongPartner")
                         ),
                         wia = Uitkering(
-                            actief = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-inkomsten-partner/uitkeringenPartnerVeldenGroep/uitkeringenPartner/wia"),
+                            actief = it.getNodeValueByPathOrNull("/stadspas-inkomsten-partner/uitkeringenPartnerVeldenGroep/uitkeringenPartner/wia"),
                             naam = "WIA",
-                            periode = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-inkomsten-partner/uitkeringenPartnerVeldenGroep/WIAPartner/periodeBedragWIAPartner"),
-                            nettobedrag = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-inkomsten-partner/uitkeringenPartnerVeldenGroep/WIAPartner/nettoBedragWIAPartner")
+                            periode = it.getNodeValueByPathOrNull("/stadspas-inkomsten-partner/uitkeringenPartnerVeldenGroep/WIAPartner/periodeBedragWIAPartner"),
+                            nettobedrag = it.getNodeValueByPathOrNull("/stadspas-inkomsten-partner/uitkeringenPartnerVeldenGroep/WIAPartner/nettoBedragWIAPartner")
                         ),
                         ziektewet = Uitkering(
-                            actief = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-inkomsten-partner/uitkeringenPartnerVeldenGroep/uitkeringenPartner/ziektewet"),
+                            actief = it.getNodeValueByPathOrNull("/stadspas-inkomsten-partner/uitkeringenPartnerVeldenGroep/uitkeringenPartner/ziektewet"),
                             naam = "Ziektewet",
-                            periode = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-inkomsten-partner/uitkeringenPartnerVeldenGroep/ZiektewetPartner/periodeBedragZiektewetPartner"),
-                            nettobedrag = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-inkomsten-partner/uitkeringenPartnerVeldenGroep/ZiektewetPartner/nettoBedragZiektewetPartner")
+                            periode = it.getNodeValueByPathOrNull("/stadspas-inkomsten-partner/uitkeringenPartnerVeldenGroep/ZiektewetPartner/periodeBedragZiektewetPartner"),
+                            nettobedrag = it.getNodeValueByPathOrNull("/stadspas-inkomsten-partner/uitkeringenPartnerVeldenGroep/ZiektewetPartner/nettoBedragZiektewetPartner")
                         )
                     ),
-                    pensioenen = it.getNodeValueByPathOrNull<List<JsonNode>?>("/aanvraag-formulier-stadspas-inkomsten-partner/pensioenenPartnerVeldenGroep/PensioenPartner/pensioenenPartner")
+                    pensioenen = it.getNodeValueByPathOrNull<List<JsonNode>?>("/stadspas-inkomsten-partner/pensioenenPartnerVeldenGroep/PensioenPartner/pensioenenPartner")
                         ?.map {
                             Pensioen(
                                 nettobedrag = it.getNodeValueByPathOrNull("/nettoPensioenPartner")
                             )
                         }
                         ?: listOf(),
-                    nettoKinderalimentatie = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-inkomsten-partner/alimentatiePartnerGroep/nettoKinderalimentatiePartner"),
-                    bedragOnderhuur = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-inkomsten-partner/inkomenUitOnderhuurPartner/bedragOnderhuurPartner"),
+                    nettoKinderalimentatie = it.getNodeValueByPathOrNull("/stadspas-inkomsten-partner/alimentatiePartnerGroep/nettoKinderalimentatiePartner"),
+                    bedragOnderhuur = it.getNodeValueByPathOrNull("/stadspas-inkomsten-partner/inkomenUitOnderhuurPartner/bedragOnderhuurPartner"),
                     bedrijfsDocumenten = BedrijfsDocumenten(
                         aanwezigeDocumenten = AanwezigeDocumenten(
-                            jaarrekening = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-inkomsten-partner/OndernemerPartner/uploadBedrijfsDocumentenPartner/a"),
-                            balans = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-inkomsten-partner/OndernemerPartner/uploadBedrijfsDocumentenPartner/b"),
-                            aangifte = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-inkomsten-partner/OndernemerPartner/uploadBedrijfsDocumentenPartner/c"),
-                            aanslag = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-inkomsten-partner/OndernemerPartner/uploadBedrijfsDocumentenPartner/d")
+                            jaarrekening = it.getNodeValueByPathOrNull("/stadspas-inkomsten-partner/OndernemerPartner/uploadBedrijfsDocumentenPartner/a"),
+                            balans = it.getNodeValueByPathOrNull("/stadspas-inkomsten-partner/OndernemerPartner/uploadBedrijfsDocumentenPartner/b"),
+                            aangifte = it.getNodeValueByPathOrNull("/stadspas-inkomsten-partner/OndernemerPartner/uploadBedrijfsDocumentenPartner/c"),
+                            aanslag = it.getNodeValueByPathOrNull("/stadspas-inkomsten-partner/OndernemerPartner/uploadBedrijfsDocumentenPartner/d")
                         ),
-                        jaarrekening = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-inkomsten-partner/OndernemerPartner/JaarrekeningPartner"),
-                        balans = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-inkomsten-partner/OndernemerPartner/BalansPartner"),
-                        aangifte = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-inkomsten-partner/OndernemerPartner/AangiftePartner"),
-                        aanslag = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-inkomsten-partner/OndernemerPartner/AanslagPartner")
+                        jaarrekening = it.getNodeValueByPathOrNull("/stadspas-inkomsten-partner/OndernemerPartner/JaarrekeningPartner"),
+                        balans = it.getNodeValueByPathOrNull("/stadspas-inkomsten-partner/OndernemerPartner/BalansPartner"),
+                        aangifte = it.getNodeValueByPathOrNull("/stadspas-inkomsten-partner/OndernemerPartner/AangiftePartner"),
+                        aanslag = it.getNodeValueByPathOrNull("/stadspas-inkomsten-partner/OndernemerPartner/AanslagPartner")
                     )
                 ),
                 vermogen = Vermogen(
                     welkVermogen = WelkVermogen(
-                        bankrekeningen = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-bezit-en-schulden/uwVermogenGroep/welkVermogen/a"),
-                        aandelenObligaties = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-bezit-en-schulden/uwVermogenGroep/welkVermogen/b"),
-                        crypto = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-bezit-en-schulden/uwVermogenGroep/welkVermogen/c"),
-                        contanten = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-bezit-en-schulden/uwVermogenGroep/welkVermogen/d")
+                        bankrekeningen = it.getNodeValueByPathOrNull("/stadspas-bezit-en-schulden/uwVermogenGroep/welkVermogen/a"),
+                        aandelenObligaties = it.getNodeValueByPathOrNull("/stadspas-bezit-en-schulden/uwVermogenGroep/welkVermogen/b"),
+                        crypto = it.getNodeValueByPathOrNull("/stadspas-bezit-en-schulden/uwVermogenGroep/welkVermogen/c"),
+                        contanten = it.getNodeValueByPathOrNull("/stadspas-bezit-en-schulden/uwVermogenGroep/welkVermogen/d")
                     ),
                     bezittingen = Bezittingen(
-                        bankrekeningen = it.getNodeValueByPathOrNull<List<JsonNode>?>("/aanvraag-formulier-stadspas-bezit-en-schulden/rekeningGroep/rekeningen")
+                        bankrekeningen = it.getNodeValueByPathOrNull<List<JsonNode>?>("/stadspas-bezit-en-schulden/rekeningGroep/rekeningen")
                             ?.map {
                                 Bankrekening(
                                     iban = it.getNodeValueByPathOrNull("/iban"),
@@ -322,7 +320,7 @@ class StadspasAanvraagMapper(
                                 )
                             }
                             ?: listOf(),
-                        aandelenObligaties = it.getNodeValueByPathOrNull<List<JsonNode>?>("/aanvraag-formulier-stadspas-bezit-en-schulden/obligatieGroep/obligaties")
+                        aandelenObligaties = it.getNodeValueByPathOrNull<List<JsonNode>?>("/stadspas-bezit-en-schulden/obligatieGroep/obligaties")
                             ?.map {
                                 AandelenObligatie(
                                     waarde = it.getNodeValueByPathOrNull("/waardeObligatie"),
@@ -330,7 +328,7 @@ class StadspasAanvraagMapper(
                                 )
                             }
                             ?: listOf(),
-                        cryptoCurrencies = it.getNodeValueByPathOrNull<List<JsonNode>?>("/aanvraag-formulier-stadspas-bezit-en-schulden/cryptoGroep/crypto")
+                        cryptoCurrencies = it.getNodeValueByPathOrNull<List<JsonNode>?>("/stadspas-bezit-en-schulden/cryptoGroep/crypto")
                             ?.map {
                                 CryptoCurrency(
                                     waarde = it.getNodeValueByPathOrNull("/waardeCrypto"),
@@ -338,9 +336,9 @@ class StadspasAanvraagMapper(
                                 )
                             }
                             ?: listOf(),
-                        contantGeld = it.getNodeValueByPathOrNull("/aanvraag-formulier-stadspas-bezit-en-schulden/contanten/contantGeld")
+                        contantGeld = it.getNodeValueByPathOrNull("/stadspas-bezit-en-schulden/contanten/contantGeld")
                     ),
-                    schulden = it.getNodeValueByPathOrNull<List<JsonNode>?>("/aanvraag-formulier-stadspas-bezit-en-schulden/schuldenGroep/vragenSchulden/schulden")
+                    schulden = it.getNodeValueByPathOrNull<List<JsonNode>?>("/stadspas-bezit-en-schulden/schuldenGroep/vragenSchulden/schulden")
                         ?.map {
                             Schuld(
                                 bedrag = it.getNodeValueByPathOrNull("/schuld"),
@@ -350,7 +348,6 @@ class StadspasAanvraagMapper(
                         }
                         ?: listOf()
                 )
-
             )
         }
     }

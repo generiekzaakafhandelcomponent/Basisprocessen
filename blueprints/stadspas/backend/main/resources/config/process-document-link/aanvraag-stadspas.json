@@ -1,0 +1,42 @@
+[
+    {
+        "processDefinitionKey": "stadspas-afhandelen-aanvraag",
+        "canInitializeDocument": true,
+        "startableByUser": false
+    },
+    {
+        "processDefinitionKey": "stadspas-controleren-afhandeltermijn",
+        "canInitializeDocument": false,
+        "startableByUser": false
+    },
+    {
+        "processDefinitionKey": "stadspas-informeren-aanvrager",
+        "canInitializeDocument": false,
+        "startableByUser": false
+    },
+    {
+        "processDefinitionKey": "stadspas-opvragen-informatie",
+        "canInitializeDocument": false,
+        "startableByUser": false
+    },
+    {
+        "processDefinitionKey": "stadspas-form-sequence",
+        "canInitializeDocument": false,
+        "startableByUser": false
+    },
+    {
+        "processDefinitionKey": "stadspas-vastleggen-reactie-op-informatieverzoek",
+        "canInitializeDocument": false,
+        "startableByUser": true
+    },
+    {
+        "processDefinitionKey": "stadspas-wijzigen-aanvraag",
+        "canInitializeDocument": false,
+        "startableByUser": true
+    },
+    {
+        "processDefinitionKey": "stadspas-genereer-document",
+        "canInitializeDocument": false,
+        "startableByUser": false
+    }
+]

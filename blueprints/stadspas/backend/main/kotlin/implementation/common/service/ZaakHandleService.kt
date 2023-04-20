@@ -60,3 +60,4 @@ class ZaakHandleService(
         private val logger = KotlinLogging.logger {}
     }
 }
+

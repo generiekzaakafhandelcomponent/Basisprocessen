@@ -43,17 +43,6 @@ class CommonAutoConfiguration {
     }
 
     @Bean
-    fun objectsApiService(
-        connectorService: ConnectorService,
-        commonDocumentService: DocumentService
-    ): ObjectsApiService {
-        return ObjectsApiService(
-            connectorService,
-            commonDocumentService
-        )
-    }
-
-    @Bean
     fun zaakPropertiesService(
         zaakService: ZaakService,
         documentService: DocumentService

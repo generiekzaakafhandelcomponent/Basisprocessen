@@ -49,13 +49,30 @@ class StadspasProcessService(
         return timestamp
     }
 
-    fun getPropertyOfLatestVerzoekFromDocument(businessKey: String, property: String): String {
+    fun getPropertyOfLatestVerzoekFromDocument(businessKey: String, property: String): Any {
         return getDocumentById(businessKey).content().asJson().let {
             val latestVerzoek =
                 it.at("/beoordelingEnAfhandeling/informatieverzoeken").last()
 
-            latestVerzoek.get(property)?.textValue()
+            latestVerzoek.get(property)?.toValue()
                 ?: throw NoSuchElementException("Property '${property}' was not found in the latest verzoek")
+        }
+    }
+
+    //Can be used in camunda (JUEL) expressions.
+    fun getPropertyOfLatestVerzoekOrDefault(businessKey: String, property: String, default: Any): Any {
+        return getDocumentById(businessKey).content().asJson().let {
+            val latestVerzoek =
+                it.at("/beoordelingEnAfhandeling/informatieverzoeken").last()
+
+            latestVerzoek.get(property)?.toValue() ?: default
+        }
+    }
+
+    val toValue: JsonNode.() -> Any? = {
+        when {
+            this.isValueNode || this.isContainerNode -> jacksonObjectMapper().treeToValue(this)
+            else -> null
         }
     }
 
@@ -66,43 +83,6 @@ class StadspasProcessService(
 
         documentService.modifyDocument(document, getRootNodeInformatieverzoeken(informatieverzoekenArrayNode))
     }
-
-    // variable for email template
-    fun getDeadlineOfLatestVerzoek(businessKey: String): String {
-        val document = getDocumentById(businessKey)
-
-        val informatieverzoekenArrayNode = getInformatieverzoekenArrayNode(document)
-
-        if (!informatieverzoekenArrayNode.isEmpty) {
-            val deadlineLatestVerzoek = getPropertyOfLatestVerzoekFromDocument(businessKey, "deadline")
-            return dateTimeService.getEuropePatternDate(deadlineLatestVerzoek)
-        }
-        return ""
-    }
-
-    fun determineBeschikkingTemplate(businessKey: String): String {
-        val document = getDocumentById(businessKey)
-        val eindconclusie =
-            document.content().asJson().get("beoordelingEnAfhandeling").get("besluit").get("eindconclusie").asText()
-
-        return when (eindconclusie) {
-            "Aanvraag toekennen" -> STADSPAS_BESLUITBRIEF_TOEWIJZING
-            "Aanvraag afwijzen" -> STADSPAS_BESLUITBRIEF_AFWIJZING
-            "Aanvraag buiten behandeling stellen" -> STADSPAS_BESLUITBRIEF_AFWIJZING
-            else -> throw IllegalArgumentException("No beschikking template available for the besluit '${eindconclusie}'")
-        }
-    }
-
-    fun setDefaultCommunicatievoorkeur(value: String, documentId: String ){
-        val document = getDocumentById(documentId)
-        val rootNode = jacksonObjectMapper().createObjectNode()
-        val communicatievoorkeuren = jacksonObjectMapper().createArrayNode()
-        communicatievoorkeuren.add(value)
-        rootNode.set<JsonNode>("communicatievoorkeuren", communicatievoorkeuren)
-
-        documentService.modifyDocument(document, rootNode)
-    }
-
     private fun getInformatieverzoekenArrayNode(document: Document) = document
         .content()
         .asJson()
@@ -130,10 +110,5 @@ class StadspasProcessService(
 
     private fun getDocumentById(businessKey: String): Document {
         return documentService.get(businessKey)
-    }
-
-    companion object {
-        private const val STADSPAS_BESLUITBRIEF_TOEWIJZING = "stadspas-besluitbrief-toewijzen"
-        private const val STADSPAS_BESLUITBRIEF_AFWIJZING = "stadspas-besluitbrief-afwijzing"
     }
 }
