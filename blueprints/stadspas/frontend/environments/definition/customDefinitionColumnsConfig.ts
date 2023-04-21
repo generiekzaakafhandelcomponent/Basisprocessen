@@ -18,6 +18,7 @@ export const customDefinitionColumns = {
         {
             propertyName: '$.datumAanvraagOntvangen',
             translationKey: 'sd.datumAanvraagOntvangen',
+            viewType: 'date',
             sortable: true
         },
         {
