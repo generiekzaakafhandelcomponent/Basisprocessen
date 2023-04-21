@@ -79,6 +79,72 @@ The 'Stadspas' is a city discount pass that the Dutch municipalities provide to 
 
 * Service task ‘Update timer afhandeltermijn’ updates the non-interupting boundry timer event on the main proces.
 
+**Building blocks**
+
+* Informeren aanvrager
+
+  * Services task ‘Voorbereiden variabelen’
+
+  * Send task ‘Versturen email notificatie’ sends an email via the transactional email service of The Hague (aka wordpress mail) to notify the applicant that there is a task that needs to be completed on the customer portal (nl: klantportaal)
+
+  * Send task ‘Versturen email (evt met bijlage)' sends an email via the transactional email service of The Hague (aka wordpress mail) to the applicant with instructions the provide additional information or the inform the applicant of a made decision on the application.
+
+  * User task ‘Afdrukken brief’ informs the case handler that a document has been generated which can be downloaded from the documents tab, printed and send by email.
+
+* Update zaakstatus
+
+  * Service task ‘Zet zaakstatus’ sets the case status in openzaak. Which status is set is provided by process variables when calling this call activity.
+
+  * Service task ‘Update zaak properties in document’, updates the zaakstatus key in document.
+
+* Genereer document
+
+  * Service task ‘Genereer document’ provides data to Smart Documents which generates and returns  the requested document.
+
+  * Service task 'Opslaan document in documenten api' saves the document in documenten api. There are multiple services task implemented to enable to set different documenttypes as meta data in the document api
+
+  * Service task ‘Linken document aan de zaak' links the generated document to the case in openzaak
+
+  * Service task ‘opslaan resourceID in document’ saves the resource ID of the generated document in the case document for use within the proces.
+
+* Opvragen informatie
+
+  * Service task ‘Controleren informatieverzoek’ checks if with the request for information (nl: informatieverzoek) the indication ‘hersteltermijn’ has been enabled.
+
+  * Service task ‘Zet start hersteltermijn’ sets the start date of a 'hersteltermijn'
+
+  * The call activity ‘Informeren aanvrager’ is used to determine via which channel (email, post, portal) the applicant is informed of the request for information.
+
+  * The call activity ‘Update zaakstatus’ is used to set the zaakstatus to ‘informatieverzoek uitgezet’.
+
+  * The service task ‘ophalen reactietermijn uit het document’ retrieves the set deadline to set the interuption boundry timer event on the user task ‘Aanleveren informatie’ and the intermediate timer event after the eventgateway.
+
+  * The user task ‘Aanleveren informatie’ is a task that can be completed by the application within the customer portal
+
+    * The applicant will receive an email notification which aks the applicant to complete a task within the customer portal (nl: klantportaal), where the applicant can upload the requested documents and complete the task.
+
+    * Portal task is implemented with the help of Portaal taak plugin Portaal taak Plugin. If ‘Portal’ is selected as communication preference and additional information is asked, ‘Taak’ object will be created in objecten API having status ‘open’ which will be updated to ‘ingediend' when the applicant submits the task in klantportaal and finally to ‘verwerkt’ when GZAC gets updated from objecten API. ROLE_ADMIN is assigned to the user task ‘Aanleveren informatie’ but executing the task in GZAC fails to update the Task object in objecten API (will be implemented in the future version).
+
+  * The interupting boundry timer event cancels the portal task if the set deadline is reached. An escalation is send to the main proces to continue the proces.
+
+  * The call activity ‘Controleren afhandeltermijn’ calculates the period between the moment the request for information was done and the moment the escalation took place due to no response from the applicant.
+
+  * The call activity ‘genereer document’ generates the confirmation of receipt document, saves it to Documenten api and links it to the case in openzaak.
+
+  * The call activity ‘Informeren aanvrager’ is used to determine via which channel (email, post, portal) the applicant is informed of the made decision.
+
+* Controleren afhandeltermijn
+
+  * Service task ‘Controleren informatieverzoek’ checks the ‘informatieverzoek’ if it has been indicated with a ‘hersteltermijn’
+
+  * Service task ‘Controleren hersteltermijn’ checks whether the ‘hersteltermijn’ has already been completed.
+
+  * Service task ‘Stop hersteltermijn’ sets the end date of the ‘hersteltermijn’ to indicate the ‘hersteltermijn’ has been completed
+
+  * Service task ‘Bereken tijdsverschil hersteltermijn’ calculates the difference between the start date ’ and the end date of the ‘hersteltermijn and returns the period in between
+
+  * Intermediate message throw event sends the calculated period to the main proces so the boundry timer event of the main proces can be updated.
+
 **Connections with other systems**
 
 OpenZaak, Objects-api, Objecttypes-api, Open-notifications, Open-forms, Smart documents, Wordpress mail.
