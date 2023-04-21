@@ -46,7 +46,8 @@ export const environment: ValtimoConfig = {
         disableFormFlow: true,
         showUserNameInTopBar: true,
         caseSearchFields: true,
-        disableCaseCount: false
+        disableCaseCount: true,
+        enableObjectManagement: true,
     },
     visibleDossierListTabs: [
         DossierListTab.ALL,

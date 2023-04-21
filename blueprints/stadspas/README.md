@@ -166,7 +166,7 @@ The following environment variables should be provided for Backend:
 * KEYCLOAK_CREDENTIALS_SECRET= keycloak credentials secret
 * IMPLEMENTATION_STADSPAS_BESLUITTYPE=Besluit i.h.k.v. aanvraag stadspas
 
-The following environment variables should be defined for Frontend:
+The following environment variables should be provided for Frontend:
 * SWAGGER_URI
 * MOCK_API_URI
 * API_URI
@@ -707,6 +707,11 @@ The following process links for plugins should be configured in Admin => Procesk
   Ontvanger: Zaak-initiator (from drop down)
   ```
   note: Formulierdefinitie can also be used as Formuliertype if the form definition exists in the portal database.  
+
+**Note:
+This process is tested with Valtimo backend version: 10.5.0.1001.RC-SNAPSHOT and frontend version: 10.5.0-138.RC**
+
+
   
 
 

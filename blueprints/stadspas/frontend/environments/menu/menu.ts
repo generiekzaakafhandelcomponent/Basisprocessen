@@ -11,6 +11,7 @@ export const menuItems = [
       {link: ['/form-management'], title: 'Forms', sequence: 3},
       {link: ['/decision-tables'], title: 'Decision tables', sequence: 4},
       {link: ['/dossier-management'], title: 'Dossiers', sequence: 5},
+      {link: ['/object-management'], title: 'Objects', sequence: 6},
       {link: ['/connectors'], title: 'Connectors', sequence: 6},
       {link: ['/plugins'], title: 'Plugins', sequence: 7},
       {link: ['/form-links'], title: 'Form links', sequence: 7},
