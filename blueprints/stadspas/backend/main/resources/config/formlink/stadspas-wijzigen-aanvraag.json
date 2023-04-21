@@ -1,0 +1,7 @@
+[
+    {
+        "formName": "aanvraag-stadspas.stadspas-afhandelen-aanvraag.wijzigen-aanvraag.start",
+        "formLinkElementId": "StartWijzigenAanvraagStartEvent",
+        "formAssociationType": "start-event"
+    }
+]

@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0932ye4" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.0.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.17.0">
+  <bpmn:collaboration id="Collaboration_11k79ui">
+    <bpmn:participant id="StadspasGenereerDocumentParticipant" name="Genereer document stadspas" processRef="stadspas-genereer-document" />
+  </bpmn:collaboration>
+  <bpmn:process id="stadspas-genereer-document" name="Stadspas: Genereer document" isExecutable="true">
+    <bpmn:sequenceFlow id="Flow_03ce78a" name="Termijn brief" sourceRef="Gateway_1a4hn5x" targetRef="Activity_09e8qwy">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${documentType == "termijnBrief"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0gd1spo" sourceRef="Activity_09e8qwy" targetRef="Gateway_0geqh2w" />
+    <bpmn:sequenceFlow id="Flow_057lfop" sourceRef="Gateway_0geqh2w" targetRef="LinkenDocumentAanDeZaakTask" />
+    <bpmn:sequenceFlow id="Flow_1e8zpw3" sourceRef="StartEvent_1" targetRef="GenereerDocumentTask" />
+    <bpmn:sequenceFlow id="Flow_1jangl9" sourceRef="GenereerDocumentTask" targetRef="Gateway_1a4hn5x" />
+    <bpmn:sequenceFlow id="Flow_1wpf0ji" sourceRef="LinkenDocumentAanDeZaakTask" targetRef="Activity_0ihbk1a" />
+    <bpmn:sequenceFlow id="Flow_03zxzcn" sourceRef="Activity_0ihbk1a" targetRef="Event_1637g5f" />
+    <bpmn:sequenceFlow id="Flow_0mekx3r" name="Bevestigingbrief" sourceRef="Gateway_1a4hn5x" targetRef="Activity_1hrfqxd">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${documentType == "bevestigingsbrief"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0cx4zx6" sourceRef="Activity_1hrfqxd" targetRef="Gateway_0geqh2w" />
+    <bpmn:sequenceFlow id="Flow_0gppkgc" sourceRef="OpslaanDocumentInDocumentenApiTask" targetRef="Gateway_0geqh2w" />
+    <bpmn:sequenceFlow id="Flow_1djw4b6" sourceRef="Activity_1yucfzm" targetRef="Gateway_0geqh2w" />
+    <bpmn:sequenceFlow id="Flow_1dnwspl" name="Besluit" sourceRef="Gateway_1a4hn5x" targetRef="OpslaanDocumentInDocumentenApiTask" />
+    <bpmn:sequenceFlow id="Flow_0jlzr8p" name="Rapportage" sourceRef="Gateway_1a4hn5x" targetRef="Activity_1yucfzm">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${documentType == "AanvraagRapportage"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:serviceTask id="Activity_1yucfzm" name="Opslaan document in documenten api" camunda:asyncAfter="true" camunda:expression="${true}">
+      <bpmn:incoming>Flow_0jlzr8p</bpmn:incoming>
+      <bpmn:outgoing>Flow_1djw4b6</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="OpslaanDocumentInDocumentenApiTask" name="Opslaan document in documenten api" camunda:asyncAfter="true" camunda:expression="${true}">
+      <bpmn:incoming>Flow_1dnwspl</bpmn:incoming>
+      <bpmn:outgoing>Flow_0gppkgc</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="Gateway_1a4hn5x" name="Document type" default="Flow_1dnwspl">
+      <bpmn:incoming>Flow_1jangl9</bpmn:incoming>
+      <bpmn:outgoing>Flow_1dnwspl</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0jlzr8p</bpmn:outgoing>
+      <bpmn:outgoing>Flow_03ce78a</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0mekx3r</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:exclusiveGateway id="Gateway_0geqh2w">
+      <bpmn:incoming>Flow_0gppkgc</bpmn:incoming>
+      <bpmn:incoming>Flow_0gd1spo</bpmn:incoming>
+      <bpmn:incoming>Flow_1djw4b6</bpmn:incoming>
+      <bpmn:incoming>Flow_0cx4zx6</bpmn:incoming>
+      <bpmn:outgoing>Flow_057lfop</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:serviceTask id="LinkenDocumentAanDeZaakTask" name="Linken document aan de zaak" camunda:asyncAfter="true" camunda:expression="${true}">
+      <bpmn:incoming>Flow_057lfop</bpmn:incoming>
+      <bpmn:outgoing>Flow_1wpf0ji</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_0ihbk1a" name="Opslaan resourceId in document" camunda:asyncAfter="true" camunda:expression="${documentWriterService.writeValueToDocumentAtPath(openZaakResourceProvider.getResource(execution.getVariable(&#34;gegenereerdeStadspasDocumentUrl&#34;)).id(), &#34;/besluit&#34;,  execution.businessKey)}">
+      <bpmn:incoming>Flow_1wpf0ji</bpmn:incoming>
+      <bpmn:outgoing>Flow_03zxzcn</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="Event_1637g5f">
+      <bpmn:incoming>Flow_03zxzcn</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="GenereerDocumentTask" name="Genereer document" camunda:asyncAfter="true" camunda:expression="${true}">
+      <bpmn:extensionElements />
+      <bpmn:incoming>Flow_1e8zpw3</bpmn:incoming>
+      <bpmn:outgoing>Flow_1jangl9</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_1e8zpw3</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="Activity_09e8qwy" name="Opslaan document in documenten api" camunda:asyncAfter="true" camunda:expression="${true}">
+      <bpmn:incoming>Flow_03ce78a</bpmn:incoming>
+      <bpmn:outgoing>Flow_0gd1spo</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_1hrfqxd" name="Opslaan document in documenten api" camunda:asyncAfter="true" camunda:expression="${true}">
+      <bpmn:incoming>Flow_0mekx3r</bpmn:incoming>
+      <bpmn:outgoing>Flow_0cx4zx6</bpmn:outgoing>
+    </bpmn:serviceTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_11k79ui">
+      <bpmndi:BPMNShape id="Participant_0aobzz3_di" bpmnElement="StadspasGenereerDocumentParticipant" isHorizontal="true">
+        <dc:Bounds x="150" y="80" width="1110" height="530" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_03ce78a_di" bpmnElement="Flow_03ce78a">
+        <di:waypoint x="520" y="335" />
+        <di:waypoint x="520" y="300" />
+        <di:waypoint x="610" y="300" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="529" y="273" width="61" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0gd1spo_di" bpmnElement="Flow_0gd1spo">
+        <di:waypoint x="710" y="300" />
+        <di:waypoint x="790" y="300" />
+        <di:waypoint x="790" y="335" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_057lfop_di" bpmnElement="Flow_057lfop">
+        <di:waypoint x="815" y="360" />
+        <di:waypoint x="880" y="360" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1e8zpw3_di" bpmnElement="Flow_1e8zpw3">
+        <di:waypoint x="245" y="360" />
+        <di:waypoint x="300" y="360" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1jangl9_di" bpmnElement="Flow_1jangl9">
+        <di:waypoint x="400" y="360" />
+        <di:waypoint x="495" y="360" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1wpf0ji_di" bpmnElement="Flow_1wpf0ji">
+        <di:waypoint x="980" y="360" />
+        <di:waypoint x="1040" y="360" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_03zxzcn_di" bpmnElement="Flow_03zxzcn">
+        <di:waypoint x="1140" y="360" />
+        <di:waypoint x="1192" y="360" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0mekx3r_di" bpmnElement="Flow_0mekx3r">
+        <di:waypoint x="520" y="335" />
+        <di:waypoint x="520" y="180" />
+        <di:waypoint x="610" y="180" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="520" y="153" width="79" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0cx4zx6_di" bpmnElement="Flow_0cx4zx6">
+        <di:waypoint x="710" y="180" />
+        <di:waypoint x="790" y="180" />
+        <di:waypoint x="790" y="335" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0gppkgc_di" bpmnElement="Flow_0gppkgc">
+        <di:waypoint x="710" y="420" />
+        <di:waypoint x="790" y="420" />
+        <di:waypoint x="790" y="385" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1djw4b6_di" bpmnElement="Flow_1djw4b6">
+        <di:waypoint x="710" y="530" />
+        <di:waypoint x="790" y="530" />
+        <di:waypoint x="790" y="385" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1dnwspl_di" bpmnElement="Flow_1dnwspl">
+        <di:waypoint x="520" y="385" />
+        <di:waypoint x="520" y="420" />
+        <di:waypoint x="610" y="420" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="543" y="393" width="34" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0jlzr8p_di" bpmnElement="Flow_0jlzr8p">
+        <di:waypoint x="520" y="385" />
+        <di:waypoint x="520" y="530" />
+        <di:waypoint x="610" y="530" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="531" y="503" width="58" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Activity_0vhwezv_di" bpmnElement="OpslaanDocumentInDocumentenApiTask">
+        <dc:Bounds x="610" y="380" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0h0pxjf" bpmnElement="Activity_1yucfzm">
+        <dc:Bounds x="610" y="490" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1a4hn5x_di" bpmnElement="Gateway_1a4hn5x" isMarkerVisible="true">
+        <dc:Bounds x="495" y="335" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="413" y="338" width="74" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0geqh2w_di" bpmnElement="Gateway_0geqh2w" isMarkerVisible="true">
+        <dc:Bounds x="765" y="335" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0hbk1hw_di" bpmnElement="LinkenDocumentAanDeZaakTask">
+        <dc:Bounds x="880" y="320" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1h29b8l_di" bpmnElement="Activity_0ihbk1a">
+        <dc:Bounds x="1040" y="320" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1637g5f_di" bpmnElement="Event_1637g5f">
+        <dc:Bounds x="1192" y="342" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0wh8xl0_di" bpmnElement="GenereerDocumentTask">
+        <dc:Bounds x="300" y="320" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="209" y="342" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_15ytl81" bpmnElement="Activity_09e8qwy">
+        <dc:Bounds x="610" y="260" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1wegtqy" bpmnElement="Activity_1hrfqxd">
+        <dc:Bounds x="610" y="140" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

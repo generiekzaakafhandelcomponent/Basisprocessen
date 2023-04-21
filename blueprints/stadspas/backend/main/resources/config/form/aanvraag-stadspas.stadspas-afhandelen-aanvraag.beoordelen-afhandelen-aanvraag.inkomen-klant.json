@@ -1,0 +1,812 @@
+{
+    "display": "form",
+    "components": [
+        {
+            "label": "back",
+            "tableView": false,
+            "key": "pv.goBack",
+            "type": "hidden",
+            "input": true
+        },
+        {
+            "label": "aanvrager",
+            "tableView": false,
+            "key": "aanvrager",
+            "type": "hidden",
+            "input": true
+        },
+        {
+            "label": "inkomenKlant",
+            "tableView": false,
+            "key": "inkomenKlant",
+            "type": "hidden",
+            "input": true
+        },
+        {
+            "content": "<dl class=\"row mb-0\">\n <dd class=\"col-4\">Klant</dd>\n <dt class=\"col-4\">{{ (data.aanvrager?.volledigeNaam || '-') }} </dt>\n    </dl>\n   <dl class=\"row mb-0\">\n <dd class=\"col-4\">Telefoonnummer</dd>\n <dt class=\"col-4\">{{ (data.aanvrager?.telefoonnummer || '-') }} </dt>\n</dl>\n</br>",
+            "tableView": true,
+            "tag": "div",
+            "key": "klant",
+            "type": "htmlelement",
+            "input": false
+        },
+        {
+            "content": "Inkomen klant",
+            "tableView": true,
+            "tag": "h4",
+            "key": "inkomen",
+            "type": "htmlelement",
+            "input": false
+        },
+        {
+            "label": "Werkgevers - beoordeling",
+            "reorder": false,
+            "disableAddingRemovingRows": false,
+            "addAnotherPosition": "bottom",
+            "addAnother": "Toevoegen",
+            "layoutFixed": false,
+            "enableRowGroups": false,
+            "initEmpty": false,
+            "hideLabel": false,
+            "tableView": false,
+            "key": "beoordelingEnAfhandeling.inkomenKlant.werkgevers",
+            "type": "datagrid",
+            "input": true,
+            "customClass": "pt-3",
+            "defaultValue": [
+            ],
+            "components": [
+                {
+                    "label": "Naam werkgever",
+                    "tableView": true,
+                    "key": "naam",
+                    "type": "textfield",
+                    "input": true,
+                    "disabled": false
+                },
+                {
+                    "label": "Nettoloon",
+                    "mask": false,
+                    "spellcheck": true,
+                    "tableView": false,
+                    "currency": "EUR",
+                    "inputFormat": "plain",
+                    "truncateMultipleSpaces": false,
+                    "key": "nettoloon",
+                    "type": "currency",
+                    "input": true,
+                    "delimiter": true
+                },
+                {
+                    "label": "Betalingsfrequentie",
+                    "customClass": "mt-3",
+                    "widget": "choicesjs",
+                    "tableView": true,
+                    "data": {
+                        "values": [
+                            {
+                                "label": "Per maand",
+                                "value": "maand"
+                            },
+                            {
+                                "label": "Per 4 weken",
+                                "value": "vierWeken"
+                            },
+                            {
+                                "label": "Per week",
+                                "value": "week"
+                            }
+                        ]
+                    },
+                    "key": "periode",
+                    "type": "select",
+                    "input": true
+                },
+                {
+                    "label": "Nettoloon per maand",
+                    "mask": false,
+                    "spellcheck": true,
+                    "tableView": false,
+                    "currency": "EUR",
+                    "inputFormat": "plain",
+                    "truncateMultipleSpaces": false,
+                    "key": "maandNettoloon",
+                    "type": "hidden",
+                    "calculateValue": "row.periode === 'vierWeken'? value = row.nettoloon * 1.0833 : row.periode === 'week'? value = row.nettoloon * 4.333 : row.periode === 'maand'? value = row.nettoloon : value = 0;",
+                    "input": true,
+                    "delimiter": true
+                }
+            ]
+        },
+        {
+            "label": "Totaal netto maandinkomen - Werkgevers (beoordeling)",
+            "labelPosition": "left-left",
+            "labelWidth": 60,
+            "disabled": false,
+            "key": "beoordelingEnAfhandeling.inkomenKlant.totaalMaandinkomenWerkgevers",
+            "type": "currency",
+            "input": true,
+            "delimiter": true,
+            "mask": false,
+            "spellcheck": true,
+            "tableView": false,
+            "currency": "EUR",
+            "calculateValue": "value = data.beoordelingEnAfhandeling?.inkomenKlant?.werkgevers?.reduce((total, item) => total + Number(item.maandNettoloon), 0) || 0;",
+            "inputFormat": "plain",
+            "truncateMultipleSpaces": false
+        },
+        {
+            "content": "<br/>",
+            "tableView": true,
+            "key": "linebreak",
+            "type": "htmlelement",
+            "input": false
+        },
+        {
+            "content": "Uitkeringen - beoordeling",
+            "tableView": true,
+            "key": "uitkeringenBeoordeling",
+            "type": "htmlelement",
+            "input": false,
+            "label": "HTML"
+        },
+        {
+            "collapsible": false,
+            "key": "panel",
+            "type": "panel",
+            "label": "Panel",
+            "hideLabel": true,
+            "input": false,
+            "tableView": false,
+            "components": [
+                {
+                    "content": "<section><strong><dl class=\"row mb-0\">\n<dd class=\"col-4\">Naam</dd><dd class=\"col-4\">Nettobedrag</dd><dd class=\"col-4\">Periode</dd></dl></strong><section>",
+                    "tableView": true,
+                    "key": "header",
+                    "type": "htmlelement",
+                    "input": false,
+                    "label": "HTML"
+                },
+                {
+                    "label": "Columns",
+                    "columns": [
+                        {
+                            "components": [
+                                {
+                                    "content": "<div class=\"align-textfield\">ANW</div> <div class=\"align-textfield\">AOW</div><div class=\"align-textfield\">Bijstand</div><div class=\"align-textfield\">WAJONG</div><div class=\"align-textfield\">WAO</div><div class=\"align-textfield\">WIA</div><div class=\"align-textfield\">WW</div><div class=\"align-textfield\">Ziektewet</div>",
+                                    "tableView": true,
+                                    "key": "uitkeringen",
+                                    "type": "htmlelement",
+                                    "input": false,
+                                    "label": "HTML"
+                                }
+                            ],
+                            "width": 4,
+                            "offset": 0,
+                            "push": 0,
+                            "pull": 0,
+                            "size": "md",
+                            "currentWidth": 4
+                        },
+                        {
+                            "components": [
+                                {
+                                    "label": "ANW nettobedrag",
+                                    "mask": false,
+                                    "customClass": "mb-2",
+                                    "hideLabel": true,
+                                    "spellcheck": true,
+                                    "tableView": false,
+                                    "currency": "EUR",
+                                    "inputFormat": "plain",
+                                    "truncateMultipleSpaces": false,
+                                    "key": "beoordelingEnAfhandeling.inkomenKlant.uitkeringen.anw.nettobedrag",
+                                    "type": "currency",
+                                    "input": true,
+                                    "delimiter": true
+                                },
+                                {
+                                    "label": "AOW nettobedrag",
+                                    "mask": false,
+                                    "customClass": "mb-2",
+                                    "hideLabel": true,
+                                    "spellcheck": true,
+                                    "tableView": false,
+                                    "currency": "EUR",
+                                    "inputFormat": "plain",
+                                    "truncateMultipleSpaces": false,
+                                    "key": "beoordelingEnAfhandeling.inkomenKlant.uitkeringen.aow.nettobedrag",
+                                    "type": "currency",
+                                    "input": true,
+                                    "delimiter": true
+                                },
+                                {
+                                    "label": "Bijstand nettobedrag",
+                                    "mask": false,
+                                    "customClass": "mb-2",
+                                    "hideLabel": true,
+                                    "spellcheck": true,
+                                    "tableView": false,
+                                    "currency": "EUR",
+                                    "inputFormat": "plain",
+                                    "truncateMultipleSpaces": false,
+                                    "key": "beoordelingEnAfhandeling.inkomenKlant.uitkeringen.bijstand.nettobedrag",
+                                    "type": "currency",
+                                    "input": true,
+                                    "delimiter": true
+                                },
+                                {
+                                    "label": "Wajong nettobedrag",
+                                    "mask": false,
+                                    "customClass": "mb-2",
+                                    "hideLabel": true,
+                                    "spellcheck": true,
+                                    "tableView": false,
+                                    "currency": "EUR",
+                                    "inputFormat": "plain",
+                                    "truncateMultipleSpaces": false,
+                                    "key": "beoordelingEnAfhandeling.inkomenKlant.uitkeringen.wajong.nettobedrag",
+                                    "type": "currency",
+                                    "input": true,
+                                    "delimiter": true
+                                },
+                                {
+                                    "label": "Wao nettobedrag",
+                                    "mask": false,
+                                    "customClass": "mb-2",
+                                    "hideLabel": true,
+                                    "spellcheck": true,
+                                    "tableView": false,
+                                    "currency": "EUR",
+                                    "inputFormat": "plain",
+                                    "truncateMultipleSpaces": false,
+                                    "key": "beoordelingEnAfhandeling.inkomenKlant.uitkeringen.wao.nettobedrag",
+                                    "type": "currency",
+                                    "input": true,
+                                    "delimiter": true
+                                },
+                                {
+                                    "label": "WIA nettobedrag",
+                                    "mask": false,
+                                    "customClass": "mb-2",
+                                    "hideLabel": true,
+                                    "spellcheck": true,
+                                    "tableView": false,
+                                    "currency": "EUR",
+                                    "inputFormat": "plain",
+                                    "truncateMultipleSpaces": false,
+                                    "key": "beoordelingEnAfhandeling.inkomenKlant.uitkeringen.wia.nettobedrag",
+                                    "type": "currency",
+                                    "input": true,
+                                    "delimiter": true
+                                },
+                                {
+                                    "label": "WW nettobedrag",
+                                    "mask": false,
+                                    "customClass": "mb-2",
+                                    "hideLabel": true,
+                                    "spellcheck": true,
+                                    "tableView": false,
+                                    "currency": "EUR",
+                                    "inputFormat": "plain",
+                                    "truncateMultipleSpaces": false,
+                                    "key": "beoordelingEnAfhandeling.inkomenKlant.uitkeringen.ww.nettobedrag",
+                                    "type": "currency",
+                                    "input": true,
+                                    "delimiter": true
+                                },
+                                {
+                                    "label": "Ziektewet nettobedrag",
+                                    "mask": false,
+                                    "customClass": "mb-2",
+                                    "hideLabel": true,
+                                    "spellcheck": true,
+                                    "tableView": false,
+                                    "currency": "EUR",
+                                    "inputFormat": "plain",
+                                    "truncateMultipleSpaces": false,
+                                    "key": "beoordelingEnAfhandeling.inkomenKlant.uitkeringen.ziektewet.nettobedrag",
+                                    "type": "currency",
+                                    "input": true,
+                                    "delimiter": true
+                                }
+                            ],
+                            "width": 4,
+                            "offset": 0,
+                            "push": 0,
+                            "pull": 0,
+                            "size": "md",
+                            "currentWidth": 4
+                        },
+                        {
+                            "components": [
+                                {
+                                    "label": "ANW periode",
+                                    "customClass": "align-selectfield",
+                                    "hideLabel": true,
+                                    "widget": "choicesjs",
+                                    "tableView": true,
+                                    "data": {
+                                        "values": [
+                                            {
+                                                "label": "Per maand",
+                                                "value": "maand"
+                                            },
+                                            {
+                                                "label": "Per 4 weken",
+                                                "value": "vierWeken"
+                                            },
+                                            {
+                                                "label": "Per week",
+                                                "value": "week"
+                                            }
+                                        ]
+                                    },
+                                    "key": "beoordelingEnAfhandeling.inkomenKlant.uitkeringen.anw.periode",
+                                    "type": "select",
+                                    "input": true
+                                },
+                                {
+                                    "label": "AOW periode",
+                                    "customClass": "align-selectfield",
+                                    "hideLabel": true,
+                                    "widget": "choicesjs",
+                                    "tableView": true,
+                                    "data": {
+                                        "values": [
+                                            {
+                                                "label": "Per maand",
+                                                "value": "maand"
+                                            },
+                                            {
+                                                "label": "Per 4 weken",
+                                                "value": "vierWeken"
+                                            },
+                                            {
+                                                "label": "Per week",
+                                                "value": "week"
+                                            }
+                                        ]
+                                    },
+                                    "key": "beoordelingEnAfhandeling.inkomenKlant.uitkeringen.aow.periode",
+                                    "type": "select",
+                                    "input": true
+                                },
+                                {
+                                    "label": "Bijstand periode",
+                                    "customClass": "align-selectfield",
+                                    "hideLabel": true,
+                                    "widget": "choicesjs",
+                                    "tableView": true,
+                                    "data": {
+                                        "values": [
+                                            {
+                                                "label": "Per maand",
+                                                "value": "maand"
+                                            },
+                                            {
+                                                "label": "Per 4 weken",
+                                                "value": "vierWeken"
+                                            },
+                                            {
+                                                "label": "Per week",
+                                                "value": "week"
+                                            }
+                                        ]
+                                    },
+                                    "key": "beoordelingEnAfhandeling.inkomenKlant.uitkeringen.bijstand.periode",
+                                    "type": "select",
+                                    "input": true
+                                },
+                                {
+                                    "label": "Wajong periode",
+                                    "customClass": "align-selectfield",
+                                    "hideLabel": true,
+                                    "widget": "choicesjs",
+                                    "tableView": true,
+                                    "data": {
+                                        "values": [
+                                            {
+                                                "label": "Per maand",
+                                                "value": "maand"
+                                            },
+                                            {
+                                                "label": "Per 4 weken",
+                                                "value": "vierWeken"
+                                            },
+                                            {
+                                                "label": "Per week",
+                                                "value": "week"
+                                            }
+                                        ]
+                                    },
+                                    "key": "beoordelingEnAfhandeling.inkomenKlant.uitkeringen.wajong.periode",
+                                    "type": "select",
+                                    "input": true
+                                },
+                                {
+                                    "label": "Wao periode",
+                                    "customClass": "align-selectfield",
+                                    "hideLabel": true,
+                                    "widget": "choicesjs",
+                                    "tableView": true,
+                                    "data": {
+                                        "values": [
+                                            {
+                                                "label": "Per maand",
+                                                "value": "maand"
+                                            },
+                                            {
+                                                "label": "Per 4 weken",
+                                                "value": "vierWeken"
+                                            },
+                                            {
+                                                "label": "Per week",
+                                                "value": "week"
+                                            }
+                                        ]
+                                    },
+                                    "key": "beoordelingEnAfhandeling.inkomenKlant.uitkeringen.wao.periode",
+                                    "type": "select",
+                                    "input": true
+                                },
+                                {
+                                    "label": "Wia periode",
+                                    "customClass": "align-selectfield",
+                                    "hideLabel": true,
+                                    "widget": "choicesjs",
+                                    "tableView": true,
+                                    "data": {
+                                        "values": [
+                                            {
+                                                "label": "Per maand",
+                                                "value": "maand"
+                                            },
+                                            {
+                                                "label": "Per 4 weken",
+                                                "value": "vierWeken"
+                                            },
+                                            {
+                                                "label": "Per week",
+                                                "value": "week"
+                                            }
+                                        ]
+                                    },
+                                    "key": "beoordelingEnAfhandeling.inkomenKlant.uitkeringen.wia.periode",
+                                    "type": "select",
+                                    "input": true
+                                },
+                                {
+                                    "label": "Ww periode",
+                                    "customClass": "align-selectfield",
+                                    "hideLabel": true,
+                                    "widget": "choicesjs",
+                                    "tableView": true,
+                                    "data": {
+                                        "values": [
+                                            {
+                                                "label": "Per maand",
+                                                "value": "maand"
+                                            },
+                                            {
+                                                "label": "Per 4 weken",
+                                                "value": "vierWeken"
+                                            },
+                                            {
+                                                "label": "Per week",
+                                                "value": "week"
+                                            }
+                                        ]
+                                    },
+                                    "key": "beoordelingEnAfhandeling.inkomenKlant.uitkeringen.ww.periode",
+                                    "type": "select",
+                                    "input": true
+                                },
+                                {
+                                    "label": "Ziektewet periode",
+                                    "customClass": "align-selectfield",
+                                    "hideLabel": true,
+                                    "widget": "choicesjs",
+                                    "tableView": true,
+                                    "data": {
+                                        "values": [
+                                            {
+                                                "label": "Per maand",
+                                                "value": "maand"
+                                            },
+                                            {
+                                                "label": "Per 4 weken",
+                                                "value": "vierWeken"
+                                            },
+                                            {
+                                                "label": "Per week",
+                                                "value": "week"
+                                            }
+                                        ]
+                                    },
+                                    "key": "beoordelingEnAfhandeling.inkomenKlant.uitkeringen.ziektewet.periode",
+                                    "type": "select",
+                                    "input": true
+                                }
+                            ],
+                            "width": 4,
+                            "offset": 0,
+                            "push": 0,
+                            "pull": 0,
+                            "size": "md",
+                            "currentWidth": 4
+                        }
+                    ],
+                    "key": "columns1",
+                    "type": "columns",
+                    "input": false,
+                    "tableView": false
+                }
+            ]
+        },
+        {
+            "label": "ANW maandbedrag",
+            "customClass": "d-none",
+            "mask": false,
+            "hideLabel": true,
+            "spellcheck": true,
+            "tableView": false,
+            "currency": "EUR",
+            "inputFormat": "plain",
+            "truncateMultipleSpaces": false,
+            "key": "anwMaandbedrag",
+            "type": "currency",
+            "calculateValue": "var periode = data.beoordelingEnAfhandeling?.inkomenKlant?.uitkeringen?.anw?.periode; var nettobedrag = data.beoordelingEnAfhandeling?.inkomenKlant?.uitkeringen?.anw?.nettobedrag; periode === 'vierWeken'? value = nettobedrag * 1.0833 : periode === 'week'? value = nettobedrag * 4.333 : periode === 'maand'? value = nettobedrag : value = 0;",
+            "input": false,
+            "delimiter": true
+        },
+        {
+            "label": "AOW maandbedrag",
+            "customClass": "d-none",
+            "mask": false,
+            "hideLabel": true,
+            "spellcheck": true,
+            "tableView": false,
+            "currency": "EUR",
+            "inputFormat": "plain",
+            "truncateMultipleSpaces": false,
+            "key": "aowMaandbedrag",
+            "type": "currency",
+            "calculateValue": "var periode = data.beoordelingEnAfhandeling?.inkomenKlant?.uitkeringen?.aow?.periode; var nettobedrag = data.beoordelingEnAfhandeling?.inkomenKlant?.uitkeringen?.aow?.nettobedrag; periode === 'vierWeken'? value = nettobedrag * 1.0833 : periode === 'week'? value = nettobedrag * 4.333 : periode === 'maand'? value = nettobedrag : value = 0;",
+            "input": false,
+            "delimiter": true
+        },
+        {
+            "label": "Bijstand maandbedrag",
+            "customClass": "d-none",
+            "mask": false,
+            "hideLabel": true,
+            "spellcheck": true,
+            "tableView": false,
+            "currency": "EUR",
+            "inputFormat": "plain",
+            "truncateMultipleSpaces": false,
+            "key": "bijstandMaandbedrag",
+            "type": "currency",
+            "calculateValue": "var periode = data.beoordelingEnAfhandeling?.inkomenKlant?.uitkeringen?.bijstand?.periode; var nettobedrag = data.beoordelingEnAfhandeling?.inkomenKlant?.uitkeringen?.bijstand?.nettobedrag; periode === 'vierWeken'? value = nettobedrag * 1.0833 : periode === 'week'? value = nettobedrag * 4.333 : periode === 'maand'? value = nettobedrag : value = 0;",
+            "input": false,
+            "delimiter": true
+        },
+        {
+            "label": "Wajong maandbedrag",
+            "customClass": "d-none",
+            "mask": false,
+            "hideLabel": true,
+            "spellcheck": true,
+            "tableView": false,
+            "currency": "EUR",
+            "inputFormat": "plain",
+            "truncateMultipleSpaces": false,
+            "key": "wajongMaandbedrag",
+            "type": "currency",
+            "calculateValue": "var periode = data.beoordelingEnAfhandeling?.inkomenKlant?.uitkeringen?.wajong?.periode; var nettobedrag = data.beoordelingEnAfhandeling?.inkomenKlant?.uitkeringen?.wajong?.nettobedrag; periode === 'vierWeken'? value = nettobedrag * 1.0833 : periode === 'week'? value = nettobedrag * 4.333 : periode === 'maand'? value = nettobedrag : value = 0;",
+            "input": false,
+            "delimiter": true
+        },
+        {
+            "label": "Wao maandbedrag",
+            "customClass": "d-none",
+            "mask": false,
+            "hideLabel": true,
+            "spellcheck": true,
+            "tableView": false,
+            "currency": "EUR",
+            "inputFormat": "plain",
+            "truncateMultipleSpaces": false,
+            "key": "waoMaandbedrag",
+            "type": "currency",
+            "calculateValue": "var periode = data.beoordelingEnAfhandeling?.inkomenKlant?.uitkeringen?.wao?.periode; var nettobedrag = data.beoordelingEnAfhandeling?.inkomenKlant?.uitkeringen?.wao?.nettobedrag; periode === 'vierWeken'? value = nettobedrag * 1.0833 : periode === 'week'? value = nettobedrag * 4.333 : periode === 'maand'? value = nettobedrag : value = 0;",
+            "input": false,
+            "delimiter": true
+        },
+        {
+            "label": "Wia maandbedrag",
+            "customClass": "d-none",
+            "mask": false,
+            "hideLabel": true,
+            "spellcheck": true,
+            "tableView": false,
+            "currency": "EUR",
+            "inputFormat": "plain",
+            "truncateMultipleSpaces": false,
+            "key": "wiaMaandbedrag",
+            "type": "currency",
+            "calculateValue": "var periode = data.beoordelingEnAfhandeling?.inkomenKlant?.uitkeringen?.wia?.periode; var nettobedrag = data.beoordelingEnAfhandeling?.inkomenKlant?.uitkeringen?.wia?.nettobedrag; periode === 'vierWeken'? value = nettobedrag * 1.0833 : periode === 'week'? value = nettobedrag * 4.333 : periode === 'maand'? value = nettobedrag : value = 0;",
+            "input": false,
+            "delimiter": true
+        },
+        {
+            "label": "WW maandbedrag",
+            "customClass": "d-none",
+            "mask": false,
+            "hideLabel": true,
+            "spellcheck": true,
+            "tableView": false,
+            "currency": "EUR",
+            "inputFormat": "plain",
+            "truncateMultipleSpaces": false,
+            "key": "wwMaandbedrag",
+            "type": "currency",
+            "calculateValue": "var periode = data.beoordelingEnAfhandeling?.inkomenKlant?.uitkeringen?.ww?.periode; var nettobedrag = data.beoordelingEnAfhandeling?.inkomenKlant?.uitkeringen?.ww?.nettobedrag; periode === 'vierWeken'? value = nettobedrag * 1.0833 : periode === 'week'? value = nettobedrag * 4.333 : periode === 'maand'? value = nettobedrag : value = 0;",
+            "input": false,
+            "delimiter": true
+        },
+        {
+            "label": "Ziektewet maandbedrag",
+            "customClass": "d-none",
+            "mask": false,
+            "hideLabel": true,
+            "spellcheck": true,
+            "tableView": false,
+            "currency": "EUR",
+            "inputFormat": "plain",
+            "truncateMultipleSpaces": false,
+            "key": "ziektewetMaandbedrag",
+            "type": "currency",
+            "calculateValue": "var periode = data.beoordelingEnAfhandeling?.inkomenKlant?.uitkeringen?.ziektewet?.periode; var nettobedrag = data.beoordelingEnAfhandeling?.inkomenKlant?.uitkeringen?.ziektewet?.nettobedrag; periode === 'vierWeken'? value = nettobedrag * 1.0833 : periode === 'week'? value = nettobedrag * 4.333 : periode === 'maand'? value = nettobedrag : value = 0;",
+            "input": false,
+            "delimiter": true
+        },
+        {
+            "label": "Totaal netto maandinkomen - Uitkeringen (beoordeling)",
+            "labelPosition": "left-left",
+            "labelWidth": 60,
+            "disabled": false,
+            "hideLabel": false,
+            "key": "beoordelingEnAfhandeling.inkomenKlant.totaalMaandinkomenUitkeringen",
+            "type": "currency",
+            "input": true,
+            "delimiter": true,
+            "mask": false,
+            "spellcheck": true,
+            "tableView": false,
+            "currency": "EUR",
+            "calculateValue": "value = data.anwMaandbedrag + data.aowMaandbedrag + data.bijstandMaandbedrag + data.wajongMaandbedrag + data.waoMaandbedrag + data.wiaMaandbedrag + data.wwMaandbedrag + data.ziektewetMaandbedrag",
+            "inputFormat": "plain",
+            "truncateMultipleSpaces": false
+        },
+        {
+            "label": "Pensioenen - beoordeling",
+            "reorder": false,
+            "disableAddingRemovingRows": false,
+            "addAnotherPosition": "bottom",
+            "addAnother": "Toevoegen",
+            "layoutFixed": false,
+            "enableRowGroups": false,
+            "initEmpty": false,
+            "hideLabel": false,
+            "tableView": false,
+            "key": "beoordelingEnAfhandeling.inkomenKlant.pensioenen",
+            "type": "datagrid",
+            "input": true,
+            "customClass": "pt-3",
+            "defaultValue": [
+            ],
+            "components": [
+                {
+                    "label": "Pensioen",
+                    "content": "{{ row.nettobedrag ? 'Pensioen - ' + (rowIndex + 1) : '-' }}",
+                    "tableView": false,
+                    "tag": "div",
+                    "key": "pensioenBeoordeling",
+                    "type": "htmlelement",
+                    "input": true
+                },
+                {
+                    "label": "Nettobedrag",
+                    "mask": false,
+                    "spellcheck": true,
+                    "tableView": false,
+                    "currency": "EUR",
+                    "inputFormat": "plain",
+                    "truncateMultipleSpaces": false,
+                    "key": "nettobedrag",
+                    "type": "currency",
+                    "input": true,
+                    "delimiter": true
+                }
+            ]
+        },
+        {
+            "label": "Totaal netto maandinkomen - Pensioenen (beoordeling)",
+            "labelPosition": "left-left",
+            "labelWidth": 60,
+            "disabled": false,
+            "hideLabel": false,
+            "key": "beoordelingEnAfhandeling.inkomenKlant.totaalMaandinkomenPensioenen",
+            "type": "currency",
+            "input": true,
+            "delimiter": true,
+            "mask": false,
+            "spellcheck": true,
+            "tableView": false,
+            "currency": "EUR",
+            "calculateValue": "value = data.beoordelingEnAfhandeling?.inkomenKlant?.pensioenen?.reduce((total, item) => total + item.nettobedrag, 0) || 0;",
+            "inputFormat": "plain",
+            "truncateMultipleSpaces": false
+        },
+        {
+            "content": "<br/>",
+            "tableView": true,
+            "key": "linebreak",
+            "type": "htmlelement",
+            "input": false
+        },
+        {
+            "label": "Columns",
+            "columns": [
+                {
+                    "components": [
+                        {
+                            "type": "button",
+                            "label": "Terug",
+                            "showValidations": false,
+                            "disableOnInvalid": true,
+                            "tableView": false,
+                            "action": "custom",
+                            "custom": "data.pv.goBack = 'true'; form.submit(); component.disabled = true;",
+                            "key": "back",
+                            "input": true
+                        }
+                    ],
+                    "width": 6,
+                    "offset": 0,
+                    "push": 0,
+                    "pull": 0,
+                    "size": "md",
+                    "currentWidth": 6
+                },
+                {
+                    "components": [
+                        {
+                            "type": "button",
+                            "label": "Volgende",
+                            "showValidations": false,
+                            "disableOnInvalid": true,
+                            "tableView": false,
+                            "action": "custom",
+                            "custom": "data.pv.goBack = 'false'; form.submit(); component.disabled = true;",
+                            "key": "submit",
+                            "input": true
+                        }
+                    ],
+                    "width": 6,
+                    "offset": 0,
+                    "push": 0,
+                    "pull": 0,
+                    "size": "md",
+                    "currentWidth": 6
+                }
+            ],
+            "key": "columns",
+            "type": "columns",
+            "input": false,
+            "tableView": false
+        }
+    ]
+}

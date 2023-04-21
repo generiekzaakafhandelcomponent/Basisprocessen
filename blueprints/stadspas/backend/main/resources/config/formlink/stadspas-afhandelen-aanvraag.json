@@ -1,0 +1,12 @@
+[
+    {
+        "formName": "aanvraag-stadspas.stadspas-afhandelen-aanvraag.start",
+        "formLinkElementId": "ProductaanvraagOntvangenStartEvent",
+        "formAssociationType": "start-event"
+    },
+    {
+        "formName": "aanvraag-stadspas.stadspas-afhandelen-aanvraag.bepaal-zaakbehandelaar",
+        "formLinkElementId": "BepaalZaakbehandelaarTask",
+        "formAssociationType": "user-task"
+    }
+]

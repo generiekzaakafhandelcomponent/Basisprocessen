@@ -1,0 +1,220 @@
+# ===================================================================
+# Spring Boot configuration.
+#
+# This configuration will be overridden by the Spring profile you use,
+# for example application-dev.yml if you use the "dev" profile.
+# ===================================================================
+
+# ===================================================================
+# Standard Spring Boot properties.
+# Full reference is available at:
+# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# ===================================================================
+logging:
+    level:
+        com.zaxxer.hikari: DEBUG
+    file:
+        name: /tmp/spring.log
+
+management:
+    endpoints:
+        web:
+            base-path: /management
+            exposure:
+                include: [ "configprops", "env", "health", "info", "logfile", "loggers", "mappings" ]
+        jmx:
+            exposure:
+                exclude: "*"
+    endpoint:
+        health:
+            show-details: when_authorized
+    info:
+        git:
+            mode: simple
+            enabled: true
+        build:
+            enabled: true
+        env:
+            enabled: true
+
+spring:
+    application:
+        name: applicaiton_name
+    jackson:
+        date-format: yyyy-MM-dd'T'HH:mm:ss.SSS'Z'
+        time-zone: UTC
+    devtools:
+        restart:
+            enabled: false
+        livereload:
+            enabled: false
+    transaction:
+        default-timeout: 300
+    datasource:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: org.postgresql.Driver
+
+        url: #external
+        name: #external
+        username: #external
+        password: #external
+        hikari:
+            poolName: "valtimo-core-pool"
+            auto-commit: false
+            maximum-pool-size: 25
+            leak-detection-threshold: 20000
+            connection-timeout: 10000
+            idle-timeout: 300000
+            max-lifetime: 600000
+            data-source-properties:
+                cachePrepStmts: true
+                prepStmtCacheSize: 500
+                prepStmtCacheSqlLimit: 2048
+                useServerPrepStmts: true
+                characterEncoding: utf8
+                useUnicode: true
+                useLegacyDatetimeCode: false
+                useSSL: false
+                useLocalSessionState: true
+                rewriteBatchedStatements: true
+                cacheResultSetMetadata: true
+                cacheServerConfiguration: true
+                elideSetAutoCommits: true
+                maintainTimeStats: false
+                serverTimezone: UTC
+                allowPublicKeyRetrieval: true
+    groovy:
+        template:
+            check-template-location: false
+    liquibase:
+        enabled: false
+    jpa:
+        database-platform: org.hibernate.dialect.PostgreSQLDialect
+        database: postgresql
+        show_sql: false
+        open-in-view: false
+        properties:
+            # 2022-11-23 - Erik: added this timeout to as workaround, to prevent queries from running for hours.
+            javax:
+                persistence:
+                    query:
+                        timeout: 300000
+            hibernate:
+                hbm2ddl.auto: none
+                generate_statistics: false
+                naming-strategy: org.springframework.boot.orm.jpa.hibernate.SpringNamingStrategy
+                cache:
+                    use_second_level_cache: false
+                    use_query_cache: false
+                    region.factory_class: org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
+                format_sql: true
+                jdbc:
+                    time_zone: UTC
+                connection:
+                    provider_disables_autocommit: true
+        hibernate:
+            ddl-auto: none
+            naming:
+                physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+                implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+            use-new-id-generator-mappings: false
+    messages:
+        basename: i18n/messages
+    main.allow-bean-definition-overriding: true
+    jersey:
+        application-path: /api/camunda-rest
+    autoconfigure:
+        exclude:
+            - org.springframework.boot.actuate.autoconfigure.metrics.web.tomcat.TomcatMetricsAutoConfiguration
+            - org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration
+
+server:
+    port: 8080
+    compression:
+        enabled: true
+        mime-types: text/html,text/xml,text/plain,text/css, application/javascript, application/json
+        min-response-size: 1024
+
+mailing:
+    onlyAllowWhitelistedRecipients: false
+    redirectAllMails: false
+    whitelistedEmailAddresses:
+
+    whitelistedDomains:
+
+    sendRedirectedMailsTo:
+
+valtimo:
+    app:
+        scheme: http
+        hostname: localhost:4200
+    database: postgres
+    jwt:
+        base64encoding: false #auth0 client is not base64 encoded
+        tokenValidityInSeconds: 3600 # Token is valid 1 hour
+        tokenValidityInSecondsForRememberMe: 2592000
+        secret: #external
+    hardening:
+        removeStacktracesFromReturnedExceptions: true
+        allowStacktraceOnIps:
+            - "*"
+    swagger:
+        enabled: false
+    auth0:
+        enabled: false
+    besluitDocumentRequired: true
+    connector-encryption:
+        secret: #external
+    plugin:
+        encryption-secret: #external
+
+spring-actuator:
+    username: admin
+    password: #external
+
+audit:
+    record:
+        retention: 365 # days
+
+# ==================
+# CRON job settings
+# ==================
+scheduling:
+    enabled: true
+    job:
+        cron:
+            syncAuth0LogsEvents: 0 0 3 * * ? # Every day at 3:00
+            cleanupAuditEvents: 0 0 4 * * ? # Every day at 00:00
+            taskNotificationReminder: 0 0 10 * * ? # Every day at 10:00
+
+
+camunda:
+    bpm:
+        database:
+            type: postgres
+        history-level: AUDIT
+        history-level-default: AUDIT
+        generic-properties:
+            properties:
+                failed-job-retry-time-cycle: R3/PT60S
+        admin-user:
+            id: admin
+            password: # external
+            first-name: Admin account
+
+# ==================
+# keycloak server to server config
+# ==================
+keycloak:
+    realm: #external
+    auth-server-url: #external
+    resource: #external
+    credentials:
+        secret: #external
+
+# ==================
+# implementation configuration
+# ==================
+implementation:
+    stadspas:
+        besluitType: #external

@@ -1,0 +1,287 @@
+{
+    "display": "form",
+    "components": [
+        {
+            "content": "Via het onderstaande formulier kunt u de aanvraag wijzigen.</br>",
+            "tableView": true,
+            "key": "aanvraagWijzigen",
+            "type": "htmlelement",
+            "input": false,
+            "label": "HTML"
+        },
+        {
+            "content": "<strong>Aanvrager gegevens</strong></br>",
+            "tableView": true,
+            "key": "aanvragerGegevens",
+            "type": "htmlelement",
+            "input": false,
+            "label": "HTML"
+        },
+        {
+            "label": "Straat",
+            "tableView": true,
+            "key": "aanvrager.adres.straat",
+            "validate": {
+                "required": true
+            },
+            "type": "textfield",
+            "input": true
+        },
+        {
+            "label": "Huisnummer",
+            "tableView": true,
+            "key": "aanvrager.adres.huisnummer",
+            "validate": {
+                "required": true
+            },
+            "type": "number",
+            "input": true
+        },
+        {
+            "label": "Huisnummertoevoeging",
+            "tableView": true,
+            "key": "aanvrager.adres.huisnummertoevoeging",
+            "type": "textfield",
+            "input": true
+        },
+        {
+            "label": "Postcode",
+            "tableView": true,
+            "key": "aanvrager.adres.postcode",
+            "validate": {
+                "required": true
+            },
+            "inputMask": "9999 AA",
+            "type": "textfield",
+            "input": true
+        },
+        {
+            "label": "Plaats",
+            "tableView": true,
+            "key": "aanvrager.adres.woonplaats",
+            "type": "textfield",
+            "validate": {
+                "required": true
+            },
+            "input": true
+        },
+        {
+            "label": "Volledig adres",
+            "tableView": true,
+            "key": "aanvrager.adres.volledigAdres",
+            "calculateValue": "value = data.aanvrager.adres ? (( data.aanvrager.adres?.straat ? data.aanvrager.adres?.straat + ' ' : '') + ( data.aanvrager?.adres?.huisnummer ? data.aanvrager?.adres?.huisnummer + ' ' : '') + ( data.aanvrager?.adres?.huisletter || '') + ( data.aanvrager?.adres?.huisnummertoevoeging || '') + ( ( data.aanvrager?.adres?.postcode || data.aanvrager?.adres?.woonplaats) ? ',' : '') + ( ' ' + data.aanvrager?.adres?.postcode || '') ) + ( ' ' + (data.aanvrager?.adres?.woonplaats || '')) : '-'",
+            "type": "hidden",
+            "input": true
+        },
+        {
+            "label": "Telefoonnummer",
+            "tableView": true,
+            "key": "aanvrager.telefoonnummer",
+            "inputMask": "9999999999",
+            "type": "phoneNumber",
+            "input": true
+        },
+        {
+            "label": "E-mailadres",
+            "tableView": true,
+            "key": "aanvrager.emailadres",
+            "validate": {
+                "required": true
+            },
+            "type": "email",
+            "input": true
+        },
+        {
+            "content": "<strong>Partner gegevens</strong></br>",
+            "tableView": true,
+            "key": "partnerGegevens",
+            "type": "htmlelement",
+            "input": false,
+            "label": "HTML"
+        },
+        {
+            "label": "Voorletters",
+            "tableView": true,
+            "key": "partner.voorletters",
+            "type": "textfield",
+            "input": true
+        },
+        {
+            "label": "Tussenvoegsel",
+            "tableView": true,
+            "key": "partner.tussenvoegsel",
+            "type": "textfield",
+            "input": true
+        },
+        {
+            "label": "Achternaam",
+            "tableView": true,
+            "key": "partner.achternaam",
+            "type": "textfield",
+            "input": true
+        },
+        {
+            "label": "Geboortedatum",
+            "key": "partner.geboortedatum",
+            "placeholder": "dd-mm-yyyy",
+            "format": "dd-MM-yyyy",
+            "tableView": false,
+            "enableTime": false,
+            "datePicker": {
+                "disableWeekends": false,
+                "disableWeekdays": false
+            },
+            "enableMinDateInput": false,
+            "enableMaxDateInput": false,
+            "type": "datetime",
+            "input": true,
+            "widget": {
+                "type": "calendar",
+                "displayInTimezone": "viewer",
+                "locale": "en",
+                "useLocaleSettings": false,
+                "allowInput": true,
+                "mode": "single",
+                "enableTime": false,
+                "noCalendar": false,
+                "format": "dd-MM-yyyy",
+                "hourIncrement": 1,
+                "minuteIncrement": 1,
+                "time_24hr": false,
+                "minDate": null,
+                "disableWeekends": false,
+                "disableWeekdays": false,
+                "maxDate": null
+            }
+        },
+        {
+            "label": "BSN",
+            "tableView": true,
+            "key": "partner.bsn",
+            "type": "textfield",
+            "input": true
+        },
+        {
+            "label": "Volledige naam partner",
+            "tableView": true,
+            "key": "partner.volledigeNaam",
+            "calculateValue": "value = data.partner.voorletters + ' ' + data.partner.tussenvoegsel + (data.partner.tussenvoegsel != '' ? ' ' : '') + data.partner.achternaam",
+            "type": "hidden",
+            "input": true
+        },
+        {
+            "content": "<strong>Kind(eren) gegevens</strong>",
+            "tableView": true,
+            "key": "kindGegevens",
+            "type": "htmlelement",
+            "input": false,
+            "label": "HTML"
+        },
+        {
+            "label": "Kinderen",
+            "reorder": false,
+            "disableAddingRemovingRows": false,
+            "addAnotherPosition": "bottom",
+            "addAnother": "Toevoegen",
+            "layoutFixed": false,
+            "enableRowGroups": false,
+            "initEmpty": false,
+            "hideLabel": false,
+            "tableView": false,
+            "key": "kinderen",
+            "type": "datagrid",
+            "input": true,
+            "customClass": "pt-3",
+            "defaultValue": [
+            ],
+            "components": [
+                {
+                    "label": "Voorletters",
+                    "tableView": true,
+                    "key": "Voorletters",
+                    "type": "textfield",
+                    "input": true
+                },
+                {
+                    "label": "Voornaam",
+                    "tableView": true,
+                    "key": "voornaam",
+                    "type": "textfield",
+                    "input": true
+                },
+                {
+                    "label": "Tussenvoegsel",
+                    "tableView": true,
+                    "key": "tussenvoegsel",
+                    "type": "textfield",
+                    "input": true
+                },
+                {
+                    "label": "Achternaam",
+                    "tableView": true,
+                    "key": "achternaam",
+                    "type": "textfield",
+                    "input": true
+                },
+                {
+                    "label": "Geboortedatum",
+                    "key": "geboortedatum",
+                    "placeholder": "dd-mm-yyyy",
+                    "format": "dd-MM-yyyy",
+                    "tableView": false,
+                    "enableTime": false,
+                    "datePicker": {
+                        "disableWeekends": false,
+                        "disableWeekdays": false
+                    },
+                    "enableMinDateInput": false,
+                    "enableMaxDateInput": false,
+                    "type": "datetime",
+                    "input": true,
+                    "widget": {
+                        "type": "calendar",
+                        "displayInTimezone": "viewer",
+                        "locale": "en",
+                        "useLocaleSettings": false,
+                        "allowInput": true,
+                        "mode": "single",
+                        "enableTime": false,
+                        "noCalendar": false,
+                        "format": "dd-MM-yyyy",
+                        "hourIncrement": 1,
+                        "minuteIncrement": 1,
+                        "time_24hr": false,
+                        "minDate": null,
+                        "disableWeekends": false,
+                        "disableWeekdays": false,
+                        "maxDate": null
+                    }
+                },
+                {
+                    "label": "BSN",
+                    "tableView": true,
+                    "key": "bsn",
+                    "type": "textfield",
+                    "input": true
+                },
+                {
+                    "label": "VolledigeNaam",
+                    "tableView": true,
+                    "key": "volledigeNaam",
+                    "calculateValue": "value = row.voornaam + ' ' + row.tussenvoegsel + (row.tussenvoegsel != '' ? ' ' : '') + row.achternaam",
+                    "type": "hidden",
+                    "input": true
+                }
+            ]
+        },
+        {
+            "type": "button",
+            "label": "Submit",
+            "showValidations": false,
+            "disableOnInvalid": true,
+            "tableView": false,
+            "key": "submit",
+            "input": true
+        }
+    ]
+}

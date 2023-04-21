@@ -1,0 +1,7 @@
+[
+    {
+        "formName": "aanvraag-stadspas.stadspas-vastleggen-reactie-op-informatieverzoek.start",
+        "formLinkElementId": "StartVastleggenReactieStartEvent",
+        "formAssociationType": "start-event"
+    }
+]

@@ -1,0 +1,7 @@
+[
+    {
+        "formName": "aanvraag-stadspas.stadspas-opvragen-informatie.aanleveren-informatie",
+        "formLinkElementId": "AanleverenInformatieTask",
+        "formAssociationType": "user-task"
+    }
+]
