@@ -10,7 +10,7 @@ The 'Stadspas' is a city discount pass that the Dutch municipalities provide to 
 
 * The processing of a formal decision (nl: ‘besluit’) on the application by the case handler
 
-* The creation of the product ‘Stadspas’ as an object in the objects api
+* The creation of the product ‘Stadspas’ as an object in the objects API
 
 * Generation of the necessary emails and documents.
 
@@ -20,15 +20,15 @@ The 'Stadspas' is a city discount pass that the Dutch municipalities provide to 
 
   * An applicant is able to complete an application for a ‘Stadspas’.
 
-  * The data of the form is submitted as an object of the type ‘productaanvraag’ in the objects api. As a response, the objects api puts a notification on the Open notification message bus.
+  * The data of the form is submitted as an object of the type ‘productaanvraag’ in the objects API. As a response, the objects API puts a notification on the Open notification message bus.
 
-  * GZAC has a subscription on these notifications and as a response, it will pull the ‘productaanvraag’ data from the objects api and create a case of the type ‘Aanvraag Stadspas’ with the help of Stadspas productaanvraag connector.
+  * GZAC has a subscription on these notifications and as a response, it will pull the ‘productaanvraag’ data from the objects API and create a case of the type ‘Aanvraag Stadspas’ with the help of Stadspas productaanvraag connector.
 
-  * GZAC deletes the ‘productaanvraag’ object from the objects api.
+  * GZAC deletes the ‘productaanvraag’ object from the objects API.
 
 * The service task ‘Vertalen ontvangen data naar document' of 'Stadspas: Afhandelen aanvraag’ process converts and saves the received productaanvraag data to the document.
 
-* The service task ‘Kopiëren op gegeven data naar beoordeling’ duplicates the application data to the ‘Beoordeling’ keys in document. This enables the creation of a report at the end of the process, which compares data received from the applicant with data updated by the case handler.
+* The service task ‘Kopiëren opgegeven data naar beoordeling’ duplicates the application data to the ‘Beoordeling’ keys in document. This enables the creation of a report at the end of the process, which compares data received from the applicant with data updated by the case handler.
 
 * The service task ‘Zet aanvraag ontvangen datum naar document’
 
@@ -55,19 +55,19 @@ The 'Stadspas' is a city discount pass that the Dutch municipalities provide to 
     
   * Case handler makes a decision (one of the following three: Aanvraag toekenen, Aanvraag afwijzen, Aanvraag buiten behandeling stellen)
 
-    * The call activity ‘genereer document’ generates the report ‘Rapportage Afhandeling aanvraag Stadspas.pdf’, saves it to Documenten api and links it to the case in openzaak. More information on this can be found below under building blocks.
+    * The call activity ‘genereer document’ generates the report ‘Rapportage Afhandeling aanvraag Stadspas.pdf’, saves it to Documenten API and links it to the case in openzaak. More information on this can be found below under building blocks.
 
     * The DMN table ‘Bepalen beschikking template’ determines which smart documents template needs to be used to generate the ‘beschikking’ document based on the made decision.
 
-    * The call activity ‘genereer document’ generates the ‘beschikking’ document, saves it to Documenten api and links it to the case in openzaak. More information on this can be found below under building blocks.
+    * The call activity ‘genereer document’ generates the ‘beschikking’ document, saves it to Documenten API and links it to the case in openzaak. More information on this can be found below under building blocks.
 
     * Service taks ‘Vastleggen besluit’ creates a ‘besluit’ in openzaak, links the generated ‘beschikking’ document to the ‘besluit’ and links the ‘besluit’ to the case in openzaak.
 
     * The DMN table ‘Bepaal zaakresultaat’ determines which result needs to be set in openzaak based on the made decision.
 
-    * Service task ‘vastleggen product’ creates an object of the objecttype ‘product stadspas' in the objects api when the decision is ‘Aanvraag toekenen’
+    * Service task ‘vastleggen product’ creates an object of the objecttype ‘product stadspas' in the objects API when the decision is ‘Aanvraag toekenen’
 
-    * Service task ‘Koppelen product aan zaak’ links the created object in the objects api with the case in openzaak
+    * Service task ‘Koppelen product aan zaak’ links the created object in the objects API with the case in openzaak
 
     * The call activity ‘Informeren aanvrager’ is used to determine via which channel (email, post, portal) the applicant is informed of the made decision. More information on this can be found below under building blocks.
 
@@ -101,7 +101,7 @@ The 'Stadspas' is a city discount pass that the Dutch municipalities provide to 
 
   * Service task ‘Genereer document’ provides data to Smart Documents which generates and returns  the requested document.
 
-  * Service task 'Opslaan document in documenten api' saves the document in documenten api. There are multiple services task implemented to enable to set different documenttypes as meta data in the document api
+  * Service task 'Opslaan document in documenten API' saves the document in documenten API. There are multiple services task implemented to enable to set different documenttypes as meta data in the document API
 
   * Service task ‘Linken document aan de zaak' links the generated document to the case in openzaak
 
@@ -129,7 +129,7 @@ The 'Stadspas' is a city discount pass that the Dutch municipalities provide to 
 
   * The call activity ‘Controleren afhandeltermijn’ calculates the period between the moment the request for information was done and the moment the escalation took place due to no response from the applicant.
 
-  * The call activity ‘genereer document’ generates the confirmation of receipt document, saves it to Documenten api and links it to the case in openzaak.
+  * The call activity ‘genereer document’ generates the confirmation of receipt document, saves it to Documenten API and links it to the case in openzaak.
 
   * The call activity ‘Informeren aanvrager’ is used to determine via which channel (email, post, portal) the applicant is informed of the made decision.
 
@@ -147,7 +147,7 @@ The 'Stadspas' is a city discount pass that the Dutch municipalities provide to 
 
 **Connections with other systems**
 
-OpenZaak, Objects-api, Objecttypes-api, Open-notifications, Open-forms, Smart documents, Wordpress mail.
+OpenZaak, Objects API, Objecttypes API, Open-notifications, Open-forms, Smart documents, Wordpress mail.
 
 
 **Prerequisites**
@@ -189,17 +189,17 @@ Make sure that the following templates are created and ready to use:
 
 **Smart documents**
 
-A user id (client id) and password are required to configure plug in GZAC and make sure that the following templates are available:
+Make sure that the following templates are available:
 * Besluit over uw aanvraag Stadspas - Toekenning 1e keer
 * Besluit over uw aanvraag Stadspas - Afwijzing
 * Aanvraag Stadspas buiten behandeling
 * Gegevens nodig aanvraag Stadspas
 * Gegevens Stadspas ontvangen
-* Rapportage Afhandeling aanvraag stadspas
+* Rapportage Afhandeling aanvraag Stadspas
 
-**Objecten api and Objecttypen api**
+**Objecten API and Objecttypen API**
 
-Make sure that the following objecttypes are created in objecttypen api and they are available in objecten api.
+Make sure that the following objecttypes are created in objecttypen API and they are available in objecten API.
 
 * zaakdetails stadspas
 * product stadspas
@@ -485,7 +485,7 @@ Make sure that a GZAC application is added and client id and secret is available
 In **Admin > Connections** the following connectors should be added:
 
 * OpenZaak
-* Objects api
+* Objects API
   * stadspas-zaakdossiersync
   * stadspas-product-stadspas
   * stadspas-productaanvraag
@@ -621,7 +621,7 @@ The following process links for plugins should be configured in Admin => Procesk
        }
        ```
 
-  * Service task: Opslaan document in documenten api - Bevestigingbrief
+  * Service task: Opslaan document in documenten API - Bevestigingbrief
     Documenten API -> Document opslaan
      ```
      Bestandsnaam = leave empty
@@ -635,7 +635,7 @@ The following process links for plugins should be configured in Admin => Procesk
      URL naar het informatieobjecttype = https://openzaak-zgw.test.denhaag.nl/catalogi/api/v1/informatieobjecttypen/BevestigingbriefUuid
      ```
 
-  * Service task: Opslaan document in documenten api - Termijn brief
+  * Service task: Opslaan document in documenten API - Termijn brief
     Documenten API -> Document opslaan
      ```
      Bestandsnaam = leave empty
@@ -649,7 +649,7 @@ The following process links for plugins should be configured in Admin => Procesk
      URL naar het informatieobjecttype = https://openzaak-zgw.test.denhaag.nl/catalogi/api/v1/informatieobjecttypen/TermijnBriefUuid
      ```
 
-  * Service task: Opslaan document in documenten api - Besluit
+  * Service task: Opslaan document in documenten API - Besluit
     Documenten API -> Document opslaan
      ```
      Bestandsnaam = leave empty
@@ -663,7 +663,7 @@ The following process links for plugins should be configured in Admin => Procesk
      URL naar het informatieobjecttype = https://openzaak-zgw.test.denhaag.nl/catalogi/api/v1/informatieobjecttypen/BesluitUuid
      ```
 
-  * Service task: Opslaan document in documenten api - Rapportage
+  * Service task: Opslaan document in documenten API - Rapportage
     Documenten API -> Document opslaan
      ```
      Bestandsnaam = leave empty
