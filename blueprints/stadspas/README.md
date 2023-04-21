@@ -88,9 +88,7 @@ OpenZaak, Objects-api, Objecttypes-api, Open-notifications, Open-forms, Smart do
 
 **Passwords and secrets**
 
-As we don't want to commit secrets/passwords. A solution to work with secrets should already be there, either through the AWS parameter store or in Kubernetes with environment variables like below:
-
-The following environment variables should be defined for Backend:
+The following environment variables should be provided for Backend:
 
 * VALTIMO_CONNECTOR-ENCRYPTION_SECRET= any secrets of 16 characters or its multiplies
 * VALTIMO_JWT_SECRET= keycloak jwt secret

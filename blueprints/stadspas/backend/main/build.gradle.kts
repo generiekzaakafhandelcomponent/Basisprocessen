@@ -37,8 +37,6 @@ java.targetCompatibility = JavaVersion.VERSION_17
 
 repositories {
     mavenCentral()
-    maven { url = uri("https://repo.ritense.com/repository/maven-snapshots/") }
-    maven { url = uri("https://repo.ritense.com/repository/maven-releases/") }
     maven { url = uri("https://s01.oss.sonatype.org/content/groups/staging/") }
     maven { url = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/") }
 }
