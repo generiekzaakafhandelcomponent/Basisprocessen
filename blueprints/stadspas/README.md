@@ -253,7 +253,7 @@ For every environment the formio object is unique, as it contains unique informa
                 "tableView": false,
                 "multipleFiles": true,
                 "customConditional": "show = data.informatieverzoeken.at(-1).opTeVragenBenodigdeInformatie.partnerID;",
-                "informatieobjecttype": "openzaakUrl/catalogi/api/v1/informatieobjecttypen/IdentiteitsbewijsUuid"
+                "informatieobjecttype": "identiteitsbewijs-inofrmatieobjecttype-url"
             },
             {
                 "key": "bankafschriftenAfgelopenMaand",
@@ -263,7 +263,7 @@ For every environment the formio object is unique, as it contains unique informa
                 "tableView": false,
                 "multipleFiles": true,
                 "customConditional": "show = data.informatieverzoeken.at(-1).opTeVragenBenodigdeInformatie.bankafschriftenAfgelopenMaand;",
-                "informatieobjecttype": "openzaakUrl/catalogi/api/v1/informatieobjecttypen/BankafschriftUuid"
+                "informatieobjecttype": "bankafschrift-inofrmatieobjecttype-url"
             },
             {
                 "key": "html",
@@ -284,7 +284,7 @@ For every environment the formio object is unique, as it contains unique informa
                 "tableView": false,
                 "multipleFiles": true,
                 "customConditional": "show = data.informatieverzoeken.at(-1).opTeVragenBenodigdeInformatie.specifiekeBankafschriftenAfgelopenMaand;",
-                "informatieobjecttype": "openzaakUrl/catalogi/api/v1/informatieobjecttypen/BankafschriftUuid"
+                "informatieobjecttype": "bankafschrift-inofrmatieobjecttype-url"
             },
             {
                 "key": "html",
@@ -305,7 +305,7 @@ For every environment the formio object is unique, as it contains unique informa
                 "tableView": false,
                 "multipleFiles": true,
                 "customConditional": "show = data.informatieverzoeken.at(-1).opTeVragenBenodigdeInformatie.specifiekeBankafschriftenPerPeriode;",
-                "informatieobjecttype": "openzaakUrl/catalogi/api/v1/informatieobjecttypen/BankafschriftUuid"
+                "informatieobjecttype": "bankafschrift-inofrmatieobjecttype-url"
             },
             {
                 "key": "laatsteInkomstenSpecificatie",
@@ -315,7 +315,7 @@ For every environment the formio object is unique, as it contains unique informa
                 "tableView": false,
                 "multipleFiles": true,
                 "customConditional": "show = data.informatieverzoeken.at(-1).opTeVragenBenodigdeInformatie.laatsteInkomstenSpecificatie;",
-                "informatieobjecttype": "openzaakUrl/catalogi/api/v1/informatieobjecttypen/InkomensspecificatieUuid"
+                "informatieobjecttype": "inkomensspecificatie-inofrmatieobjecttype-url"
             },
             {
                 "key": "laatsteInkomstenSpecificatiePartner",
@@ -325,7 +325,7 @@ For every environment the formio object is unique, as it contains unique informa
                 "tableView": false,
                 "multipleFiles": true,
                 "customConditional": "show = data.informatieverzoeken.at(-1).opTeVragenBenodigdeInformatie.laatsteInkomstenSpecificatiePartner;",
-                "informatieobjecttype": "openzaakUrl/catalogi/api/v1/informatieobjecttypen/InkomensspecificatieUuid"
+                "informatieobjecttype": "inkomensspecificatie-inofrmatieobjecttype-url"
             },
             {
                 "key": "specificatiePensioen",
@@ -335,7 +335,7 @@ For every environment the formio object is unique, as it contains unique informa
                 "tableView": false,
                 "multipleFiles": true,
                 "customConditional": "show = data.informatieverzoeken.at(-1).opTeVragenBenodigdeInformatie.specificatiePensioen;",
-                "informatieobjecttype": "openzaakUrl/catalogi/api/v1/informatieobjecttypen/PensioenOverzichtUuid"
+                "informatieobjecttype": "pPensioenOverzicht-inofrmatieobjecttype-url"
             },
             {
                 "key": "belastingaangifte",
@@ -345,7 +345,7 @@ For every environment the formio object is unique, as it contains unique informa
                 "tableView": false,
                 "multipleFiles": true,
                 "customConditional": "show = data.informatieverzoeken.at(-1).opTeVragenBenodigdeInformatie.belastingaangifteAfgelopenJaar;",
-                "informatieobjecttype": "openzaakUrl/catalogi/api/v1/informatieobjecttypen/BelastingaangifteUuid"
+                "informatieobjecttype": "belastingaangifte-inofrmatieobjecttype-url"
             },
             {
                 "key": "belastingaanslag",
@@ -355,7 +355,7 @@ For every environment the formio object is unique, as it contains unique informa
                 "tableView": false,
                 "multipleFiles": true,
                 "customConditional": "show = data.informatieverzoeken.at(-1).opTeVragenBenodigdeInformatie.belastingaanslagAfgelopenJaar;",
-                "informatieobjecttype": "openzaakUrl/catalogi/api/v1/informatieobjecttypen/BelastingaanslagUuid"
+                "informatieobjecttype": "belastingaanslag-inofrmatieobjecttype-url"
             },
             {
                 "key": "jaarrekening",
@@ -365,7 +365,7 @@ For every environment the formio object is unique, as it contains unique informa
                 "tableView": false,
                 "multipleFiles": true,
                 "customConditional": "show = data.informatieverzoeken.at(-1).opTeVragenBenodigdeInformatie.jaarrekening;",
-                "informatieobjecttype": "openzaakUrl/catalogi/api/v1/informatieobjecttypen/JaarrekeningUuid"
+                "informatieobjecttype": "jaarrekening-inofrmatieobjecttype-url"
             },
             {
                 "key": "balansrekening",
@@ -375,7 +375,7 @@ For every environment the formio object is unique, as it contains unique informa
                 "tableView": false,
                 "multipleFiles": true,
                 "customConditional": "show = data.informatieverzoeken.at(-1).opTeVragenBenodigdeInformatie.balansrekening;",
-                "informatieobjecttype": "openzaakUrl/catalogi/api/v1/informatieobjecttypen/BalansrekeningUuid"
+                "informatieobjecttype": "balansrekening-inofrmatieobjecttype-url"
             },
             {
                 "key": "html",
@@ -396,7 +396,7 @@ For every environment the formio object is unique, as it contains unique informa
                 "tableView": false,
                 "multipleFiles": true,
                 "customConditional": "show = data.informatieverzoeken.at(-1).opTeVragenBenodigdeInformatie.bewijsVanInschrijving;",
-                "informatieobjecttype": "openzaakUrl/catalogi/api/v1/informatieobjecttypen/BewijsVanInschrijvingUuid"
+                "informatieobjecttype": "bewijsVanInschrijving-inofrmatieobjecttype-url"
             },
             {
                 "key": "reactie.ontvangenBestanden",
@@ -632,7 +632,7 @@ The following process links for plugins should be configured in Admin => Procesk
      Naam procesvariabele voor opslag document-URL = gegenereerdeeStadspasDocumentUrl
      Taal = nl
      Status = Definitief
-     URL naar het informatieobjecttype = openzaakUrl/catalogi/api/v1/informatieobjecttypen/BevestigingbriefUuid
+     URL naar het informatieobjecttype = bevestigingbrief-inofrmatieobjecttype-url
      ```
 
   * Service task: Opslaan document in documenten API - Termijn brief
@@ -646,7 +646,7 @@ The following process links for plugins should be configured in Admin => Procesk
      Naam procesvariabele voor opslag document-URL = gegenereerdeStadspasDocumentUrl
      Taal = nl
      Status = Definitief
-     URL naar het informatieobjecttype = openzaakUrl/catalogi/api/v1/informatieobjecttypen/TermijnBriefUuid
+     URL naar het informatieobjecttype = termijnBrief-inofrmatieobjecttype-url
      ```
 
   * Service task: Opslaan document in documenten API - Besluit
@@ -660,7 +660,7 @@ The following process links for plugins should be configured in Admin => Procesk
      Naam procesvariabele voor opslag document-URL = gegenereerdeStadspasDocumentUrl
      Taal = nl
      Status = Definitief
-     URL naar het informatieobjecttype = openzaakUrl/catalogi/api/v1/informatieobjecttypen/BesluitUuid
+     URL naar het informatieobjecttype = besluit-inofrmatieobjecttype-url
      ```
 
   * Service task: Opslaan document in documenten API - Rapportage
@@ -674,7 +674,7 @@ The following process links for plugins should be configured in Admin => Procesk
      Naam procesvariabele voor opslag document-URL = gegenereerdeStadspasDocumentUrl
      Taal = nl
      Status = Definitief
-     URL naar het informatieobjecttype = openzaakUrl/catalogi/api/v1/informatieobjecttypen/RapportageUuid
+     URL naar het informatieobjecttype = rapportage-inofrmatieobjecttype-url
      ```
 
   * Service task: Linken document aan de zaak
