@@ -4,13 +4,13 @@ The 'Stadspas' is a city discount pass that the Dutch municipalities provide to 
 
 **These processes support:**
 
-* The processing of an application for an ‘Ooievaarspas’ by a inhabitant of the city of The Hague
+* The processing of an application for an ‘Stadspas’ by a inhabitant of the city.
 
 * The processing of a request for information from the applicant by a case handler either via the customer portal (nl: 'klantportaal') or via post.
 
 * The processing of a formal decision (nl: ‘besluit’) on the application by the case handler
 
-* The creation of the product ‘Ooievaarspas’ as an object in the objects api
+* The creation of the product ‘Stadspas’ as an object in the objects api
 
 * Generation of the necessary emails and documents.
 
@@ -18,15 +18,15 @@ The 'Stadspas' is a city discount pass that the Dutch municipalities provide to 
 
 * Message catch event ‘Product aanvraag ontvangen’ is the trigger for the start of the proces ‘Afhandelen aanvraag’. This event is preceded by the following activities within the ZGW platform:
 
-  * An applicant is able to complete an application for an ‘Ooievaarspas’ (Openforms form which has been developed internally by The Hague) on the website of the municipality of The Hague.
+  * An applicant is able to complete an application for a ‘Stadspas’.
 
-  * The data of the form is submitted as an object of the type ‘Productaanvraag’ in the objects api. As a response, the objects api puts a notification on the Open notification message bus.
+  * The data of the form is submitted as an object of the type ‘productaanvraag’ in the objects api. As a response, the objects api puts a notification on the Open notification message bus.
 
-  * GZAC has a subscription on these notifications and as a response, it will pull the ‘productaanvraag’ data from the objects api and create a case of the type ‘Aanvraag Opas (ooievaarspas)’ with the help of Ooievaarspas productaanvraag connector.
+  * GZAC has a subscription on these notifications and as a response, it will pull the ‘productaanvraag’ data from the objects api and create a case of the type ‘Aanvraag Stadspas’ with the help of Stadspas productaanvraag connector.
 
-  * GZAC deletes the ‘Productaanvraag’ object from the objects api.
+  * GZAC deletes the ‘productaanvraag’ object from the objects api.
 
-* The service task ‘Vertalen ontvangen data naar document' of 'Ooievaarspas: Afhandelen aanvraag’ process converts and saves the received productaanvraag data to the document.
+* The service task ‘Vertalen ontvangen data naar document' of 'Stadspas: Afhandelen aanvraag’ process converts and saves the received productaanvraag data to the document.
 
 * The service task ‘Kopiëren op gegeven data naar beoordeling’ duplicates the application data to the ‘Beoordeling’ keys in document. This enables the creation of a report at the end of the process, which compares data received from the applicant with data updated by the case handler.
 
@@ -55,7 +55,7 @@ The 'Stadspas' is a city discount pass that the Dutch municipalities provide to 
     
   * Case handler makes a decision (one of the following three: Aanvraag toekenen, Aanvraag afwijzen, Aanvraag buiten behandeling stellen)
 
-    * The call activity ‘genereer document’ generates the report ‘Rapportage Afhandeling aanvraag ooievaarspas.pdf’, saves it to Documenten api and links it to the case in openzaak. More information on this can be found below under building blocks.
+    * The call activity ‘genereer document’ generates the report ‘Rapportage Afhandeling aanvraag Stadspas.pdf’, saves it to Documenten api and links it to the case in openzaak. More information on this can be found below under building blocks.
 
     * The DMN table ‘Bepalen beschikking template’ determines which smart documents template needs to be used to generate the ‘beschikking’ document based on the made decision.
 
@@ -85,9 +85,9 @@ The 'Stadspas' is a city discount pass that the Dutch municipalities provide to 
 
   * Services task ‘Voorbereiden variabelen’
 
-  * Send task ‘Versturen email notificatie’ sends an email via the transactional email service of The Hague (aka wordpress mail) to notify the applicant that there is a task that needs to be completed on the customer portal (nl: klantportaal)
+  * Send task ‘Versturen email notificatie’ sends an email via Wordpress mail to notify the applicant that there is a task that needs to be completed on the customer portal (nl: klantportaal)
 
-  * Send task ‘Versturen email (evt met bijlage)' sends an email via the transactional email service of The Hague (aka wordpress mail) to the applicant with instructions the provide additional information or the inform the applicant of a made decision on the application.
+  * Send task ‘Versturen email (evt met bijlage)' sends an email via Wordpress mail to the applicant with instructions the provide additional information or the inform the applicant of a made decision on the application.
 
   * User task ‘Afdrukken brief’ informs the case handler that a document has been generated which can be downloaded from the documents tab, printed and send by email.
 
@@ -668,8 +668,8 @@ The following process links for plugins should be configured in Admin => Procesk
      ```
      Bestandsnaam = leave empty
      Vertrouwelijkheidsaanduiding = zaakvertrouwelijk
-     Titel = Rapportage  aanvraag ooievaarspas or any titel
-     Beschrijving = Rapportage  aanvraag ooievaarspas or any beschrijving
+     Titel = Rapportage  aanvraag Stadspas or any titel
+     Beschrijving = Rapportage  aanvraag Stadspas or any beschrijving
      Naam procesvariabele met document = gegenereerdeStadspasDocumentUrl
      Naam procesvariabele voor opslag document-URL = gegenereerdeStadspasDocumentUrl
      Taal = nl
