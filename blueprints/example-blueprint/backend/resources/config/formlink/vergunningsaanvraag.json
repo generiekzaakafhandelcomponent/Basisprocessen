@@ -1,0 +1,27 @@
+[
+    {
+        "formName": "vergunningsaanvraag.start",
+        "formLinkElementId": "VergunningsaanvraagOntvangenStartEvent",
+        "formAssociationType": "start-event"
+    },
+    {
+        "formName": "vergunningsaanvraag.aanvullende-informatie-ontvangen",
+        "formLinkElementId": "AanvullendeInformatieOntvangenTask",
+        "formAssociationType": "user-task"
+    },
+    {
+        "formName": "vergunningsaanvraag.controleren-volledigheid-aanvraag",
+        "formLinkElementId": "ControlerenVolledigheidAanvraagTask",
+        "formAssociationType": "user-task"
+    },
+    {
+        "formName": "vergunningsaanvraag.besluit-verlenen-vergunning",
+        "formLinkElementId": "BesluitVerlenenVergunningTask",
+        "formAssociationType": "user-task"
+    },
+    {
+        "formName": "vergunningsaanvraag.akkoorderen-besluit",
+        "formLinkElementId": "AkkoorderenBesluitTask",
+        "formAssociationType": "user-task"
+    }
+]
