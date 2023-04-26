@@ -1,8 +1,0 @@
-{
-  "$id": "example-document.schema",
-  "type": "object",
-  "title": "Example document",
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "properties": {},
-  "additionalProperties": true
-}

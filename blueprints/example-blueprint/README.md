@@ -1,3 +1,2 @@
-# Example blueprint
-This is an example blueprint that exists as a point of reference for the structure when
-creating blueprints.
+# Vergunningsaanvraag
+This is a generic process for permit applications
