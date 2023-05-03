@@ -8,7 +8,7 @@ contribution. It will smooth out the experience for all involved. The community 
 
 ## I have a question
 
-> If you want to ask a question, we assume that you have read the available [documentation](https://docs.valtimo.nl/valtimo-implementation/process-blueprints).
+> If you want to ask a question, we assume that you have read the available [documentation](https://docs.valtimo.nl/valtimo-implementation/exchange/process-blueprints).
 
 Before you ask a question, it is best to search for existing [Issues](https://github.com/generiekzaakafhandelcomponent/Basisprocessen/issues)
 that might help you. In case you have found a suitable issue and still need clarification, you can write your question
@@ -39,10 +39,10 @@ following steps in advance to help us fix any potential bug as fast as possible:
 - Make sure that you are using the latest version of the process blueprint.
 - Determine if your bug is really a bug and not an error on your side e.g. using incompatible environment
 components/versions (Make sure that you have read the
-[documentation](https://docs.valtimo.nl/valtimo-implementation/process-blueprints). If you are looking for support, you
+[documentation](https://docs.valtimo.nl/valtimo-implementation/exchange/process-blueprints). If you are looking for support, you
 might want to check [this section](#i-have-a-question)).
 - To see if other users have experienced (and potentially already solved) the same issue you are having, check if there
-is not already a bug report existing for your bug or error in the [bug tracker](https://github.com/generiekzaakafhandelcomponent/Basisprocessenissues?q=label%3Abug).
+is not already a bug report existing for your bug or error in the [bug tracker](https://github.com/generiekzaakafhandelcomponent/Basisprocessen/issues?q=label%3Abug).
 - Also make sure to search the internet (including Stack Overflow) to see if users outside the GitHub community have
 discussed the issue.
 - Collect information about the bug:
@@ -85,7 +85,7 @@ maintainers and the community to understand your suggestion and find related sug
 #### Before submitting an enhancement
 
 - Make sure that you are using the latest version of Valtimo.
-- Read the [documentation](https://docs.valtimo.nl/valtimo-implementation/process-blueprints#creating-process-blueprints-for-gzac)
+- Read the [documentation](https://docs.valtimo.nl/valtimo-implementation/exchange/process-blueprints#creating-process-blueprints-for-gzac)
 carefully.
 - Find out if the functionality is already covered.
 - Perform a [search](https://github.com/generiekzaakafhandelcomponent/Basisprocessen/issues) to see if the enhancement
@@ -97,12 +97,12 @@ Enhancement suggestions are tracked as [GitHub issues](https://github.com/generi
 
 - Use a **clear and descriptive title** for the issue to identify the suggestion.
 - Provide a **step-by-step description of the suggested enhancement** in as many details as possible.
-- Follow the instructions as listed [here](https://docs.valtimo.nl/valtimo-implementation/process-blueprints#how-to-import-a-process-blueprint) when
+- Follow the instructions as listed [here](https://docs.valtimo.nl/valtimo-implementation/exchange/process-blueprints#how-to-import-a-process-blueprint) when
 adding a new process blueprint.
 
 ### Adding a new process blueprint
 
-For general guidelines on how to add process blueprints, please see [this page](https://docs.valtimo.nl/valtimo-implementation/process-blueprints#creating-process-blueprints-for-gzac).
+For general guidelines on how to add process blueprints, please see [this page](https://docs.valtimo.nl/valtimo-implementation/exchange/process-blueprints#creating-process-blueprints-for-gzac).
 
 ### Improving the documentation
 
