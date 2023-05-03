@@ -2,9 +2,11 @@
 
 [![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/generiekzaakafhandelcomponent/Basisprocessen/blob/feature/generieke-zaak/README.md)
 
-Process blueprints (or basisprocessen in Dutch) are a collection of files, that form a starting point to kickstart an
-implementation. These often consist of one or more BPMNs, a document definition, forms, as well as less common things
-such as custom front-end and back-end code.
+Process blueprints are a collection of files, that either form a starting point to speed up development for an
+implementation. There are two kinds of blueprints. Process blueprints that directly add value (e.g. a blueprint for City
+Pass applications), and process blueprints that are a part of the bigger picture (e.g. a process on handling change
+requests for a case). These can consist of one or more BPMNs, a document definition, forms, as well as less common
+things such as custom front-end and back-end code.
 
 ## How to import a process blueprint
 
