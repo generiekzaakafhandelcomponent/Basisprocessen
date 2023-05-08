@@ -1,0 +1,44 @@
+{
+  "connector": {
+    "SmartDocuments": {
+      "description": "Een service om documenten te genereren (zoals DOCX of PDF) aan de hand van templates.",
+      "title": "Smart documents"
+    },
+    "WordpressMail": {
+      "description": "Een email service die wordpress gebruikt om templates te vullen.",
+      "title": "Wordpress mail"
+    }
+  },
+  "Connector details": "Koppeling details",
+  "Create new Connector": "Maak nieuwe koppeling",
+  "dossier": {
+    "tabs": {
+      "notice": "Notities"
+    }
+  },
+  "fieldLabels": {
+    "terugbelnotitie": {
+      "backOffice": "In behandeling bij",
+      "customerName": "Naam klant",
+      "customerPhone": "Telefoonnummer klant",
+      "dateCreated": "Datum aangemaakt",
+      "dateDeadline": "Deadline",
+      "hogePrio": "Spoed",
+      "product": "Product",
+      "statusIntern": "Status",
+      "subject": "Onderwerp",
+      "zaakNumber": "Zaaknummer",
+      "zaakStatus": "Zaakstatus"
+    }
+  },
+  "searchFields": {
+    "customerName": "Naam klant",
+    "customerPhone": "Telefoonnummer klant",
+    "product": "Product",
+    "statusIntern": "Status",
+    "subject": "Onderwerp",
+    "zaakNumber": "Zaaknummer",
+    "aanmaker": "Aanmaker",
+    "assigneeFullName": "Behandelaar"
+  }
+}

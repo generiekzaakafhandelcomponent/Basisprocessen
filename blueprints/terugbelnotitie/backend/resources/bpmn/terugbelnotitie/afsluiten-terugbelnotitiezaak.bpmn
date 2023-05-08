@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1ob1y60" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.0.0">
+  <bpmn:collaboration id="Collaboration_0mqr8vm">
+    <bpmn:participant id="AfsluitenTerugbelnotitiezaakParticipant" name="Afsluiten terugbelnotitiezaak" processRef="afsluiten-terugbelnotitie" />
+    <bpmn:participant id="Participant_1kyf4hr" name="Klant" />
+    <bpmn:messageFlow id="Flow_0x7hz13" sourceRef="Activity_1ws7vne" targetRef="Participant_1kyf4hr" />
+  </bpmn:collaboration>
+  <bpmn:process id="afsluiten-terugbelnotitie" name="Afsluiten terugbelnotitiezaak" isExecutable="true">
+    <bpmn:startEvent id="AfsluitenTerugbelnotitieStartEvent">
+      <bpmn:outgoing>Flow_1fihihy</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sendTask id="Activity_1ws7vne" name="Versturen notificatie &#39;terugbelnotitie afgehandeld&#39;" camunda:asyncBefore="true" camunda:asyncAfter="true" camunda:expression="${mailService.sendElementTemplateTaskMail(execution)}">
+      <bpmn:extensionElements>
+        <camunda:properties>
+          <camunda:property name="mailSendTaskFrom" value="noreply@valtimo.nl" />
+          <camunda:property name="mailSendTaskTemplate" value="gemeente-den-haag-contactverzoeken-terugbelnotitie-afgehandeld" />
+          <camunda:property name="mailSendTaskSubject" value="Notificatie terugbelnotitie afgehandeld" />
+          <camunda:property name="mailSendTaskTo" value="${burger}" />
+        </camunda:properties>
+        <camunda:executionListener expression="${execution.setVariable(&#34;burger&#34;,documentVariableDelegate.findValueByJsonPointer(&#34;/klant/contactgegevens/email&#34;,execution))}" event="start" />
+        <camunda:executionListener expression="${execution.setVariable(&#34;oplossing&#34;,documentVariableDelegate.findValueByJsonPointer(&#34;/afhandeling/oplossing&#34;,execution))}" event="start" />
+        <camunda:executionListener expression="${execution.setVariable(&#34;voorletters&#34;,documentVariableDelegate.findValueByJsonPointer(&#34;/klant/contactgegevens/voorletters&#34;,execution))}" event="start" />
+        <camunda:executionListener expression="${execution.setVariable(&#34;achternaam&#34;,documentVariableDelegate.findValueByJsonPointer(&#34;/klant/contactgegevens/achternaam&#34;,execution))}" event="start" />
+        <camunda:executionListener expression="${execution.setVariable(&#34;zaaknummer&#34;,documentVariableDelegate.findValueByJsonPointer(&#34;/openZaak/zaaknummer&#34;,execution))}" event="start" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1fihihy</bpmn:incoming>
+      <bpmn:outgoing>Flow_1j9ocnt</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:sequenceFlow id="Flow_14v8i10" sourceRef="Activity_09nsqxm" targetRef="TerugbelnotitiezaakAfgeslotenEndEvent" />
+    <bpmn:sequenceFlow id="Flow_1fihihy" sourceRef="AfsluitenTerugbelnotitieStartEvent" targetRef="Activity_1ws7vne" />
+    <bpmn:sequenceFlow id="Flow_1t3z3ly" sourceRef="ZetZaakresultaatAfgeslotenTask" targetRef="Activity_09nsqxm" />
+    <bpmn:sequenceFlow id="Flow_1j9ocnt" sourceRef="Activity_1ws7vne" targetRef="ZetZaakresultaatAfgeslotenTask" />
+    <bpmn:dataStoreReference id="OpenZaakDataStoreReference1" name="OpenZaak" />
+    <bpmn:serviceTask id="ZetZaakresultaatAfgeslotenTask" name="Zet zaakresultaat &#39;afgesloten&#39;" camunda:asyncAfter="true" camunda:expression="${openZaakPropertiesService.getOpenZaakResultaat(execution)}">
+      <bpmn:incoming>Flow_1j9ocnt</bpmn:incoming>
+      <bpmn:outgoing>Flow_1t3z3ly</bpmn:outgoing>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_0m2jw2l">
+        <bpmn:targetRef>OpenZaakDataStoreReference1</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_09nsqxm" name="zet status en zaakstatus &#39;afgehandeld&#39;" camunda:asyncAfter="true" camunda:expression="${openZaakPropertiesService.getOpenZaakStatus(execution)}">
+      <bpmn:extensionElements>
+        <camunda:executionListener expression="${terugbelnotitieProcessService.setInterneStatus(execution, &#34;Afgehandeld&#34;)}" event="end" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1t3z3ly</bpmn:incoming>
+      <bpmn:outgoing>Flow_14v8i10</bpmn:outgoing>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_1m1swga">
+        <bpmn:targetRef>DataStoreReference_1qg5x9f</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="TerugbelnotitiezaakAfgeslotenEndEvent" name="terugbelnotitie-zaak afgesloten" camunda:asyncBefore="true">
+      <bpmn:incoming>Flow_14v8i10</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:dataStoreReference id="DataStoreReference_1qg5x9f" name="OpenZaak" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0mqr8vm">
+      <bpmndi:BPMNShape id="Participant_1fzh0y5_di" bpmnElement="AfsluitenTerugbelnotitiezaakParticipant" isHorizontal="true" bioc:stroke="black" bioc:fill="white">
+        <dc:Bounds x="200" y="220" width="710" height="320" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1j9ocnt_di" bpmnElement="Flow_1j9ocnt">
+        <di:waypoint x="460" y="338" />
+        <di:waypoint x="510" y="338" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1t3z3ly_di" bpmnElement="Flow_1t3z3ly">
+        <di:waypoint x="610" y="338" />
+        <di:waypoint x="660" y="338" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1fihihy_di" bpmnElement="Flow_1fihihy">
+        <di:waypoint x="298" y="338" />
+        <di:waypoint x="360" y="338" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_14v8i10_di" bpmnElement="Flow_14v8i10">
+        <di:waypoint x="760" y="338" />
+        <di:waypoint x="822" y="338" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_1llbsyd_di" bpmnElement="AfsluitenTerugbelnotitieStartEvent">
+        <dc:Bounds x="262" y="320" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1ws7vne_di" bpmnElement="Activity_1ws7vne">
+        <dc:Bounds x="360" y="298" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataStoreReference_1a6edd7_di" bpmnElement="OpenZaakDataStoreReference1">
+        <dc:Bounds x="535" y="403" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="534" y="463" width="52" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1rwlpwk_di" bpmnElement="ZetZaakresultaatAfgeslotenTask">
+        <dc:Bounds x="510" y="298" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_09nsqxm_di" bpmnElement="Activity_09nsqxm">
+        <dc:Bounds x="660" y="298" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1f46fr0_di" bpmnElement="TerugbelnotitiezaakAfgeslotenEndEvent">
+        <dc:Bounds x="822" y="320" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="801" y="373" width="78" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataStoreReference_1qg5x9f_di" bpmnElement="DataStoreReference_1qg5x9f">
+        <dc:Bounds x="685" y="403" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="685" y="460" width="52" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_1kyf4hr_di" bpmnElement="Participant_1kyf4hr" isHorizontal="true">
+        <dc:Bounds x="200" y="80" width="710" height="60" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_0m2jw2l_di" bpmnElement="DataOutputAssociation_0m2jw2l">
+        <di:waypoint x="562" y="378" />
+        <di:waypoint x="564" y="403" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_1m1swga_di" bpmnElement="DataOutputAssociation_1m1swga">
+        <di:waypoint x="710" y="378" />
+        <di:waypoint x="710" y="403" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0x7hz13_di" bpmnElement="Flow_0x7hz13">
+        <di:waypoint x="410" y="298" />
+        <di:waypoint x="410" y="140" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

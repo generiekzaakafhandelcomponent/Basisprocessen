@@ -1,0 +1,37 @@
+{
+    "$id": "contactgegevens.schema",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Contactgegevens",
+    "definitions": {
+        "contactgegevens": {
+            "type": "object",
+            "properties": {
+                "voorletters": {
+                    "type": "string",
+                    "description": "Voorletters"
+                },
+                "achternaam": {
+                    "type": "string",
+                    "description": "Achternaam klant"
+                },
+                "naam": {
+                    "type": "string",
+                    "description": "Naam klant"
+                },
+                "email": {
+                    "type": "string",
+                    "description": "E-mailadres klant"
+                },
+                "telefoon": {
+                    "type": "string",
+                    "description": "Telefoonnummer overdag",
+                    "minLength": 10,
+                    "maxLength": 13
+                },
+                "bereikbaarheidNotitie": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

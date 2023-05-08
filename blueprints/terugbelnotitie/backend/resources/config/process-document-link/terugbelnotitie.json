@@ -1,0 +1,27 @@
+[
+    {
+        "processDefinitionKey": "verwerken-terugbelnotitie",
+        "canInitializeDocument": true,
+        "startableByUser": false
+    },
+    {
+        "processDefinitionKey": "wijzigen-terugbelnotitie",
+        "canInitializeDocument": false,
+        "startableByUser": true
+    },
+    {
+        "processDefinitionKey": "afhandel-terugbelnotitie",
+        "canInitializeDocument": false,
+        "startableByUser": false
+    },
+    {
+        "processDefinitionKey": "afsluiten-terugbelnotitie",
+        "canInitializeDocument": false,
+        "startableByUser": false
+    },
+    {
+        "processDefinitionKey": "aanmaken-notitie",
+        "canInitializeDocument": false,
+        "startableByUser": true
+    }
+]

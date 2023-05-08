@@ -1,0 +1,7 @@
+[
+    {
+        "formName": "terugbelnotitie.verwerken-terugbelnotitie.start",
+        "formLinkElementId": "TerugbelnotitieAangemaaktStartEvent",
+        "formAssociationType": "start-event"
+    }
+]

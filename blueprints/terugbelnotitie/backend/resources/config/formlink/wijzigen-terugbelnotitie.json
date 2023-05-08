@@ -1,0 +1,7 @@
+[
+    {
+        "formName": "terugbelnotitie.doorvoeren-wijziging-terugbelnotitie.start",
+        "formLinkElementId": "WijzigingTBNStartEvent",
+        "formAssociationType": "start-event"
+    }
+]

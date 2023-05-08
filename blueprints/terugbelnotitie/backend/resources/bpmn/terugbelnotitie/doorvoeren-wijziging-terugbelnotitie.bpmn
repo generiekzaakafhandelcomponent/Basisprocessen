@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.0.0" camunda:diagramRelationId="5560846a-92cc-4022-94b6-5c2eeab1b6ec">
+  <bpmn:collaboration id="Collaboration_0hik299">
+    <bpmn:participant id="KlantBuitenHetSysteemParticipant" name="Klant (buiten het systeem)" />
+    <bpmn:participant id="DoorvoerenWijzigingTerugbelnotitieParticipant" name="Doorvoeren wijziging terugbelnotitie" processRef="wijzigen-terugbelnotitie" />
+    <bpmn:messageFlow id="OntvangstbevestigingMessageFlow" name="ontvangst-bevestiging" sourceRef="VersturenOntvangstBevestigingTask" targetRef="KlantBuitenHetSysteemParticipant" />
+    <bpmn:messageFlow id="WijzigingTBNMessageFlow" name="Wijziging terugbelnotitie" sourceRef="KlantBuitenHetSysteemParticipant" targetRef="WijzigingTBNStartEvent" />
+  </bpmn:collaboration>
+  <bpmn:process id="wijzigen-terugbelnotitie" name="Doorvoeren wijziging terugbelnotitie" isExecutable="true">
+    <bpmn:sequenceFlow id="Flow_0iu5slt" sourceRef="WijzigingTBNStartEvent" targetRef="VersturenOntvangstBevestigingTask" />
+    <bpmn:sendTask id="VersturenOntvangstBevestigingTask" name="versturen ontvangst bevestiging" camunda:asyncBefore="true" camunda:asyncAfter="true" camunda:expression="${mailService.sendElementTemplateTaskMail(execution)}">
+      <bpmn:extensionElements>
+        <camunda:executionListener expression="${execution.setVariable(&#34;zaaknummer&#34;,documentVariableDelegate.findValueByJsonPointer(&#34;/openZaak/zaaknummer&#34;,execution))}" event="start" />
+        <camunda:executionListener expression="${execution.setVariable(&#34;email&#34;,documentVariableDelegate.findValueByJsonPointer(&#34;/klant/contactgegevens/email&#34;,execution))}" event="start" />
+        <camunda:executionListener expression="${execution.setVariable(&#34;voorletters&#34;,documentVariableDelegate.findValueByJsonPointer(&#34;/klant/contactgegevens/voorletters&#34;,execution))}" event="start" />
+        <camunda:executionListener expression="${execution.setVariable(&#34;achternaam&#34;,documentVariableDelegate.findValueByJsonPointer(&#34;/klant/contactgegevens/achternaam&#34;,execution))}" event="start" />
+        <camunda:properties>
+          <camunda:property name="mailSendTaskFrom" value="noreply@valtimo.nl" />
+          <camunda:property name="mailSendTaskTemplate" value="gemeente-den-haag-dwt-ontvangstbevestiging" />
+          <camunda:property name="mailSendTaskSubject" value="Ontvangstbevestiging" />
+          <camunda:property name="mailSendTaskTo" value="${email}" />
+        </camunda:properties>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0iu5slt</bpmn:incoming>
+      <bpmn:outgoing>Flow_0fpgpba</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:endEvent id="WijzigingTBNDoorgevoerdEndEvent" name="Wijziging terugbelnotitie doorgevoerd">
+      <bpmn:incoming>Flow_0fpgpba</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0fpgpba" sourceRef="VersturenOntvangstBevestigingTask" targetRef="WijzigingTBNDoorgevoerdEndEvent" />
+    <bpmn:startEvent id="WijzigingTBNStartEvent" name="wijziging terugbelnotitie ontvangen">
+      <bpmn:extensionElements />
+      <bpmn:outgoing>Flow_0iu5slt</bpmn:outgoing>
+    </bpmn:startEvent>
+  </bpmn:process>
+  <bpmn:message id="Message_1rtdyhm" name="Message_0tu5n3qfaefffdf" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0hik299">
+      <bpmndi:BPMNShape id="Participant_036k5qa_di" bpmnElement="KlantBuitenHetSysteemParticipant" isHorizontal="true">
+        <dc:Bounds x="160" y="80" width="590" height="60" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_0jv0a44_di" bpmnElement="DoorvoerenWijzigingTerugbelnotitieParticipant" isHorizontal="true">
+        <dc:Bounds x="160" y="220" width="590" height="340" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0fpgpba_di" bpmnElement="Flow_0fpgpba">
+        <di:waypoint x="500" y="390" />
+        <di:waypoint x="612" y="390" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0iu5slt_di" bpmnElement="Flow_0iu5slt">
+        <di:waypoint x="298" y="390" />
+        <di:waypoint x="400" y="390" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Activity_00vhk8b_di" bpmnElement="VersturenOntvangstBevestigingTask">
+        <dc:Bounds x="400" y="350" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_08tjr8d_di" bpmnElement="WijzigingTBNDoorgevoerdEndEvent">
+        <dc:Bounds x="612" y="372" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="596" y="415" width="70" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0g6uu3t_di" bpmnElement="WijzigingTBNStartEvent">
+        <dc:Bounds x="262" y="372" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="246" y="415" width="70" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0q08vdo_di" bpmnElement="OntvangstbevestigingMessageFlow">
+        <di:waypoint x="450" y="350" />
+        <di:waypoint x="450" y="140" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="422" y="170" width="56" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1hu2laf_di" bpmnElement="WijzigingTBNMessageFlow">
+        <di:waypoint x="280" y="140" />
+        <di:waypoint x="280" y="372" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="246" y="170" width="70" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

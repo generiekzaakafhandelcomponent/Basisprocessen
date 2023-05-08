@@ -1,0 +1,34 @@
+{
+  "connector": {
+    "SmartDocuments": {
+      "description": "Ein Dienst zum Generieren von Dokumenten (z. B. DOCX oder PDF) mithilfe von Vorlagen.",
+      "title": "Smart documents"
+    },
+    "WordpressMail": {
+      "description": "Ein E-Mail-Dienst, der WordPress zum Ausfüllen von Vorlagen verwendet.",
+      "title": "Wordpress mail"
+    }
+  },
+  "Connector details": "Linkdetails",
+  "Create new Connector": "Neuen Link erstellen",
+  "dossier": {
+    "tabs": {
+      "notice": "Anmerkungen"
+    }
+  },
+  "fieldLabels": {
+    "terugbelnotitie": {
+      "backOffice": "In Behandlung bei",
+      "customerName": "Kundenname",
+      "customerPhone": "Telefonnummer des Kunden",
+      "dateCreated": "Datum erstellt",
+      "dateDeadline": "Termin",
+      "hogePrio": "Geschwindigkeit",
+      "product": "Produkt",
+      "statusIntern": "Status",
+      "subject": "Thema",
+      "zaakNumber": "Fallnummer",
+      "zaakStatus": "Fallstatus"
+    }
+  }
+}
