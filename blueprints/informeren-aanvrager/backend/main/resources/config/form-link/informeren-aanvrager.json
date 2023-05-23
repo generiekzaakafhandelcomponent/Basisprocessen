@@ -1,0 +1,7 @@
+[
+    {
+        "formName": "informeren-aanvrager.afdrukken-brief",
+        "formLinkElementId": "AfdrukkenBriefTask",
+        "formAssociationType": "user-task"
+    }
+]

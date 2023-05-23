@@ -1,0 +1,29 @@
+{
+    "$id": "aanvraag.schema",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Aanvraag",
+    "type": "object",
+    "additionalProperties": true,
+    "properties": {
+        "datumAanvraagOntvangen": {
+            "type": "string"
+        },
+        "aanvrager": {
+            "anyOf": [
+                {
+                    "$ref": "persoonsgegevens.schema.json#/definitions/persoonsgegevens"
+                },
+                {
+                    "$ref": "contactgegevens.schema.json#/definitions/contactgegevens"
+                },
+                {
+                    "$ref": "adres.schema.json#/definitions/adresgegevens"
+                }
+            ]
+        },
+        "communicatievoorkeur": {
+            "type": "string"
+        }
+    },
+    "definitions": {}
+}
