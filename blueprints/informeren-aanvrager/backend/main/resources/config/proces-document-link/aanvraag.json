@@ -1,0 +1,7 @@
+[
+    {
+        "processDefinitionKey": "informeren-aanvrager",
+        "canInitializeDocument": false,
+        "startableByUser": false
+    }
+]
