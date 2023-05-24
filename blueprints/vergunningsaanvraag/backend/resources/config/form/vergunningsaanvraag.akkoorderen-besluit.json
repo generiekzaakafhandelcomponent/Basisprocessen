@@ -1,0 +1,44 @@
+{
+    "display": "form",
+    "components": [
+        {
+            "label": "HTML",
+            "tag": "div",
+            "content": "<h4>Akkoorderen besluit</h4>",
+            "refreshOnChange": false,
+            "key": "html",
+            "type": "htmlelement",
+            "input": false,
+            "tableView": false
+        },
+        {
+            "label": "Akkoord met besluit?",
+            "optionsLabelPosition": "right",
+            "inline": false,
+            "tableView": false,
+            "values": [
+                {
+                    "label": "Ja",
+                    "value": "true",
+                    "shortcut": ""
+                },
+                {
+                    "label": "Nee",
+                    "value": "false",
+                    "shortcut": ""
+                }
+            ],
+            "key": "aanvraag.isBesluitAkkoord",
+            "type": "radio",
+            "input": true
+        },
+        {
+            "type": "button",
+            "label": "Doorgaan",
+            "key": "submit",
+            "disableOnInvalid": true,
+            "input": true,
+            "tableView": false
+        }
+    ]
+}

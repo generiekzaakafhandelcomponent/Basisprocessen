@@ -1,0 +1,8 @@
+[
+    {
+        "processDefinitionKey": "Vergunningsaanvraag",
+        "canInitializeDocument": true,
+        "startableByUser": false,
+        "processIsVisibleInMenu": true
+    }
+]

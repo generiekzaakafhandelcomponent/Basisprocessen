@@ -1,0 +1,102 @@
+{
+    "$id": "vergunningsaanvraag.schema",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Vergunningsaanvraag",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "aanvrager": {
+            "type": "object",
+            "properties": {
+                "contactgevens": {
+                    "type": "object",
+                    "$ref": "#/definitions/contactgegevens"
+                },
+                "adres": {
+                    "type": "object",
+                    "$ref": "#/definitions/adres"
+                }
+            }
+        },
+        "aanvraag" : {
+            "type": "object",
+            "properties": {
+                "typeAanvraag": {
+                    "type": "string"
+                },
+                "ingangsdatumVergunning": {
+                    "type": "string"
+                },
+                "kenteken": {
+                    "type": "string"
+                },
+                "isAanvraagVolledig": {
+                    "type": "boolean"
+                },
+                "isBesluitAkkoord": {
+                    "type": "boolean"
+                },
+                "isVergunningVerleend": {
+                    "type": "boolean"
+                }
+            }
+        }
+    },
+    "definitions": {
+        "contactgegevens": {
+            "type": "object",
+            "properties": {
+                "voornaam": {
+                    "type": "string",
+                    "description": "First name"
+                },
+                "tussenvoegsel": {
+                    "type": "string",
+                    "description": "Tussenvoegsel"
+                },
+                "achternaam": {
+                    "type": "string",
+                    "description": "Surname"
+                },
+                "telefoonnummer": {
+                    "type": "string",
+                    "description": "Phone number",
+                    "minLength": 10
+                },
+                "emailadres": {
+                    "type": "string",
+                    "description": "Emailaddress"
+                }
+            }
+        },
+        "adres": {
+            "type": "object",
+            "properties": {
+                "straat": {
+                    "type": "string",
+                    "description": "Straat"
+                },
+                "huisnummer": {
+                    "type": "number",
+                    "description": "Huisnummer"
+                },
+                "huisletter": {
+                    "type": "string",
+                    "description": "Huisletter"
+                },
+                "huisnummertoevoeging": {
+                    "type": "string",
+                    "description": "Huisnummertoevoeging"
+                },
+                "postcode": {
+                    "type": "string",
+                    "description": "Postcode"
+                },
+                "woonplaats": {
+                    "type": "string",
+                    "description": "Woonplaats"
+                }
+            }
+        }
+    }
+}
