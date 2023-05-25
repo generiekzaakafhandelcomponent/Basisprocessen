@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1j83zcz" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.0.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+  <bpmn:collaboration id="Collaboration_0mepv0m">
+    <bpmn:participant id="AanmakenNotitieParticipant" name="AanmakenNotitie" processRef="aanmaken-notitie" />
+  </bpmn:collaboration>
+  <bpmn:process id="aanmaken-notitie" name="Aanmaken notitie" isExecutable="true">
+    <bpmn:laneSet id="LaneSet_0ceup59">
+      <bpmn:lane id="MedewerkerLane" name="Medewerker ">
+        <bpmn:flowNodeRef>VastleggenNotitieStartEvent</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_1q2k3i9</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:sequenceFlow id="Flow_1wgv2q2" sourceRef="VastleggenNotitieStartEvent" targetRef="Event_1q2k3i9" />
+    <bpmn:startEvent id="VastleggenNotitieStartEvent" name="Vastleggen notitie">
+      <bpmn:outgoing>Flow_1wgv2q2</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="Event_1q2k3i9" name="Notitie vastgelegd">
+      <bpmn:incoming>Flow_1wgv2q2</bpmn:incoming>
+    </bpmn:endEvent>
+  </bpmn:process>
+  <bpmn:message id="Message_0ty2yuo" name="Message_0b12cjo" />
+  <bpmn:message id="Message_18hdx46" name="Message_32nkcjg" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0mepv0m">
+      <bpmndi:BPMNShape id="Participant_0d72joi_di" bpmnElement="AanmakenNotitieParticipant" isHorizontal="true" bioc:stroke="black" bioc:fill="white">
+        <dc:Bounds x="120" y="70" width="370" height="258" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_0hq3uqm_di" bpmnElement="MedewerkerLane" isHorizontal="true" bioc:stroke="black" bioc:fill="white">
+        <dc:Bounds x="150" y="70" width="340" height="258" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1wgv2q2_di" bpmnElement="Flow_1wgv2q2">
+        <di:waypoint x="269" y="201" />
+        <di:waypoint x="382" y="201" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_0alljxd_di" bpmnElement="VastleggenNotitieStartEvent">
+        <dc:Bounds x="233" y="183" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="208" y="226" width="87" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1q2k3i9_di" bpmnElement="Event_1q2k3i9">
+        <dc:Bounds x="382" y="183" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="357" y="226" width="88" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

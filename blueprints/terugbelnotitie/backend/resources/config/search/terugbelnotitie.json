@@ -1,0 +1,76 @@
+{
+    "searchFields": [
+        {
+            "key": "zaakNumber",
+            "path": "doc:openZaak.zaaknummer",
+            "dataType": "text",
+            "fieldType": "single",
+            "matchType": "like",
+            "title": null
+        },
+        {
+            "key": "customerPhone",
+            "path": "doc:klant.contactgegevens.telefoon",
+            "dataType": "text",
+            "fieldType": "single",
+            "matchType": "like",
+            "title": null
+        },
+        {
+            "key": "customerName",
+            "path": "doc:klant.contactgegevens.naam",
+            "dataType": "text",
+            "fieldType": "single",
+            "matchType": "like",
+            "title": null
+        },
+        {
+            "key": "product",
+            "path": "doc:afhandeling.product",
+            "dataType": "text",
+            "fieldType": "single",
+            "matchType": "like",
+            "title": null
+        },
+        {
+            "key": "subject",
+            "path": "doc:klantVraag.onderwerp",
+            "dataType": "text",
+            "fieldType": "single",
+            "matchType": "like",
+            "title": null
+        },
+        {
+            "key": "statusIntern",
+            "path": "doc:interneStatus",
+            "dataType": "text",
+            "fieldType": "single",
+            "matchType": "like",
+            "title": null
+        },
+        {
+            "key": "aanmaker",
+            "path": "doc:caseMetadata.aangemaaktDoor",
+            "dataType": "text",
+            "fieldType": "single",
+            "matchType": "like",
+            "title": null
+        },
+        {
+            "key": "assigneeFullName",
+            "path": "case:assigneeFullName",
+            "dataType": "text",
+            "fieldType": "single",
+            "matchType": "like",
+            "title": null
+        },
+        {
+            "key": "backOffice",
+            "path": "doc:afhandeling.afhandelaar.backOffice.naam",
+            "dataType": "text",
+            "fieldType": "multiple",
+            "matchType": "exact",
+            "title": "Back office"
+        }
+    ]
+}

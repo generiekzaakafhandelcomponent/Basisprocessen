@@ -1,0 +1,18 @@
+  <ng-container *ngIf="document?.content?.notities?.length > 0 ; else empty">
+    <section *ngFor="let notitie of document?.content?.notities.slice().reverse()">
+      <dl class="row border p-2" >
+        <dl class="row col-12">
+          <dd class="col-6">Aangemaakt door</dd>
+          <dt class="col-6">{{ notitie.aangemaaktDoor || '-'}}</dt>
+          <dd class="col-6">Datum en tijd</dd>
+          <dt class="col-6">{{ notitie.datum | date:'MMMM d, y, HH:mm:ss' || '-'}}</dt>
+          <dd class="col-6">Notitie</dd>
+          <dt class="col-6">{{ notitie.notitie || '-'}}</dt>
+        </dl>
+      </dl>
+    </section>
+  </ng-container>
+
+<ng-template #empty>
+  <p>Er zijn nog geen notities</p>
+</ng-template>

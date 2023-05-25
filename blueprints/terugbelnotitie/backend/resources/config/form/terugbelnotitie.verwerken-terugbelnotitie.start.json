@@ -1,0 +1,379 @@
+{
+    "components": [
+        {
+            "title": "Blok 1",
+            "hideLabel": true,
+            "collapsible": false,
+            "key": "blok1",
+            "type": "panel",
+            "label": "Panel",
+            "input": false,
+            "tableView": false,
+            "components": [
+                {
+                    "label": "HTML",
+                    "content": "<div class=\"visible-for-client-alert\">Let op! Onderstaande informatie is ook zichtbaar voor de klant!</div>",
+                    "refreshOnChange": false,
+                    "key": "html",
+                    "type": "htmlelement",
+                    "input": false,
+                    "tableView": false
+                },
+                {
+                    "label": "Onderwerp",
+                    "customClass": "visible-for-client",
+                    "tableView": true,
+                    "key": "klantVraag.onderwerp",
+                    "type": "textfield",
+                    "validate": {
+                        "required": true
+                    },
+                    "input": true
+                },
+                {
+                    "label": "Vraag van de klant",
+                    "customClass": "visible-for-client",
+                    "tableView": true,
+                    "key": "klantVraag.vraag",
+                    "type": "textarea",
+                    "validate": {
+                        "required": true
+                    },
+                    "autoExpand": true,
+                    "input": true
+                },
+                {
+                    "label": "Voorletters",
+                    "customClass": "visible-for-client",
+                    "tableView": true,
+                    "key": "klant.contactgegevens.voorletters",
+                    "type": "textfield",
+                    "validate": {
+                        "required": true
+                    },
+                    "input": true
+                },
+                {
+                    "label": "Achternaam",
+                    "customClass": "visible-for-client",
+                    "tableView": true,
+                    "key": "klant.contactgegevens.achternaam",
+                    "type": "textfield",
+                    "validate": {
+                        "required": true
+                    },
+                    "input": true
+                },
+                {
+                    "label": "E-mailadres",
+                    "customClass": "visible-for-client",
+                    "tableView": true,
+                    "key": "klant.contactgegevens.email",
+                    "type": "email",
+                    "validate": {
+                        "required": true
+                    },
+                    "input": true
+                },
+                {
+                    "label": "Telefoonnummer",
+                    "customClass": "visible-for-client",
+                    "tableView": true,
+                    "key": "klant.contactgegevens.telefoon",
+                    "type": "phoneNumber",
+                    "input": true,
+                    "validateOn": "blur",
+                    "validate": {
+                        "required": true,
+                        "customMessage": "Voer een geldig telefoonnummer in"
+                    },
+                    "inputMask": "9999999999"
+                },
+                {
+                    "label": "Ruimte voor notities (bijv. buitenlands telefoonnummer, bereikbaarheid klant of Engelssprekend)",
+                    "customClass": "visible-for-client",
+                    "tableView": true,
+                    "key": "klant.contactgegevens.bereikbaarheidNotitie",
+                    "type": "textarea",
+                    "input": true
+                },
+                {
+                    "label": "Geboortedatum",
+                    "customClass": "visible-for-client",
+                    "format": "dd-MM-yyyy",
+                    "tableView": false,
+                    "enableMinDateInput": false,
+                    "datePicker": {
+                        "disableWeekends": false,
+                        "disableWeekdays": false
+                    },
+                    "enableMaxDateInput": false,
+                    "enableTime": false,
+                    "key": "klant.geboortedatum",
+                    "type": "datetime",
+                    "validate": {
+                        "required": true
+                    },
+                    "input": true,
+                    "widget": {
+                        "type": "calendar",
+                        "displayInTimezone": "viewer",
+                        "locale": "en",
+                        "useLocaleSettings": false,
+                        "allowInput": true,
+                        "mode": "single",
+                        "enableTime": false,
+                        "noCalendar": false,
+                        "format": "dd-MM-yyyy",
+                        "hourIncrement": 1,
+                        "minuteIncrement": 1,
+                        "time_24hr": true,
+                        "minDate": null,
+                        "disableWeekends": false,
+                        "disableWeekdays": false,
+                        "maxDate": null
+                    }
+                },
+                {
+                    "label": "Kenmerk",
+                    "customClass": "visible-for-client",
+                    "tableView": true,
+                    "key": "caseMetadata.kenmerk",
+                    "type": "textarea",
+                    "input": true
+                },
+                {
+                    "label": "Straat + huisnummer",
+                    "customClass": "visible-for-client",
+                    "tableView": true,
+                    "key": "klant.adres.adres",
+                    "type": "textfield",
+                    "input": true
+                },
+                {
+                    "label": "Postcode",
+                    "customClass": "visible-for-client",
+                    "tableView": true,
+                    "key": "klant.adres.postcode",
+                    "type": "textfield",
+                    "inputMask": "9999 AA",
+                    "input": true
+                }
+            ]
+        },
+        {
+            "title": "Blok 2",
+            "hideLabel": true,
+            "collapsible": false,
+            "key": "blok2",
+            "type": "panel",
+            "label": "Panel",
+            "input": false,
+            "tableView": false,
+            "components": [
+                {
+                    "label": "HTML",
+                    "content": "<div class=\"not-visible-for-client-alert\">Onderstaande informatie is alleen voor intern gebruik</div>",
+                    "refreshOnChange": false,
+                    "key": "html",
+                    "type": "htmlelement",
+                    "input": false,
+                    "tableView": false
+                },
+                {
+                    "label": "Datum aangemaakt",
+                    "format": "dd-MM-yyyy HH:mm",
+                    "defaultDate": "moment()",
+                    "disabled": true,
+                    "tableView": false,
+                    "enableMinDateInput": false,
+                    "datePicker": {
+                        "disableWeekends": false,
+                        "disableWeekdays": false
+                    },
+                    "enableMaxDateInput": false,
+                    "timePicker": {
+                        "showMeridian": false
+                    },
+                    "key": "caseMetadata.datumAangemaakt",
+                    "type": "datetime",
+                    "input": true,
+                    "widget": {
+                        "type": "calendar",
+                        "displayInTimezone": "viewer",
+                        "locale": "en",
+                        "useLocaleSettings": false,
+                        "allowInput": true,
+                        "mode": "single",
+                        "enableTime": true,
+                        "noCalendar": false,
+                        "format": "YYYY-MM-DD",
+                        "hourIncrement": 1,
+                        "minuteIncrement": 1,
+                        "time_24hr": true,
+                        "minDate": null,
+                        "disableWeekends": false,
+                        "disableWeekdays": false,
+                        "maxDate": null
+                    }
+                },
+                {
+                    "label": "Datum uiterlijke beantwoording TBN",
+                    "format": "dd-MM-yyyy HH:mm",
+                    "tableView": false,
+                    "enableMinDateInput": false,
+                    "datePicker": {
+                        "disableWeekends": false,
+                        "disableWeekdays": false
+                    },
+                    "enableMaxDateInput": false,
+                    "timePicker": {
+                        "showMeridian": false
+                    },
+                    "key": "caseMetadata.datumUiterste",
+                    "type": "datetime",
+                    "input": true,
+                    "widget": {
+                        "type": "calendar",
+                        "displayInTimezone": "viewer",
+                        "locale": "en",
+                        "useLocaleSettings": false,
+                        "allowInput": true,
+                        "mode": "single",
+                        "enableTime": true,
+                        "noCalendar": false,
+                        "format": "YYYY-MM-DD",
+                        "hourIncrement": 1,
+                        "minuteIncrement": 1,
+                        "time_24hr": true,
+                        "minDate": null,
+                        "disableWeekends": false,
+                        "disableWeekdays": false,
+                        "maxDate": null
+                    },
+                    "customDefaultValue": "var datumAangemaakt = data.caseMetadata.datumAangemaakt; var datumUiterlijkeBeantwoording = moment(datumAangemaakt).add(7, 'days').format('DD-MM-YYYY'); var tijdUiterlijkeBeantwoording = '17:00'; value = moment(datumUiterlijkeBeantwoording + ' ' + tijdUiterlijkeBeantwoording, 'DD-MM-YYYY HH:mm');"
+                },
+                {
+                    "label": "Spoed",
+                    "tableView": false,
+                    "defaultValue": false,
+                    "key": "prio.hogePrio",
+                    "type": "checkbox",
+                    "input": true
+                },
+                {
+                    "label": "Hoge prio emoji",
+                    "customClass": "d-none",
+                    "tableView": true,
+                    "redrawOn": "data",
+                    "key": "prio.hogePrioEmoji",
+                    "type": "textfield",
+                    "input": true,
+                    "calculateValue": "data.prio.hogePrio ? value = '❗️❗️❗️' : value = ' '"
+                },
+                {
+                    "label": "Product",
+                    "tableView": true,
+                    "defaultValue": "AKTES",
+                    "data": {
+                        "values": [
+                            {
+                                "label": "Aktes",
+                                "value": "AKTES"
+                            },
+                            {
+                                "label": "Uittreksels/Verklaringen",
+                                "value": "UITTREKSELS_VERKLARINGEN"
+                            },
+                            {
+                                "label": "Schriftelijke en digitale aanvragen (verhuizingen)",
+                                "value": "SCHRIFTELIJKE_EN_DIGITALE_AANVRAGEN_VERHUIZINGEN"
+                            },
+                            {
+                                "label": "14070 Senioren",
+                                "value": "14070_SENIOREN"
+                            },
+                            {
+                                "label": "Parkeervergunning Bewoners",
+                                "value": "PARKEERVERGUNNING_BEWONERS"
+                            },
+                            {
+                                "label": "Parkeervergunning Bezoekers",
+                                "value": "PARKEERVERGUNNING_BEZOEKERS"
+                            },
+                            {
+                                "label": "Parkeervergunning Bedrijven",
+                                "value": "PARKEERVERGUNNING_BEDRIJVEN"
+                            },
+                            {
+                                "label": "Parkeervergunning Gehandicapten",
+                                "value": "PARKEERVERGUNNING_GEHANDICAPTEN"
+                            },
+                            {
+                                "label": "Gehandicaptenparkeerkaart",
+                                "value": "GEHANDICAPTENPARKEERKAART"
+                            },
+                            {
+                                "label": "Gehandicaptenparkeerplaats",
+                                "value": "GEHANDICAPTENPARKEERPLAATS"
+                            }
+                        ]
+                    },
+                    "validate": {
+                        "required": true
+                    },
+                    "key": "afhandeling.product",
+                    "type": "select",
+                    "input": true
+                },
+                {
+                    "label": "Backoffice",
+                    "widget": "choicesjs",
+                    "tableView": true,
+                    "disabled": true,
+                    "data": {
+                        "values": [
+                            {
+                                "label": "Unit beheer en verstrekkingen",
+                                "value": "UNIT_BEHEER_EN_VERSTREKKINGEN"
+                            },
+                            {
+                                "label": "14070 Senioren",
+                                "value": "14070_SENIOREN"
+                            },
+                            {
+                                "label": "Parkeren",
+                                "value": "PARKEREN"
+                            }
+                        ]
+                    },
+                    "calculateValue": "var product = data.afhandeling?.product; product === '14070_SENIOREN' ? value = '14070_SENIOREN' : product === 'AKTES'  || product === 'UITTREKSELS_VERKLARINGEN'  || product === 'SCHRIFTELIJKE_EN_DIGITALE_AANVRAGEN_VERHUIZINGEN' ? value = 'UNIT_BEHEER_EN_VERSTREKKINGEN' : value = 'PARKEREN';",
+                    "validate": {
+                        "required": true
+                    },
+                    "key": "afhandeling.afhandelaar.backOffice.naam",
+                    "type": "select",
+                    "input": true
+                }
+            ]
+        },
+        {
+            "label": "naam",
+            "customClass": "d-none",
+            "tableView": true,
+            "key": "klant.contactgegevens.naam",
+            "calculateValue": "value = data.klant.contactgegevens.voorletters +' '+ data.klant.contactgegevens.achternaam",
+            "type": "textfield",
+            "input": true
+        },
+        {
+            "type": "button",
+            "label": "Verzenden",
+            "disableOnInvalid": true,
+            "input": true,
+            "tableView": false,
+            "action": "custom",
+            "custom": "component.disabled = true; form.submit();"
+        }
+    ]
+}

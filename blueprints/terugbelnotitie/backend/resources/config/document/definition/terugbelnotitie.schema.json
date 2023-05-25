@@ -1,0 +1,246 @@
+{
+    "$id": "terugbelnotitie.schema",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Terugbelnotitie",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "klant": {
+            "type": "object",
+            "description": "Klant",
+            "$ref": "#/definitions/klant"
+        },
+        "klantFeedback": {
+            "type": "object",
+            "$ref": "#/definitions/klantFeedback"
+        },
+        "openZaak": {
+            "type": "object",
+            "description": "OpenZaak",
+            "$ref": "#/definitions/openZaak"
+        },
+        "klantVraag": {
+            "type": "object",
+            "description": "Klant vraag",
+            "$ref": "#/definitions/klantVraag"
+        },
+        "caseMetadata": {
+            "type": "object",
+            "description": "Metadata",
+            "$ref": "#/definitions/caseMetadata"
+        },
+        "afhandeling": {
+            "type": "object",
+            "description": "Afhandeling",
+            "$ref": "#/definitions/afhandeling"
+        },
+        "proces": {
+            "type": "object",
+            "description": "Variablen die nodig zijn voor gateways binnen proces",
+            "$ref": "#/definitions/proces"
+        },
+        "interneStatus": {
+            "type": "string",
+            "description": "Interne status"
+        },
+        "prio": {
+            "type": "object",
+            "description": "Prio",
+            "$ref": "#/definitions/prio"
+        },
+        "aanvullendeInformatie": {
+            "type": "object",
+            "description": "Aanvullende informatie",
+            "$ref": "#/definitions/aanvullendeInformatie"
+        },
+        "notities": {
+            "type": "array",
+            "items": {
+                "$ref": "notitie.schema.json"
+            }
+        }
+    },
+    "definitions": {
+        "datum": {
+            "type": "string",
+            "description": "datum"
+        },
+        "backOffice": {
+            "type": "object",
+            "description": "Backoffice",
+            "properties": {
+                "naam": {
+                    "type": "string",
+                    "description": "Backoffice"
+                }
+            }
+        },
+        "toelichtingInfo": {
+            "type": "object",
+            "description": "Toelichting agent object",
+            "properties": {
+                "toelichting": {
+                    "type": "string"
+                },
+                "timestamp": {
+                    "type": "string"
+                },
+                "gebruiker": {
+                    "type": "string"
+                }
+            }
+        },
+        "klant": {
+            "type": "object",
+            "description": "Klant",
+            "properties": {
+                "contactgegevens": {
+                    "type": "object",
+                    "description": "Contactgegevens",
+                    "$ref": "contactgegevens.schema.json"
+                },
+                "adres": {
+                    "type": "object",
+                    "description": "Adres",
+                    "$ref": "adres.schema.json"
+                },
+                "geboortedatum": {
+                    "type": "string"
+                }
+            }
+        },
+        "klantFeedback": {
+            "type": "object",
+            "properties": {
+                "klantReactie": {
+                    "type": "string",
+                    "description": "Klant reactie op de gestelde vraag"
+                }
+            }
+        },
+        "klantVraag": {
+            "type": "object",
+            "properties": {
+                "onderwerp": {
+                    "type": "string",
+                    "description": "Onderwerp"
+                },
+                "vraag": {
+                    "type": "string",
+                    "description": "Vraag van de klant"
+                },
+                "gewijzigdeVraag": {
+                    "type": "string",
+                    "description": "Gewijzigde vraag van de klant"
+                }
+            }
+        },
+        "openZaak": {
+            "type": "object",
+            "description": "OpenZaak",
+            "$ref": "openZaak.schema.json"
+        },
+        "caseMetadata": {
+            "type": "object",
+            "properties": {
+                "kenmerk": {
+                    "type": "string"
+                },
+                "datumAangemaakt": {
+                    "description": "Datum aangemaakt",
+                    "$ref": "#/definitions/datum"
+                },
+                "aangemaaktDoor": {
+                    "type": "string",
+                    "description": "Aangemaakt door"
+                },
+                "datumUiterste": {
+                    "description": "Datum uiterlijke beantwoording TBN",
+                    "$ref": "#/definitions/datum"
+                },
+                "datumAfgehandeld": {
+                    "description": "Datum afgehandeld",
+                    "$ref": "#/definitions/datum"
+                }
+            }
+        },
+        "afhandeling": {
+            "type": "object",
+            "properties": {
+                "product": {
+                    "type": "string"
+                },
+                "oplossing": {
+                    "type": "string",
+                    "description": "Oplossing"
+                },
+                "afhandelenOptie": {
+                    "type": "string",
+                    "description": "Afhandelen optie"
+                },
+                "toelichtingMedewerker": {
+                    "type": "array",
+                    "description": "Toelichting",
+                    "items": {
+                        "$ref": "#/definitions/toelichtingInfo"
+                    }
+                },
+                "afhandelaar": {
+                    "type": "object",
+                    "description": "Afhandelaar",
+                    "$ref": "#/definitions/afhandelaar"
+                }
+            }
+        },
+        "afhandelaar": {
+            "backOffice": {
+                "type": "object",
+                "description": "Backoffice",
+                "$ref": "#/definitions/backOffice"
+            },
+            "afgehandeldDoor": {
+                "type": "string",
+                "description": "Afgehandeld door"
+            }
+        },
+        "aanvullendeInformatie": {
+            "type": "object",
+            "properties": {
+                "informatieIngevoerdDoor": {
+                    "type": "string",
+                    "description": "Informatie ingevoerd door"
+                },
+                "datumInformatieIngevoerd": {
+                    "description": "Informatie ingevoerd op",
+                    "$ref": "#/definitions/datum"
+                }
+            }
+        },
+        "proces": {
+            "type": "object",
+            "description": "Variablen die nodig zijn voor gateways binnen proces",
+            "properties": {
+                "nietMogelijkExpertTeBepalen": {
+                    "type": "boolean",
+                    "description": "Niet mogelijk Backoffice te bepalen"
+                },
+                "juisteBackofficeBekend": {
+                    "type": "boolean",
+                    "description": "Juiste Backoffice bekend?"
+                }
+            }
+        },
+        "prio": {
+            "type": "object",
+            "properties": {
+                "hogePrio": {
+                    "type": "boolean"
+                },
+                "hogePrioEmoji": {
+                    "type": "string",
+                    "description": "This string will be shown in the case overview in the 'hoge prio' column"
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,44 @@
+{
+  "connector": {
+    "WordpressMail": {
+      "title": "Wordpress mail",
+      "description": "An email service using wordpress to fill email templates."
+    },
+    "SmartDocuments": {
+      "title": "Smart documents",
+      "description": "A service to create documents (like DOCX or PDF) using templates"
+    }
+  },
+  "Connector details": "Connector details",
+  "Create new Connector": "Create new connection",
+  "dossier": {
+    "tabs": {
+      "notice": "Notices"
+    }
+  },
+  "fieldLabels": {
+    "terugbelnotitie": {
+      "backOffice": "Pending at",
+      "customerName": "Customer name",
+      "customerPhone": "Customer phone number",
+      "dateCreated": "Date created",
+      "dateDeadline": "Deadline",
+      "hogePrio": "Urgent",
+      "product": "Product",
+      "statusIntern": "Status",
+      "subject": "Subject",
+      "zaakNumber": "Case number",
+      "zaakStatus": "Case status"
+    }
+  },
+  "searchFields": {
+    "customerName": "Customer name",
+    "customerPhone": "Customer phone number",
+    "product": "Product",
+    "statusIntern": "Status",
+    "subject": "Subject",
+    "zaakNumber": "Case number",
+    "aanmaker": "Creator",
+    "assigneeFullName": "Handler"
+  }
+}

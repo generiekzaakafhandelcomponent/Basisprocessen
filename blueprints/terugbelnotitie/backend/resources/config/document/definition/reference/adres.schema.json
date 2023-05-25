@@ -1,0 +1,24 @@
+{
+    "$id": "adres.schema",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Adres",
+    "definitions": {
+        "adres": {
+            "type": "object",
+            "properties": {
+                "adres": {
+                    "type": "string",
+                    "description": "Straat + huisnummer"
+                },
+                "postcode": {
+                    "type": "string",
+                    "description": "Postcode"
+                },
+                "woonplaats": {
+                    "type": "string",
+                    "description": "Woonplaats"
+                }
+            }
+        }
+    }
+}
