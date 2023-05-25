@@ -24,3 +24,6 @@ In de volgende processen moet een proceskoppeling worden gemaakt:
 - Afsluiten terugbelnotitiezaak
     - Taak 'Zet zaakresultaat afgesloten'
     - Taak 'Zet status en zaakstatus afgehandeld'
+
+**Note:
+This process is tested with Valtimo backend version: 9.25.0.RELEASE and frontend version: 5.14.0**
