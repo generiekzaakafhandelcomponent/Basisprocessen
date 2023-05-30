@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1858uts" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.9.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.18.0">
+  <bpmn:collaboration id="Collaboration_0gctgz8">
+    <bpmn:participant id="ExampleMainProcessParticipant" name="Example Main Process" processRef="example-main-process" />
+  </bpmn:collaboration>
+  <bpmn:process id="example-main-process" name="Example Main Process" isExecutable="true">
+    <bpmn:userTask id="ControlerenDataTask" name="Controleren data" camunda:candidateGroups="ROLE_USER">
+      <bpmn:incoming>Flow_1w3esuu</bpmn:incoming>
+      <bpmn:outgoing>Flow_0yxie4q</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:callActivity id="InformerenAanvragerCallActivity" name="Informeren aanvrager" camunda:asyncBefore="true" camunda:asyncAfter="true" calledElement="informeren-aanvrager">
+      <bpmn:extensionElements>
+        <camunda:in businessKey="#{execution.processBusinessKey}" />
+        <camunda:inputOutput>
+          <camunda:inputParameter name="emailTemplateSubject">Wij hebben uw aanvraag ontvangen</camunda:inputParameter>
+          <camunda:inputParameter name="emailTemplateName">ontvangstbevestiging-aanvraag</camunda:inputParameter>
+        </camunda:inputOutput>
+        <camunda:in source="emailTemplateSubject" target="emailTemplateSubject" />
+        <camunda:in source="emailTemplateName" target="emailTemplateName" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0yxie4q</bpmn:incoming>
+      <bpmn:outgoing>Flow_0rfv62b</bpmn:outgoing>
+    </bpmn:callActivity>
+    <bpmn:endEvent id="Event_1e3vipk">
+      <bpmn:incoming>Flow_0rfv62b</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:startEvent id="ExampleAanvraagStartEvent" name="Example Aanvraag">
+      <bpmn:outgoing>Flow_1w3esuu</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1w3esuu" sourceRef="ExampleAanvraagStartEvent" targetRef="ControlerenDataTask" />
+    <bpmn:sequenceFlow id="Flow_0yxie4q" sourceRef="ControlerenDataTask" targetRef="InformerenAanvragerCallActivity" />
+    <bpmn:sequenceFlow id="Flow_0rfv62b" sourceRef="InformerenAanvragerCallActivity" targetRef="Event_1e3vipk" />
+    <bpmn:textAnnotation id="TextAnnotation_1s2tp8g">
+      <bpmn:text>ontvangstbevestiging aanvraag</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_028e3bw" sourceRef="TextAnnotation_1s2tp8g" targetRef="InformerenAanvragerCallActivity" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0gctgz8">
+      <bpmndi:BPMNShape id="Participant_08ddge6_di" bpmnElement="ExampleMainProcessParticipant" isHorizontal="true">
+        <dc:Bounds x="160" y="85" width="600" height="250" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1s2tp8g_di" bpmnElement="TextAnnotation_1s2tp8g">
+        <dc:Bounds x="520" y="110" width="130" height="41" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_12uunaa_di" bpmnElement="ControlerenDataTask">
+        <dc:Bounds x="330" y="170" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1287uvb" bpmnElement="InformerenAanvragerCallActivity">
+        <dc:Bounds x="470" y="170" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1hgel3f" bpmnElement="Event_1e3vipk">
+        <dc:Bounds x="612" y="192" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2160" y="515" width="61" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0sy07jz" bpmnElement="ExampleAanvraagStartEvent">
+        <dc:Bounds x="242" y="192" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="236" y="235" width="48" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_028e3bw_di" bpmnElement="Association_028e3bw">
+        <di:waypoint x="570" y="151" />
+        <di:waypoint x="555" y="170" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1w3esuu_di" bpmnElement="Flow_1w3esuu">
+        <di:waypoint x="278" y="210" />
+        <di:waypoint x="330" y="210" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0yxie4q_di" bpmnElement="Flow_0yxie4q">
+        <di:waypoint x="430" y="210" />
+        <di:waypoint x="470" y="210" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0rfv62b_di" bpmnElement="Flow_0rfv62b">
+        <di:waypoint x="570" y="210" />
+        <di:waypoint x="612" y="210" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

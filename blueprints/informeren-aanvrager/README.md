@@ -2,6 +2,9 @@
 ## Prerequisites
 - A working Valtimo instance
 
+In this blueprint you will find an example process that you can use to get a better understanding of how the informeren aanvrager process is implemented.
+
+
 ## Components
 
 - AutoConfig
@@ -19,13 +22,15 @@
 - Add the files from the blueprint into the project root
 - If you already have an AutoConfiguration file, merge the code into your existing file.
 
-## Starting up
-- Run the following command from a terminal in the project root: ```./gradlew bootrun```
-- After the Valtimo backend application has finished starting up, the service is available at http://localhost:8080
-  - The application uptime can be verified by calling [this API endpoint](http://localhost:8080/api/ping)
+## Troubleshooting
+If your cases tab is empty please do the following:
+- In your environment menu go to ``Admin > Cases > Aanvraag`` and check if the process is connected to the document. 
+  - If not then click the `Connect process` button and select the `Example Main Process`.
+- Link the forms to the process by:
+  - going to the `Process links` tab and selecting the main process
+  - click the start event and select the `example-form.start` as form definition.
+  - now add the `example-controle-form` to the respective user task via the same method
 
-## Supporting containers
-The Valtimo backend application requires a Keycloak instance and a database server. When running the application locally, running Keycloak and the database locally as well is recommended. In the [valtimo-docker-compose repository](https://github.com/valtimo-platform/valtimo-docker-compose), Docker compose files are available to support the Valtimo application. This repository includes a guide on which Compose file to use.
 
 This blueprint was tested on Valtimo `10.5.0.RELEASE`.
 

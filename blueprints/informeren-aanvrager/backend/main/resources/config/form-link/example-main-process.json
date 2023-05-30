@@ -1,0 +1,12 @@
+[
+        {
+        "formName": "example-form.start",
+        "formLinkElementId": "ExampleAanvraagStartEvent",
+        "formAssociationType": "start-event"
+    },
+    {
+        "formName": "example-controle-form",
+        "formLinkElementId": "ControlerenDataTask",
+        "formAssociationType": "user-task"
+    }
+]
