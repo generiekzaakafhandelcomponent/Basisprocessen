@@ -2,7 +2,7 @@ package com.ritense.valtimo.implementation.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ritense.document.domain.impl.JsonSchemaDocument;
-import com.ritense.openzaak.service.ZaakInstanceLinkService;
+import com.ritense.zakenapi.link.ZaakInstanceLinkService;
 import com.ritense.openzaak.service.ZaakService;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.springframework.stereotype.Component;
