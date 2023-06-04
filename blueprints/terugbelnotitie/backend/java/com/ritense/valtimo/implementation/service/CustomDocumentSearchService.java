@@ -48,11 +48,12 @@ public class CustomDocumentSearchService extends JsonSchemaDocumentSearchService
     private final QueryDialectHelper queryDialectHelper;
 
     public CustomDocumentSearchService(
-        EntityManager entityManager,
-        QueryDialectHelper queryDialectHelper,
-        SearchFieldService searchFieldService
+            EntityManager entityManager,
+            QueryDialectHelper queryDialectHelper,
+            SearchFieldService searchFieldService,
+            UserManagementService userManagementService
     ) {
-        super(entityManager, queryDialectHelper, searchFieldService);
+        super(entityManager, queryDialectHelper, searchFieldService, userManagementService);
         this.entityManager = entityManager;
         this.queryDialectHelper = queryDialectHelper;
     }

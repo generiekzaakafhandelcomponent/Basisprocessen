@@ -20,12 +20,14 @@ public class CustomizedValtimoConfiguration {
     public JsonSchemaDocumentSearchService documentSearchService(
         final EntityManager entityManager,
         final QueryDialectHelper queryDialectHelper,
-        final SearchFieldService searchFieldService
+        final SearchFieldService searchFieldService,
+        final UserManagementService userManagementService
     ) {
         return new CustomDocumentSearchService(
             entityManager,
             queryDialectHelper,
-            searchFieldService
+            searchFieldService,
+            userManagementService
         );
     }
 }
