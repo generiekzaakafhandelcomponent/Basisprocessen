@@ -39,8 +39,4 @@ public class CommonDocumentService {
             throw new RuntimeException("Document not updated!");
         }
     }
-
-    public String getOrThrowEmptyText(JsonSchemaDocument document, String path) {
-        return document.content().getValueBy(JsonPointer.valueOf(path)).orElse(TextNode.valueOf("")).asText();
-    }
 }
