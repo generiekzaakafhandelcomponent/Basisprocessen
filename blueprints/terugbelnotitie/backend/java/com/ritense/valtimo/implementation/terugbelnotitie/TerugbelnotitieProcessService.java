@@ -6,20 +6,23 @@ import com.ritense.valtimo.contract.authentication.CurrentUserService;
 import com.ritense.valtimo.contract.authentication.ManageableUser;
 import com.ritense.valtimo.implementation.service.CommonDocumentService;
 import com.valtimo.keycloak.service.KeycloakUserManagementService;
-import lombok.RequiredArgsConstructor;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
-
-@RequiredArgsConstructor
 @Component
 public class TerugbelnotitieProcessService {
 
     private final CommonDocumentService commonDocumentService;
     private final CurrentUserService currentUserService;
     private final KeycloakUserManagementService keycloakUserManagementService;
+
+    public TerugbelnotitieProcessService(CommonDocumentService commonDocumentService, CurrentUserService currentUserService, KeycloakUserManagementService keycloakUserManagementService) {
+        this.commonDocumentService = commonDocumentService;
+        this.currentUserService = currentUserService;
+        this.keycloakUserManagementService = keycloakUserManagementService;
+    }
 
     public void setInterneStatus(DelegateExecution execution, String status) {
         var document = commonDocumentService.findDocumentById(execution.getBusinessKey());

@@ -15,9 +15,7 @@
             "$ref": "#/definitions/klantFeedback"
         },
         "openZaak": {
-            "type": "object",
-            "description": "OpenZaak",
-            "$ref": "#/definitions/openZaak"
+            "$ref": "openzaak.schema.json#/definitions/openZaak"
         },
         "klantVraag": {
             "type": "object",
