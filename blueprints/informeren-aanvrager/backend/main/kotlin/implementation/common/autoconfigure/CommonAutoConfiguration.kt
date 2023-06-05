@@ -8,16 +8,6 @@ import org.springframework.context.annotation.Configuration
 
 @Configuration
 class CommonAutoConfiguration {
-
-    @Bean
-    fun documentReaderService(
-        documentService: DocumentService
-    ): DocumentReaderService {
-        return DocumentReaderService(
-            documentService
-        )
-    }
-
     @Bean
     fun dateTimeService(): DateTimeService {
         return DateTimeService()
