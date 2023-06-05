@@ -7,7 +7,7 @@ This is a process that is used to inform applicants. The next flows are supporte
 - Control of said case
 - Informeren aanvrager
 
-## Overige eisen
+## Miscellaneous requirements
 The next factors are required for a completely working process
 - The implementation of a mail module. In this blueprint the local-mail module is used. Please note that this doesn't send mail.
 
