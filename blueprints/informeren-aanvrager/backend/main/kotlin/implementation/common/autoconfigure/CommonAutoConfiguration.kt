@@ -1,8 +1,8 @@
-package com.ritense.valtimo.common.autoconfigure
+package implementation.common.autoconfigure
 
 import com.ritense.document.service.DocumentService
-import com.ritense.valtimo.common.service.DateTimeService
-import com.ritense.valtimo.common.service.DocumentReaderService
+import implementation.common.service.DateTimeService
+import implementation.common.service.DocumentReaderService
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 

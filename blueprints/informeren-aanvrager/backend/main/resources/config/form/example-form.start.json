@@ -57,12 +57,12 @@
             "values": [
                 {
                     "label": "E-Mail",
-                    "value": "eMail",
+                    "value": "EMAIL",
                     "shortcut": ""
                 },
                 {
                     "label": "Post",
-                    "value": "post",
+                    "value": "POST",
                     "shortcut": ""
                 }
             ],

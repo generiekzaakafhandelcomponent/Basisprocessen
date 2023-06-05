@@ -7,23 +7,9 @@
     <bpmn:startEvent id="StartEvent">
       <bpmn:outgoing>Flow_0r8rt6r</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:sequenceFlow id="Flow_04kzfel" sourceRef="VersturenEmailNotificatieTask" targetRef="PortaalNotificatieVerstuurdEndEvent" />
-    <bpmn:sequenceFlow id="Flow_1kvdq3k" sourceRef="VerzendenEmailMetBijlageTask" targetRef="EmailMetBijlageVerstuurdEndEvent" />
-    <bpmn:sequenceFlow id="Flow_0abrfze" sourceRef="AfdrukkenBriefTask" targetRef="BriefAfgedruktEndEvent" />
-    <bpmn:sequenceFlow id="ViaPortaalSequenceFlow" name="Via portaal" sourceRef="CommunicatieVoorkeurGateway" targetRef="VersturenEmailNotificatieTask">
-      <bpmn:extensionElements />
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${communicatievoorkeur == "Portaal"}</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_0r8rt6r" sourceRef="StartEvent" targetRef="VoorbereidenProcesVariabelenTask" />
-    <bpmn:sequenceFlow id="ViaEmailSequenceFlow" name="Via e-mail" sourceRef="CommunicatieVoorkeurGateway" targetRef="VerzendenEmailMetBijlageTask" />
-    <bpmn:sequenceFlow id="ViaPostSequenceFlow" name="Via post" sourceRef="CommunicatieVoorkeurGateway" targetRef="AfdrukkenBriefTask">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${communicatievoorkeur == "Post"}</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_0v86pqx" sourceRef="VoorbereidenProcesVariabelenTask" targetRef="CommunicatieVoorkeurGateway" />
-    <bpmn:serviceTask id="VoorbereidenProcesVariabelenTask" name="Voorbereiden variabelen" camunda:expression="${true}">
+    <bpmn:serviceTask id="VoorbereidenVariabelenTask" name="Voorbereiden variabelen" camunda:expression="${true}">
       <bpmn:extensionElements>
         <camunda:inputOutput>
-          <camunda:outputParameter name="communicatievoorkeur">${documentReaderService.getValueFromDocumentAtPathOrDefault("/communicatievoorkeur",  execution.businessKey, "")}</camunda:outputParameter>
           <camunda:outputParameter name="voornaam">${documentReaderService.getValueFromDocumentAtPathOrDefault("/aanvrager/voornaam", execution.businessKey, "")}</camunda:outputParameter>
           <camunda:outputParameter name="tussenvoegsel">${documentReaderService.getValueFromDocumentAtPathOrDefault("/aanvrager/tussenvoegsel", execution.businessKey, "")}</camunda:outputParameter>
           <camunda:outputParameter name="achternaam">${documentReaderService.getValueFromDocumentAtPathOrDefault("/aanvrager/achternaam", execution.businessKey, "")}</camunda:outputParameter>
@@ -34,22 +20,27 @@
       <bpmn:incoming>Flow_0r8rt6r</bpmn:incoming>
       <bpmn:outgoing>Flow_0v86pqx</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:sendTask id="VersturenEmailNotificatieTask" name="versturen e-mail notificatie" camunda:asyncBefore="true" camunda:asyncAfter="true" camunda:expression="${mailService.sendElementTemplateTaskMail(execution)} ">
-      <bpmn:extensionElements>
-        <camunda:inputOutput>
-          <camunda:outputParameter name="portaalnotificatieVerstuurd">${true}</camunda:outputParameter>
-        </camunda:inputOutput>
-        <camunda:properties>
-          <camunda:property name="mailSendTaskFrom" value="noreply@valtimo.nl" />
-          <camunda:property name="mailSendTaskTemplate" value="${emailTemplateName}" />
-          <camunda:property name="mailSendTaskSubject" value="${emailTemplateSubject}" />
-          <camunda:property name="mailSendTaskTo" value="${emailAanvrager}" />
-        </camunda:properties>
-        <camunda:executionListener expression="${execution.processInstance.removeVariable(&#34;communicatievoorkeur&#34;)}" event="start" />
-      </bpmn:extensionElements>
-      <bpmn:incoming>ViaPortaalSequenceFlow</bpmn:incoming>
-      <bpmn:outgoing>Flow_04kzfel</bpmn:outgoing>
-    </bpmn:sendTask>
+    <bpmn:userTask id="AfdrukkenBriefTask" name="Afdrukken brief" camunda:candidateGroups="ROLE_USER">
+      <bpmn:extensionElements />
+      <bpmn:incoming>ViaPostSequenceFlow</bpmn:incoming>
+      <bpmn:outgoing>Flow_0abrfze</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="PortaalNotificatieVerstuurdEndEvent" name="Portaal notificatie verstuurd" camunda:asyncBefore="true">
+      <bpmn:incoming>Flow_08ua1gm</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="EmailMetBijlageVerstuurdEndEvent" name="Email met bijlage verstuurd" camunda:asyncBefore="true">
+      <bpmn:incoming>Flow_161gr5b</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="BriefAfgedruktEndEvent" name="Brief afgedrukt" camunda:asyncBefore="true">
+      <bpmn:incoming>Flow_0abrfze</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:exclusiveGateway id="CommunicatieVoorkeurGateway" name="communicatie voorkeur" default="ViaEmailSequenceFlow">
+      <bpmn:extensionElements />
+      <bpmn:incoming>Flow_0v86pqx</bpmn:incoming>
+      <bpmn:outgoing>ViaPortaalSequenceFlow</bpmn:outgoing>
+      <bpmn:outgoing>ViaEmailSequenceFlow</bpmn:outgoing>
+      <bpmn:outgoing>ViaPostSequenceFlow</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
     <bpmn:sendTask id="VerzendenEmailMetBijlageTask" name="verzenden email (evt met bijlage)" camunda:asyncBefore="true" camunda:asyncAfter="true" camunda:expression="${mailService.sendElementTemplateTaskMail(execution)} ">
       <bpmn:extensionElements>
         <camunda:inputOutput>
@@ -64,125 +55,129 @@
         <camunda:executionListener expression="${execution.processInstance.removeVariable(&#34;communicatievoorkeur&#34;)}" event="start" />
       </bpmn:extensionElements>
       <bpmn:incoming>ViaEmailSequenceFlow</bpmn:incoming>
-      <bpmn:outgoing>Flow_1kvdq3k</bpmn:outgoing>
+      <bpmn:outgoing>Flow_161gr5b</bpmn:outgoing>
     </bpmn:sendTask>
-    <bpmn:userTask id="AfdrukkenBriefTask" name="Afdrukken brief" camunda:candidateGroups="ROLE_USER">
+    <bpmn:sendTask id="Activity_1xi7wck" name="versturen e-mail notificatie" camunda:asyncBefore="true" camunda:asyncAfter="true" camunda:expression="${mailService.sendElementTemplateTaskMail(execution)} ">
       <bpmn:extensionElements>
         <camunda:inputOutput>
-          <camunda:outputParameter name="portaalnotificatieVerstuurd">${false}</camunda:outputParameter>
+          <camunda:outputParameter name="portaalnotificatieVerstuurd">${true}</camunda:outputParameter>
         </camunda:inputOutput>
+        <camunda:properties>
+          <camunda:property name="mailSendTaskFrom" value="noreply@valtimo.nl" />
+          <camunda:property name="mailSendTaskTemplate" value="${emailTemplateName}" />
+          <camunda:property name="mailSendTaskSubject" value="${emailTemplateSubject}" />
+          <camunda:property name="mailSendTaskTo" value="${emailAanvrager}" />
+        </camunda:properties>
+        <camunda:executionListener expression="${execution.processInstance.removeVariable(&#34;communicatievoorkeur&#34;)}" event="start" />
       </bpmn:extensionElements>
-      <bpmn:incoming>ViaPostSequenceFlow</bpmn:incoming>
-      <bpmn:outgoing>Flow_0abrfze</bpmn:outgoing>
-    </bpmn:userTask>
-    <bpmn:endEvent id="PortaalNotificatieVerstuurdEndEvent" name="Portaal notificatie verstuurd" camunda:asyncBefore="true">
-      <bpmn:incoming>Flow_04kzfel</bpmn:incoming>
-    </bpmn:endEvent>
-    <bpmn:endEvent id="EmailMetBijlageVerstuurdEndEvent" name="Email met bijlage verstuurd" camunda:asyncBefore="true">
-      <bpmn:incoming>Flow_1kvdq3k</bpmn:incoming>
-    </bpmn:endEvent>
-    <bpmn:endEvent id="BriefAfgedruktEndEvent" name="Brief afgedrukt" camunda:asyncBefore="true">
-      <bpmn:incoming>Flow_0abrfze</bpmn:incoming>
-    </bpmn:endEvent>
-    <bpmn:exclusiveGateway id="CommunicatieVoorkeurGateway" name="communicatie voorkeur" default="ViaEmailSequenceFlow">
+      <bpmn:incoming>ViaPortaalSequenceFlow</bpmn:incoming>
+      <bpmn:outgoing>Flow_08ua1gm</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:sequenceFlow id="Flow_0r8rt6r" sourceRef="StartEvent" targetRef="VoorbereidenVariabelenTask" />
+    <bpmn:sequenceFlow id="Flow_0v86pqx" sourceRef="VoorbereidenVariabelenTask" targetRef="CommunicatieVoorkeurGateway" />
+    <bpmn:sequenceFlow id="ViaPostSequenceFlow" name="Via post" sourceRef="CommunicatieVoorkeurGateway" targetRef="AfdrukkenBriefTask">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${communicatievoorkeur == "POST"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0abrfze" sourceRef="AfdrukkenBriefTask" targetRef="BriefAfgedruktEndEvent" />
+    <bpmn:sequenceFlow id="Flow_08ua1gm" sourceRef="Activity_1xi7wck" targetRef="PortaalNotificatieVerstuurdEndEvent" />
+    <bpmn:sequenceFlow id="Flow_161gr5b" sourceRef="VerzendenEmailMetBijlageTask" targetRef="EmailMetBijlageVerstuurdEndEvent" />
+    <bpmn:sequenceFlow id="ViaPortaalSequenceFlow" name="Via portaal" sourceRef="CommunicatieVoorkeurGateway" targetRef="Activity_1xi7wck">
       <bpmn:extensionElements />
-      <bpmn:incoming>Flow_0v86pqx</bpmn:incoming>
-      <bpmn:outgoing>ViaPortaalSequenceFlow</bpmn:outgoing>
-      <bpmn:outgoing>ViaEmailSequenceFlow</bpmn:outgoing>
-      <bpmn:outgoing>ViaPostSequenceFlow</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${communicatievoorkeur == "PORTAAL"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="ViaEmailSequenceFlow" name="Via e-mail" sourceRef="CommunicatieVoorkeurGateway" targetRef="VerzendenEmailMetBijlageTask" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_17efitx">
       <bpmndi:BPMNShape id="Participant_1h0eeom_di" bpmnElement="InformerenAanvragerParticipant" isHorizontal="true">
-        <dc:Bounds x="160" y="80" width="790" height="390" />
+        <dc:Bounds x="160" y="80" width="790" height="500" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1tyne5g_di" bpmnElement="StartEvent">
-        <dc:Bounds x="202" y="252" width="36" height="36" />
+        <dc:Bounds x="202" y="362" width="36" height="36" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0csubga_di" bpmnElement="VoorbereidenProcesVariabelenTask">
-        <dc:Bounds x="310" y="230" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0c5z9n1_di" bpmnElement="VersturenEmailNotificatieTask">
-        <dc:Bounds x="650" y="110" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_13ai2rf_di" bpmnElement="VerzendenEmailMetBijlageTask">
-        <dc:Bounds x="650" y="230" width="100" height="80" />
+      <bpmndi:BPMNShape id="Activity_0csubga_di" bpmnElement="VoorbereidenVariabelenTask">
+        <dc:Bounds x="310" y="340" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_10kr4g4_di" bpmnElement="AfdrukkenBriefTask">
-        <dc:Bounds x="650" y="350" width="100" height="80" />
+        <dc:Bounds x="650" y="460" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1o2l2vc_di" bpmnElement="PortaalNotificatieVerstuurdEndEvent">
-        <dc:Bounds x="842" y="132" width="36" height="36" />
+        <dc:Bounds x="842" y="242" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="818" y="175" width="85" height="27" />
+          <dc:Bounds x="818" y="285" width="85" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0xf1ra8_di" bpmnElement="EmailMetBijlageVerstuurdEndEvent">
-        <dc:Bounds x="842" y="252" width="36" height="36" />
+        <dc:Bounds x="842" y="362" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="818" y="295" width="84" height="27" />
+          <dc:Bounds x="818" y="405" width="84" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1wftenp_di" bpmnElement="BriefAfgedruktEndEvent">
-        <dc:Bounds x="842" y="372" width="36" height="36" />
+        <dc:Bounds x="842" y="482" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="824" y="415" width="72" height="14" />
+          <dc:Bounds x="824" y="525" width="72" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_0fukaxe_di" bpmnElement="CommunicatieVoorkeurGateway" isMarkerVisible="true">
-        <dc:Bounds x="495" y="245" width="50" height="50" />
+        <dc:Bounds x="495" y="355" width="50" height="50" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="446" y="226" width="68" height="27" />
+          <dc:Bounds x="446" y="336" width="68" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Flow_04kzfel_di" bpmnElement="Flow_04kzfel">
-        <di:waypoint x="750" y="150" />
-        <di:waypoint x="842" y="150" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1kvdq3k_di" bpmnElement="Flow_1kvdq3k">
-        <di:waypoint x="750" y="270" />
-        <di:waypoint x="842" y="270" />
-      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="BPMNShape_1fjt7px" bpmnElement="VerzendenEmailMetBijlageTask">
+        <dc:Bounds x="650" y="340" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_11ee4if" bpmnElement="Activity_1xi7wck">
+        <dc:Bounds x="650" y="220" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_0abrfze_di" bpmnElement="Flow_0abrfze">
-        <di:waypoint x="750" y="390" />
-        <di:waypoint x="842" y="390" />
+        <di:waypoint x="750" y="500" />
+        <di:waypoint x="842" y="500" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0qtbuqp_di" bpmnElement="ViaPortaalSequenceFlow">
-        <di:waypoint x="520" y="245" />
-        <di:waypoint x="520" y="150" />
-        <di:waypoint x="650" y="150" />
+        <di:waypoint x="520" y="355" />
+        <di:waypoint x="520" y="260" />
+        <di:waypoint x="650" y="260" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="554" y="133" width="53" height="14" />
+          <dc:Bounds x="563" y="243" width="53" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0r8rt6r_di" bpmnElement="Flow_0r8rt6r">
-        <di:waypoint x="238" y="270" />
-        <di:waypoint x="310" y="270" />
+        <di:waypoint x="238" y="380" />
+        <di:waypoint x="310" y="380" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0y8ld23_di" bpmnElement="ViaEmailSequenceFlow">
-        <di:waypoint x="545" y="270" />
-        <di:waypoint x="650" y="270" />
+        <di:waypoint x="545" y="380" />
+        <di:waypoint x="650" y="380" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="566" y="243" width="49" height="14" />
+          <dc:Bounds x="565" y="353" width="49" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0ggf0a5_di" bpmnElement="ViaPostSequenceFlow">
-        <di:waypoint x="520" y="295" />
-        <di:waypoint x="520" y="390" />
-        <di:waypoint x="650" y="390" />
+        <di:waypoint x="520" y="405" />
+        <di:waypoint x="520" y="500" />
+        <di:waypoint x="650" y="500" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="571" y="363" width="40" height="14" />
+          <dc:Bounds x="571" y="473" width="40" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0v86pqx_di" bpmnElement="Flow_0v86pqx">
-        <di:waypoint x="410" y="270" />
-        <di:waypoint x="495" y="270" />
+        <di:waypoint x="410" y="380" />
+        <di:waypoint x="495" y="380" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_161gr5b_di" bpmnElement="Flow_161gr5b">
+        <di:waypoint x="750" y="380" />
+        <di:waypoint x="842" y="380" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_08ua1gm_di" bpmnElement="Flow_08ua1gm">
+        <di:waypoint x="750" y="260" />
+        <di:waypoint x="842" y="260" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

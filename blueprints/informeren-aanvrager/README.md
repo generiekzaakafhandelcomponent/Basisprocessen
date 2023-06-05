@@ -4,24 +4,9 @@
 
 In this blueprint you will find an example process that you can use to get a better understanding of how the informeren aanvrager process is implemented.
 
-
-## Components
-
-- AutoConfig
-- Services
-    - DateTimeService
-    - DocumentReaderService
-- Process model
-- Document schema
-- Form
-- Form-Link
-- Process-Document-Link
-
 ## Configuration
-- Make sure you have a properties file to the project root. This file should have the name ".env.properties"
 - Add the files from the blueprint into the project root
-- If you already have an AutoConfiguration file, merge the code into your existing file.
-
+- Add user roles to main process
 ## Troubleshooting
 If your cases tab is empty please do the following:
 - In your environment menu go to ``Admin > Cases > Aanvraag`` and check if the process is connected to the document. 

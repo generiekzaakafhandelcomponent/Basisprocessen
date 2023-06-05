@@ -1,4 +1,4 @@
-package com.ritense.valtimo.informerenaanvrager.service
+package implementation.common.service
 
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter

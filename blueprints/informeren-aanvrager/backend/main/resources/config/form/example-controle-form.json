@@ -2,6 +2,13 @@
     "display": "form",
     "components": [
         {
+            "label": "communicatievoorkeur",
+            "key": "pv.communicatievoorkeur",
+            "calculateValue": "value = data.communicatievoorkeur",
+            "type": "hidden",
+            "input": true
+        },
+        {
             "label": "aanvrager",
             "tableView": true,
             "key": "aanvrager",
@@ -31,7 +38,7 @@
         {
             "label": "HTML",
             "tag": "div",
-            "content": "Aanvrager volledige naam: {{ data.aanvrager?.persoonsgegevens?.volledigeNaam }}",
+            "content": "Aanvrager volledige naam: {{ data.pv?.volledigeNaam }}",
             "refreshOnChange": false,
             "key": "html",
             "type": "htmlelement",
@@ -54,12 +61,12 @@
             "values": [
                 {
                     "label": "E-Mail",
-                    "value": "eMail",
+                    "value": "EMAIL",
                     "shortcut": ""
                 },
                 {
                     "label": "Post",
-                    "value": "post",
+                    "value": "POST",
                     "shortcut": ""
                 }
             ],
