@@ -10,11 +10,11 @@
     <bpmn:serviceTask id="VoorbereidenVariabelenTask" name="Voorbereiden variabelen" camunda:expression="${true}">
       <bpmn:extensionElements>
         <camunda:inputOutput>
-          <camunda:outputParameter name="voornaam">${documentVariableDelegate.findValueByJsonPointerOrDefault("/aanvrager/voornaam", execution.businessKey, "")}</camunda:outputParameter>
-          <camunda:outputParameter name="tussenvoegsel">${documentVariableDelegate.findValueByJsonPointerOrDefault("/aanvrager/tussenvoegsel", execution.businessKey, "")}</camunda:outputParameter>
-          <camunda:outputParameter name="achternaam">${documentVariableDelegate.findValueByJsonPointerOrDefault("/aanvrager/achternaam", execution.businessKey, "")}</camunda:outputParameter>
-          <camunda:outputParameter name="datumAanvraag">${dateTimeService.getDayMonthFullYearPatternDate(documentVariableDelegate.findValueByJsonPointerOrDefault("/datumAanvraagOntvangen", execution.businessKey, "").toString())}</camunda:outputParameter>
-          <camunda:outputParameter name="emailAanvrager">${documentVariableDelegate.findValueByJsonPointerOrDefault("/aanvrager/emailadres", execution.businessKey, "")}</camunda:outputParameter>
+          <camunda:outputParameter name="voornaam">${documentVariableDelegate.findValueByJsonPointerOrDefault("/aanvrager/voornaam", execution, "")}</camunda:outputParameter>
+          <camunda:outputParameter name="tussenvoegsel">${documentVariableDelegate.findValueByJsonPointerOrDefault("/aanvrager/tussenvoegsel", execution, "")}</camunda:outputParameter>
+          <camunda:outputParameter name="achternaam">${documentVariableDelegate.findValueByJsonPointerOrDefault("/aanvrager/achternaam", execution, "")}</camunda:outputParameter>
+          <camunda:outputParameter name="datumAanvraag">${dateTimeService.getDayMonthFullYearPatternDate(documentVariableDelegate.findValueByJsonPointerOrDefault("/datumAanvraagOntvangen", execution, "").toString())}</camunda:outputParameter>
+          <camunda:outputParameter name="emailAanvrager">${documentVariableDelegate.findValueByJsonPointerOrDefault("/aanvrager/emailadres", execution, "")}</camunda:outputParameter>
         </camunda:inputOutput>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_0r8rt6r</bpmn:incoming>
