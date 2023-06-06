@@ -1,4 +1,4 @@
-package com.ritense.valtimo.common.enums
+package com.implementation.common.enums
 
 enum class ZaakResultaat(
     val resultaat: String

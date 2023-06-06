@@ -1,5 +1,8 @@
-package com.ritense.valtimo.common.autoconfigure
+package com.implementation.common.autoconfigure
 
+import com.implementation.common.client.OpenzaakClient
+import com.implementation.common.service.ZaakHandleService
+import com.implementation.common.service.ZaakPropertiesService
 import com.ritense.document.service.DocumentService
 import com.ritense.openzaak.service.ZaakResultaatService
 import com.ritense.openzaak.service.ZaakService
@@ -7,9 +10,6 @@ import com.ritense.openzaak.service.ZaakStatusService
 import com.ritense.openzaak.service.impl.OpenZaakConfigService
 import com.ritense.openzaak.service.impl.OpenZaakTokenGeneratorService
 import com.ritense.zakenapi.link.ZaakInstanceLinkService
-import com.ritense.valtimo.common.client.OpenzaakClient
-import com.ritense.valtimo.common.service.ZaakPropertiesService
-import com.ritense.valtimo.common.service.ZaakHandleService
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 

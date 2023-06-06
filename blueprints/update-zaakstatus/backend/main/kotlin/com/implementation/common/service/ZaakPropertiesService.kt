@@ -1,4 +1,4 @@
-package com.ritense.valtimo.common.service
+package com.implementation.common.service
 
 import com.fasterxml.jackson.databind.node.ObjectNode
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper

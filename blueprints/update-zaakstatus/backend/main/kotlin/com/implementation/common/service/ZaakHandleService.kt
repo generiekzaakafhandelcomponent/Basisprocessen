@@ -1,14 +1,14 @@
-package com.ritense.valtimo.common.service
+package com.implementation.common.service
 
 import com.ritense.document.service.DocumentService
 import com.ritense.zakenapi.link.ZaakInstanceLinkService
 import com.ritense.openzaak.service.ZaakResultaatService
 import com.ritense.openzaak.service.ZaakStatusService
 import com.ritense.openzaak.service.ZaakService
-import com.ritense.valtimo.common.client.OpenzaakClient
-import com.ritense.valtimo.common.enums.ZaakrelatieType
-import com.ritense.valtimo.common.enums.ZaakResultaat
-import com.ritense.valtimo.common.enums.ZaakStatus
+import com.implementation.common.client.OpenzaakClient
+import com.implementation.common.enums.ZaakrelatieType
+import com.implementation.common.enums.ZaakResultaat
+import com.implementation.common.enums.ZaakStatus
 import mu.KotlinLogging
 import java.util.UUID
 

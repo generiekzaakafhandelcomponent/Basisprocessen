@@ -1,4 +1,4 @@
-package com.ritense.valtimo.common.enums
+package com.implementation.common.enums
 
 enum class ZaakStatus(
     val status: String

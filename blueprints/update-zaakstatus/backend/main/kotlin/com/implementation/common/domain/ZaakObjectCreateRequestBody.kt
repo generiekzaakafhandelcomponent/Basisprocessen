@@ -1,4 +1,4 @@
-package com.ritense.valtimo.common.domain
+package com.implementation.common.domain
 
 import com.fasterxml.jackson.annotation.JsonProperty
 

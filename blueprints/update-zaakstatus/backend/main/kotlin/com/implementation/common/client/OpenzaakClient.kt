@@ -1,11 +1,11 @@
-package com.ritense.valtimo.common.client
+package com.implementation.common.client
 
 import com.ritense.openzaak.service.impl.OpenZaakConfigService
 import com.ritense.openzaak.service.impl.OpenZaakRequestBuilder
 import com.ritense.openzaak.service.impl.OpenZaakTokenGeneratorService
 import com.ritense.openzaak.service.impl.model.zaak.Zaak
-import com.ritense.valtimo.common.domain.ZaakUpdateRequestBody
-import com.ritense.valtimo.common.enums.ZaakrelatieType
+import com.implementation.common.domain.ZaakUpdateRequestBody
+import com.implementation.common.enums.ZaakrelatieType
 import mu.KotlinLogging
 import org.springframework.boot.web.client.RestTemplateBuilder
 

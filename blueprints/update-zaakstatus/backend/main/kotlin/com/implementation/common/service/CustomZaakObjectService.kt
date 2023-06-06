@@ -1,4 +1,4 @@
-package com.ritense.valtimo.common.service
+package com.implementation.common.service
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.ritense.openzaak.service.impl.OpenZaakConfigService
@@ -6,8 +6,8 @@ import com.ritense.openzaak.service.impl.OpenZaakRequestBuilder
 import com.ritense.openzaak.service.impl.OpenZaakTokenGeneratorService
 import com.ritense.openzaak.service.impl.model.zaak.Zaak
 import com.ritense.openzaak.service.ZaakService
-import com.ritense.valtimo.common.domain.ZaakObjectCreateRequestBody
-import com.ritense.valtimo.common.domain.ZaakObjectResponse
+import com.implementation.common.domain.ZaakObjectCreateRequestBody
+import com.implementation.common.domain.ZaakObjectResponse
 import mu.KotlinLogging
 import org.springframework.boot.web.client.RestTemplateBuilder
 import java.util.UUID

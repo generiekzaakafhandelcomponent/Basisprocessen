@@ -1,4 +1,4 @@
-package com.ritense.valtimo.common.enums
+package com.implementation.common.enums
 
 enum class ZaakrelatieType(val relatie: String) {
     // De andere zaak gaf aanleiding tot het starten van de onderhanden zaak.
