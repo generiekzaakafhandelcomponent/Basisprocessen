@@ -1,0 +1,12 @@
+[
+    {
+        "processDefinitionKey": "example-main-process",
+        "canInitializeDocument": true,
+        "startableByUser": false
+    },
+    {
+        "processDefinitionKey": "informeren-aanvrager",
+        "canInitializeDocument": false,
+        "startableByUser": false
+    }
+]

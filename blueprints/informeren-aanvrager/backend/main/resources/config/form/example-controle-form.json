@@ -1,0 +1,80 @@
+{
+    "display": "form",
+    "components": [
+        {
+            "label": "Volledige naam",
+            "tableView": true,
+            "key": "pv.volledigeNaam",
+            "type": "hidden",
+            "input": true
+        },
+        {
+            "label": "HTML",
+            "tag": "div",
+            "content": "<h2>Example Controle Form</h2>",
+            "refreshOnChange": false,
+            "key": "html",
+            "type": "htmlelement",
+            "input": false,
+            "tableView": false
+        },
+        {
+            "label": "Aanvraag gegevens",
+            "tag": "div",
+            "content": "<h4>Aanvraag gegevens</h4>",
+            "refreshOnChange": false,
+            "key": "html1",
+            "type": "htmlelement",
+            "input": false,
+            "tableView": false
+        },
+        {
+            "label": "HTML",
+            "tag": "div",
+            "content": "Aanvrager volledige naam: {{ data.pv?.volledigeNaam || '-' }}",
+            "refreshOnChange": false,
+            "key": "html",
+            "type": "htmlelement",
+            "input": false,
+            "tableView": false
+        },
+        {
+            "label": "E-mail",
+            "tableView": true,
+            "key": "pv.emailadres",
+            "type": "email",
+            "disabled": true,
+            "input": true
+        },
+        {
+            "label": "Communicatievoorkeur",
+            "optionsLabelPosition": "right",
+            "inline": false,
+            "tableView": false,
+            "values": [
+                {
+                    "label": "E-Mail",
+                    "value": "email",
+                    "shortcut": ""
+                },
+                {
+                    "label": "Post",
+                    "value": "post",
+                    "shortcut": ""
+                }
+            ],
+            "key": "pv.communicatievoorkeur",
+            "type": "radio",
+            "disabled": true,
+            "input": true
+        },
+        {
+            "type": "button",
+            "label": "Doorgaan",
+            "key": "submit",
+            "disableOnInvalid": true,
+            "input": true,
+            "tableView": false
+        }
+    ]
+}
