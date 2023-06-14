@@ -15,31 +15,46 @@ description:
       This is a Valtimo GZAC component
 
 
-
       ## Prerequisites
 
+
+
       - A working Valtimo instance
-  
-  
-  
-     This is a process that is used to inform applicants. The next flows are
+
+
+
+      This is a process that is used to inform applicants. The next flows are
       supported:
-  
+
+
+
       - Creating an example case
-  
+
+
+
       - Informeren aanvrager
-  
-  
-  
-     ## Miscellaneous requirements
-  
+
+
+
+      ## Miscellaneous requirements
+
+
+
       The next factors are required for a completely working process
-  
+
+
+
       - The implementation of a mail module. In this blueprint the local-mail
+
       module is used. Please note that this doesn't send mail. (the process will
+
       still work without this)
-  
-      - Set the mail subject and template name under the \\`Inputs\\` section of
+
+
+
+      - Set the mail subject and template name under the \\\`Inputs\\\` section
+      of
+
       the call activity.
     shortDescription: This gzac component contains the 'informeren aanvrager' process
 developmentStatus: stable
@@ -63,7 +78,7 @@ it:
     pagopa: false
     spid: false
 landingURL: |-
-  https://github.com/generiekzaakafhandelcomponent/Basisprocessen/tree/feature/bp-informeren-aanvrager
+  https://github.com/generiekzaakafhandelcomponent/Basisprocessen/tree/main/blueprints/informeren-aanvrager
 legal:
   license: EUPL-1.2
   repoOwner: Ritense B.V.
