@@ -7,54 +7,39 @@
     <bpmn:startEvent id="ExampleAanvraagStartEvent" name="Example Aanvraag">
       <bpmn:outgoing>Flow_1w3esuu</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:userTask id="ControlerenDataTask" name="Controleren data" camunda:candidateGroups="ROLE_USER">
-      <bpmn:incoming>Flow_1yixiww</bpmn:incoming>
-      <bpmn:outgoing>Flow_0yxie4q</bpmn:outgoing>
+    <bpmn:sequenceFlow id="Flow_1w3esuu" sourceRef="ExampleAanvraagStartEvent" targetRef="ExampleFormTask" />
+    <bpmn:sequenceFlow id="Flow_1yixiww" sourceRef="ExampleFormTask" targetRef="InformerenAanvragerCallActivity" />
+    <bpmn:sequenceFlow id="Flow_0rfv62b" sourceRef="InformerenAanvragerCallActivity" targetRef="Event_1e3vipk" />
+    <bpmn:userTask id="ExampleFormTask" name="Example Form" camunda:candidateGroups="ROLE_USER">
+      <bpmn:incoming>Flow_1w3esuu</bpmn:incoming>
+      <bpmn:outgoing>Flow_1yixiww</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:callActivity id="InformerenAanvragerCallActivity" name="Informeren aanvrager" camunda:asyncBefore="true" camunda:asyncAfter="true" calledElement="informeren-aanvrager">
       <bpmn:extensionElements>
         <camunda:in businessKey="#{execution.processBusinessKey}" />
         <camunda:inputOutput>
-          <camunda:inputParameter name="emailTemplateSubject">Wij hebben uw aanvraag ontvangen</camunda:inputParameter>
-          <camunda:inputParameter name="emailTemplateName">ontvangstbevestiging-aanvraag</camunda:inputParameter>
+          <camunda:inputParameter name="emailTemplateSubject">E-mail subject</camunda:inputParameter>
+          <camunda:inputParameter name="emailTemplateName">template-name</camunda:inputParameter>
         </camunda:inputOutput>
         <camunda:in source="emailTemplateSubject" target="emailTemplateSubject" />
         <camunda:in source="emailTemplateName" target="emailTemplateName" />
         <camunda:in source="communicatievoorkeur" target="communicatievoorkeur" />
+        <camunda:in source="voornaam" target="voornaam" />
+        <camunda:in source="achternaam" target="achternaam" />
+        <camunda:in source="tussenvoegsel" target="tussenvoegsel" />
+        <camunda:in source="emailadres" target="emailAanvrager" />
       </bpmn:extensionElements>
-      <bpmn:incoming>Flow_0yxie4q</bpmn:incoming>
+      <bpmn:incoming>Flow_1yixiww</bpmn:incoming>
       <bpmn:outgoing>Flow_0rfv62b</bpmn:outgoing>
     </bpmn:callActivity>
     <bpmn:endEvent id="Event_1e3vipk">
       <bpmn:incoming>Flow_0rfv62b</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:userTask id="ExampleFormTask" name="Example Form" camunda:candidateGroups="ROLE_USER">
-      <bpmn:incoming>Flow_107wyc7</bpmn:incoming>
-      <bpmn:outgoing>Flow_1yixiww</bpmn:outgoing>
-    </bpmn:userTask>
-    <bpmn:serviceTask id="VoorbereidenVariabelenTask" name="Voorbereiden variabelen" camunda:expression="${true}">
-      <bpmn:extensionElements>
-        <camunda:inputOutput>
-          <camunda:outputParameter name="communicatievoorkeur" />
-        </camunda:inputOutput>
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_1w3esuu</bpmn:incoming>
-      <bpmn:outgoing>Flow_107wyc7</bpmn:outgoing>
-    </bpmn:serviceTask>
-    <bpmn:sequenceFlow id="Flow_1w3esuu" sourceRef="ExampleAanvraagStartEvent" targetRef="VoorbereidenVariabelenTask" />
-    <bpmn:sequenceFlow id="Flow_1yixiww" sourceRef="ExampleFormTask" targetRef="ControlerenDataTask" />
-    <bpmn:sequenceFlow id="Flow_0yxie4q" sourceRef="ControlerenDataTask" targetRef="InformerenAanvragerCallActivity" />
-    <bpmn:sequenceFlow id="Flow_0rfv62b" sourceRef="InformerenAanvragerCallActivity" targetRef="Event_1e3vipk" />
-    <bpmn:sequenceFlow id="Flow_107wyc7" sourceRef="VoorbereidenVariabelenTask" targetRef="ExampleFormTask" />
-    <bpmn:textAnnotation id="TextAnnotation_1s2tp8g">
-      <bpmn:text>ontvangstbevestiging aanvraag</bpmn:text>
-    </bpmn:textAnnotation>
-    <bpmn:association id="Association_028e3bw" sourceRef="TextAnnotation_1s2tp8g" targetRef="InformerenAanvragerCallActivity" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1p81v7m">
       <bpmndi:BPMNShape id="BPMNShape_01ew6q8" bpmnElement="ExampleMainProcessParticipant" isHorizontal="true">
-        <dc:Bounds x="160" y="80" width="890" height="250" />
+        <dc:Bounds x="160" y="80" width="580" height="250" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_0qnobpg" bpmnElement="ExampleAanvraagStartEvent">
@@ -63,54 +48,31 @@
           <dc:Bounds x="236" y="230" width="48" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_1vac2ek" bpmnElement="ControlerenDataTask">
-        <dc:Bounds x="620" y="165" width="100" height="80" />
+      <bpmndi:BPMNShape id="BPMNShape_05lrmwp" bpmnElement="ExampleFormTask">
+        <dc:Bounds x="350" y="165" width="100" height="80" />
+        <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_1da30wh" bpmnElement="InformerenAanvragerCallActivity">
-        <dc:Bounds x="760" y="165" width="100" height="80" />
+        <dc:Bounds x="520" y="165" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_1y7km16" bpmnElement="Event_1e3vipk">
-        <dc:Bounds x="902" y="187" width="36" height="36" />
+        <dc:Bounds x="662" y="187" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="2160" y="515" width="61" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_05lrmwp" bpmnElement="ExampleFormTask">
-        <dc:Bounds x="460" y="165" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_1p4ofxo" bpmnElement="VoorbereidenVariabelenTask">
-        <dc:Bounds x="320" y="165" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_0iukfpp" bpmnElement="TextAnnotation_1s2tp8g">
-        <dc:Bounds x="810" y="105" width="130" height="41" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_1960gue" bpmnElement="Flow_1w3esuu">
         <di:waypoint x="278" y="205" />
-        <di:waypoint x="320" y="205" />
+        <di:waypoint x="350" y="205" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_0fztnnw" bpmnElement="Flow_1yixiww">
-        <di:waypoint x="560" y="205" />
-        <di:waypoint x="620" y="205" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="BPMNEdge_03wkly2" bpmnElement="Flow_0yxie4q">
-        <di:waypoint x="720" y="205" />
-        <di:waypoint x="760" y="205" />
+        <di:waypoint x="450" y="205" />
+        <di:waypoint x="520" y="205" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_0if932b" bpmnElement="Flow_0rfv62b">
-        <di:waypoint x="860" y="205" />
-        <di:waypoint x="902" y="205" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="BPMNEdge_0omroet" bpmnElement="Flow_107wyc7">
-        <di:waypoint x="420" y="205" />
-        <di:waypoint x="460" y="205" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="BPMNEdge_0c0ur52" bpmnElement="Association_028e3bw">
-        <di:waypoint x="860" y="146" />
-        <di:waypoint x="845" y="165" />
+        <di:waypoint x="620" y="205" />
+        <di:waypoint x="662" y="205" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

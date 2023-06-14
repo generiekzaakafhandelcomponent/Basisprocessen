@@ -24,21 +24,21 @@
         {
             "label": "Voornaam",
             "tableView": true,
-            "key": "aanvrager.persoonsgegevens.voornaam",
+            "key": "pv.voornaam",
             "type": "textfield",
             "input": true
         },
         {
             "label": "Tussenvoegsel",
             "tableView": true,
-            "key": "aanvrager.persoonsgegevens.tussenvoegsel",
+            "key": "pv.tussenvoegsel",
             "type": "textfield",
             "input": true
         },
         {
             "label": "Achternaam",
             "tableView": true,
-            "key": "aanvrager.persoonsgegevens.achternaam",
+            "key": "pv.achternaam",
             "type": "textfield",
             "input": true
         },
@@ -64,6 +64,11 @@
                     "label": "Post",
                     "value": "post",
                     "shortcut": ""
+                },
+                {
+                    "label": "Portaal",
+                    "value": "portaal",
+                    "shortcut": ""
                 }
             ],
             "key": "pv.communicatievoorkeur",
@@ -71,20 +76,15 @@
             "input": true
         },
         {
-            "label": "Volledige naam",
-            "tableView": true,
-            "key": "pv.volledigeNaam",
-            "calculateValue": "value = data.aanvrager.persoonsgegevens.voornaam + ' ' + data.aanvrager.persoonsgegevens.tussenvoegsel + (data.aanvrager.persoonsgegevens.tussenvoegsel != '' ? ' ' : '') + data.aanvrager.persoonsgegevens.achternaam",
-            "type": "hidden",
-            "input": true
-        },
-        {
             "type": "button",
             "label": "Doorgaan",
-            "key": "submit",
+            "action": "custom",
+            "showValidations": false,
             "disableOnInvalid": true,
+            "tableView": false,
+            "key": "submit",
             "input": true,
-            "tableView": false
+            "custom": "form.submit(); component.disabled = true;"
         }
     ]
 }

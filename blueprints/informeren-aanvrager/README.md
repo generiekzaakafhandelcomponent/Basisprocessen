@@ -5,7 +5,6 @@
 
 This is a process that is used to inform applicants. The next flows are supported:
 - Creating an example case
-- Control of said case
 - Informeren aanvrager
 
 ## Miscellaneous requirements

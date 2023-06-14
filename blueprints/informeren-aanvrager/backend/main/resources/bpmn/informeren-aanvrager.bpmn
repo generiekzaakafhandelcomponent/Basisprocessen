@@ -14,21 +14,11 @@
       <bpmn:extensionElements />
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${communicatievoorkeur == "portaal"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_0r8rt6r" sourceRef="StartEvent" targetRef="VoorbereidenProcesVariabelenTask" />
+    <bpmn:sequenceFlow id="Flow_0r8rt6r" sourceRef="StartEvent" targetRef="CommunicatieVoorkeurGateway" />
     <bpmn:sequenceFlow id="ViaEmailSequenceFlow" name="Via e-mail" sourceRef="CommunicatieVoorkeurGateway" targetRef="VerzendenEmailMetBijlageTask" />
     <bpmn:sequenceFlow id="ViaPostSequenceFlow" name="Via post" sourceRef="CommunicatieVoorkeurGateway" targetRef="AfdrukkenBriefTask">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${communicatievoorkeur == "post"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_0v86pqx" sourceRef="VoorbereidenProcesVariabelenTask" targetRef="CommunicatieVoorkeurGateway" />
-    <bpmn:serviceTask id="VoorbereidenProcesVariabelenTask" name="Voorbereiden variabelen" camunda:expression="${true}">
-      <bpmn:extensionElements>
-        <camunda:inputOutput>
-          <camunda:outputParameter name="datumAanvraag">${dateTimeService.getDayMonthFullYearPatternDate(documentVariableDelegate.findValueByJsonPointerOrDefault("/datumAanvraagOntvangen", execution, "").toString())}</camunda:outputParameter>
-        </camunda:inputOutput>
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_0r8rt6r</bpmn:incoming>
-      <bpmn:outgoing>Flow_0v86pqx</bpmn:outgoing>
-    </bpmn:serviceTask>
     <bpmn:sendTask id="VersturenEmailNotificatieTask" name="versturen e-mail notificatie" camunda:asyncBefore="true" camunda:asyncAfter="true" camunda:expression="${mailService.sendElementTemplateTaskMail(execution)} ">
       <bpmn:extensionElements>
         <camunda:inputOutput>
@@ -81,7 +71,7 @@
     </bpmn:endEvent>
     <bpmn:exclusiveGateway id="CommunicatieVoorkeurGateway" name="communicatie voorkeur" default="ViaEmailSequenceFlow">
       <bpmn:extensionElements />
-      <bpmn:incoming>Flow_0v86pqx</bpmn:incoming>
+      <bpmn:incoming>Flow_0r8rt6r</bpmn:incoming>
       <bpmn:outgoing>ViaPortaalSequenceFlow</bpmn:outgoing>
       <bpmn:outgoing>ViaEmailSequenceFlow</bpmn:outgoing>
       <bpmn:outgoing>ViaPostSequenceFlow</bpmn:outgoing>
@@ -90,94 +80,86 @@
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_17efitx">
       <bpmndi:BPMNShape id="Participant_1h0eeom_di" bpmnElement="InformerenAanvragerParticipant" isHorizontal="true">
-        <dc:Bounds x="160" y="80" width="790" height="390" />
+        <dc:Bounds x="160" y="80" width="630" height="390" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1tyne5g_di" bpmnElement="StartEvent">
         <dc:Bounds x="202" y="252" width="36" height="36" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0csubga_di" bpmnElement="VoorbereidenProcesVariabelenTask">
-        <dc:Bounds x="310" y="230" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0c5z9n1_di" bpmnElement="VersturenEmailNotificatieTask">
-        <dc:Bounds x="650" y="110" width="100" height="80" />
+        <dc:Bounds x="490" y="110" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_13ai2rf_di" bpmnElement="VerzendenEmailMetBijlageTask">
-        <dc:Bounds x="650" y="230" width="100" height="80" />
+        <dc:Bounds x="490" y="230" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_10kr4g4_di" bpmnElement="AfdrukkenBriefTask">
-        <dc:Bounds x="650" y="350" width="100" height="80" />
+        <dc:Bounds x="490" y="350" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1o2l2vc_di" bpmnElement="PortaalNotificatieVerstuurdEndEvent">
-        <dc:Bounds x="842" y="132" width="36" height="36" />
+        <dc:Bounds x="682" y="132" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="818" y="175" width="85" height="27" />
+          <dc:Bounds x="658" y="175" width="85" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0xf1ra8_di" bpmnElement="EmailMetBijlageVerstuurdEndEvent">
-        <dc:Bounds x="842" y="252" width="36" height="36" />
+        <dc:Bounds x="682" y="252" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="818" y="295" width="84" height="27" />
+          <dc:Bounds x="658" y="295" width="84" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1wftenp_di" bpmnElement="BriefAfgedruktEndEvent">
-        <dc:Bounds x="842" y="372" width="36" height="36" />
+        <dc:Bounds x="682" y="372" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="824" y="415" width="72" height="14" />
+          <dc:Bounds x="664" y="415" width="72" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_0fukaxe_di" bpmnElement="CommunicatieVoorkeurGateway" isMarkerVisible="true">
-        <dc:Bounds x="495" y="245" width="50" height="50" />
+        <dc:Bounds x="335" y="245" width="50" height="50" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="446" y="226" width="68" height="27" />
+          <dc:Bounds x="286" y="226" width="68" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_04kzfel_di" bpmnElement="Flow_04kzfel">
-        <di:waypoint x="750" y="150" />
-        <di:waypoint x="842" y="150" />
+        <di:waypoint x="590" y="150" />
+        <di:waypoint x="682" y="150" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1kvdq3k_di" bpmnElement="Flow_1kvdq3k">
-        <di:waypoint x="750" y="270" />
-        <di:waypoint x="842" y="270" />
+        <di:waypoint x="590" y="270" />
+        <di:waypoint x="682" y="270" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0abrfze_di" bpmnElement="Flow_0abrfze">
-        <di:waypoint x="750" y="390" />
-        <di:waypoint x="842" y="390" />
+        <di:waypoint x="590" y="390" />
+        <di:waypoint x="682" y="390" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0qtbuqp_di" bpmnElement="ViaPortaalSequenceFlow">
-        <di:waypoint x="520" y="245" />
-        <di:waypoint x="520" y="150" />
-        <di:waypoint x="650" y="150" />
+        <di:waypoint x="360" y="245" />
+        <di:waypoint x="360" y="150" />
+        <di:waypoint x="490" y="150" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="554" y="133" width="53" height="14" />
+          <dc:Bounds x="394" y="133" width="53" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0r8rt6r_di" bpmnElement="Flow_0r8rt6r">
         <di:waypoint x="238" y="270" />
-        <di:waypoint x="310" y="270" />
+        <di:waypoint x="335" y="270" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0y8ld23_di" bpmnElement="ViaEmailSequenceFlow">
-        <di:waypoint x="545" y="270" />
-        <di:waypoint x="650" y="270" />
+        <di:waypoint x="385" y="270" />
+        <di:waypoint x="490" y="270" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="566" y="243" width="49" height="14" />
+          <dc:Bounds x="406" y="243" width="49" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0ggf0a5_di" bpmnElement="ViaPostSequenceFlow">
-        <di:waypoint x="520" y="295" />
-        <di:waypoint x="520" y="390" />
-        <di:waypoint x="650" y="390" />
+        <di:waypoint x="360" y="295" />
+        <di:waypoint x="360" y="390" />
+        <di:waypoint x="490" y="390" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="571" y="363" width="40" height="14" />
+          <dc:Bounds x="411" y="363" width="40" height="14" />
         </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0v86pqx_di" bpmnElement="Flow_0v86pqx">
-        <di:waypoint x="410" y="270" />
-        <di:waypoint x="495" y="270" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
