@@ -15,9 +15,7 @@
             "$ref": "#/definitions/klantFeedback"
         },
         "openZaak": {
-            "type": "object",
-            "description": "OpenZaak",
-            "$ref": "#/definitions/openZaak"
+            "$ref": "openZaak.schema.json#/definitions/openZaak"
         },
         "klantVraag": {
             "type": "object",
@@ -134,11 +132,6 @@
                     "description": "Gewijzigde vraag van de klant"
                 }
             }
-        },
-        "openZaak": {
-            "type": "object",
-            "description": "OpenZaak",
-            "$ref": "openZaak.schema.json"
         },
         "caseMetadata": {
             "type": "object",

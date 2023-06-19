@@ -7,6 +7,7 @@ import com.ritense.document.domain.search.SearchOperator;
 import com.ritense.document.domain.search.SearchRequestValidator;
 import com.ritense.document.service.SearchFieldService;
 import com.ritense.document.service.impl.JsonSchemaDocumentSearchService;
+import com.ritense.valtimo.contract.authentication.UserManagementService;
 import com.ritense.valtimo.contract.database.QueryDialectHelper;
 import com.ritense.valtimo.contract.utils.SecurityUtils;
 import org.apache.commons.lang3.NotImplementedException;
@@ -48,11 +49,12 @@ public class CustomDocumentSearchService extends JsonSchemaDocumentSearchService
     private final QueryDialectHelper queryDialectHelper;
 
     public CustomDocumentSearchService(
-        EntityManager entityManager,
-        QueryDialectHelper queryDialectHelper,
-        SearchFieldService searchFieldService
+            EntityManager entityManager,
+            QueryDialectHelper queryDialectHelper,
+            SearchFieldService searchFieldService,
+            UserManagementService userManagementService
     ) {
-        super(entityManager, queryDialectHelper, searchFieldService);
+        super(entityManager, queryDialectHelper, searchFieldService, userManagementService);
         this.entityManager = entityManager;
         this.queryDialectHelper = queryDialectHelper;
     }

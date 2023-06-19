@@ -9,7 +9,6 @@ import com.ritense.valtimo.contract.authentication.CurrentUserService;
 import com.ritense.valtimo.contract.authentication.ManageableUser;
 import com.ritense.valtimo.implementation.service.CommonDocumentService;
 import com.valtimo.keycloak.service.KeycloakUserManagementService;
-import lombok.RequiredArgsConstructor;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.springframework.stereotype.Component;
 
@@ -19,12 +18,17 @@ import java.util.Date;
 import java.util.Optional;
 
 @Component
-@RequiredArgsConstructor
 public class ToelichtingMedewerkerService {
 
     private final CommonDocumentService commonDocumentService;
     private final CurrentUserService currentUserService;
     private final KeycloakUserManagementService keycloakUserManagementService;
+
+    public ToelichtingMedewerkerService(CommonDocumentService commonDocumentService, CurrentUserService currentUserService, KeycloakUserManagementService keycloakUserManagementService) {
+        this.commonDocumentService = commonDocumentService;
+        this.currentUserService = currentUserService;
+        this.keycloakUserManagementService = keycloakUserManagementService;
+    }
 
     public void addTimeStampAndCurrentUserToDocument(DelegateExecution execution) throws IllegalAccessException {
         var document = commonDocumentService.findDocumentById(execution.getBusinessKey());

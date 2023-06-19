@@ -2,20 +2,24 @@ package com.ritense.valtimo.implementation.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ritense.document.domain.impl.JsonSchemaDocument;
-import com.ritense.openzaak.service.ZaakInstanceLinkService;
+import com.ritense.zakenapi.link.ZaakInstanceLinkService;
 import com.ritense.openzaak.service.ZaakService;
-import lombok.RequiredArgsConstructor;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
 @Component
-@RequiredArgsConstructor
 public class OpenZaakPropertiesService {
     private final ZaakService zaakService;
     private final CommonDocumentService commonDocumentService;
     private final ZaakInstanceLinkService zaakInstanceLinkService;
+
+    public OpenZaakPropertiesService(ZaakService zaakService, CommonDocumentService commonDocumentService, ZaakInstanceLinkService zaakInstanceLinkService) {
+        this.zaakService = zaakService;
+        this.commonDocumentService = commonDocumentService;
+        this.zaakInstanceLinkService = zaakInstanceLinkService;
+    }
 
     public void getOpenZaakId(DelegateExecution execution) {
         var document = commonDocumentService.findDocumentById(execution.getBusinessKey());

@@ -2,6 +2,7 @@ package com.ritense.valtimo.implementation.config;
 
 import com.ritense.document.autoconfigure.DocumentAutoConfiguration;
 import com.ritense.document.service.SearchFieldService;
+import com.ritense.valtimo.contract.authentication.UserManagementService;
 import com.ritense.document.service.impl.JsonSchemaDocumentSearchService;
 import com.ritense.valtimo.contract.database.QueryDialectHelper;
 import com.ritense.valtimo.implementation.service.CustomDocumentSearchService;
@@ -20,12 +21,14 @@ public class CustomizedValtimoConfiguration {
     public JsonSchemaDocumentSearchService documentSearchService(
         final EntityManager entityManager,
         final QueryDialectHelper queryDialectHelper,
-        final SearchFieldService searchFieldService
+        final SearchFieldService searchFieldService,
+        final UserManagementService userManagementService
     ) {
         return new CustomDocumentSearchService(
             entityManager,
             queryDialectHelper,
-            searchFieldService
+            searchFieldService,
+            userManagementService
         );
     }
 }

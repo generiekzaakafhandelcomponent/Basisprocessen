@@ -8,15 +8,17 @@ import com.ritense.document.domain.impl.JsonSchemaDocumentId;
 import com.ritense.document.domain.impl.request.ModifyDocumentRequest;
 import com.ritense.document.exception.DocumentNotFoundException;
 import com.ritense.document.service.DocumentService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
-@RequiredArgsConstructor
 @Component
 public class CommonDocumentService {
     private final DocumentService documentService;
+
+    public CommonDocumentService(DocumentService documentService) {
+        this.documentService = documentService;
+    }
 
     public JsonSchemaDocument findDocumentById(String documentId) {
         return (JsonSchemaDocument) documentService.findBy
@@ -36,9 +38,5 @@ public class CommonDocumentService {
         if (modifyResult.errors().size() > 0) {
             throw new RuntimeException("Document not updated!");
         }
-    }
-
-    public String getOrThrowEmptyText(JsonSchemaDocument document, String path) {
-        return document.content().getValueBy(JsonPointer.valueOf(path)).orElse(TextNode.valueOf("")).asText();
     }
 }
