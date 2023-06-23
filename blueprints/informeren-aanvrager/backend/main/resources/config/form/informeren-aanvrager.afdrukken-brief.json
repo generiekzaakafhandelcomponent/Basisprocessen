@@ -4,7 +4,7 @@
         {
             "label": "HTML",
             "tag": "p",
-            "content": "Het document is gegenereerd. Ga naar tabblad 'Documenten' om het document te openen en af te drukken.",
+            "content": "Genereren van de brief is buiten scope van dit voorbeeld. Deze user taak gaat ervan uit dat onder tabblad 'Documenten' de brief klaar staat om te openen en af te drukken.",
             "refreshOnChange": false,
             "key": "html",
             "type": "htmlelement",
