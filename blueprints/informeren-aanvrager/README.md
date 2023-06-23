@@ -1,27 +1,28 @@
 # Informeren aanvrager
 [![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/generiekzaakafhandelcomponent/Basisprocessen/blob/feature/generieke-zaak/README.md)
+
+## Introduction
+
+This blueprint provides a process to inform applicants. Two flows are provided:
+- Informeren aanvrager (subprocess)
+- Example main process (in order to use the subprocess)
+
 ## Prerequisites
 - A working Valtimo instance
-- The implementation of a mail module. In this blueprint the local-mail module is used. Please note that because of that this implementation doesn't send an email. (the process will still work without this)
-
-This is a process that is used to inform applicants. The next flows are provided:
-- Creating an example case
-- Informeren aanvrager
+- A mail module. In this blueprint the local-mail module is used (which is a dummy implementation)
 
 ## Instructions
 ### Copy files
-- Copy the folders and files from the blueprint process 'informeren-aanvrager'
+- Copy the directories and files in the `main/resource` directory of 'informeren-aanvrager' to your own Valtimo backend implementation below `src/main/resources`. 
 ### Restart Valtimo
-- (re)start Valtimo
-### Set Roles
-- Select the roles needed to have access to the case. At first the cases tab is empty. To be able to select a case you need to set the roles. In order to do this go in your environment menu to `Admin > Cases > Aanvraag` and choose the roles that have access to this case.
-
+- (re)start Valtimo your Valtimo instance
+### Set Roles in the Valtimo interface
+- Login (e.g. through http://localhost:4200) ->  `Admin > Cases > Aanvraag` and choose the roles that have access to this case.
 
 ## Additional information
-- For the call activity to work, where the main process passes process variables to subprocesses, the mail subject and template name under the `Inputs` section of the call activity need to be set.
-- In this example of the call activity 'Informeren aanvrager' under the tab `Input/Output`, the process variables 'emailTemplateSubject' and 'emailTemplateName' are passed to the send tasks of the subprocess.
-
-
+- This example shows how to pass process variables from a call activity to a subprocesses. In this case 'emailTemplateSubject' and 'emailTemplateName'. This is configured in the`Inputs` section of the "Informeren aanvrager" call activity.
 
 **Note:
 This process is tested with Valtimo backend version: `10.5.0.RELEASE`**
+
+
