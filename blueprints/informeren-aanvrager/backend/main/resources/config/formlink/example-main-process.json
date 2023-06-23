@@ -1,0 +1,12 @@
+[
+    {
+        "formName": "example-form-informeren-aanvrager.start",
+        "formLinkElementId": "ExampleAanvraagStartEvent",
+        "formAssociationType": "start-event"
+    },
+    {
+        "formName": "example-form-informeren-aanvrager",
+        "formLinkElementId": "ExampleFormTask",
+        "formAssociationType": "user-task"
+    }
+]

@@ -1,0 +1,26 @@
+{
+    "display": "form",
+    "components": [
+        {
+            "label": "HTML",
+            "tag": "p",
+            "content": "Genereren van de brief is buiten scope van dit voorbeeld. Deze user taak gaat ervan uit dat onder tabblad 'Documenten' de brief klaar staat om te openen en af te drukken.",
+            "refreshOnChange": false,
+            "key": "html",
+            "type": "htmlelement",
+            "input": false,
+            "tableView": false
+        },
+        {
+            "type": "button",
+            "label": "Doorgaan",
+            "action": "custom",
+            "showValidations": false,
+            "disableOnInvalid": true,
+            "tableView": false,
+            "key": "submit",
+            "input": true,
+            "custom": "form.submit(); component.disabled = true;"
+        }
+    ]
+}

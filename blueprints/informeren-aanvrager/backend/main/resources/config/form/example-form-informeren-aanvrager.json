@@ -1,0 +1,90 @@
+{
+    "display": "form",
+    "components": [
+        {
+            "label": "HTML",
+            "tag": "div",
+            "content": "<h2>Example Form</h2>",
+            "refreshOnChange": false,
+            "key": "html",
+            "type": "htmlelement",
+            "input": false,
+            "tableView": false
+        },
+        {
+            "label": "Aanvraag gegevens",
+            "tag": "div",
+            "content": "<h4>Aanvraag gegevens</h4>",
+            "refreshOnChange": false,
+            "key": "html1",
+            "type": "htmlelement",
+            "input": false,
+            "tableView": false
+        },
+        {
+            "label": "Voornaam",
+            "tableView": true,
+            "key": "pv.voornaam",
+            "type": "textfield",
+            "input": true
+        },
+        {
+            "label": "Tussenvoegsel",
+            "tableView": true,
+            "key": "pv.tussenvoegsel",
+            "type": "textfield",
+            "input": true
+        },
+        {
+            "label": "Achternaam",
+            "tableView": true,
+            "key": "pv.achternaam",
+            "type": "textfield",
+            "input": true
+        },
+        {
+            "label": "E-mail",
+            "tableView": true,
+            "key": "pv.emailadres",
+            "type": "email",
+            "input": true
+        },
+        {
+            "label": "Communicatievoorkeur",
+            "optionsLabelPosition": "right",
+            "inline": false,
+            "tableView": false,
+            "values": [
+                {
+                    "label": "E-Mail",
+                    "value": "email",
+                    "shortcut": ""
+                },
+                {
+                    "label": "Post",
+                    "value": "post",
+                    "shortcut": ""
+                },
+                {
+                    "label": "Portaal",
+                    "value": "portaal",
+                    "shortcut": ""
+                }
+            ],
+            "key": "pv.communicatievoorkeur",
+            "type": "radio",
+            "input": true
+        },
+        {
+            "type": "button",
+            "label": "Doorgaan",
+            "action": "custom",
+            "showValidations": false,
+            "disableOnInvalid": true,
+            "tableView": false,
+            "key": "submit",
+            "input": true,
+            "custom": "form.submit(); component.disabled = true;"
+        }
+    ]
+}

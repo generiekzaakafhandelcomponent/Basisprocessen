@@ -1,0 +1,102 @@
+# This repository adheres to the publiccode.yml standard by including this 
+# metadata file that makes public software easily discoverable.
+# More info at https://github.com/italia/publiccode.yml
+
+publiccodeYmlVersion: '0.2'
+categories:
+  - business-process-management
+description:
+  en:
+    features:
+      - Creating an example case
+      - Informeren aanvrager
+    genericName: GZAC Component
+    longDescription: |
+      This is a Valtimo GZAC component
+
+
+      ## Prerequisites
+
+
+
+      - A working Valtimo instance
+
+
+
+      This is a process that is used to inform applicants. The next flows are
+      supported:
+
+
+
+      - Creating an example case
+
+
+
+      - Informeren aanvrager
+
+
+
+      ## Miscellaneous requirements
+
+
+
+      The next factors are required for a completely working process
+
+
+
+      - The implementation of a mail module. In this blueprint the local-mail
+
+      module is used. Please note that this doesn't send mail. (the process will
+
+      still work without this)
+
+
+
+      - Set the mail subject and template name under the \\\`Inputs\\\` section
+      of
+
+      the call activity.
+    shortDescription: This gzac component contains the 'informeren aanvrager' process
+developmentStatus: stable
+intendedAudience:
+  countries:
+    - nl
+  scope:
+    - government
+    - local-authorities
+    - welfare
+it:
+  conforme:
+    gdpr: false
+    lineeGuidaDesign: false
+    misureMinimeSicurezza: false
+    modelloInteroperabilita: false
+  countryExtensionVersion: '0.2'
+  piattaforme:
+    anpr: false
+    cie: false
+    pagopa: false
+    spid: false
+landingURL: |-
+  https://github.com/generiekzaakafhandelcomponent/Basisprocessen/tree/main/blueprints/informeren-aanvrager
+legal:
+  license: EUPL-1.2
+  repoOwner: Ritense B.V.
+localisation:
+  availableLanguages:
+    - en
+    - nl
+  localisationReady: false
+maintenance:
+  contacts:
+    - name: Ritense B.V.
+  type: internal
+name: GZAC - Informeren aanvrager
+platforms:
+  - web
+releaseDate: '2023-06-14'
+softwareType: addon
+softwareVersion: 10.5.0.RELEASE
+url: 'https://github.com/generiekzaakafhandelcomponent/Basisprocessen.git'
+usedBy:
+  - Gemeente Den Haag
