@@ -8,7 +8,7 @@ contribution. It will smooth out the experience for all involved. The community 
 
 ## I have a question
 
-> If you want to ask a question, we assume that you have read the available [documentation](https://docs.valtimo.nl/valtimo-implementation/exchange/process-blueprints).
+> If you want to ask a question, we assume that you have read the available [documentation](https://docs.valtimo.nl/getting-started/exchange/blueprints).
 
 Before you ask a question, it is best to search for existing [Issues](https://github.com/generiekzaakafhandelcomponent/Basisprocessen/issues)
 that might help you. In case you have found a suitable issue and still need clarification, you can write your question
@@ -85,7 +85,7 @@ maintainers and the community to understand your suggestion and find related sug
 #### Before submitting an enhancement
 
 - Make sure that you are using the latest version of Valtimo.
-- Read the [documentation](https://docs.valtimo.nl/valtimo-implementation/exchange/process-blueprints#creating-process-blueprints-for-gzac)
+- Read the [documentation](https://docs.valtimo.nl/getting-started/exchange/blueprints#creating-process-blueprints-for-gzac)
 carefully.
 - Find out if the functionality is already covered.
 - Perform a [search](https://github.com/generiekzaakafhandelcomponent/Basisprocessen/issues) to see if the enhancement
@@ -97,12 +97,12 @@ Enhancement suggestions are tracked as [GitHub issues](https://github.com/generi
 
 - Use a **clear and descriptive title** for the issue to identify the suggestion.
 - Provide a **step-by-step description of the suggested enhancement** in as many details as possible.
-- Follow the instructions as listed [here](https://docs.valtimo.nl/valtimo-implementation/exchange/process-blueprints#how-to-import-a-process-blueprint) when
+- Follow the instructions as listed [here](https://docs.valtimo.nl/getting-started/exchange/blueprints#how-to-import-a-process-blueprint) when
 adding a new process blueprint.
 
 ### Adding a new process blueprint
 
-For general guidelines on how to add process blueprints, please see [this page](https://docs.valtimo.nl/valtimo-implementation/exchange/process-blueprints#creating-process-blueprints-for-gzac).
+For general guidelines on how to add process blueprints, please see [this page](https://docs.valtimo.nl/getting-started/exchange/blueprints#creating-process-blueprints-for-gzac).
 
 ### Improving the documentation
 
