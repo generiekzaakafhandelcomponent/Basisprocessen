@@ -12,6 +12,11 @@
             "input": true
         },
         {
+            "type": "hidden",
+            "key": "pv.categorie",
+            "input": true
+        },
+        {
             "label": "",
             "columns": [
                 {
@@ -56,7 +61,7 @@
                     "components": [
                         {
                             "label": "HTML",
-                            "content": "<h4>Aanvraag</h4><section>\n    <dl class=\"row mb-0\">\n        <dd class=\"col-6\">Aanvraag volledig?</dd>\n        <dt class=\"col-6\">{{ data.aanvraag.isAanvraagVolledig ? 'Ja' : 'Nee' }}</dt>\n    </dl>\n    <dl class=\"row mb-0\">\n        <dd class=\"col-6\">Vergunning verleend?</dd>\n        <dt class=\"col-6\">{{ data.aanvraag.isVergunningVerleend ? 'Ja' : 'Nee' }}</dt>\n    </dl>\n    <dl class=\"row mb-0\">\n        <dd class=\"col-6\">Besluit akkoord?</dd>\n        <dt class=\"col-6\">{{ data.aanvraag.isBesluitAkkoord ? 'Ja' : 'Nee' }}</dt>\n    </dl>\n</section>",
+                            "content": "<h4>Aanvraag</h4><section>\n    <dl class=\"row mb-0\">\n        <dd class=\"col-6\">Categorie</dd>\n        <dt class=\"col-6\">{{ data.pv.categorie || '-' }}</dt>\n    </dl>\n    <dl class=\"row mb-0\">\n        <dd class=\"col-6\">Aanvraag volledig?</dd>\n        <dt class=\"col-6\">{{ data.aanvraag.isAanvraagVolledig == null ? 'Nog niet bepaald' : data.aanvraag.isAanvraagVolledig ? 'Ja' : 'Nee' }}</dt>\n    </dl>\n    <dl class=\"row mb-0\">\n        <dd class=\"col-6\">Vergunning verleend?</dd>\n        <dt class=\"col-6\">{{ data.aanvraag.isVergunningVerleend == null ? 'Nog niet bepaald' : data.aanvraag.isVergunningVerleend ? 'Ja' : 'Nee' }}</dt>\n    </dl>\n    <dl class=\"row mb-0\">\n        <dd class=\"col-6\">Besluit akkoord?</dd>\n        <dt class=\"col-6\">{{ data.aanvraag.isBesluitAkkoord == null ? 'Nog niet bepaald' : data.aanvraag.isBesluitAkkoord ? 'Ja' : 'Nee' }}</dt>\n    </dl>\n</section>",
                             "key": "html",
                             "tag": "div",
                             "type": "htmlelement",
