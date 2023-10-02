@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="BepaalCategorie1" name="Bepaal Categorie" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.14.0">
+  <decision id="bepaal-categorie" name="Bepaal categorie">
+    <decisionTable id="DecisionTable_1e8i44i" hitPolicy="FIRST">
+      <input id="InputClause_0hqifpv" camunda:inputVariable="aanvragerPlaats">
+        <inputExpression id="LiteralExpression_1lmkc0l" typeRef="string">
+          <text>aanvragerPlaats</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="categorie" name="categorie" typeRef="string" />
+      <rule id="DecisionRule_060q5zw">
+        <inputEntry id="UnaryTests_1otra87">
+          <text>"Amsterdam"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0do9c6q">
+          <text>"Intern"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0d3iajv">
+        <inputEntry id="UnaryTests_06hm1on">
+          <text>not("Amsterdam")</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0zykokr">
+          <text>"Extern"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="bepaal-categorie">
+        <dc:Bounds height="80" width="180" x="160" y="80" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>
