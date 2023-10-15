@@ -1,0 +1,7 @@
+[
+    {
+        "formName": "simuleren-notificatie.start",
+        "formLinkElementId": "StartEvent_1",
+        "formAssociationType": "start-event"
+    }
+]

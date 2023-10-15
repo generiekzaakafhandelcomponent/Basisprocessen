@@ -1,0 +1,126 @@
+[
+    {
+        "title": "",
+        "key": "zaaknummer",
+        "path": "doc:openzaak.identificatie",
+        "displayType": {
+            "type": "string",
+            "displayTypeParameters": {}
+        },
+        "sortable": true,
+        "defaultSort": null,
+        "order": 0
+    },
+    {
+        "title": "",
+        "key": "statusOmschrijving",
+        "path": "doc:openzaak.statusOmschrijving",
+        "displayType": {
+            "type": "string",
+            "displayTypeParameters": {}
+        },
+        "sortable": true,
+        "defaultSort": null,
+        "order": 1
+    },
+    {
+        "title": "",
+        "key": "resultaatOmschrijving",
+        "path": "doc:openzaak.resulaatOmschrijving",
+        "displayType": {
+            "type": "string",
+            "displayTypeParameters": {}
+        },
+        "sortable": true,
+        "defaultSort": null,
+        "order": 2
+    },
+    {
+        "title": "",
+        "key": "datumAanvraagOntvangen",
+        "path": "doc:aanvraaggegevens.datumAanvraagOntvangen",
+        "displayType": {
+            "type": "date",
+            "displayTypeParameters": {
+                "dateFormat": "DD-MM-yyyy HH:mm"
+            }
+        },
+        "sortable": true,
+        "defaultSort": null,
+        "order": 3
+    },
+    {
+        "title": "",
+        "key": "voorNaamAanvrager",
+        "path": "doc:aanvrager.voornaam",
+        "displayType": {
+            "type": "string",
+            "displayTypeParameters": {}
+        },
+        "sortable": true,
+        "defaultSort": null,
+        "order": 4
+    },
+    {
+        "title": "",
+        "key": "achterNaamAanvrager",
+        "path": "doc:aanvrager.achternaam",
+        "displayType": {
+            "type": "string",
+            "displayTypeParameters": {}
+        },
+        "sortable": true,
+        "defaultSort": null,
+        "order": 5
+    },
+    {
+        "title": "",
+        "key": "emailadresAanvrager",
+        "path": "doc:aanvrager.emailadres",
+        "displayType": {
+            "type": "string",
+            "displayTypeParameters": {}
+        },
+        "sortable": true,
+        "defaultSort": null,
+        "order": 6
+    },
+    {
+        "title": "",
+        "key": "telefoonnummerAanvrager",
+        "path": "doc:aanvrager.telefoonnummer",
+        "displayType": {
+            "type": "string",
+            "displayTypeParameters": {}
+        },
+        "sortable": true,
+        "defaultSort": null,
+        "order": 7
+    },
+    {
+        "title": "",
+        "key": "soortAanvraag",
+        "path": "doc:aanvraaggegevens.soortAanvraag",
+        "displayType": {
+            "type": "string",
+            "displayTypeParameters": {}
+        },
+        "sortable": true,
+        "defaultSort": null,
+        "order": 8
+    },
+    {
+        "title": "",
+        "key": "lastModified",
+        "path": "case:modifiedOn",
+        "displayType": {
+            "type": "date",
+            "displayTypeParameters": {
+                "dateFormat": "DD-MM-yyyy HH:mm:ss"
+            }
+        },
+        "sortable": true,
+        "defaultSort": "DESC",
+        "order": 9
+    }
+]

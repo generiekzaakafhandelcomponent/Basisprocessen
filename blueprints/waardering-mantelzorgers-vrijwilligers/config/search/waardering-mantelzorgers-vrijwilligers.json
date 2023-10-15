@@ -1,0 +1,68 @@
+{
+    "searchFields": [
+        {
+            "key": "zaaknummer",
+            "path": "doc:openzaak.identificatie",
+            "dataType": "text",
+            "fieldType": "single",
+            "matchType": "like",
+            "title": ""
+        },
+        {
+            "key": "statusOmschrijving",
+            "path": "doc:openzaak.statusOmschrijving",
+            "dataType": "text",
+            "fieldType": "single",
+            "matchType": "like",
+            "title": ""
+        },
+        {
+            "key": "datumAanvraagOntvangen",
+            "path": "doc:aanvraaggegevens.datumAanvraagOntvangen",
+            "dataType": "date",
+            "fieldType": "single",
+            "matchType": "exact",
+            "title": ""
+        },
+        {
+            "key": "voorNaamAanvrager",
+            "path": "doc:aanvrager.voornaam",
+            "dataType": "text",
+            "fieldType": "single",
+            "matchType": "like",
+            "title": ""
+        },
+        {
+            "key": "achterNaamAanvrager",
+            "path": "doc:aanvrager.achternaam",
+            "dataType": "text",
+            "fieldType": "single",
+            "matchType": "like",
+            "title": ""
+        },
+        {
+            "key": "emailadresAanvrager",
+            "path": "doc:aanvrager.emailadres",
+            "dataType": "text",
+            "fieldType": "single",
+            "matchType": "like",
+            "title": ""
+        },
+        {
+            "key": "telefoonnummerAanvrager",
+            "path": "doc:aanvrager.telefoonnummer",
+            "dataType": "text",
+            "fieldType": "single",
+            "matchType": "like",
+            "title": ""
+        },
+        {
+            "key": "soortAanvraag",
+            "path": "doc:aanvraaggegevens.soortAanvraag",
+            "dataType": "text",
+            "fieldType": "single",
+            "matchType": "like",
+            "title": ""
+        }
+    ]
+}
