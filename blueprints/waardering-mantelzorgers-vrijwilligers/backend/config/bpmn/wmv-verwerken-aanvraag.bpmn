@@ -26,7 +26,7 @@
     </bpmn:serviceTask>
     <bpmn:dataObjectReference id="DocumentDataObjectReference" name="Document" dataObjectRef="DataObject_0wdkhv9" />
     <bpmn:dataObject id="DataObject_0wdkhv9" />
-    <bpmn:serviceTask id="OphalenInitiatorBSNTask" name="ophalen initiator BSN" camunda:asyncAfter="true" camunda:expression="${true}" camunda:resultVariable="initiatorBSN">
+    <bpmn:serviceTask id="OphalenInitiatorBSNTask" name="Ophalen initiator BSN" camunda:asyncAfter="true" camunda:expression="${true}" camunda:resultVariable="initiatorBSN">
       <bpmn:incoming>Flow_1ts9jja</bpmn:incoming>
       <bpmn:outgoing>Flow_15mw311</bpmn:outgoing>
       <bpmn:property id="Property_00z0gry" name="__targetRef_placeholder" />
@@ -36,7 +36,7 @@
       </bpmn:dataInputAssociation>
     </bpmn:serviceTask>
     <bpmn:dataStoreReference id="ZakenAPIDataStoreReference2" name="Zaken API" />
-    <bpmn:serviceTask id="ControlerenAantalWMVZakenVoorBSNTask" name="controleren op meerdere zaken voor BSN" camunda:asyncAfter="true" camunda:expression="${0}" camunda:resultVariable="aantalZakenVoorBSN">
+    <bpmn:serviceTask id="ControlerenAantalWMVZakenVoorBSNTask" name="Controleren op meerdere zaken voor BSN" camunda:asyncAfter="true" camunda:expression="${0}" camunda:resultVariable="aantalZakenVoorBSN">
       <bpmn:incoming>Flow_15mw311</bpmn:incoming>
       <bpmn:outgoing>Flow_1s17bsp</bpmn:outgoing>
       <bpmn:property id="Property_0uflr79" name="__targetRef_placeholder" />
@@ -131,22 +131,6 @@
     </bpmn:callActivity>
     <bpmn:dataStoreReference id="ObjectenAPIDataStoreReference" name="Objecten API" />
     <bpmn:dataStoreReference id="ZakenAPIDataStoreReference1" name="Zaken API" />
-    <bpmn:endEvent id="ZaakAfgebrokenEndEvent" name="Zaak afgebroken">
-      <bpmn:incoming>Flow_1fxsn06</bpmn:incoming>
-    </bpmn:endEvent>
-    <bpmn:callActivity id="AfsluitenZaakCallActivity1" name="Afsluiten zaak" camunda:asyncBefore="true" camunda:asyncAfter="true" calledElement="generic-afsluiten-zaak">
-      <bpmn:extensionElements>
-        <camunda:in businessKey="#{execution.processBusinessKey}" />
-        <camunda:inputOutput>
-          <camunda:inputParameter name="resultaat">GEWEIGERD</camunda:inputParameter>
-          <camunda:inputParameter name="status">AFGEHANDELD</camunda:inputParameter>
-        </camunda:inputOutput>
-        <camunda:in source="resultaat" target="resultaat" />
-        <camunda:in source="status" target="status" />
-      </bpmn:extensionElements>
-      <bpmn:incoming>JaSequenceFlow</bpmn:incoming>
-      <bpmn:outgoing>Flow_1fxsn06</bpmn:outgoing>
-    </bpmn:callActivity>
     <bpmn:exclusiveGateway id="Gateway_02zd0ru">
       <bpmn:incoming>Flow_0mll4iv</bpmn:incoming>
       <bpmn:incoming>Flow_1ndibaw</bpmn:incoming>
@@ -169,82 +153,141 @@
     <bpmn:sequenceFlow id="Flow_04dsvmo" sourceRef="UpdateZaakstatusCallActivity1" targetRef="NotificatieObjectGewijzigdOntvangenEvent" />
     <bpmn:sequenceFlow id="Flow_0t4az2l" sourceRef="NotificatieObjectGewijzigdOntvangenEvent" targetRef="AfsluitenZaakCallActivity" />
     <bpmn:sequenceFlow id="Flow_14hhc7v" sourceRef="AfsluitenZaakCallActivity" targetRef="ZaakAfgehandeldEndEvent" />
+    <bpmn:callActivity id="AfsluitenZaakCallActivity1" name="Afsluiten zaak" camunda:asyncBefore="true" camunda:asyncAfter="true" calledElement="generic-afsluiten-zaak">
+      <bpmn:extensionElements>
+        <camunda:in businessKey="#{execution.processBusinessKey}" />
+        <camunda:inputOutput>
+          <camunda:inputParameter name="resultaat">GEWEIGERD</camunda:inputParameter>
+          <camunda:inputParameter name="status">AFGEHANDELD</camunda:inputParameter>
+        </camunda:inputOutput>
+        <camunda:in source="resultaat" target="resultaat" />
+        <camunda:in source="status" target="status" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>JaSequenceFlow</bpmn:incoming>
+      <bpmn:outgoing>Flow_1fxsn06</bpmn:outgoing>
+    </bpmn:callActivity>
+    <bpmn:endEvent id="ZaakAfgebrokenEndEvent" name="Zaak afgebroken">
+      <bpmn:incoming>Flow_1fxsn06</bpmn:incoming>
+    </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_1fxsn06" sourceRef="AfsluitenZaakCallActivity1" targetRef="ZaakAfgebrokenEndEvent" />
-    <bpmn:textAnnotation id="TextAnnotation_1eojbts">
-      <bpmn:text>Als de status = 'Opgehaald door Webshop'</bpmn:text>
-    </bpmn:textAnnotation>
-    <bpmn:textAnnotation id="TextAnnotation_1yj8h2b">
-      <bpmn:text>Status: 'Afgehandeld' Resultaat: 'Verstrekt'</bpmn:text>
-    </bpmn:textAnnotation>
-    <bpmn:textAnnotation id="TextAnnotation_1dhxzhn">
-      <bpmn:text>Status: 'Afgehandeld'
-Resultaat: 'Geweigerd'</bpmn:text>
-    </bpmn:textAnnotation>
     <bpmn:textAnnotation id="TextAnnotation_0xsmuh1">
       <bpmn:text>zaak handmatig aangemaakt via startformulier</bpmn:text>
     </bpmn:textAnnotation>
-    <bpmn:textAnnotation id="TextAnnotation_19o2z0k">
-      <bpmn:text>Te implementeren: methode om object in object-api aan te maken.</bpmn:text>
-    </bpmn:textAnnotation>
-    <bpmn:textAnnotation id="TextAnnotation_1t7pfkp">
-      <bpmn:text>Configureer een email plugin of implemteer methode om mail te sturen</bpmn:text>
-    </bpmn:textAnnotation>
-    <bpmn:textAnnotation id="TextAnnotation_0zdseal">
-      <bpmn:text>Te implementeren: methode om object in object-api met zaak in Openzaak te koppelen</bpmn:text>
-    </bpmn:textAnnotation>
-    <bpmn:textAnnotation id="TextAnnotation_0z355k8">
-      <bpmn:text>Status 'In behandeling genomen'</bpmn:text>
-    </bpmn:textAnnotation>
-    <bpmn:textAnnotation id="TextAnnotation_12vt36k">
-      <bpmn:text>Status: 'In afwachting van Webshop'</bpmn:text>
-    </bpmn:textAnnotation>
-    <bpmn:association id="Association_109cqga" sourceRef="NotificatieObjectGewijzigdOntvangenEvent" targetRef="TextAnnotation_1eojbts" />
-    <bpmn:association id="Association_04p7nwu" sourceRef="AfsluitenZaakCallActivity" targetRef="TextAnnotation_1yj8h2b" />
-    <bpmn:association id="Association_0i30q4y" sourceRef="TextAnnotation_1dhxzhn" targetRef="AfsluitenZaakCallActivity1" />
     <bpmn:association id="Association_00gcwf9" sourceRef="HandmatigStartEvent" targetRef="TextAnnotation_0xsmuh1" />
-    <bpmn:association id="Association_0kyh8jt" sourceRef="AanmakenWaarderingsobjectTask" targetRef="TextAnnotation_19o2z0k" />
-    <bpmn:association id="Association_0dac3gb" sourceRef="VersturenOntvangstbevestigingTask" targetRef="TextAnnotation_1t7pfkp" />
-    <bpmn:association id="Association_1a9wth6" sourceRef="TextAnnotation_0zdseal" targetRef="LinkWaarderingsobjectAanZaakTask" />
-    <bpmn:association id="Association_1pm8ydk" sourceRef="UpdateZaakstatusCallActivity" targetRef="TextAnnotation_0z355k8" />
-    <bpmn:association id="Association_1kgrby6" sourceRef="UpdateZaakstatusCallActivity1" targetRef="TextAnnotation_12vt36k" />
-    <bpmn:textAnnotation id="TextAnnotation_17np351">
-      <bpmn:text>configureer verzoek plugin om verzoeken uit objects-api te ontvangen</bpmn:text>
-    </bpmn:textAnnotation>
-    <bpmn:association id="Association_1dn46d0" sourceRef="VerzoekOntvangenStartEvent" targetRef="TextAnnotation_17np351" />
     <bpmn:textAnnotation id="TextAnnotation_1balspf">
       <bpmn:text>te implementeren: methode om datum in document te plaatsen</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:association id="Association_1yd35cq" sourceRef="ZetAanvraagOntvangenDatumNaarDocumentTask" targetRef="TextAnnotation_1balspf" />
+    <bpmn:textAnnotation id="TextAnnotation_17np351">
+      <bpmn:text>configureer verzoek plugin om verzoeken uit objects-api te ontvangen</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_1dn46d0" sourceRef="VerzoekOntvangenStartEvent" targetRef="TextAnnotation_17np351" />
     <bpmn:textAnnotation id="TextAnnotation_087h01p">
-      <bpmn:text>te implementeren: methode om bsn uit Openzaak te halen</bpmn:text>
+      <bpmn:text>te implementeren: methode om bsn uit Open Zaak te halen</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:association id="Association_0nm5s1t" sourceRef="OphalenInitiatorBSNTask" targetRef="TextAnnotation_087h01p" />
     <bpmn:textAnnotation id="TextAnnotation_154ucix">
       <bpmn:text>te implementeren: methode om te controleren of er niet al een zaak is op basis van de opgehaalde bsn (initiatorBSN)</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:association id="Association_0ket26m" sourceRef="ControlerenAantalWMVZakenVoorBSNTask" targetRef="TextAnnotation_154ucix" />
+    <bpmn:textAnnotation id="TextAnnotation_0z355k8">
+      <bpmn:text>zet zaakstatus:
+'In behandeling genomen'</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_1pm8ydk" sourceRef="UpdateZaakstatusCallActivity" targetRef="TextAnnotation_0z355k8" />
+    <bpmn:textAnnotation id="TextAnnotation_12vt36k">
+      <bpmn:text>Zet zaakstatus:
+'In afwachting van Webshop'</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_1kgrby6" sourceRef="UpdateZaakstatusCallActivity1" targetRef="TextAnnotation_12vt36k" />
+    <bpmn:textAnnotation id="TextAnnotation_1dhxzhn">
+      <bpmn:text>Zet zaakstatus: 'Afgehandeld'
+Zet zaakresultaat: 'Resultaat: 'Geweigerd'</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0i30q4y" sourceRef="TextAnnotation_1dhxzhn" targetRef="AfsluitenZaakCallActivity1" />
+    <bpmn:textAnnotation id="TextAnnotation_0pvulpl">
+      <bpmn:text>In de praktijk wordt de status van het object door de aangesloten webshop gewijzigd wanneer deze het object heeft opgehaald. Om dit te simuleren, is het ad-hoc proces 'simuleren notificatie' bijgevoegd</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_17e3xo8" sourceRef="NotificatieObjectGewijzigdOntvangenEvent" targetRef="TextAnnotation_0pvulpl" />
+    <bpmn:textAnnotation id="TextAnnotation_1eojbts">
+      <bpmn:text>Als de status = 'Opgehaald door Webshop'</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_109cqga" sourceRef="NotificatieObjectGewijzigdOntvangenEvent" targetRef="TextAnnotation_1eojbts" />
+    <bpmn:textAnnotation id="TextAnnotation_1t7pfkp">
+      <bpmn:text>Configureer een email plugin of implementeer methode om mail te sturen</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0dac3gb" sourceRef="VersturenOntvangstbevestigingTask" targetRef="TextAnnotation_1t7pfkp" />
+    <bpmn:textAnnotation id="TextAnnotation_19o2z0k">
+      <bpmn:text>Te implementeren: methode om object in Objecten API aan te maken.</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0kyh8jt" sourceRef="AanmakenWaarderingsobjectTask" targetRef="TextAnnotation_19o2z0k" />
+    <bpmn:textAnnotation id="TextAnnotation_0zdseal">
+      <bpmn:text>Te implementeren: methode om object in Objecten API met zaak in Open Zaak te koppelen</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_1a9wth6" sourceRef="TextAnnotation_0zdseal" targetRef="LinkWaarderingsobjectAanZaakTask" />
+    <bpmn:textAnnotation id="TextAnnotation_1yj8h2b">
+      <bpmn:text>Zet zaakstatus: 'Afgehandeld'
+Zet zaakresultaat: 'Resultaat: 'Verstrekt'</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_04p7nwu" sourceRef="AfsluitenZaakCallActivity" targetRef="TextAnnotation_1yj8h2b" />
   </bpmn:process>
   <bpmn:message id="Message_13qj6az" name="NOTIFICATIE_OBJECT_GEWIJZIGD_ONTVANGEN_MESSAGE" />
   <bpmn:message id="Message_3qedtck" name="VERZOEK_ONTVANGEN_MESSAGE" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_00qfvfv">
       <bpmndi:BPMNShape id="Participant_02n6qhq_di" bpmnElement="VerwerkenAanvraagParticipant" isHorizontal="true">
-        <dc:Bounds x="180" y="80" width="2031" height="580" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="TextAnnotation_17np351_di" bpmnElement="TextAnnotation_17np351">
-        <dc:Bounds x="220" y="146" width="175" height="59" />
-        <bpmndi:BPMNLabel />
+        <dc:Bounds x="180" y="80" width="2031" height="740" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="TextAnnotation_1balspf_di" bpmnElement="TextAnnotation_1balspf">
-        <dc:Bounds x="430" y="149" width="170" height="53" />
+        <dc:Bounds x="430" y="141" width="170" height="62" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_17np351_di" bpmnElement="TextAnnotation_17np351">
+        <dc:Bounds x="230" y="142" width="175" height="59" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="TextAnnotation_087h01p_di" bpmnElement="TextAnnotation_087h01p">
-        <dc:Bounds x="630" y="146" width="145" height="60" />
+        <dc:Bounds x="608" y="142" width="145" height="60" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="TextAnnotation_154ucix_di" bpmnElement="TextAnnotation_154ucix">
-        <dc:Bounds x="770" y="141" width="185" height="70" />
+        <dc:Bounds x="770" y="137" width="185" height="70" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_0z355k8_di" bpmnElement="TextAnnotation_0z355k8">
+        <dc:Bounds x="1060" y="428" width="160" height="47" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_12vt36k_di" bpmnElement="TextAnnotation_12vt36k">
+        <dc:Bounds x="1690" y="440" width="140" height="55" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1sd2f3e" bpmnElement="TextAnnotation_1dhxzhn">
+        <dc:Bounds x="1957" y="550" width="145" height="70" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_0pvulpl_di" bpmnElement="TextAnnotation_0pvulpl">
+        <dc:Bounds x="1730" y="112" width="190" height="113" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1eojbts_di" bpmnElement="TextAnnotation_1eojbts">
+        <dc:Bounds x="1870" y="447" width="160" height="41" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1t7pfkp_di" bpmnElement="TextAnnotation_1t7pfkp">
+        <dc:Bounds x="1520" y="137" width="150" height="70" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_19o2z0k_di" bpmnElement="TextAnnotation_19o2z0k">
+        <dc:Bounds x="1190" y="137" width="155" height="70" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1jxac30" bpmnElement="TextAnnotation_0zdseal">
+        <dc:Bounds x="1350" y="137" width="155" height="70" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1yj8h2b_di" bpmnElement="TextAnnotation_1yj8h2b">
+        <dc:Bounds x="1952" y="133" width="130" height="70" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1p8c1gr_di" bpmnElement="VerzoekOntvangenStartEvent">
@@ -333,69 +376,73 @@ Resultaat: 'Geweigerd'</bpmn:text>
           <dc:Bounds x="1437" y="482" width="51" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0qey1ef_di" bpmnElement="ZaakAfgebrokenEndEvent">
-        <dc:Bounds x="2123" y="552" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="2100" y="595" width="83" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_0ltf0oi" bpmnElement="AfsluitenZaakCallActivity1">
-        <dc:Bounds x="1971" y="530" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_02zd0ru_di" bpmnElement="Gateway_02zd0ru" isMarkerVisible="true">
         <dc:Bounds x="366" y="315" width="50" height="50" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="TextAnnotation_1eojbts_di" bpmnElement="TextAnnotation_1eojbts">
-        <dc:Bounds x="1821" y="170" width="160" height="41" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="TextAnnotation_1yj8h2b_di" bpmnElement="TextAnnotation_1yj8h2b">
-        <dc:Bounds x="1956" y="225" width="130" height="50" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_1sd2f3e" bpmnElement="TextAnnotation_1dhxzhn">
-        <dc:Bounds x="1948" y="450" width="145" height="55" />
-        <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="TextAnnotation_0xsmuh1_di" bpmnElement="TextAnnotation_0xsmuh1">
         <dc:Bounds x="281" y="510" width="99.99656781987919" height="55.46403075233388" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="TextAnnotation_19o2z0k_di" bpmnElement="TextAnnotation_19o2z0k">
-        <dc:Bounds x="1241" y="209" width="155" height="55" />
-        <bpmndi:BPMNLabel />
+      <bpmndi:BPMNShape id="BPMNShape_0ltf0oi" bpmnElement="AfsluitenZaakCallActivity1">
+        <dc:Bounds x="1980" y="680" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="TextAnnotation_1t7pfkp_di" bpmnElement="TextAnnotation_1t7pfkp">
-        <dc:Bounds x="1521" y="176" width="149.9991419549698" height="69.74190005491488" />
-        <bpmndi:BPMNLabel />
+      <bpmndi:BPMNShape id="Event_0qey1ef_di" bpmnElement="ZaakAfgebrokenEndEvent">
+        <dc:Bounds x="2132" y="702" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2109" y="745" width="83" height="14" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_1jxac30" bpmnElement="TextAnnotation_0zdseal">
-        <dc:Bounds x="1351" y="120" width="154.99725425590336" height="69.74190005491488" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="TextAnnotation_0z355k8_di" bpmnElement="TextAnnotation_0z355k8">
-        <dc:Bounds x="1068" y="428" width="145" height="43" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="TextAnnotation_12vt36k_di" bpmnElement="TextAnnotation_12vt36k">
-        <dc:Bounds x="1711" y="440" width="140" height="41" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Association_1dn46d0_di" bpmnElement="Association_1dn46d0">
-        <di:waypoint x="289" y="322" />
-        <di:waypoint x="272" y="205" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Association_1yd35cq_di" bpmnElement="Association_1yd35cq">
-        <di:waypoint x="516" y="300" />
-        <di:waypoint x="479" y="202" />
+        <di:waypoint x="517" y="300" />
+        <di:waypoint x="482" y="203" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_1dn46d0_di" bpmnElement="Association_1dn46d0">
+        <di:waypoint x="291" y="322" />
+        <di:waypoint x="280" y="201" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Association_0nm5s1t_di" bpmnElement="Association_0nm5s1t">
-        <di:waypoint x="677" y="300" />
-        <di:waypoint x="666" y="206" />
+        <di:waypoint x="672" y="300" />
+        <di:waypoint x="648" y="202" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Association_0ket26m_di" bpmnElement="Association_0ket26m">
         <di:waypoint x="834" y="300" />
-        <di:waypoint x="818" y="211" />
+        <di:waypoint x="818" y="207" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_1pm8ydk_di" bpmnElement="Association_1pm8ydk">
+        <di:waypoint x="1138" y="380" />
+        <di:waypoint x="1135" y="428" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_1kgrby6_di" bpmnElement="Association_1kgrby6">
+        <di:waypoint x="1774" y="380" />
+        <di:waypoint x="1764" y="440" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0i30q4y_di" bpmnElement="Association_0i30q4y">
+        <di:waypoint x="2030" y="620" />
+        <di:waypoint x="2030" y="680" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_17e3xo8_di" bpmnElement="Association_17e3xo8">
+        <di:waypoint x="1892" y="325" />
+        <di:waypoint x="1832" y="225" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_109cqga_di" bpmnElement="Association_109cqga">
+        <di:waypoint x="1907" y="357" />
+        <di:waypoint x="1942" y="447" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0dac3gb_di" bpmnElement="Association_0dac3gb">
+        <di:waypoint x="1610" y="300" />
+        <di:waypoint x="1588" y="207" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0kyh8jt_di" bpmnElement="Association_0kyh8jt">
+        <di:waypoint x="1292" y="300" />
+        <di:waypoint x="1275" y="207" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_1a9wth6_di" bpmnElement="Association_1a9wth6">
+        <di:waypoint x="1437" y="207" />
+        <di:waypoint x="1458" y="300" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_04p7nwu_di" bpmnElement="Association_04p7nwu">
+        <di:waypoint x="2021" y="300" />
+        <di:waypoint x="2021" y="203" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0mll4iv_di" bpmnElement="Flow_0mll4iv">
         <di:waypoint x="309" y="340" />
@@ -424,10 +471,10 @@ Resultaat: 'Geweigerd'</bpmn:text>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1xv6tfy_di" bpmnElement="JaSequenceFlow">
         <di:waypoint x="991" y="365" />
-        <di:waypoint x="991" y="570" />
-        <di:waypoint x="1971" y="570" />
+        <di:waypoint x="991" y="720" />
+        <di:waypoint x="1980" y="720" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1000" y="372" width="12" height="14" />
+          <dc:Bounds x="1000" y="382" width="12" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_11fhjek_di" bpmnElement="NeeSequenceFlow">
@@ -465,45 +512,13 @@ Resultaat: 'Geweigerd'</bpmn:text>
         <di:waypoint x="2071" y="340" />
         <di:waypoint x="2123" y="340" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1fxsn06_di" bpmnElement="Flow_1fxsn06">
-        <di:waypoint x="2071" y="570" />
-        <di:waypoint x="2123" y="570" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_109cqga_di" bpmnElement="Association_109cqga">
-        <di:waypoint x="1901" y="322" />
-        <di:waypoint x="1901" y="211" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_04p7nwu_di" bpmnElement="Association_04p7nwu">
-        <di:waypoint x="2023" y="300" />
-        <di:waypoint x="2024" y="275" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_0i30q4y_di" bpmnElement="Association_0i30q4y">
-        <di:waypoint x="2021" y="505" />
-        <di:waypoint x="2021" y="530" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Association_00gcwf9_di" bpmnElement="Association_00gcwf9">
         <di:waypoint x="299" y="466" />
         <di:waypoint x="323" y="510" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_0kyh8jt_di" bpmnElement="Association_0kyh8jt">
-        <di:waypoint x="1307" y="300" />
-        <di:waypoint x="1313" y="264" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_0dac3gb_di" bpmnElement="Association_0dac3gb">
-        <di:waypoint x="1618" y="300" />
-        <di:waypoint x="1615" y="246" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_1a9wth6_di" bpmnElement="Association_1a9wth6">
-        <di:waypoint x="1437" y="190" />
-        <di:waypoint x="1459" y="300" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_1pm8ydk_di" bpmnElement="Association_1pm8ydk">
-        <di:waypoint x="1141" y="380" />
-        <di:waypoint x="1141" y="428" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_1kgrby6_di" bpmnElement="Association_1kgrby6">
-        <di:waypoint x="1781" y="380" />
-        <di:waypoint x="1781" y="440" />
+      <bpmndi:BPMNEdge id="Flow_1fxsn06_di" bpmnElement="Flow_1fxsn06">
+        <di:waypoint x="2080" y="720" />
+        <di:waypoint x="2132" y="720" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_0ynf4ng" bpmnElement="DataOutputAssociation_016ovyu">
         <di:waypoint x="530" y="380" />
