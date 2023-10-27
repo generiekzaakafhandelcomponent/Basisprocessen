@@ -1,0 +1,64 @@
+{
+    "$id": "waardering-mantelzorgers-vrijwilligers.schema",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "WMV",
+    "type": "object",
+    "additionalProperties": true,
+    "properties": {
+        "aanvrager": {
+            "anyOf": [
+                {
+                    "$ref": "persoonsgegevens.schema.json#/definitions/persoonsgegevens"
+                },
+                {
+                    "$ref": "contactgegevens.schema.json#/definitions/contactgegevens"
+                },
+                {
+                    "$ref": "adres.schema.json#/definitions/adresgegevens"
+                }
+            ]
+        },
+        "aanvraaggegevens": {
+            "type": "object",
+            "properties": {
+                "datumAanvraagOntvangen": {
+                    "type": "string"
+                },
+                "soortAanvraag": {
+                    "type": "string",
+                    "enum": [
+                        "a",
+                        "b",
+                        "c"
+                    ],
+                    "description": "a Mantelzorger, b Vrijwilliger, c Mantelzorger & Vrijwilliger"
+                },
+                "vrijwilligerBij": {
+                    "type": "string"
+                },
+                "verklaringNietEerderMantelzorg": {
+                    "type": "boolean"
+                },
+                "verklaringNietEerderVrijwilliger": {
+                    "type": "boolean"
+                },
+                "verklaringNogNietEerderBeiden": {
+                    "type": "boolean"
+                },
+                "toestemmingDelenGegevens": {
+                    "type": "boolean"
+                },
+                "toestemmingBenadering": {
+                    "type": "boolean"
+                },
+                "verklaringNaarWaarheidIngevuld": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "openzaak": {
+            "$ref": "openzaak.schema.json#/definitions/openzaakgegevens"
+        }
+    },
+    "definitions": {}
+}

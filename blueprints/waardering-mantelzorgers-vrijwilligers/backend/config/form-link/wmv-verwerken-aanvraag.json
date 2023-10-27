@@ -1,0 +1,7 @@
+[
+    {
+        "formName": "waardering-mantelzorgers-vrijwilligers.verwerk-aanvraag.start",
+        "formLinkElementId": "HandmatigStartEvent",
+        "formAssociationType": "start-event"
+    }
+]

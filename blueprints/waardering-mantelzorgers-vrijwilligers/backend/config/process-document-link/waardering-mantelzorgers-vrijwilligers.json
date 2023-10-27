@@ -1,0 +1,12 @@
+[
+    {
+        "processDefinitionKey": "wmv-verwerken-aanvraag",
+        "canInitializeDocument": true,
+        "startableByUser": false
+    },
+    {
+        "processDefinitionKey": "simuleren-notificatie-proces",
+        "canInitializeDocument": false,
+        "startableByUser": true
+    }
+]

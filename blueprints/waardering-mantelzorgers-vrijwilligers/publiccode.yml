@@ -1,0 +1,44 @@
+# This repository adheres to the publiccode.yml standard by including this
+# metadata file that makes public software easily discoverable.
+# More info at https://github.com/italia/publiccode.yml
+
+publiccodeYmlVersion: '0.2'
+categories:
+  - business-process-management
+description:
+  nl:
+    features:
+      - Voorbeeld proces
+      - Waardering mantelzorgers en vrijwilligers
+    genericName: GZAC Component
+    shortDescription: Dit basisproces kan gebruikt worden als uitgangspunt voor het 'Waardering mantelzorgers en vrijwilligers' proces
+developmentStatus: stable
+intendedAudience:
+  countries:
+    - nl
+  scope:
+    - overheid
+    - gemeentes
+    - sociaal domein
+landingURL: |-
+  https://github.com/generiekzaakafhandelcomponent/Basisprocessen
+legal:
+  license: EUPL-1.2
+  repoOwner: Ritense B.V.
+localisation:
+  availableLanguages:
+    - nl
+  localisationReady: false
+maintenance:
+  contacts:
+    - name: Ritense B.V.
+  type: internal
+name: GZAC - Waardering mantelzorgers en vrijwilligers
+platforms:
+  - web
+releaseDate: '2023-10-20'
+softwareType: addon
+softwareVersion: 10.7.0.RELEASE
+url: 'https://github.com/generiekzaakafhandelcomponent/Basisprocessen.git'
+usedBy:
+  - Gemeente Den Haag

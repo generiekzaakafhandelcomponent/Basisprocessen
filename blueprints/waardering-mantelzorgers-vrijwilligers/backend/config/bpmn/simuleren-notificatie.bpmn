@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1qtvyiv" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.15.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.19.0">
+  <bpmn:collaboration id="versturen-notificatie">
+    <bpmn:participant id="bTrK11" name="simuleren notificatie" processRef="simuleren-notificatie-proces" />
+  </bpmn:collaboration>
+  <bpmn:process id="simuleren-notificatie-proces" name="simuleren notificatie proces" isExecutable="true" camunda:historyTimeToLive="180">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_1co3k8u</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="versturenNotificatie" name="versturen notificatie">
+      <bpmn:incoming>Flow_1co3k8u</bpmn:incoming>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_1fr7dwh" camunda:expression="${correlationService.sendCatchEventMessage(&#34;NOTIFICATIE_OBJECT_GEWIJZIGD_ONTVANGEN_MESSAGE&#34;, execution.businessKey, null)}" />
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1co3k8u" sourceRef="StartEvent_1" targetRef="versturenNotificatie" />
+  </bpmn:process>
+  <bpmn:message id="Message_3ibkt8r" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="versturen-notificatie">
+      <bpmndi:BPMNShape id="Participant_03cg949_di" bpmnElement="bTrK11" isHorizontal="true">
+        <dc:Bounds x="160" y="79" width="330" height="271" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="242" y="182" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_11v7y4q_di" bpmnElement="versturenNotificatie">
+        <dc:Bounds x="322" y="182" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="324" y="225" width="47" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1co3k8u_di" bpmnElement="Flow_1co3k8u">
+        <di:waypoint x="278" y="200" />
+        <di:waypoint x="322" y="200" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
