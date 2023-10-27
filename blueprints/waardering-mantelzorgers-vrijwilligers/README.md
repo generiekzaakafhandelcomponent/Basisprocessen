@@ -1,7 +1,7 @@
 # Basisproces Waardering Mantelzorgers en Vrijwilligers
 
 ## Installatie
-We gaan uit van een bestaande Valtimo GZAC backend repository. 
+We gaan uit van een bestaande Valtimo GZAC backend repository. Dit basisproces is getest op Valtimo GZAC 10.7.0.RELEASE.
 
 Kopiëer de bestanden van de `config` directory naar de config directory van Valtimo GZAC (`src/main/resources/config/`) 
 en behoud dezelfde directory structuur.
