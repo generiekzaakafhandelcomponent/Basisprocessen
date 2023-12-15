@@ -1,0 +1,27 @@
+[
+    {
+        "formName": "vergunning-opkoopbescherming.start",
+        "formLinkElementId": "VergunningAangevraagdEnLegesBetaaldStartEvent",
+        "formAssociationType": "start-event"
+    },
+    {
+        "formName": "vergunning-opkoopbescherming.controleren-en-afhandelen-aanvraag",
+        "formLinkElementId": "ControlerenEnAfhandelenAanvraagTask",
+        "formAssociationType": "user-task"
+    },
+    {
+        "formName": "vergunning-opkoopbescherming.aanleveren-additionele-informatie",
+        "formLinkElementId": "AanleverenAdditioneleInformatieTask",
+        "formAssociationType": "user-task"
+    },
+    {
+        "formName": "vergunning-opkoopbescherming.verifieren-afhandeling",
+        "formLinkElementId": "VerifierenAfhandelingTask",
+        "formAssociationType": "user-task"
+    },
+    {
+        "formName": "vergunning-opkoopbescherming.vastleggen-besluit",
+        "formLinkElementId": "VastleggenBesluitTask",
+        "formAssociationType": "user-task"
+    }
+]

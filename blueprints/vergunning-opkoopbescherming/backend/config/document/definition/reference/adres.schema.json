@@ -1,0 +1,36 @@
+{
+    "$id": "adres.schema",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Adres definition",
+    "definitions": {
+        "adres": {
+            "type": "object",
+            "properties": {
+                "straat": {
+                    "type": "string"
+                },
+                "huisnummer": {
+                    "type": "string"
+                },
+                "huisletter": {
+                    "type": "string"
+                },
+                "huisnummerToevoeging": {
+                    "type": "string"
+                },
+                "postcode": {
+                    "type": "string"
+                },
+                "plaats": {
+                    "type": "string"
+                },
+                "land": {
+                    "type": "string"
+                },
+                "volledigeAdres": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

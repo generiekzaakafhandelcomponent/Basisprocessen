@@ -1,0 +1,371 @@
+{
+    "display": "form",
+    "components": [
+        {
+            "readonly": false,
+            "key": "keycloakUser",
+            "type": "form-io-current-user",
+            "input": false
+        },
+        {
+            "label": "HTML",
+            "tag": "h4",
+            "content": "Controleer de aanvraag en beantwoord vervolgens de onderstaande vragen:",
+            "refreshOnChange": false,
+            "key": "html",
+            "type": "htmlelement",
+            "input": false,
+            "tableView": false
+        },
+        {
+            "label": "Additionele informatie noodzakelijk?",
+            "optionsLabelPosition": "right",
+            "inline": false,
+            "tableView": false,
+            "values": [
+                {
+                    "label": "Ja",
+                    "value": true,
+                    "shortcut": ""
+                },
+                {
+                    "label": "Nee",
+                    "value": false,
+                    "shortcut": ""
+                }
+            ],
+            "validate": {
+                "required": true
+            },
+            "key": "aanvraag.vergunning.additioneleInformatie.isNoodzakelijk",
+            "type": "radio",
+            "input": true
+        },
+        {
+            "label": "Toelichting additionele informatie",
+            "autoExpand": false,
+            "tableView": true,
+            "key": "aanvraag.vergunning.additioneleInformatie.toelichtingVerzoek",
+            "conditional": {
+                "show": true,
+                "when": "aanvraag.vergunning.additioneleInformatie.isNoodzakelijk",
+                "eq": true
+            },
+            "type": "textarea",
+            "input": true
+        },
+        {
+            "label": "Deadline aanleveren additionele informatie (standaard 6 weken)",
+            "format": "dd-MM-yyyy",
+            "tableView": false,
+            "enableTime": false,
+            "datePicker": {
+                "disableWeekends": false,
+                "disableWeekdays": false
+            },
+            "enableMinDateInput": false,
+            "enableMaxDateInput": false,
+            "key": "aanvraag.vergunning.additioneleInformatie.deadline",
+            "type": "datetime",
+            "input": true,
+            "customDefaultValue": "value = moment().add(42, 'days')",
+            "widget": {
+                "type": "calendar",
+                "displayInTimezone": "viewer",
+                "locale": "en",
+                "useLocaleSettings": false,
+                "allowInput": true,
+                "mode": "single",
+                "enableTime": false,
+                "noCalendar": false,
+                "format": "dd-MM-yyyy",
+                "hourIncrement": 1,
+                "minuteIncrement": 1,
+                "time_24hr": false,
+                "minDate": null,
+                "disableWeekends": false,
+                "disableWeekdays": false,
+                "maxDate": null
+            },
+            "conditional": {
+                "show": true,
+                "when": "aanvraag.vergunning.additioneleInformatie.isNoodzakelijk",
+                "eq": true
+            }
+        },
+        {
+            "label": "Besluit aanvraag voor verhuurvergunning of ontheffing opkoopbescherming",
+            "optionsLabelPosition": "right",
+            "inline": false,
+            "tableView": false,
+            "values": [
+                {
+                    "label": "Vergunning wordt verleend",
+                    "value": "VERGUNNING_WORDT_VERLEEND",
+                    "shortcut": ""
+                },
+                {
+                    "label": "Vergunning wordt niet verleend",
+                    "value": "VERGUNNING_WORDT_NIET_VERLEEND",
+                    "shortcut": ""
+                },
+                {
+                    "label": "Ontheffing wordt verleend",
+                    "value": "ONTHEFFING_WORDT_VERLEEND",
+                    "shortcut": ""
+                },
+                {
+                    "label": "Ontheffing wordt niet verleend",
+                    "value": "ONTHEFFING_WORDT_NIET_VERLEEND",
+                    "shortcut": ""
+                },
+                {
+                    "label": "Aanvraag wordt buiten behandeling gesteld",
+                    "value": "BUITEN_BEHANDELING_GESTELD",
+                    "shortcut": ""
+                },
+                {
+                    "label": "Aanvraag is ingetrokken",
+                    "value": "AANVRAAG_INGETROKKEN",
+                    "shortcut": ""
+                },
+                {
+                    "label": "Aanvraag is onterecht",
+                    "value": "AANVRAAG_ONTERECHT",
+                    "shortcut": ""
+                }
+            ],
+            "validate": {
+                "required": true
+            },
+            "key": "aanvraag.vergunning.resultaat.status",
+            "type": "radio",
+            "input": true,
+            "conditional": {
+                "show": true,
+                "when": "aanvraag.vergunning.additioneleInformatie.isNoodzakelijk",
+                "eq": false
+            }
+        },
+        {
+            "label": "Selecteer een van de volgende redenen",
+            "optionsLabelPosition": "right",
+            "inline": false,
+            "tableView": false,
+            "values": [
+                {
+                    "label": "De eigenaar woont in de woning en staat als bewoner ingeschreven in de basisregistratie personen op het betreffende adres en een deel van de woning wordt in gebruik gegeven.",
+                    "value": "De eigenaar woont in de woning en staat als bewoner ingeschreven in de basisregistratie personen op het betreffende adres en een deel van de woning wordt in gebruik gegeven.",
+                    "shortcut": ""
+                },
+                {
+                    "label": "De voornoemde woning dient in ieder geval in gebruik te worden gegeven aan uw eerste- of tweedegraads familielid.",
+                    "value": "De voornoemde woning dient in ieder geval in gebruik te worden gegeven aan uw eerste- of tweedegraads familielid.",
+                    "shortcut": ""
+                },
+                {
+                    "label": "De woning wordt niet voor een periode langer dan 12 maanden in gebruik gegeven.",
+                    "value": "De woning wordt niet voor een periode langer dan 12 maanden in gebruik gegeven.",
+                    "shortcut": ""
+                },
+                {
+                    "label": "De woonruimte is onlosmakelijk verbonden aan de betreffende bedrijfs-, kantoor-, of winkelruimte.",
+                    "value": "De woonruimte is onlosmakelijk verbonden aan de betreffende bedrijfs-, kantoor-, of winkelruimte.",
+                    "shortcut": ""
+                }
+            ],
+            "validate": {
+                "required": true
+            },
+            "key": "aanvraag.vergunning.resultaat.redenVergunningVerleend",
+            "customConditional": "show = data.aanvraag.vergunning.resultaat.status === 'VERGUNNING_WORDT_VERLEEND'",
+            "type": "radio",
+            "input": true
+        },
+        {
+            "label": "Selecteer een van de volgende redenen",
+            "optionsLabelPosition": "right",
+            "inline": false,
+            "tableView": false,
+            "values": [
+                {
+                    "label": "Uit uw aanvraag is niet gebleken dat de woonruimte in gebruik wordt gegeven aan een woningzoekende die een bloed- of aanverwantschap in de eerste of tweede graad heeft met de eigenaar.",
+                    "value": "Uit uw aanvraag is niet gebleken dat de woonruimte in gebruik wordt gegeven aan een woningzoekende die een bloed- of aanverwantschap in de eerste of tweede graad heeft met de eigenaar.",
+                    "shortcut": ""
+                },
+                {
+                    "label": "Uit uw aanvraag is niet gebleken dat de eigenaar na de datum van inschrijving in de openbare registers van de akte van levering van die woonruimte aan hem, ten minste twaalf maanden zijn woonadres als bedoeld in artikel 1.1, onderdeel o, onder 1°, van de Wet basisregistratie personen, in die woonruimte heeft en de eigenaar met een woningzoekende schriftelijk overeenkomt dat de woningzoekende de woonruimte voor een termijn van ten hoogste twaalf maanden, anders dan voor toeristische verhuur, in gebruik neemt.",
+                    "value": "Uit uw aanvraag is niet gebleken dat de eigenaar na de datum van inschrijving in de openbare registers van de akte van levering van die woonruimte aan hem, ten minste twaalf maanden zijn woonadres als bedoeld in artikel 1.1, onderdeel o, onder 1°, van de Wet basisregistratie personen, in die woonruimte heeft en de eigenaar met een woningzoekende schriftelijk overeenkomt dat de woningzoekende de woonruimte voor een termijn van ten hoogste twaalf maanden, anders dan voor toeristische verhuur, in gebruik neemt.",
+                    "shortcut": ""
+                },
+                {
+                    "label": "Uit uw aanvraag is niet gebleken dat de woonruimte onlosmakelijk deel uitmaakt van een winkel-, kantoor of bedrijfsruimte.",
+                    "value": "Uit uw aanvraag is niet gebleken dat de woonruimte onlosmakelijk deel uitmaakt van een winkel-, kantoor of bedrijfsruimte.",
+                    "shortcut": ""
+                }
+            ],
+            "validate": {
+                "required": true
+            },
+            "key": "aanvraag.vergunning.resultaat.redenVergunningVerleend",
+            "customConditional": "show = data.aanvraag.vergunning.resultaat.status === 'VERGUNNING_WORDT_NIET_VERLEEND'",
+            "type": "radio",
+            "input": true
+        },
+        {
+            "label": "Selecteer een van de volgende redenen",
+            "optionsLabelPosition": "right",
+            "inline": false,
+            "tableView": false,
+            "values": [
+                {
+                    "label": "Uit uw aanvraag is gebleken dat zich omstandigheden voordoen die maken dat naar het oordeel van het college het redelijkerwijs niet van de eigenaar verlangd kan worden dat hij het verbod in het eerste lid naleeft.",
+                    "value": "Uit uw aanvraag is gebleken dat zich omstandigheden voordoen die maken dat naar het oordeel van het college het redelijkerwijs niet van de eigenaar verlangd kan worden dat hij het verbod in het eerste lid naleeft.",
+                    "shortcut": ""
+                },
+                {
+                    "label": "Uit uw aanvraag is gebleken dat het naar oordeel van burgemeester en wethouders gaat om een dusdanig maatschappelijk gewenste vorm van verhuur of handeling die gepaard gaat met verhuur, dat het belang van verhuur in dat geval prevaleert boven het belang van het verbod.",
+                    "value": "Uit uw aanvraag is gebleken dat het naar oordeel van burgemeester en wethouders gaat om een dusdanig maatschappelijk gewenste vorm van verhuur of handeling die gepaard gaat met verhuur, dat het belang van verhuur in dat geval prevaleert boven het belang van het verbod.",
+                    "shortcut": ""
+                },
+                {
+                    "label": "Uit uw aanvraag is gebleken dat de woonruimte door één eigenaar wordt verkocht in een cluster bestaande uit vier tot en met negen woningen in één pand en deze woningen gelijktijdig worden overdragen aan één opvolgende eigenaar (complexgewijze verkoop ‘klein’).",
+                    "value": "Uit uw aanvraag is gebleken dat de woonruimte door één eigenaar wordt verkocht in een cluster bestaande uit vier tot en met negen woningen in één pand en deze woningen gelijktijdig worden overdragen aan één opvolgende eigenaar (complexgewijze verkoop ‘klein’).",
+                    "shortcut": ""
+                }
+            ],
+            "validate": {
+                "required": true
+            },
+            "key": "aanvraag.vergunning.resultaat.redenVergunningVerleend",
+            "customConditional": "show = data.aanvraag.vergunning.resultaat.status === 'ONTHEFFING_WORDT_VERLEEND'",
+            "type": "radio",
+            "input": true
+        },
+        {
+            "label": "Selecteer een van de volgende redenen",
+            "optionsLabelPosition": "right",
+            "inline": false,
+            "tableView": false,
+            "values": [
+                {
+                    "label": "Uit uw aanvraag is niet gebleken dat de eigenaar van de woonruimte een deel van de woonruimte zelf bewoont en een gedeelte van die woonruimte in gebruik geeft.",
+                    "value": "Uit uw aanvraag is niet gebleken dat de eigenaar van de woonruimte een deel van de woonruimte zelf bewoont en een gedeelte van die woonruimte in gebruik geeft.",
+                    "shortcut": ""
+                },
+                {
+                    "label": "Uit uw aanvraag is niet gebleken dat zich omstandigheden voordoen die maken dat naar het oordeel van het college het redelijkerwijs niet van de eigenaar verlangd kan worden dat hij het verbod in het eerste lid naleeft.",
+                    "value": "Uit uw aanvraag is niet gebleken dat zich omstandigheden voordoen die maken dat naar het oordeel van het college het redelijkerwijs niet van de eigenaar verlangd kan worden dat hij het verbod in het eerste lid naleeft.",
+                    "shortcut": ""
+                },
+                {
+                    "label": "Uit uw aanvraag is niet gebleken dat het naar oordeel van burgemeester en wethouders gaat om een dusdanig maatschappelijk gewenste vorm van verhuur of handeling die gepaard gaat met verhuur, dat het belang van verhuur in dat geval prevaleert boven het belang van het verbod als bedoeld in het eerste lid.",
+                    "value": "Uit uw aanvraag is niet gebleken dat het naar oordeel van burgemeester en wethouders gaat om een dusdanig maatschappelijk gewenste vorm van verhuur of handeling die gepaard gaat met verhuur, dat het belang van verhuur in dat geval prevaleert boven het belang van het verbod als bedoeld in het eerste lid.",
+                    "shortcut": ""
+                },
+                {
+                    "label": "Uit uw aanvraag is niet gebleken dat de woonruimte door één eigenaar wordt verkocht in een cluster bestaande uit vier tot en met negen woningen in één pand en deze woningen gelijktijdig worden overdragen aan één opvolgende eigenaar (complexgewijze verkoop ‘klein’).",
+                    "value": "Uit uw aanvraag is niet gebleken dat de woonruimte door één eigenaar wordt verkocht in een cluster bestaande uit vier tot en met negen woningen in één pand en deze woningen gelijktijdig worden overdragen aan één opvolgende eigenaar (complexgewijze verkoop ‘klein’).",
+                    "shortcut": ""
+                }
+            ],
+            "validate": {
+                "required": true
+            },
+            "key": "aanvraag.vergunning.resultaat.redenVergunningVerleend",
+            "customConditional": "show = data.aanvraag.vergunning.resultaat.status === 'ONTHEFFING_WORDT_NIET_VERLEEND'",
+            "type": "radio",
+            "input": true
+        },
+        {
+            "label": "Beschikkingsnummer",
+            "autoExpand": false,
+            "tableView": true,
+            "key": "aanvraag.inhoudelijkeBeoordeling.beschikkingsnummer",
+            "conditional": {
+                "show": true,
+                "when": "aanvraag.vergunning.additioneleInformatie.isNoodzakelijk",
+                "eq": false
+            },
+            "type": "textarea",
+            "input": true
+        },
+        {
+            "label": "Besluit genomen op",
+            "format": "dd-MM-yyyy",
+            "useLocaleSettings": true,
+            "tableView": false,
+            "enableTime": false,
+            "enableMinDateInput": true,
+            "datePicker": {
+                "minDate": "moment().startOf('day')"
+            },
+            "customDefaultValue": "value = moment().startOf('day')",
+            "enableMaxDateInput": false,
+            "key": "aanvraag.besluitGenomenOp",
+            "type": "datetime",
+            "input": true,
+            "conditional": {
+                "show": true,
+                "when": "aanvraag.vergunning.additioneleInformatie.isNoodzakelijk",
+                "eq": false
+            },
+            "widget": {
+                "type": "calendar",
+                "displayInTimezone": "viewer",
+                "locale": "en",
+                "useLocaleSettings": false,
+                "allowInput": true,
+                "mode": "single",
+                "enableTime": false,
+                "noCalendar": false,
+                "format": "dd-MM-yyyy",
+                "hourIncrement": 1,
+                "minuteIncrement": 1,
+                "time_24hr": false,
+                "minDate": "today",
+                "disableWeekends": false,
+                "disableWeekdays": false,
+                "maxDate": null
+            }
+        },
+        {
+            "label": "HTML",
+            "content": "Geef hieronder een toelichting op het genomen besluit. Let op: Deze informatie wordt ook op de besluitbrief afgedrukt!",
+            "refreshOnChange": false,
+            "key": "html",
+            "tag": "div",
+            "type": "htmlelement",
+            "input": false,
+            "tableView": false,
+            "conditional": {
+                "show": true,
+                "when": "aanvraag.vergunning.additioneleInformatie.isNoodzakelijk",
+                "eq": false
+            }
+        },
+        {
+            "label": "Motivering genomen besluit",
+            "autoExpand": false,
+            "tableView": true,
+            "key": "aanvraag.vergunning.resultaat.toelichting",
+            "type": "textarea",
+            "validate": {
+                "required": true
+            },
+            "input": true,
+            "conditional": {
+                "show": true,
+                "when": "aanvraag.vergunning.additioneleInformatie.isNoodzakelijk",
+                "eq": false
+            }
+        },
+        {
+            "type": "button",
+            "label": "Doorgaan",
+            "disableOnInvalid": true,
+            "tableView": false,
+            "input": true
+        }
+    ]
+}

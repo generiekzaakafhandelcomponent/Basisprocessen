@@ -1,0 +1,49 @@
+{
+    "searchFields": [
+        {
+            "key": "afhandelingGeverifieerdDoor",
+            "path": "doc:aanvraag.dossier.afhandelingGeverifieerdDoor",
+            "dataType": "text",
+            "fieldType": "single",
+            "matchType": "like",
+            "dropdownDataProvider": null,
+            "title": "Geverifieerd door"
+        },
+        {
+            "key": "createdOn",
+            "path": "case:createdOn",
+            "dataType": "date",
+            "fieldType": "single",
+            "matchType": "exact",
+            "dropdownDataProvider": null,
+            "title": "Datum aanvraag"
+        },
+        {
+            "key": "assigneeFullName",
+            "path": "case:assigneeFullName",
+            "dataType": "text",
+            "fieldType": "single",
+            "matchType": "like",
+            "dropdownDataProvider": null,
+            "title": "Behandelaar"
+        },
+        {
+            "key": "volledigeNaam",
+            "path": "doc:aanvraag.aanvrager.volledigeNaam",
+            "dataType": "text",
+            "fieldType": "single",
+            "matchType": "like",
+            "dropdownDataProvider": null,
+            "title": "Naam aanvrager"
+        },
+        {
+            "key": "beschikkingsnummer",
+            "path": "doc:aanvraag.inhoudelijkeBeoordeling.beschikkingsnummer",
+            "dataType": "text",
+            "fieldType": "single",
+            "matchType": "like",
+            "dropdownDataProvider": null,
+            "title": "Beschikkingsnummer"
+        }
+    ]
+}

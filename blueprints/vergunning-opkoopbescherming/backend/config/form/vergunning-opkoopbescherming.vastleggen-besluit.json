@@ -1,0 +1,43 @@
+{
+    "display": "form",
+    "components": [
+        {
+            "label": "Selecteren besluit document",
+            "widget": "choicesjs",
+            "tableView": true,
+            "dataSrc": "custom",
+            "data": {
+                "custom": "values = instance.getResources()"
+            },
+            "dataType": "string",
+            "valueProperty": "value",
+            "key": "besluit",
+            "type": "resource-selector",
+            "input": true,
+            "asyncValues": true
+        },
+        {
+            "label": "Toelichting",
+            "autoExpand": true,
+            "tableView": true,
+            "key": "toelichtingGenomenBesluit",
+            "type": "textarea",
+            "input": true
+        },
+        {
+            "content": "Let op: na het afronden van deze taak wordt de aanvrager via e-mail op de hoogte gebracht van het besluit.",
+            "refreshOnChange": false,
+            "key": "html",
+            "type": "htmlelement",
+            "input": false,
+            "tableView": false
+        },
+        {
+            "type": "button",
+            "label": "Doorgaan",
+            "disableOnInvalid": true,
+            "tableView": false,
+            "input": true
+        }
+    ]
+}

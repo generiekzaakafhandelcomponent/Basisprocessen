@@ -1,0 +1,2273 @@
+{
+    "display": "wizard",
+    "settings": {
+        "pdf": {
+            "id": "1ec0f8ee-6685-5d98-a847-26f67b67d6f0",
+            "src": "https://files.form.io/pdf/5692b91fd1028f01000407e3/file/1ec0f8ee-6685-5d98-a847-26f67b67d6f0"
+        }
+    },
+    "components": [
+        {
+            "title": "Stap 1",
+            "breadcrumb": "none",
+            "buttonSettings": {
+                "previous": true,
+                "cancel": false,
+                "next": true
+            },
+            "navigateOnEnter": false,
+            "saveOnEnter": false,
+            "scrollToTop": false,
+            "collapsible": false,
+            "label": "Stap 1",
+            "type": "panel",
+            "key": "page1",
+            "input": false,
+            "tableView": false,
+            "components": [
+                {
+                    "label": "HTML",
+                    "tag": "h4",
+                    "content": "Stap 1. Valt uw woning onder de opkoopbescherming?",
+                    "refreshOnChange": false,
+                    "key": "html",
+                    "type": "htmlelement",
+                    "input": false,
+                    "tableView": false
+                },
+                {
+                    "type": "hidden",
+                    "key": "aanvraag.dossier.aanvraagDatum",
+                    "calculateValue": "value = moment()",
+                    "input": true
+                },
+                {
+                    "label": "Wanneer is de akte van levering van de woning ingeschreven in het Kadaster?",
+                    "format": "yyyy-MM-dd",
+                    "placeholder": "yyyy-MM-dd",
+                    "tableView": false,
+                    "enableMinDateInput": false,
+                    "datePicker": {
+                        "disableWeekends": false,
+                        "disableWeekdays": false,
+                        "maxDate": "moment().subtract(1, 'day')"
+                    },
+                    "enableMaxDateInput": false,
+                    "enableTime": false,
+                    "key": "aanvraag.opkoopbescherming.aankoopDatum",
+                    "type": "datetime",
+                    "input": true,
+                    "validate": {
+                        "required": true,
+                        "customMessage": "Dit veld is verplicht."
+                    },
+                    "widget": {
+                        "type": "calendar",
+                        "displayInTimezone": "viewer",
+                        "locale": "en",
+                        "useLocaleSettings": false,
+                        "allowInput": true,
+                        "mode": "single",
+                        "enableTime": false,
+                        "noCalendar": false,
+                        "format": "yyyy-MM-dd",
+                        "hourIncrement": 1,
+                        "minuteIncrement": 1,
+                        "time_24hr": false,
+                        "minDate": null,
+                        "disableWeekends": false,
+                        "disableWeekdays": false,
+                        "maxDate": "moment().subtract(1, 'day')"
+                    }
+                },
+                {
+                    "label": "HTML",
+                    "tag": "h4",
+                    "content": "De inschrijving van de woning in het kadaster kan niet in de toekomst liggen",
+                    "refreshOnChange": false,
+                    "key": "html",
+                    "type": "htmlelement",
+                    "input": false,
+                    "tableView": false,
+                    "className": "alert alert-info"
+                },
+                {
+                    "label": "Wat is de WOZ-waarde van de te verhuren woonruimte?",
+                    "mask": false,
+                    "spellcheck": true,
+                    "tableView": false,
+                    "currency": "EUR",
+                    "inputFormat": "plain",
+                    "truncateMultipleSpaces": false,
+                    "key": "aanvraag.opkoopbescherming.woz",
+                    "type": "currency",
+                    "input": true,
+                    "validate": {
+                        "required": true,
+                        "customMessage": "Dit veld is verplicht."
+                    },
+                    "delimiter": true,
+                    "customConditional": "show = moment(data.aanvraag?.opkoopbescherming?.aankoopDatum, 'YYYY-MM-DD').isSameOrAfter(moment('2022-04-01').format('YYYY-MM-DD'))"
+                },
+                {
+                    "label": "HTML",
+                    "tag": "h4",
+                    "content": "U kunt de WOZ-waarde van uw woning opzoeken op <a href='https://www.wozwaardeloket.nl' target='_new'>wozwaardeloket.nl</a>, gebruik bij het invullen de meest recente WOZ-waarde.",
+                    "refreshOnChange": false,
+                    "key": "html",
+                    "type": "htmlelement",
+                    "input": false,
+                    "tableView": false,
+                    "className": "alert alert-info",
+                    "customConditional": "show = moment(data.aanvraag?.opkoopbescherming?.aankoopDatum, 'YYYY-MM-DD').isSameOrAfter(moment('2022-04-01').format('YYYY-MM-DD'))"
+                },
+                {
+                    "label": "Is de woning niet of korter dan 6 maanden voorafgaand aan de inschrijving van de akte van levering van de woning in het Kadaster in zijn geheel verhuurd of in gebruik gegeven?",
+                    "optionsLabelPosition": "right",
+                    "inline": false,
+                    "tableView": false,
+                    "values": [
+                        {
+                            "label": "Ja",
+                            "value": true,
+                            "shortcut": ""
+                        },
+                        {
+                            "label": "Nee",
+                            "value": false,
+                            "shortcut": ""
+                        }
+                    ],
+                    "key": "aanvraag.opkoopbescherming.woningLangerDan6MaandenLeeg",
+                    "type": "radio",
+                    "input": true,
+                    "validate": {
+                        "required": true,
+                        "customMessage": "Vul alle vragen in."
+                    },
+                    "customConditional": "show = ( (moment(data.aanvraag?.opkoopbescherming?.aankoopDatum, 'YYYY-MM-DD').isBetween(moment('2022-04-01').format('YYYY-MM-DD'), moment('2022-12-31').format('YYYY-MM-DD'), 'days', '[]')) && (data.aanvraag?.opkoopbescherming?.woz <= 512000) ) || ( (moment(data.aanvraag?.opkoopbescherming?.aankoopDatum, 'YYYY-MM-DD').isSameOrAfter(moment('2023-01-01').format('YYYY-MM-DD'))) && (data.aanvraag?.opkoopbescherming?.woz <= 533000) )"
+                },
+                {
+                    "label": "Betreft het een woning die u gelijktijdig met andere woningen aankoopt binnen één complex? En zo ja, gaat dit om tien woningen of meer?",
+                    "optionsLabelPosition": "right",
+                    "inline": false,
+                    "tableView": false,
+                    "values": [
+                        {
+                            "label": "Ja",
+                            "value": true,
+                            "shortcut": ""
+                        },
+                        {
+                            "label": "Nee",
+                            "value": false,
+                            "shortcut": ""
+                        }
+                    ],
+                    "key": "aanvraag.opkoopbescherming.betreftMeerdereWoningenBinnenEenComplex",
+                    "type": "radio",
+                    "input": true,
+                    "validate": {
+                        "required": true,
+                        "customMessage": "Vul alle vragen in."
+                    },
+                    "customConditional": "show = ( (moment(data.aanvraag?.opkoopbescherming?.aankoopDatum, 'YYYY-MM-DD').isBetween(moment('2022-04-01').format('YYYY-MM-DD'), moment('2022-12-31').format('YYYY-MM-DD'), 'days', '[]')) && (data.aanvraag?.opkoopbescherming?.woz <= 512000) ) || ( (moment(data.aanvraag?.opkoopbescherming?.aankoopDatum, 'YYYY-MM-DD').isSameOrAfter(moment('2023-01-01').format('YYYY-MM-DD'))) && (data.aanvraag?.opkoopbescherming?.woz <= 533000) )"
+                },
+                {
+                    "label": "Betreft het een woning waarvoor een verhuurverbod is opgenomen in de erfpachtvoorwaarden?",
+                    "optionsLabelPosition": "right",
+                    "inline": false,
+                    "tableView": false,
+                    "values": [
+                        {
+                            "label": "Ja",
+                            "value": true,
+                            "shortcut": ""
+                        },
+                        {
+                            "label": "Nee",
+                            "value": false,
+                            "shortcut": ""
+                        }
+                    ],
+                    "key": "aanvraag.opkoopbescherming.betreftWoningWaarvoorVerhuurverbodOpgenomenInErfpachtvoorwaarden",
+                    "type": "radio",
+                    "input": true,
+                    "validate": {
+                        "required": true,
+                        "customMessage": "Vul alle vragen in."
+                    },
+                    "customConditional": "show = ( (moment(data.aanvraag?.opkoopbescherming?.aankoopDatum, 'YYYY-MM-DD').isBetween(moment('2022-04-01').format('YYYY-MM-DD'), moment('2022-12-31').format('YYYY-MM-DD'), 'days', '[]')) && (data.aanvraag?.opkoopbescherming?.woz <= 512000) ) || ( (moment(data.aanvraag?.opkoopbescherming?.aankoopDatum, 'YYYY-MM-DD').isSameOrAfter(moment('2023-01-01').format('YYYY-MM-DD'))) && (data.aanvraag?.opkoopbescherming?.woz <= 533000) )"
+                },
+                {
+                    "label": "Betreft het een woning ontstaan door nieuwbouw of transformatie zonder erfpachtcontract met de gemeente en waarvan de ontwikkeling is gestart na 1 april 2022?",
+                    "optionsLabelPosition": "right",
+                    "inline": false,
+                    "tableView": false,
+                    "values": [
+                        {
+                            "label": "Ja",
+                            "value": true,
+                            "shortcut": ""
+                        },
+                        {
+                            "label": "Nee",
+                            "value": false,
+                            "shortcut": ""
+                        }
+                    ],
+                    "key": "aanvraag.opkoopbescherming.betreftWoningOntstaanDoorNieuwbouwOfTransformatie",
+                    "type": "radio",
+                    "input": true,
+                    "validate": {
+                        "required": true,
+                        "customMessage": "Vul alle vragen in."
+                    },
+                    "customConditional": "show = ( (moment(data.aanvraag?.opkoopbescherming?.aankoopDatum, 'YYYY-MM-DD').isBetween(moment('2022-04-01').format('YYYY-MM-DD'), moment('2022-12-31').format('YYYY-MM-DD'), 'days', '[]')) && (data.aanvraag?.opkoopbescherming?.woz <= 512000) ) || ( (moment(data.aanvraag?.opkoopbescherming?.aankoopDatum, 'YYYY-MM-DD').isSameOrAfter(moment('2023-01-01').format('YYYY-MM-DD'))) && (data.aanvraag?.opkoopbescherming?.woz <= 533000) )"
+                },
+                {
+                    "label": "HTML",
+                    "tag": "h4",
+                    "content": "Uw woning valt onder de opkoopbescherming. Dit betekent dat de woning na aankoop voor vier jaar niet mag worden verhuurd. Hier kan in uitzonderingssituaties een vergunning of ontheffing voor worden verleend. Ga door naar stap 2 als u wil weten of u hiervoor in aanmerking komt, of als u een aanvraag wil doen.",
+                    "refreshOnChange": false,
+                    "key": "html",
+                    "type": "htmlelement",
+                    "input": false,
+                    "tableView": false,
+                    "className": "alert alert-info",
+                    "customConditional": "show = (data.aanvraag?.opkoopbescherming?.aankoopDatum != '' && data.aanvraag.opkoopbescherming.betreftWoningOntstaanDoorNieuwbouwOfTransformatie === false)"
+                },
+                {
+                    "label": "HTML",
+                    "tag": "h4",
+                    "content": "Uw woning valt niet onder de opkoopbescherming. U hoeft geen vergunning aan te vragen.",
+                    "refreshOnChange": false,
+                    "key": "html",
+                    "type": "htmlelement",
+                    "input": false,
+                    "tableView": false,
+                    "className": "alert alert-warning",
+                    "customConditional": "show = (moment(data.aanvraag?.opkoopbescherming?.aankoopDatum, 'YYYY-MM-DD').isBefore(moment('2022-04-01').format('YYYY-MM-DD'))) || ( (moment(data.aanvraag?.opkoopbescherming?.aankoopDatum, 'YYYY-MM-DD').isBetween(moment('2022-04-01').format('YYYY-MM-DD'), moment('2022-12-31').format('YYYY-MM-DD'), 'days', '[]')) && (data.aanvraag?.opkoopbescherming?.woz > 512000) ) || ( (moment(data.aanvraag?.opkoopbescherming?.aankoopDatum, 'YYYY-MM-DD').isSameOrAfter(moment('2023-01-01').format('YYYY-MM-DD'))) && (data.aanvraag?.opkoopbescherming?.woz > 533000) ) || (data.aanvraag?.opkoopbescherming?.woningLangerDan6MaandenLeeg === false) || (data.aanvraag?.opkoopbescherming?.betreftMeerdereWoningenBinnenEenComplex === true) || (data.aanvraag?.opkoopbescherming?.betreftWoningWaarvoorVerhuurverbodOpgenomenInErfpachtvoorwaarden === true) || (data.aanvraag?.opkoopbescherming?.betreftWoningOntstaanDoorNieuwbouwOfTransformatie === true)"
+                }
+            ]
+        },
+        {
+            "title": "Stap 2",
+            "breadcrumb": "none",
+            "buttonSettings": {
+                "previous": true,
+                "cancel": false,
+                "next": true
+            },
+            "navigateOnEnter": false,
+            "saveOnEnter": false,
+            "scrollToTop": false,
+            "collapsible": false,
+            "label": "Stap 2",
+            "type": "panel",
+            "key": "page2",
+            "input": false,
+            "tableView": false,
+            "components": [
+                {
+                    "label": "HTML",
+                    "tag": "h4",
+                    "content": "Stap 2. Vergunning op basis van de wettelijke uitzonderingsregels of ontheffing",
+                    "refreshOnChange": false,
+                    "key": "html",
+                    "type": "htmlelement",
+                    "input": false,
+                    "tableView": false
+                },
+                {
+                    "label": "Gaat u de woning verhuren aan één of meerdere eerste- of tweedegraads familieleden (bloed- of aanverwantschap)?",
+                    "optionsLabelPosition": "right",
+                    "inline": false,
+                    "tableView": false,
+                    "validate": {
+                        "required": true,
+                        "customMessage": "Dit veld is verplicht."
+                    },
+                    "values": [
+                        {
+                            "label": "Ja",
+                            "value": true,
+                            "shortcut": ""
+                        },
+                        {
+                            "label": "Nee",
+                            "value": false,
+                            "shortcut": ""
+                        }
+                    ],
+                    "key": "aanvraag.vergunning.woningVerhuurdAanFamilie",
+                    "type": "radio",
+                    "input": true
+                },
+                {
+                    "label": "HTML",
+                    "tag": "h4",
+                    "content": "Onder eerstegraads familie (bloed- of aanverwantschap) wordt verstaan: (adoptie) (stief) kinderen, (adoptie) (stief) ouders; partner (huwelijk, geregistreerd partnerschap) of partner (huwelijk, geregistreerd partnerschap) van (adoptie)kinderen (schoonzoon of schoondochter). Onder tweedegraads familie wordt verstaan: broer, zus, grootouders en kleinkinderen van u of uw partner. Zie voor meer informatie: <a href='https://www.rijksoverheid.nl/onderwerpen/curatele-bewind-en-mentorschap/vraag-en-antwoord/wat-is-aanverwantschap' target='_new'>Wat is aanverwantschap?</a> en <a href='https://www.rijksoverheid.nl/onderwerpen/curatele-bewind-en-mentorschap/vraag-en-antwoord/bloedverwantschap' target='_new'>Bloedverwantschap</a>.",
+                    "refreshOnChange": false,
+                    "key": "html",
+                    "type": "htmlelement",
+                    "input": false,
+                    "tableView": false,
+                    "className": "alert alert-info"
+                },
+                {
+                    "label": "fieldset",
+                    "type": "fieldset",
+                    "input": false,
+                    "components": [
+                        {
+                            "label": "Soort familierelatie",
+                            "tableView": true,
+                            "key": "aanvraag.vergunning.familie.soortRelatie",
+                            "type": "textfield",
+                            "validateOn": "blur",
+                            "validate": {
+                                "required": true,
+                                "customMessage": "Dit veld is verplicht."
+                            },
+                            "input": true
+                        },
+                        {
+                            "label": "Voornaam",
+                            "tableView": true,
+                            "key": "aanvraag.vergunning.familie.voornaam",
+                            "type": "textfield",
+                            "validateOn": "blur",
+                            "validate": {
+                                "required": true,
+                                "customMessage": "Dit veld is verplicht."
+                            },
+                            "input": true
+                        },
+                        {
+                            "label": "Tussenvoegel",
+                            "tableView": true,
+                            "key": "aanvraag.vergunning.familie.tussenvoegsel",
+                            "type": "textfield",
+                            "input": true
+                        },
+                        {
+                            "label": "Achternaam",
+                            "tableView": true,
+                            "key": "aanvraag.vergunning.familie.achternaam",
+                            "type": "textfield",
+                            "validateOn": "blur",
+                            "validate": {
+                                "required": true,
+                                "customMessage": "Dit veld is verplicht."
+                            },
+                            "input": true
+                        },
+                        {
+                            "label": "Geboortedatum",
+                            "format": "dd-MM-yyyy",
+                            "tableView": false,
+                            "enableMinDateInput": false,
+                            "datePicker": {
+                                "disableWeekends": false,
+                                "disableWeekdays": false
+                            },
+                            "validateOn": "blur",
+                            "validate": {
+                                "required": true,
+                                "customMessage": "Dit veld is verplicht."
+                            },
+                            "enableMaxDateInput": false,
+                            "enableTime": false,
+                            "key": "aanvraag.vergunning.familie.geboorteDatum",
+                            "type": "datetime",
+                            "input": true,
+                            "widget": {
+                                "type": "calendar",
+                                "displayInTimezone": "viewer",
+                                "locale": "en",
+                                "useLocaleSettings": false,
+                                "allowInput": true,
+                                "mode": "single",
+                                "enableTime": false,
+                                "noCalendar": false,
+                                "format": "dd-MM-yyyy",
+                                "hourIncrement": 1,
+                                "minuteIncrement": 1,
+                                "time_24hr": false,
+                                "minDate": null,
+                                "disableWeekends": false,
+                                "disableWeekdays": false,
+                                "maxDate": null
+                            }
+                        },
+                        {
+                            "label": "Telefoonnummer",
+                            "tableView": true,
+                            "key": "aanvraag.vergunning.familie.telefoonnummer",
+                            "type": "textfield",
+                            "validateOn": "blur",
+                            "validate": {
+                                "required": true,
+                                "customMessage": "Dit veld is verplicht."
+                            },
+                            "input": true
+                        },
+                        {
+                            "label": "E-mail",
+                            "tableView": true,
+                            "key": "aanvraag.vergunning.familie.email",
+                            "validateOn": "blur",
+                            "validate": {
+                                "required": true,
+                                "customMessage": "Dit veld is verplicht."
+                            },
+                            "type": "email",
+                            "input": true
+                        },
+                        {
+                            "label": "Uittreksels geboorteakte",
+                            "tableView": false,
+                            "storage": "url",
+                            "webcam": false,
+                            "fileTypes": [
+                                {
+                                    "label": "",
+                                    "value": ""
+                                }
+                            ],
+                            "key": "aanvraag.vergunning.familie.uittreksels",
+                            "type": "file",
+                            "multiple": true,
+                            "input": true,
+                            "url": "/api/form-file"
+                        }
+                    ],
+                    "conditional": {
+                        "show": true,
+                        "when": "aanvraag.vergunning.woningVerhuurdAanFamilie",
+                        "eq": true
+                    }
+                },
+                {
+                    "label": "Gaat u de woning tijdelijk verhuren voor maximaal één jaar? Bijvoorbeeld in verband met verblijf in het buitenland.",
+                    "validate": {
+                        "required": true,
+                        "customMessage": "Dit veld is verplicht."
+                    },
+                    "optionsLabelPosition": "right",
+                    "inline": false,
+                    "tableView": false,
+                    "values": [
+                        {
+                            "label": "Ja",
+                            "value": true,
+                            "shortcut": ""
+                        },
+                        {
+                            "label": "Nee",
+                            "value": false,
+                            "shortcut": ""
+                        }
+                    ],
+                    "key": "aanvraag.vergunning.tijdelijkeVerhuur",
+                    "conditional": {
+                        "show": true,
+                        "when": "aanvraag.vergunning.woningVerhuurdAanFamilie",
+                        "eq": false
+                    },
+                    "type": "radio",
+                    "input": true
+                },
+                {
+                    "label": "Heeft u (de eigenaar) minimaal een jaar op de woning ingeschreven gestaan in de Basisregistratie personen voordat u de woning gaat verhuren?",
+                    "optionsLabelPosition": "right",
+                    "inline": false,
+                    "tableView": false,
+                    "values": [
+                        {
+                            "label": "Ja",
+                            "value": true,
+                            "shortcut": ""
+                        },
+                        {
+                            "label": "Nee",
+                            "value": false,
+                            "shortcut": ""
+                        }
+                    ],
+                    "key": "aanvraag.vergunning.eigenaarMinimaalEenJaarIngeschrevenBRP",
+                    "conditional": {
+                        "show": true,
+                        "when": "aanvraag.vergunning.tijdelijkeVerhuur",
+                        "eq": true
+                    },
+                    "type": "radio",
+                    "input": true
+                },
+                {
+                    "label": "Om in aanmerking te komen voor een vergunning dient u een tijdelijk huurcontract van maximaal 1 jaar zonder mogelijkheid tot verlenging met uw tijdelijke huurder in te dienen. Dit kan hieronder.",
+                    "tableView": false,
+                    "storage": "url",
+                    "webcam": false,
+                    "fileTypes": [
+                        {
+                            "label": "",
+                            "value": ""
+                        }
+                    ],
+                    "key": "aanvraag.vergunning.tijdelijkVerhuurcontract",
+                    "type": "file",
+                    "multiple": true,
+                    "input": true,
+                    "url": "/api/form-file",
+                    "conditional": {
+                        "show": true,
+                        "when": "aanvraag.vergunning.eigenaarMinimaalEenJaarIngeschrevenBRP",
+                        "eq": true
+                    }
+                },
+                {
+                    "label": "Is de woning onlosmakelijk verbonden met een winkel-, kantoor- of bedrijfspand?",
+                    "optionsLabelPosition": "right",
+                    "inline": false,
+                    "tableView": false,
+                    "values": [
+                        {
+                            "label": "Ja",
+                            "value": true,
+                            "shortcut": ""
+                        },
+                        {
+                            "label": "Nee",
+                            "value": false,
+                            "shortcut": ""
+                        }
+                    ],
+                    "key": "aanvraag.vergunning.woningOnlosmakelijkVerbonden",
+                    "customConditional": "show = data.aanvraag.vergunning.tijdelijkeVerhuur === false || data.aanvraag.vergunning.eigenaarMinimaalEenJaarIngeschrevenBRP === false",
+                    "type": "radio",
+                    "input": true
+                },
+                {
+                    "label": "Uittreksel KVK handelsregister",
+                    "tableView": false,
+                    "storage": "url",
+                    "webcam": false,
+                    "fileTypes": [
+                        {
+                            "label": "",
+                            "value": ""
+                        }
+                    ],
+                    "key": "aanvraag.vergunning.kvkUittreksel",
+                    "type": "file",
+                    "multiple": true,
+                    "input": true,
+                    "url": "/api/form-file",
+                    "conditional": {
+                        "show": true,
+                        "when": "aanvraag.vergunning.woningOnlosmakelijkVerbonden",
+                        "eq": true
+                    }
+                },
+                {
+                    "label": "Situatietekeningen en foto's",
+                    "tableView": false,
+                    "storage": "url",
+                    "webcam": false,
+                    "fileTypes": [
+                        {
+                            "label": "",
+                            "value": ""
+                        }
+                    ],
+                    "key": "aanvraag.vergunning.situatieTekeningen",
+                    "type": "file",
+                    "multiple": true,
+                    "input": true,
+                    "url": "/api/form-file",
+                    "conditional": {
+                        "show": true,
+                        "when": "aanvraag.vergunning.woningOnlosmakelijkVerbonden",
+                        "eq": true
+                    }
+                },
+                {
+                    "label": "Betreft het een woning die u gelijktijdig met andere woningen aankoopt binnen één complex? Zo ja, gaat dit om vier tot negen woningen?",
+                    "validate": {
+                        "required": true,
+                        "customMessage": "Dit veld is verplicht."
+                    },
+                    "optionsLabelPosition": "right",
+                    "inline": false,
+                    "tableView": false,
+                    "values": [
+                        {
+                            "label": "Ja",
+                            "value": true,
+                            "shortcut": ""
+                        },
+                        {
+                            "label": "Nee",
+                            "value": false,
+                            "shortcut": ""
+                        }
+                    ],
+                    "key": "aanvraag.vergunning.betreftMeerdereWoningenTegelijkGekocht",
+                    "conditional": {
+                        "show": true,
+                        "when": "aanvraag.vergunning.woningOnlosmakelijkVerbonden",
+                        "eq": false
+                    },
+                    "type": "radio",
+                    "input": true
+                },
+                {
+                    "label": "Akte van levering van alle betreffende woningen",
+                    "tableView": false,
+                    "storage": "url",
+                    "webcam": false,
+                    "fileTypes": [
+                        {
+                            "label": "",
+                            "value": ""
+                        }
+                    ],
+                    "key": "aanvraag.vergunning.akteLeveringBetreffendeWoningen",
+                    "type": "file",
+                    "multiple": true,
+                    "input": true,
+                    "url": "/api/form-file",
+                    "conditional": {
+                        "show": true,
+                        "when": "aanvraag.vergunning.betreftMeerdereWoningenTegelijkGekocht",
+                        "eq": true
+                    }
+                },
+                {
+                    "label": "Bent u van plan de woning in gebruik te geven voor een maatschappelijk gewenst doel? Let op: dit is een uitzonderingssituatie die zeer terughoudend wordt toegepast. Het gaat hier dan bijvoorbeeld om verhuur in het kader van zorg of vluchtelingenopvang.",
+                    "validate": {
+                        "required": true,
+                        "customMessage": "Dit veld is verplicht."
+                    },
+                    "optionsLabelPosition": "right",
+                    "inline": false,
+                    "tableView": false,
+                    "values": [
+                        {
+                            "label": "Ja",
+                            "value": true,
+                            "shortcut": ""
+                        },
+                        {
+                            "label": "Nee",
+                            "value": false,
+                            "shortcut": ""
+                        }
+                    ],
+                    "key": "aanvraag.vergunning.gebruikVoorMaatschappelijkDoel",
+                    "conditional": {
+                        "show": true,
+                        "when": "aanvraag.vergunning.betreftMeerdereWoningenTegelijkGekocht",
+                        "eq": false
+                    },
+                    "type": "radio",
+                    "input": true
+                },
+                {
+                    "label": "Geef een uitgebreide toelichting op hoe de situatie tot stand is gekomen, de doelstellingen van de eigenaar, en waarom verhuur van deze woning maatschappelijk gewenst is.",
+                    "autoExpand": false,
+                    "tableView": true,
+                    "key": "aanvraag.vergunning.gebruikVoorMaatschappelijkDoelToelichting",
+                    "type": "textarea",
+                    "input": true,
+                    "conditional": {
+                        "show": true,
+                        "when": "aanvraag.vergunning.gebruikVoorMaatschappelijkDoel",
+                        "eq": true
+                    }
+                },
+                {
+                    "label": "Zijn er omstandigheden die maken dat u het verhuurverbod dat uit de opkoopbescherming voortvloeit redelijkerwijs niet kunt naleven? Denk aan onverwachte situaties die maken dat u zich genoodzaakt ziet de woning te verhuren en het niet mogelijk is deze (binnen afzienbare tijd) te verkopen.",
+                    "validate": {
+                        "required": true,
+                        "customMessage": "Dit veld is verplicht."
+                    },
+                    "optionsLabelPosition": "right",
+                    "inline": false,
+                    "tableView": false,
+                    "values": [
+                        {
+                            "label": "Ja",
+                            "value": true,
+                            "shortcut": ""
+                        },
+                        {
+                            "label": "Nee",
+                            "value": false,
+                            "shortcut": ""
+                        }
+                    ],
+                    "key": "aanvraag.vergunning.kanVerhuurverbodNietNaleven",
+                    "conditional": {
+                        "show": true,
+                        "when": "aanvraag.vergunning.gebruikVoorMaatschappelijkDoel",
+                        "eq": false
+                    },
+                    "type": "radio",
+                    "input": true
+                },
+                {
+                    "label": "Geef een uitgebreide beschrijving van de situatie en leg uit waarom u denkt in aanmerking te komen voor een ontheffing.",
+                    "autoExpand": false,
+                    "tableView": true,
+                    "key": "aanvraag.vergunning.kanVerhuurverbodNietNalevenToelichting",
+                    "type": "textarea",
+                    "input": true,
+                    "conditional": {
+                        "show": true,
+                        "when": "aanvraag.vergunning.kanVerhuurverbodNietNaleven",
+                        "eq": true
+                    }
+                },
+                {
+                    "label": "Woont u zelf in de woning en wilt u de woning delen met een of meerdere personen waar u geen gemeenschappelijke huishouding mee voert?",
+                    "validate": {
+                        "required": true,
+                        "customMessage": "Dit veld is verplicht."
+                    },
+                    "optionsLabelPosition": "right",
+                    "inline": false,
+                    "tableView": false,
+                    "values": [
+                        {
+                            "label": "Ja",
+                            "value": true,
+                            "shortcut": ""
+                        },
+                        {
+                            "label": "Nee",
+                            "value": false,
+                            "shortcut": ""
+                        }
+                    ],
+                    "key": "aanvraag.vergunning.woontZelfInDeWoning",
+                    "conditional": {
+                        "show": true,
+                        "when": "aanvraag.vergunning.kanVerhuurverbodNietNaleven",
+                        "eq": false
+                    },
+                    "type": "radio",
+                    "input": true
+                },
+                {
+                    "label": "HTML",
+                    "tag": "h4",
+                    "content": "Huishouden: een alleenstaande, dan wel twee personen met of zonder kinderen, die een duurzame gemeenschappelijke huishouding voeren of wensen te voeren waarbij er sprake is van bewuste wederzijdse zorg en taakverdeling die het enkel gezamenlijk bewonen van een bepaalde woonruimte te boven gaat en waarbij de intentie bestaat om voor onbepaalde periode samen te wonen.",
+                    "refreshOnChange": false,
+                    "key": "html",
+                    "type": "htmlelement",
+                    "input": false,
+                    "tableView": false,
+                    "className": "alert alert-info",
+                    "conditional": {
+                        "show": true,
+                        "when": "aanvraag.vergunning.kanVerhuurverbodNietNaleven",
+                        "eq": false
+                    }
+                },
+                {
+                    "label": "HTML",
+                    "tag": "h4",
+                    "content": "Kijk voor meer regels over woningdelen, waaronder kamerverhuur op <a href='https://www.amsterdam.nl/wonen-leefomgeving/wonen/kamerverhuur/' target='_new'>amsterdam.nl</a>.",
+                    "refreshOnChange": false,
+                    "key": "html",
+                    "type": "htmlelement",
+                    "input": false,
+                    "tableView": false,
+                    "className": "alert alert-info",
+                    "customConditional": "show = data.aanvraag.vergunning.woontZelfInDeWoning === true"
+                },
+                {
+                    "label": "HTML",
+                    "tag": "h4",
+                    "content": "Uw woning valt onder de opkoopbescherming. Op basis van ingevoerde gegevens lijkt u niet in aanmerking te komen voor een vergunning of een ontheffing. Het advies is om geen aanvraag in te dienen.",
+                    "refreshOnChange": false,
+                    "key": "html",
+                    "type": "htmlelement",
+                    "input": false,
+                    "tableView": false,
+                    "className": "alert alert-warning",
+                    "customConditional": "show = data.aanvraag.vergunning.woontZelfInDeWoning === false"
+                }
+            ]
+        },
+        {
+            "title": "Stap 3",
+            "breadcrumb": "none",
+            "buttonSettings": {
+                "previous": true,
+                "cancel": false,
+                "next": true
+            },
+            "navigateOnEnter": false,
+            "saveOnEnter": false,
+            "scrollToTop": false,
+            "collapsible": false,
+            "label": "Stap 3",
+            "type": "panel",
+            "key": "page3",
+            "input": false,
+            "tableView": false,
+            "components": [
+                {
+                    "label": "HTML",
+                    "tag": "h4",
+                    "content": "Stap 3. Gegevens te verhuren woonruimte",
+                    "refreshOnChange": false,
+                    "key": "html",
+                    "type": "htmlelement",
+                    "input": false,
+                    "tableView": false
+                },
+                {
+                    "label": "Straat",
+                    "tableView": true,
+                    "validateOn": "blur",
+                    "key": "aanvraag.woonruimte.adres.straat",
+                    "type": "textfield",
+                    "input": true
+                },
+                {
+                    "label": "Huisnummer",
+                    "mask": false,
+                    "tableView": true,
+                    "delimiter": false,
+                    "requireDecimal": false,
+                    "inputFormat": "plain",
+                    "truncateMultipleSpaces": false,
+                    "validateOn": "blur",
+                    "validate": {
+                        "required": true,
+                        "customMessage": "Dit veld is verplicht."
+                    },
+                    "key": "aanvraag.woonruimte.adres.huisnummer",
+                    "type": "number",
+                    "input": true
+                },
+                {
+                    "label": "Huisnummer toevoeging",
+                    "tableView": true,
+                    "key": "aanvraag.woonruimte.adres.huisnummerToevoeging",
+                    "type": "textfield",
+                    "input": true
+                },
+                {
+                    "label": "Postcode",
+                    "inputMask": "9999 AA",
+                    "tableView": true,
+                    "validateOn": "blur",
+                    "validate": {
+                        "minLength": 6,
+                        "maxLength": 7,
+                        "required": true,
+                        "customMessage": "Dit veld is verplicht."
+                    },
+                    "key": "aanvraag.woonruimte.adres.postcode",
+                    "type": "textfield",
+                    "input": true
+                },
+                {
+                    "label": "Plaats",
+                    "tableView": true,
+                    "validateOn": "blur",
+                    "key": "aanvraag.woonruimte.adres.plaats",
+                    "type": "textfield",
+                    "input": true
+                },
+                {
+                    "key": "aanvraag.woonruimte.adres.volledigeAdres",
+                    "type": "hidden",
+                    "calculateValue": "value = data.aanvraag?.woonruimte?.adres ? (( data.aanvraag.woonruimte?.adres?.straat ? data.aanvraag.woonruimte?.adres?.straat + ' ' : '') + ( data.aanvraag.woonruimte?.adres?.huisnummer ? ' ' + data.aanvraag.woonruimte?.adres?.huisnummer + ' ' : ' ') + ( data.aanvraag.woonruimte?.adres?.huisletter || '') + ( data.aanvraag.woonruimte?.adres?.huisnummerToevoeging || '') + ( ( data.aanvraag.woonruimte?.adres?.postcode || data.aanvraag.woonruimte?.adres?.postcode || data.aanvraag.woonruimte?.adres?.postcode) ? ',' : '') + ( ' ' + data.aanvraag.woonruimte?.adres?.postcode || '') ) + ( ' ' + (data.aanvraag.woonruimte?.adres?.plaats || '')) + ( ' ' + (data.aanvraag.woonruimte?.adres?.land || '')) : '-'",
+                    "input": true
+                },
+                {
+                    "label": "Kopie leveringsakte en datum inschrijving in de registers",
+                    "tableView": false,
+                    "storage": "url",
+                    "webcam": false,
+                    "fileTypes": [
+                        {
+                            "label": "",
+                            "value": ""
+                        }
+                    ],
+                    "key": "aanvraag.woonruimte.leveringsakte",
+                    "type": "file",
+                    "multiple": true,
+                    "input": true,
+                    "url": "/api/form-file"
+                }
+            ]
+        },
+        {
+            "title": "Stap 4",
+            "breadcrumb": "none",
+            "buttonSettings": {
+                "previous": true,
+                "cancel": false,
+                "next": true
+            },
+            "navigateOnEnter": false,
+            "saveOnEnter": false,
+            "scrollToTop": false,
+            "collapsible": false,
+            "label": "Stap 4",
+            "type": "panel",
+            "key": "page4",
+            "input": false,
+            "tableView": false,
+            "components": [
+                {
+                    "label": "HTML",
+                    "tag": "h4",
+                    "content": "Stap 4. Gegevens aanvrager",
+                    "refreshOnChange": false,
+                    "key": "html",
+                    "type": "htmlelement",
+                    "input": false,
+                    "tableView": false
+                },
+                {
+                    "label": "In welke hoedanigheid wilt u een aanvraag doen?",
+                    "optionsLabelPosition": "right",
+                    "inline": false,
+                    "tableView": false,
+                    "values": [
+                        {
+                            "label": "aanvraag als particulier",
+                            "value": "particulier",
+                            "shortcut": ""
+                        },
+                        {
+                            "label": "aanvraag als organisatie",
+                            "value": "organisatie",
+                            "shortcut": ""
+                        }
+                    ],
+                    "validate": {
+                        "required": true,
+                        "customMessage": "Dit veld is verplicht."
+                    },
+                    "key": "aanvraag.aanvrager.type",
+                    "type": "radio",
+                    "input": true
+                },
+                {
+                    "label": "fieldset",
+                    "type": "fieldset",
+                    "input": false,
+                    "components": [
+                        {
+                            "label": "BSN",
+                            "key": "aanvraag.aanvrager.bsn",
+                            "type": "hidden",
+                            "input": true
+                        },
+                        {
+                            "label": "Voornaam",
+                            "tableView": true,
+                            "key": "aanvraag.aanvrager.voornaam",
+                            "validateOn": "blur",
+                            "validate": {
+                                "required": true,
+                                "customMessage": "Dit veld is verplicht."
+                            },
+                            "type": "textfield",
+                            "input": true
+                        },
+                        {
+                            "label": "Tussenvoegsel",
+                            "key": "aanvraag.aanvrager.tussenvoegsel",
+                            "type": "textfield",
+                            "input": true
+                        },
+                        {
+                            "label": "Achternaam",
+                            "tableView": true,
+                            "key": "aanvraag.aanvrager.achternaam",
+                            "validateOn": "blur",
+                            "validate": {
+                                "required": true,
+                                "customMessage": "Dit veld is verplicht."
+                            },
+                            "type": "textfield",
+                            "input": true
+                        },
+                        {
+                            "type": "hidden",
+                            "key": "aanvraag.aanvrager.volledigeNaam",
+                            "calculateValue": "value = data.aanvraag.aanvrager.voornaam + ' ' + data.aanvraag.aanvrager.tussenvoegsel + (data.aanvraag.aanvrager.tussenvoegsel != '' ? ' ' : '') + data.aanvraag.aanvrager.achternaam",
+                            "input": true
+                        },
+                        {
+                            "label": "Straat",
+                            "tableView": true,
+                            "key": "aanvraag.aanvrager.adres.straat",
+                            "type": "textfield",
+                            "input": true
+                        },
+                        {
+                            "label": "Huisnummer",
+                            "mask": false,
+                            "tableView": true,
+                            "delimiter": false,
+                            "requireDecimal": false,
+                            "inputFormat": "plain",
+                            "truncateMultipleSpaces": false,
+                            "validateOn": "blur",
+                            "key": "aanvraag.aanvrager.adres.huisnummer",
+                            "type": "number",
+                            "input": true,
+                            "validate": {
+                                "required": true,
+                                "customMessage": "Dit veld is verplicht."
+                            }
+                        },
+                        {
+                            "label": "Huisnummer toevoeging",
+                            "tableView": true,
+                            "key": "aanvraag.aanvrager.adres.huisnummerToevoeging",
+                            "type": "textfield",
+                            "input": true
+                        },
+                        {
+                            "label": "Postcode",
+                            "inputMask": "9999 AA",
+                            "tableView": true,
+                            "validateOn": "blur",
+                            "validate": {
+                                "minLength": 6,
+                                "maxLength": 7,
+                                "required": true,
+                                "customMessage": "Dit veld is verplicht."
+                            },
+                            "key": "aanvraag.aanvrager.adres.postcode",
+                            "type": "textfield",
+                            "input": true
+                        },
+                        {
+                            "label": "Plaats",
+                            "tableView": true,
+                            "key": "aanvraag.aanvrager.adres.plaats",
+                            "type": "textfield",
+                            "input": true
+                        },
+                        {
+                            "label": "Land",
+                            "tableView": true,
+                            "key": "aanvraag.aanvrager.land",
+                            "type": "textfield",
+                            "input": true
+                        },
+                        {
+                            "label": "Telefoonnummer",
+                            "tableView": true,
+                            "key": "aanvraag.aanvrager.telefoonnummer",
+                            "type": "textfield",
+                            "input": true
+                        },
+                        {
+                            "label": "E-mailadres",
+                            "tableView": true,
+                            "validateOn": "blur",
+                            "validate": {
+                                "required": true,
+                                "customMessage": "Dit veld is verplicht."
+                            },
+                            "key": "aanvraag.aanvrager.email",
+                            "type": "email",
+                            "input": true
+                        }
+                    ],
+                    "conditional": {
+                        "show": true,
+                        "when": "aanvraag.aanvrager.type",
+                        "eq": "particulier"
+                    }
+                },
+                {
+                    "label": "fieldset",
+                    "type": "fieldset",
+                    "input": false,
+                    "components": [
+                        {
+                            "label": "KVK nummer",
+                            "key": "aanvraag.aanvrager.kvk",
+                            "type": "hidden",
+                            "input": true
+                        },
+                        {
+                            "label": "Bedrijfsnaam",
+                            "tableView": true,
+                            "validateOn": "blur",
+                            "validate": {
+                                "required": true,
+                                "customMessage": "Dit veld is verplicht."
+                            },
+                            "key": "aanvraag.aanvrager.bedrijfsnaam",
+                            "type": "textfield",
+                            "input": true
+                        },
+                        {
+                            "type": "hidden",
+                            "key": "aanvraag.aanvrager.volledigeNaam",
+                            "calculateValue": "value = data.aanvraag.aanvrager.bedrijfsnaam",
+                            "input": true
+                        },
+                        {
+                            "label": "Straat",
+                            "tableView": true,
+                            "key": "aanvraag.aanvrager.adres.straat",
+                            "type": "textfield",
+                            "input": true
+                        },
+                        {
+                            "label": "Huisnummer",
+                            "mask": false,
+                            "tableView": true,
+                            "delimiter": false,
+                            "requireDecimal": false,
+                            "inputFormat": "plain",
+                            "truncateMultipleSpaces": false,
+                            "validateOn": "blur",
+                            "key": "aanvraag.aanvrager.adres.huisnummer",
+                            "type": "number",
+                            "input": true
+                        },
+                        {
+                            "label": "Huisnummer toevoeging",
+                            "tableView": true,
+                            "key": "aanvraag.aanvrager.adres.huisnummerToevoeging",
+                            "type": "textfield",
+                            "input": true
+                        },
+                        {
+                            "label": "Postcode",
+                            "inputMask": "9999 AA",
+                            "tableView": true,
+                            "validateOn": "blur",
+                            "validate": {
+                                "minLength": 6,
+                                "maxLength": 7,
+                                "required": true,
+                                "customMessage": "Dit veld is verplicht."
+                            },
+                            "key": "aanvraag.aanvrager.adres.postcode",
+                            "type": "textfield",
+                            "input": true
+                        },
+                        {
+                            "label": "Plaats",
+                            "tableView": true,
+                            "key": "aanvraag.aanvrager.adres.plaats",
+                            "type": "textfield",
+                            "input": true
+                        },
+                        {
+                            "label": "Voornaam (contactpersoon)",
+                            "tableView": true,
+                            "key": "aanvraag.aanvrager.voornaam",
+                            "validateOn": "blur",
+                            "validate": {
+                                "required": true,
+                                "customMessage": "Dit veld is verplicht."
+                            },
+                            "type": "textfield",
+                            "input": true
+                        },
+                        {
+                            "label": "Tussenvoegsel (contactpersoon)",
+                            "key": "aanvraag.aanvrager.tussenvoegsel",
+                            "type": "textfield",
+                            "input": true
+                        },
+                        {
+                            "label": "Achternaam (contactpersoon)",
+                            "tableView": true,
+                            "key": "aanvraag.aanvrager.achternaam",
+                            "validateOn": "blur",
+                            "validate": {
+                                "required": true,
+                                "customMessage": "Dit veld is verplicht."
+                            },
+                            "type": "textfield",
+                            "input": true
+                        },
+                        {
+                            "label": "Telefoonnummer",
+                            "tableView": true,
+                            "key": "aanvraag.aanvrager.telefoonnummer",
+                            "type": "textfield",
+                            "input": true
+                        },
+                        {
+                            "label": "E-mailadres",
+                            "tableView": true,
+                            "validateOn": "blur",
+                            "validate": {
+                                "required": true,
+                                "customMessage": "Dit veld is verplicht."
+                            },
+                            "key": "aanvraag.aanvrager.email",
+                            "type": "email",
+                            "input": true
+                        }
+                    ],
+                    "conditional": {
+                        "show": true,
+                        "when": "aanvraag.aanvrager.type",
+                        "eq": "organisatie"
+                    }
+                }
+            ]
+        },
+        {
+            "title": "Stap 5",
+            "breadcrumb": "none",
+            "buttonSettings": {
+                "previous": true,
+                "cancel": false,
+                "next": true
+            },
+            "navigateOnEnter": false,
+            "saveOnEnter": false,
+            "scrollToTop": false,
+            "collapsible": false,
+            "label": "Stap 5",
+            "type": "panel",
+            "key": "page5",
+            "input": false,
+            "tableView": false,
+            "components": [
+                {
+                    "label": "HTML",
+                    "tag": "h4",
+                    "content": "Stap 5. Samenvatting",
+                    "refreshOnChange": false,
+                    "key": "html",
+                    "type": "htmlelement",
+                    "input": false,
+                    "tableView": false
+                },
+                {
+                    "label": "Wanneer is de akte van levering van de woning ingeschreven in het Kadaster?",
+                    "format": "yyyy-MM-dd",
+                    "tableView": false,
+                    "enableMinDateInput": false,
+                    "datePicker": {
+                        "disableWeekends": false,
+                        "disableWeekdays": false,
+                        "maxDate": "moment().subtract(1, 'day')"
+                    },
+                    "enableMaxDateInput": false,
+                    "enableTime": false,
+                    "key": "aanvraag.opkoopbescherming.aankoopDatum",
+                    "type": "datetime",
+                    "input": true,
+                    "widget": {
+                        "type": "calendar",
+                        "displayInTimezone": "viewer",
+                        "locale": "en",
+                        "useLocaleSettings": false,
+                        "allowInput": true,
+                        "mode": "single",
+                        "enableTime": false,
+                        "noCalendar": false,
+                        "format": "yyyy-MM-dd",
+                        "hourIncrement": 1,
+                        "minuteIncrement": 1,
+                        "time_24hr": false,
+                        "minDate": null,
+                        "disableWeekends": false,
+                        "disableWeekdays": false,
+                        "maxDate": "moment().subtract(1, 'day')"
+                    },
+                    "disabled": true
+                },
+                {
+                    "label": "Wat is de WOZ-waarde van te verhuren woonruimte?",
+                    "mask": false,
+                    "spellcheck": true,
+                    "tableView": false,
+                    "currency": "EUR",
+                    "inputFormat": "plain",
+                    "truncateMultipleSpaces": false,
+                    "key": "aanvraag.opkoopbescherming.woz",
+                    "type": "currency",
+                    "input": true,
+                    "delimiter": true,
+                    "disabled": true
+                },
+                {
+                    "label": "Is de woning niet of korter dan 6 maanden voorafgaand aan de inschrijving van de akte van levering van de woning in het Kadaster in zijn geheel verhuurd of in gebruik gegeven?",
+                    "optionsLabelPosition": "right",
+                    "inline": false,
+                    "tableView": false,
+                    "values": [
+                        {
+                            "label": "Ja",
+                            "value": true,
+                            "shortcut": ""
+                        },
+                        {
+                            "label": "Nee",
+                            "value": false,
+                            "shortcut": ""
+                        }
+                    ],
+                    "key": "aanvraag.opkoopbescherming.woningLangerDan6MaandenLeeg",
+                    "type": "radio",
+                    "input": true,
+                    "customConditional": "show = (data.aanvraag?.opkoopbescherming?.aankoopDatum != '' && data.aanvraag?.opkoopbescherming?.aankoopDatum >= moment('04-01-2022').format('YYYY-MM-DD'))",
+                    "disabled": true
+                },
+                {
+                    "label": "Betreft het een woning die u gelijktijdig met andere woningen aankoopt binnen één complex? En zo ja, gaat dit om tien woningen of meer?",
+                    "optionsLabelPosition": "right",
+                    "inline": false,
+                    "tableView": false,
+                    "values": [
+                        {
+                            "label": "Ja",
+                            "value": true,
+                            "shortcut": ""
+                        },
+                        {
+                            "label": "Nee",
+                            "value": false,
+                            "shortcut": ""
+                        }
+                    ],
+                    "key": "aanvraag.opkoopbescherming.betreftMeerdereWoningenBinnenEenComplex",
+                    "type": "radio",
+                    "input": true,
+                    "conditional": {
+                        "show": true,
+                        "when": "aanvraag.opkoopbescherming.woningLangerDan6MaandenLeeg",
+                        "eq": true
+                    },
+                    "disabled": true
+                },
+                {
+                    "label": "Betreft het een woning waarvoor een verhuurverbod is opgenomen in de erfpachtvoorwaarden?",
+                    "optionsLabelPosition": "right",
+                    "inline": false,
+                    "tableView": false,
+                    "values": [
+                        {
+                            "label": "Ja",
+                            "value": true,
+                            "shortcut": ""
+                        },
+                        {
+                            "label": "Nee",
+                            "value": false,
+                            "shortcut": ""
+                        }
+                    ],
+                    "key": "aanvraag.opkoopbescherming.betreftWoningWaarvoorVerhuurverbodOpgenomenInErfpachtvoorwaarden",
+                    "type": "radio",
+                    "input": true,
+                    "conditional": {
+                        "show": true,
+                        "when": "aanvraag.opkoopbescherming.betreftMeerdereWoningenBinnenEenComplex",
+                        "eq": false
+                    },
+                    "disabled": true
+                },
+                {
+                    "label": "Betreft het een woning ontstaan door nieuwbouw of transformatie zonder erfpachtcontract met de gemeente en waarvan de ontwikkeling is gestart na 1 april 2022?",
+                    "optionsLabelPosition": "right",
+                    "inline": false,
+                    "tableView": false,
+                    "values": [
+                        {
+                            "label": "Ja",
+                            "value": true,
+                            "shortcut": ""
+                        },
+                        {
+                            "label": "Nee",
+                            "value": false,
+                            "shortcut": ""
+                        }
+                    ],
+                    "key": "aanvraag.opkoopbescherming.betreftWoningOntstaanDoorNieuwbouwOfTransformatie",
+                    "type": "radio",
+                    "input": true,
+                    "conditional": {
+                        "show": true,
+                        "when": "aanvraag.opkoopbescherming.betreftWoningWaarvoorVerhuurverbodOpgenomenInErfpachtvoorwaarden",
+                        "eq": false
+                    },
+                    "disabled": true
+                },
+                {
+                    "label": "Gaat u de woning verhuren aan één of meerdere eerste- of tweedegraads familieleden (bloed- of aanverwantschap)?",
+                    "optionsLabelPosition": "right",
+                    "inline": false,
+                    "tableView": false,
+                    "validate": {
+                        "required": true,
+                        "customMessage": "Dit veld is verplicht."
+                    },
+                    "values": [
+                        {
+                            "label": "Ja",
+                            "value": true,
+                            "shortcut": ""
+                        },
+                        {
+                            "label": "Nee",
+                            "value": false,
+                            "shortcut": ""
+                        }
+                    ],
+                    "key": "aanvraag.vergunning.woningVerhuurdAanFamilie",
+                    "type": "radio",
+                    "input": true,
+                    "disabled": true
+                },
+                {
+                    "label": "fieldset",
+                    "type": "fieldset",
+                    "input": false,
+                    "components": [
+                        {
+                            "label": "Soort familierelatie",
+                            "tableView": true,
+                            "key": "aanvraag.vergunning.familie.soortRelatie",
+                            "type": "textfield",
+                            "validateOn": "blur",
+                            "validate": {
+                                "required": true,
+                                "customMessage": "Dit veld is verplicht."
+                            },
+                            "input": true,
+                            "disabled": true
+                        },
+                        {
+                            "label": "Voornaam",
+                            "tableView": true,
+                            "key": "aanvraag.vergunning.familie.voornaam",
+                            "type": "textfield",
+                            "validateOn": "blur",
+                            "validate": {
+                                "required": true,
+                                "customMessage": "Dit veld is verplicht."
+                            },
+                            "input": true,
+                            "disabled": true
+                        },
+                        {
+                            "label": "Tussenvoegel",
+                            "tableView": true,
+                            "key": "aanvraag.vergunning.familie.tussenvoegsel",
+                            "type": "textfield",
+                            "input": true,
+                            "disabled": true
+                        },
+                        {
+                            "label": "Achternaam",
+                            "tableView": true,
+                            "key": "aanvraag.vergunning.familie.achternaam",
+                            "type": "textfield",
+                            "validateOn": "blur",
+                            "validate": {
+                                "required": true,
+                                "customMessage": "Dit veld is verplicht."
+                            },
+                            "input": true,
+                            "disabled": true
+                        },
+                        {
+                            "label": "Geboortedatum",
+                            "format": "dd-MM-yyyy",
+                            "tableView": false,
+                            "enableMinDateInput": false,
+                            "datePicker": {
+                                "disableWeekends": false,
+                                "disableWeekdays": false
+                            },
+                            "validateOn": "blur",
+                            "validate": {
+                                "required": true,
+                                "customMessage": "Dit veld is verplicht."
+                            },
+                            "enableMaxDateInput": false,
+                            "enableTime": false,
+                            "key": "aanvraag.vergunning.familie.geboorteDatum",
+                            "type": "datetime",
+                            "input": true,
+                            "widget": {
+                                "type": "calendar",
+                                "displayInTimezone": "viewer",
+                                "locale": "en",
+                                "useLocaleSettings": false,
+                                "allowInput": true,
+                                "mode": "single",
+                                "enableTime": false,
+                                "noCalendar": false,
+                                "format": "dd-MM-yyyy",
+                                "hourIncrement": 1,
+                                "minuteIncrement": 1,
+                                "time_24hr": false,
+                                "minDate": null,
+                                "disableWeekends": false,
+                                "disableWeekdays": false,
+                                "maxDate": null
+                            },
+                            "disabled": true
+                        },
+                        {
+                            "label": "Telefoonnummer",
+                            "tableView": true,
+                            "key": "aanvraag.vergunning.familie.telefoonnummer",
+                            "type": "textfield",
+                            "validateOn": "blur",
+                            "validate": {
+                                "required": true,
+                                "customMessage": "Dit veld is verplicht."
+                            },
+                            "input": true,
+                            "disabled": true
+                        },
+                        {
+                            "label": "E-mail",
+                            "tableView": true,
+                            "key": "aanvraag.vergunning.familie.email",
+                            "validateOn": "blur",
+                            "validate": {
+                                "required": true,
+                                "customMessage": "Dit veld is verplicht."
+                            },
+                            "type": "email",
+                            "input": true,
+                            "disabled": true
+                        },
+                        {
+                            "label": "Uittreksels geboorteakte",
+                            "tableView": false,
+                            "storage": "url",
+                            "webcam": false,
+                            "fileTypes": [
+                                {
+                                    "label": "",
+                                    "value": ""
+                                }
+                            ],
+                            "key": "aanvraag.vergunning.familie.uittreksels",
+                            "type": "file",
+                            "multiple": true,
+                            "input": true,
+                            "url": "/api/form-file",
+                            "disabled": true
+                        }
+                    ],
+                    "conditional": {
+                        "show": true,
+                        "when": "aanvraag.vergunning.woningVerhuurdAanFamilie",
+                        "eq": true
+                    }
+                },
+                {
+                    "label": "Gaat u de woning tijdelijk verhuren voor maximaal één jaar? Bijvoorbeeld in verband met verblijf in het buitenland.",
+                    "validate": {
+                        "required": true,
+                        "customMessage": "Dit veld is verplicht."
+                    },
+                    "optionsLabelPosition": "right",
+                    "inline": false,
+                    "tableView": false,
+                    "values": [
+                        {
+                            "label": "Ja",
+                            "value": true,
+                            "shortcut": ""
+                        },
+                        {
+                            "label": "Nee",
+                            "value": false,
+                            "shortcut": ""
+                        }
+                    ],
+                    "key": "aanvraag.vergunning.tijdelijkeVerhuur",
+                    "conditional": {
+                        "show": true,
+                        "when": "aanvraag.vergunning.woningVerhuurdAanFamilie",
+                        "eq": false
+                    },
+                    "type": "radio",
+                    "input": true,
+                    "disabled": true
+                },
+                {
+                    "label": "Heeft u (de eigenaar) minimaal een jaar op de woning ingeschreven gestaan in de Basisregistratie personen voordat u de woning gaat verhuren?",
+                    "optionsLabelPosition": "right",
+                    "inline": false,
+                    "tableView": false,
+                    "values": [
+                        {
+                            "label": "Ja",
+                            "value": true,
+                            "shortcut": ""
+                        },
+                        {
+                            "label": "Nee",
+                            "value": false,
+                            "shortcut": ""
+                        }
+                    ],
+                    "key": "aanvraag.vergunning.eigenaarMinimaalEenJaarIngeschrevenBRP",
+                    "conditional": {
+                        "show": true,
+                        "when": "aanvraag.vergunning.tijdelijkeVerhuur",
+                        "eq": true
+                    },
+                    "type": "radio",
+                    "input": true,
+                    "disabled": true
+                },
+                {
+                    "label": "Om in aanmerking te komen voor een vergunning dient u een tijdelijk huurcontract van maximaal 1 jaar zonder mogelijkheid tot verlenging met uw tijdelijke huurder in te dienen. Dit kan hieronder.",
+                    "tableView": false,
+                    "storage": "url",
+                    "webcam": false,
+                    "fileTypes": [
+                        {
+                            "label": "",
+                            "value": ""
+                        }
+                    ],
+                    "key": "aanvraag.vergunning.tijdelijkVerhuurcontract",
+                    "type": "file",
+                    "multiple": true,
+                    "input": true,
+                    "url": "/api/form-file",
+                    "conditional": {
+                        "show": true,
+                        "when": "aanvraag.vergunning.eigenaarMinimaalEenJaarIngeschrevenBRP",
+                        "eq": true
+                    },
+                    "disabled": true
+                },
+                {
+                    "label": "Is de woning onlosmakelijk verbonden met een winkel-, kantoor- of bedrijfspand?",
+                    "optionsLabelPosition": "right",
+                    "inline": false,
+                    "tableView": false,
+                    "values": [
+                        {
+                            "label": "Ja",
+                            "value": true,
+                            "shortcut": ""
+                        },
+                        {
+                            "label": "Nee",
+                            "value": false,
+                            "shortcut": ""
+                        }
+                    ],
+                    "key": "aanvraag.vergunning.woningOnlosmakelijkVerbonden",
+                    "customConditional": "show = data.aanvraag.vergunning.tijdelijkeVerhuur === false || data.aanvraag.vergunning.eigenaarMinimaalEenJaarIngeschrevenBRP === false",
+                    "type": "radio",
+                    "input": true,
+                    "disabled": true
+                },
+                {
+                    "label": "Uittreksel KVK handelsregister",
+                    "tableView": false,
+                    "storage": "url",
+                    "webcam": false,
+                    "fileTypes": [
+                        {
+                            "label": "",
+                            "value": ""
+                        }
+                    ],
+                    "key": "aanvraag.vergunning.kvkUittreksel",
+                    "type": "file",
+                    "multiple": true,
+                    "input": true,
+                    "url": "/api/form-file",
+                    "conditional": {
+                        "show": true,
+                        "when": "aanvraag.vergunning.woningOnlosmakelijkVerbonden",
+                        "eq": true
+                    },
+                    "disabled": true
+                },
+                {
+                    "label": "Situatietekeningen en foto's",
+                    "tableView": false,
+                    "storage": "url",
+                    "webcam": false,
+                    "fileTypes": [
+                        {
+                            "label": "",
+                            "value": ""
+                        }
+                    ],
+                    "key": "aanvraag.vergunning.situatieTekeningen",
+                    "type": "file",
+                    "multiple": true,
+                    "input": true,
+                    "url": "/api/form-file",
+                    "conditional": {
+                        "show": true,
+                        "when": "aanvraag.vergunning.woningOnlosmakelijkVerbonden",
+                        "eq": true
+                    },
+                    "disabled": true
+                },
+                {
+                    "label": "Betreft het een woning die u gelijktijdig met andere woningen aankoopt binnen één complex? Zo ja, gaat dit om vier tot negen woningen?",
+                    "validate": {
+                        "required": true,
+                        "customMessage": "Dit veld is verplicht."
+                    },
+                    "optionsLabelPosition": "right",
+                    "inline": false,
+                    "tableView": false,
+                    "values": [
+                        {
+                            "label": "Ja",
+                            "value": true,
+                            "shortcut": ""
+                        },
+                        {
+                            "label": "Nee",
+                            "value": false,
+                            "shortcut": ""
+                        }
+                    ],
+                    "key": "aanvraag.vergunning.betreftMeerdereWoningenTegelijkGekocht",
+                    "conditional": {
+                        "show": true,
+                        "when": "aanvraag.vergunning.woningOnlosmakelijkVerbonden",
+                        "eq": false
+                    },
+                    "type": "radio",
+                    "input": true,
+                    "disabled": true
+                },
+                {
+                    "label": "Akte van levering van alle betreffende woningen",
+                    "tableView": false,
+                    "storage": "url",
+                    "webcam": false,
+                    "fileTypes": [
+                        {
+                            "label": "",
+                            "value": ""
+                        }
+                    ],
+                    "key": "aanvraag.vergunning.akteLeveringBetreffendeWoningen",
+                    "type": "file",
+                    "multiple": true,
+                    "input": true,
+                    "url": "/api/form-file",
+                    "conditional": {
+                        "show": true,
+                        "when": "aanvraag.vergunning.betreftMeerdereWoningenTegelijkGekocht",
+                        "eq": true
+                    },
+                    "disabled": true
+                },
+                {
+                    "label": "Bent u van plan de woning in gebruik te geven voor een maatschappelijk gewenst doel? Let op: dit is een uitzonderingssituatie die zeer terughoudend wordt toegepast. Het gaat hier dan bijvoorbeeld om verhuur in het kader van zorg of vluchtelingenopvang.",
+                    "validate": {
+                        "required": true,
+                        "customMessage": "Dit veld is verplicht."
+                    },
+                    "optionsLabelPosition": "right",
+                    "inline": false,
+                    "tableView": false,
+                    "values": [
+                        {
+                            "label": "Ja",
+                            "value": true,
+                            "shortcut": ""
+                        },
+                        {
+                            "label": "Nee",
+                            "value": false,
+                            "shortcut": ""
+                        }
+                    ],
+                    "key": "aanvraag.vergunning.gebruikVoorMaatschappelijkDoel",
+                    "conditional": {
+                        "show": true,
+                        "when": "aanvraag.vergunning.betreftMeerdereWoningenTegelijkGekocht",
+                        "eq": false
+                    },
+                    "type": "radio",
+                    "input": true,
+                    "disabled": true
+                },
+                {
+                    "label": "Geef een uitgebreide toelichting op hoe de situatie tot stand is gekomen, de doelstellingen van de eigenaar, en waarom verhuur van deze woning maatschappelijk gewenst is.",
+                    "autoExpand": false,
+                    "tableView": true,
+                    "key": "aanvraag.vergunning.gebruikVoorMaatschappelijkDoelToelichting",
+                    "type": "textarea",
+                    "input": true,
+                    "conditional": {
+                        "show": true,
+                        "when": "aanvraag.vergunning.gebruikVoorMaatschappelijkDoel",
+                        "eq": true
+                    },
+                    "disabled": true
+                },
+                {
+                    "label": "Zijn er omstandigheden die maken dat u het verhuurverbod dat uit de opkoopbescherming voortvloeit redelijkerwijs niet kunt naleven? Denk aan onverwachte situaties die maken dat u zich genoodzaakt ziet de woning te verhuren en het niet mogelijk is deze (binnen afzienbare tijd) te verkopen.",
+                    "validate": {
+                        "required": true,
+                        "customMessage": "Dit veld is verplicht."
+                    },
+                    "optionsLabelPosition": "right",
+                    "inline": false,
+                    "tableView": false,
+                    "values": [
+                        {
+                            "label": "Ja",
+                            "value": true,
+                            "shortcut": ""
+                        },
+                        {
+                            "label": "Nee",
+                            "value": false,
+                            "shortcut": ""
+                        }
+                    ],
+                    "key": "aanvraag.vergunning.kanVerhuurverbodNietNaleven",
+                    "conditional": {
+                        "show": true,
+                        "when": "aanvraag.vergunning.gebruikVoorMaatschappelijkDoel",
+                        "eq": false
+                    },
+                    "type": "radio",
+                    "input": true,
+                    "disabled": true
+                },
+                {
+                    "label": "Geef een uitgebreide beschrijving van de situatie en leg uit waarom u denkt in aanmerking te komen voor een ontheffing.",
+                    "autoExpand": false,
+                    "tableView": true,
+                    "key": "aanvraag.vergunning.kanVerhuurverbodNietNalevenToelichting",
+                    "type": "textarea",
+                    "input": true,
+                    "conditional": {
+                        "show": true,
+                        "when": "aanvraag.vergunning.kanVerhuurverbodNietNaleven",
+                        "eq": true
+                    },
+                    "disabled": true
+                },
+                {
+                    "label": "Woont u zelf in de woning en wilt u de woning delen met een of meerdere personen waar u geen gemeenschappelijke huishouding mee voert?",
+                    "validate": {
+                        "required": true,
+                        "customMessage": "Dit veld is verplicht."
+                    },
+                    "optionsLabelPosition": "right",
+                    "inline": false,
+                    "tableView": false,
+                    "values": [
+                        {
+                            "label": "Ja",
+                            "value": true,
+                            "shortcut": ""
+                        },
+                        {
+                            "label": "Nee",
+                            "value": false,
+                            "shortcut": ""
+                        }
+                    ],
+                    "key": "aanvraag.vergunning.woontZelfInDeWoning",
+                    "conditional": {
+                        "show": true,
+                        "when": "aanvraag.vergunning.kanVerhuurverbodNietNaleven",
+                        "eq": false
+                    },
+                    "type": "radio",
+                    "input": true,
+                    "disabled": true
+                },
+                {
+                    "label": "Straat",
+                    "tableView": true,
+                    "validateOn": "blur",
+                    "key": "aanvraag.woonruimte.adres.straat",
+                    "type": "textfield",
+                    "input": true,
+                    "disabled": true
+                },
+                {
+                    "label": "Huisnummer",
+                    "mask": false,
+                    "tableView": true,
+                    "delimiter": false,
+                    "requireDecimal": false,
+                    "inputFormat": "plain",
+                    "truncateMultipleSpaces": false,
+                    "validateOn": "blur",
+                    "validate": {
+                        "required": true,
+                        "customMessage": "Dit veld is verplicht."
+                    },
+                    "key": "aanvraag.woonruimte.adres.huisnummer",
+                    "type": "number",
+                    "input": true,
+                    "disabled": true
+                },
+                {
+                    "label": "Huisnummer toevoeging",
+                    "tableView": true,
+                    "key": "aanvraag.woonruimte.adres.huisnummerToevoeging",
+                    "type": "textfield",
+                    "input": true,
+                    "disabled": true
+                },
+                {
+                    "label": "Postcode",
+                    "inputMask": "9999 AA",
+                    "tableView": true,
+                    "validateOn": "blur",
+                    "validate": {
+                        "minLength": 6,
+                        "maxLength": 7,
+                        "required": true,
+                        "customMessage": "Dit veld is verplicht."
+                    },
+                    "key": "aanvraag.woonruimte.adres.postcode",
+                    "type": "textfield",
+                    "input": true,
+                    "disabled": true
+                },
+                {
+                    "label": "Plaats",
+                    "tableView": true,
+                    "validateOn": "blur",
+                    "key": "aanvraag.woonruimte.adres.plaats",
+                    "type": "textfield",
+                    "input": true,
+                    "disabled": true
+                },
+                {
+                    "label": "Kopie leveringsakte en datum inschrijving in de registers",
+                    "tableView": false,
+                    "storage": "url",
+                    "webcam": false,
+                    "fileTypes": [
+                        {
+                            "label": "",
+                            "value": ""
+                        }
+                    ],
+                    "key": "aanvraag.woonruimte.leveringsakte",
+                    "type": "file",
+                    "multiple": true,
+                    "input": true,
+                    "url": "/api/form-file",
+                    "disabled": true
+                },
+                {
+                    "label": "In welke hoedanigheid wilt u een aanvraag doen?",
+                    "optionsLabelPosition": "right",
+                    "inline": false,
+                    "tableView": false,
+                    "disabled": true,
+                    "values": [
+                        {
+                            "label": "aanvraag als particulier",
+                            "value": "particulier",
+                            "shortcut": ""
+                        },
+                        {
+                            "label": "aanvraag als organisatie",
+                            "value": "organisatie",
+                            "shortcut": ""
+                        }
+                    ],
+                    "validate": {
+                        "required": true,
+                        "customMessage": "Dit veld is verplicht."
+                    },
+                    "key": "aanvraag.aanvrager.type",
+                    "type": "radio",
+                    "input": true
+                },
+                {
+                    "label": "fieldset",
+                    "type": "fieldset",
+                    "input": false,
+                    "components": [
+                        {
+                            "label": "Voornaam",
+                            "tableView": true,
+                            "key": "aanvraag.aanvrager.voornaam",
+                            "validateOn": "blur",
+                            "validate": {
+                                "required": true,
+                                "customMessage": "Dit veld is verplicht."
+                            },
+                            "type": "textfield",
+                            "input": true,
+                            "disabled": true
+                        },
+                        {
+                            "label": "Tussenvoegsel",
+                            "key": "aanvraag.aanvrager.tussenvoegsel",
+                            "type": "textfield",
+                            "input": true,
+                            "disabled": true
+                        },
+                        {
+                            "label": "Achternaam",
+                            "tableView": true,
+                            "key": "aanvraag.aanvrager.achternaam",
+                            "validateOn": "blur",
+                            "validate": {
+                                "required": true,
+                                "customMessage": "Dit veld is verplicht."
+                            },
+                            "type": "textfield",
+                            "input": true,
+                            "disabled": true
+                        },
+                        {
+                            "label": "Straat",
+                            "tableView": true,
+                            "key": "aanvraag.aanvrager.adres.straat",
+                            "type": "textfield",
+                            "input": true,
+                            "disabled": true
+                        },
+                        {
+                            "label": "Huisnummer",
+                            "mask": false,
+                            "tableView": true,
+                            "delimiter": false,
+                            "requireDecimal": false,
+                            "inputFormat": "plain",
+                            "truncateMultipleSpaces": false,
+                            "validateOn": "blur",
+                            "key": "aanvraag.aanvrager.adres.huisnummer",
+                            "type": "number",
+                            "input": true,
+                            "disabled": true
+                        },
+                        {
+                            "label": "Huisnummer toevoeging",
+                            "tableView": true,
+                            "key": "aanvraag.aanvrager.adres.huisnummerToevoeging",
+                            "type": "textfield",
+                            "input": true,
+                            "disabled": true
+                        },
+                        {
+                            "label": "Postcode",
+                            "tableView": true,
+                            "key": "aanvraag.aanvrager.adres.postcode",
+                            "type": "textfield",
+                            "input": true,
+                            "disabled": true
+                        },
+                        {
+                            "label": "Plaats",
+                            "tableView": true,
+                            "key": "aanvraag.aanvrager.adres.plaats",
+                            "type": "textfield",
+                            "input": true,
+                            "disabled": true
+                        },
+                        {
+                            "label": "Land",
+                            "tableView": true,
+                            "key": "aanvraag.aanvrager.land",
+                            "type": "textfield",
+                            "input": true,
+                            "disabled": true
+                        },
+                        {
+                            "label": "Telefoonnummer",
+                            "tableView": true,
+                            "key": "aanvraag.aanvrager.telefoonnummer",
+                            "type": "textfield",
+                            "input": true,
+                            "disabled": true
+                        },
+                        {
+                            "label": "E-mailadres",
+                            "tableView": true,
+                            "validateOn": "blur",
+                            "validate": {
+                                "required": true,
+                                "customMessage": "Dit veld is verplicht."
+                            },
+                            "key": "aanvraag.aanvrager.email",
+                            "type": "email",
+                            "input": true,
+                            "disabled": true
+                        }
+                    ],
+                    "conditional": {
+                        "show": true,
+                        "when": "aanvraag.aanvrager.type",
+                        "eq": "particulier"
+                    }
+                },
+                {
+                    "label": "fieldset",
+                    "type": "fieldset",
+                    "input": false,
+                    "components": [
+                        {
+                            "label": "Bedrijfsnaam",
+                            "tableView": true,
+                            "validateOn": "blur",
+                            "validate": {
+                                "required": true,
+                                "customMessage": "Dit veld is verplicht."
+                            },
+                            "key": "aanvraag.aanvrager.bedrijfsnaam",
+                            "type": "textfield",
+                            "input": true,
+                            "disabled": true
+                        },
+                        {
+                            "label": "Straat",
+                            "tableView": true,
+                            "key": "aanvraag.aanvrager.adres.straat",
+                            "type": "textfield",
+                            "input": true,
+                            "disabled": true
+                        },
+                        {
+                            "label": "Huisnummer",
+                            "mask": false,
+                            "tableView": true,
+                            "delimiter": false,
+                            "requireDecimal": false,
+                            "inputFormat": "plain",
+                            "truncateMultipleSpaces": false,
+                            "validateOn": "blur",
+                            "key": "aanvraag.aanvrager.adres.huisnummer",
+                            "type": "number",
+                            "input": true,
+                            "disabled": true
+                        },
+                        {
+                            "label": "Huisnummer toevoeging",
+                            "tableView": true,
+                            "key": "aanvraag.aanvrager.adres.huisnummerToevoeging",
+                            "type": "textfield",
+                            "input": true,
+                            "disabled": true
+                        },
+                        {
+                            "label": "Postcode",
+                            "tableView": true,
+                            "key": "aanvraag.aanvrager.adres.postcode",
+                            "type": "textfield",
+                            "input": true,
+                            "disabled": true
+                        },
+                        {
+                            "label": "Plaats",
+                            "tableView": true,
+                            "key": "aanvraag.aanvrager.adres.plaats",
+                            "type": "textfield",
+                            "input": true,
+                            "disabled": true
+                        },
+                        {
+                            "label": "Voornaam",
+                            "tableView": true,
+                            "key": "aanvraag.aanvrager.voornaam",
+                            "validateOn": "blur",
+                            "validate": {
+                                "required": true,
+                                "customMessage": "Dit veld is verplicht."
+                            },
+                            "type": "textfield",
+                            "input": true,
+                            "disabled": true
+                        },
+                        {
+                            "label": "Tussenvoegsel",
+                            "key": "aanvraag.aanvrager.tussenvoegsel",
+                            "type": "textfield",
+                            "input": true,
+                            "disabled": true
+                        },
+                        {
+                            "label": "Achternaam",
+                            "tableView": true,
+                            "key": "aanvraag.aanvrager.achternaam",
+                            "validateOn": "blur",
+                            "validate": {
+                                "required": true,
+                                "customMessage": "Dit veld is verplicht."
+                            },
+                            "type": "textfield",
+                            "input": true,
+                            "disabled": true
+                        },
+                        {
+                            "label": "Telefoonnummer",
+                            "tableView": true,
+                            "key": "aanvraag.aanvrager.telefoonnummer",
+                            "type": "textfield",
+                            "input": true,
+                            "disabled": true
+                        },
+                        {
+                            "label": "E-mailadres",
+                            "tableView": true,
+                            "validateOn": "blur",
+                            "validate": {
+                                "required": true,
+                                "customMessage": "Dit veld is verplicht."
+                            },
+                            "key": "aanvraag.aanvrager.email",
+                            "type": "email",
+                            "input": true,
+                            "disabled": true
+                        }
+                    ],
+                    "conditional": {
+                        "show": true,
+                        "when": "aanvraag.aanvrager.type",
+                        "eq": "organisatie"
+                    }
+                },
+                {
+                    "label": "HTML",
+                    "tag": "h4",
+                    "content": "Na het afronden van dit formulier wordt u doorverwezen naar een betaalpagina om de leges van €279,15 te voldoen.",
+                    "refreshOnChange": false,
+                    "key": "html",
+                    "type": "htmlelement",
+                    "input": false,
+                    "tableView": false,
+                    "className": "alert alert-info"
+                }
+            ]
+        }
+    ]
+}

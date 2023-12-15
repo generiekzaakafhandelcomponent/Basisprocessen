@@ -1,0 +1,374 @@
+{
+    "$id": "vergunning-opkoopbescherming.schema",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Vergunning opkoopbescherming",
+    "type": "object",
+    "additionalProperties": true,
+    "properties": {
+        "aanvraag": {
+            "type": "object",
+            "properties": {
+                "aanvrager": {
+                    "$ref": "#/definitions/aanvrager"
+                },
+                "woonruimte": {
+                    "$ref": "#/definitions/woonruimte"
+                },
+                "opkoopbescherming": {
+                    "$ref": "#/definitions/opkoopbescherming"
+                },
+                "vergunning": {
+                    "$ref": "#/definitions/vergunning"
+                },
+                "dossier": {
+                    "type": "object",
+                    "properties": {
+                        "aanvraagDatum": {
+                            "type": "string"
+                        },
+                        "status": {
+                            "type": "string"
+                        },
+                        "behandelaar": {
+                            "type": "string"
+                        },
+                        "afhandelingGeverifieerdDoor": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "inhoudelijkeBeoordeling": {
+                    "type": "object",
+                    "properties": {
+                        "beschikkingsnummer": {
+                            "type": "string"
+                        },
+                        "resultaat": {
+                            "type": "string"
+                        },
+                        "toelichting": {
+                            "type": "string"
+                        },
+                        "resultaatVerificatie": {
+                            "type": "boolean"
+                        },
+                        "toelichtingVerificatie": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "besluit": {
+                    "type": "string"
+                },
+                "besluitGenomenOp": {
+                    "type": "string"
+                },
+                "toelichtingGenomenBesluit": {
+                    "type": "string"
+                }
+            }
+        },
+        "gerelateerdeDossiers": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "registratie": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "aanvrager": {
+                    "$ref": "#/definitions/aanvrager"
+                },
+                "aanvragerNaam": {
+                    "type": "string"
+                },
+                "particulier": {
+                    "type": "object",
+                    "properties": {
+                        "bsn": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "organisatie": {
+                    "type": "object",
+                    "properties": {
+                        "kvk": {
+                            "type": "string"
+                        },
+                        "naam": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "adres": {
+                    "type": "object",
+                    "$ref": "adres.schema.json"
+                },
+                "bevestiging": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "openZaak": {
+            "$ref": "open-zaak.schema.json"
+        },
+        "notities": {
+            "type": "array",
+            "items": {
+                "$ref": "notitie.schema.json"
+            }
+        }
+    },
+    "definitions": {
+        "aanvrager": {
+            "type": "object",
+            "properties": {
+                "kvk": {
+                    "type": "string"
+                },
+                "bedrijfsnaam": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "bsn": {
+                    "type": "string"
+                },
+                "voornaam": {
+                    "type": "string"
+                },
+                "tussenvoegsel": {
+                    "type": "string"
+                },
+                "achternaam": {
+                    "type": "string"
+                },
+                "volledigeNaam": {
+                    "type": "string"
+                },
+                "adres": {
+                    "type": "object",
+                    "$ref": "adres.schema.json"
+                },
+                "land": {
+                    "type": "string"
+                },
+                "telefoonnummer": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                }
+            }
+        },
+        "woonruimte": {
+            "type": "object",
+            "properties": {
+                "adres": {
+                    "type": "object",
+                    "$ref": "adres.schema.json"
+                },
+                "leveringsakte": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "formio-file.schema.json"
+                    },
+                    "description": "file upload"
+                }
+            }
+        },
+        "opkoopbescherming": {
+            "type": "object",
+            "properties": {
+                "woz": {
+                    "type": "number"
+                },
+                "aankoopDatum": {
+                    "type": "string"
+                },
+                "woningMomenteelVerhuurt": {
+                    "type": "boolean"
+                },
+                "woningLangerDan6MaandenLeeg": {
+                    "type": "boolean"
+                },
+                "betreftMeerdereWoningenBinnenEenComplex": {
+                    "type": "boolean"
+                },
+                "betreftWoningWaarvoorVerhuurverbodOpgenomenInErfpachtvoorwaarden": {
+                    "type": "boolean"
+                },
+                "betreftWoningOntstaanDoorNieuwbouwOfTransformatie": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "vergunning": {
+            "type": "object",
+            "properties": {
+                "woningVerhuurdAanFamilie": {
+                    "type": "boolean"
+                },
+                "aankoopDatum": {
+                    "type": "string"
+                },
+                "woningMomenteelVerhuurt": {
+                    "type": "boolean"
+                },
+                "woningLangerDan6MaandenLeeg": {
+                    "type": "boolean"
+                },
+                "familie": {
+                    "$ref": "#/definitions/familie"
+                },
+                "tijdelijkeVerhuur": {
+                    "type": "boolean"
+                },
+                "tijdelijkeVerhuurcontract": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "formio-file.schema.json"
+                    },
+                    "description": "file upload"
+                },
+                "woningOnlosmakelijkVerbonden": {
+                    "type": "boolean"
+                },
+                "eigenaarMinimaalEenJaarIngeschrevenBRP": {
+                    "type": "boolean"
+                },
+                "kvkUittreksel": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "formio-file.schema.json"
+                    },
+                    "description": "file upload"
+                },
+                "situatieTekeningen": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "formio-file.schema.json"
+                    },
+                    "description": "file upload"
+                },
+                "redenAanmerking": {
+                    "type": "boolean"
+                },
+                "redenAanmerkingToelichting": {
+                    "type": "string"
+                },
+                "additioneleInformatie": {
+                    "type": "object",
+                    "properties": {
+                        "isNoodzakelijk": {
+                            "type": "boolean"
+                        },
+                        "deadline": {
+                            "type": "string"
+                        },
+                        "toelichtingVerzoek": {
+                            "type": "string"
+                        },
+                        "verzoekGeannuleerdDatum": {
+                            "type": "string"
+                        },
+                        "documentatie": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "formio-file.schema.json"
+                            },
+                            "description": "file upload"
+                        },
+                        "toelichting": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "resultaat": {
+                    "type": "object",
+                    "properties": {
+                        "status": {
+                            "type": "string"
+                        },
+                        "toelichting": {
+                            "type": "string"
+                        },
+                        "redenVergunningVerleend": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "betreftMeerdereWoningenTegelijkGekocht": {
+                    "type": "boolean"
+                },
+                "akteLeveringBetreffendeWoningen": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "formio-file.schema.json"
+                    },
+                    "description": "file upload"
+                },
+                "gebruikVoorMaatschappelijkDoel": {
+                    "type": "boolean"
+                },
+                "gebruikVoorMaatschappelijkDoelToelichting": {
+                    "type": "string"
+                },
+                "kanVerhuurverbodNietNaleven": {
+                    "type": "boolean"
+                },
+                "kanVerhuurverbodNietNalevenToelichting": {
+                    "type": "string"
+                },
+                "woontZelfInDeWoning": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "familie": {
+            "type": "object",
+            "properties": {
+                "soortRelatie": {
+                    "type": "string"
+                },
+                "voornaam": {
+                    "type": "string"
+                },
+                "tussenvoegsel": {
+                    "type": "string"
+                },
+                "achternaam": {
+                    "type": "string"
+                },
+                "geboorteDatum": {
+                    "type": "string"
+                },
+                "telefoonnummer": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "uittreksels": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "formio-file.schema.json"
+                    },
+                    "description": "file upload"
+                }
+            }
+        },
+        "bestanden": {
+            "type": "array",
+            "items": {
+                "$ref": "formio-file.schema.json"
+            }
+        }
+    }
+}
