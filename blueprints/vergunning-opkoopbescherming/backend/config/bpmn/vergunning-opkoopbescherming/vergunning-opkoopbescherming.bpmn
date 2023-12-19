@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.17.0" camunda:diagramRelationId="1dca725b-3503-4188-8906-1da9dc866b87">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.18.0" camunda:diagramRelationId="1dca725b-3503-4188-8906-1da9dc866b87">
   <bpmn:collaboration id="VastleggenBesluitGebTask">
     <bpmn:participant id="VergunningOpkoopbeschermingParticipant" name="Vergunning opkoopbescherming" processRef="vergunning-opkoopbescherming" />
   </bpmn:collaboration>
@@ -130,7 +130,7 @@
         <bpmn:targetRef>ZaakdossierDataObjectReference</bpmn:targetRef>
       </bpmn:dataOutputAssociation>
     </bpmn:serviceTask>
-    <bpmn:sendTask id="VersturenOntvangstbevestigingTask" name="Versturen ontvangst-bevestiging" camunda:asyncAfter="true" camunda:expression="${true}">
+    <bpmn:sendTask id="VersturenOntvangstbevestigingTask" name="Versturen ontvangst-bevestiging additionele informatie" camunda:asyncAfter="true" camunda:expression="${true}">
       <bpmn:extensionElements />
       <bpmn:incoming>Flow_0be2d9i</bpmn:incoming>
       <bpmn:outgoing>Flow_0tgymlz</bpmn:outgoing>
@@ -297,95 +297,81 @@
     <bpmn:endEvent id="VersturenNotificatieBesluitOverAanvraagGenomenEndEvent">
       <bpmn:incoming>Flow_1vn7u1p</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:textAnnotation id="TextAnnotation_0f9dtnw">
-      <bpmn:text>Implement code that:
-Creates a new zaakstatus:
-Aanvraag in behandeling</bpmn:text>
-    </bpmn:textAnnotation>
-    <bpmn:textAnnotation id="TextAnnotation_10elq1j">
-      <bpmn:text>afhankelijk van de aanvraag gaat het hier om het wel/niet verlenen van toestemming of om het wel/niet verlenen van een vergunning</bpmn:text>
-    </bpmn:textAnnotation>
-    <bpmn:association id="Association_080xq8b" sourceRef="ZettenZaakStatusTask" targetRef="TextAnnotation_0f9dtnw" />
-    <bpmn:association id="Association_054ldq2" sourceRef="ControlerenEnAfhandelenAanvraagTask" targetRef="TextAnnotation_10elq1j" />
-    <bpmn:textAnnotation id="TextAnnotation_1je9dkp">
-      <bpmn:text>Implement code that:
-Finds existing related cases and stores them in the case</bpmn:text>
-    </bpmn:textAnnotation>
-    <bpmn:association id="Association_0hrftoe" sourceRef="VindGerelateerdeDossiersTask" targetRef="TextAnnotation_1je9dkp" />
     <bpmn:textAnnotation id="TextAnnotation_09rqhr7">
-      <bpmn:text>Implement code that:
-Sends a receipt e-mail</bpmn:text>
+      <bpmn:text>configureer e-mail plugin of implementeer methode om email te versturen</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:association id="Association_01jv4f3" sourceRef="TextAnnotation_09rqhr7" targetRef="VersturenOntvangstbevestigingAanvraagTask" />
-    <bpmn:textAnnotation id="TextAnnotation_0xz9piq">
-      <bpmn:text>Implement code that:
-Creates a new zaakstatus: Aanvraag afgehandeld</bpmn:text>
-    </bpmn:textAnnotation>
-    <bpmn:association id="Association_00z2wvm" sourceRef="ZettenZaakStatusTask2" targetRef="TextAnnotation_0xz9piq" />
     <bpmn:textAnnotation id="TextAnnotation_12ueg38">
-      <bpmn:text>Implement code that:
-Stores a 'No reaction' in the case</bpmn:text>
+      <bpmn:text>Implementeer methode om in het zaakdossier vast te leggen dat er geen reactie is ontvangen op het informatieverzoek</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:association id="Association_00h0n9u" sourceRef="AanpassenZaakdossierNaGeenReactieAanvragerTask" targetRef="TextAnnotation_12ueg38" />
     <bpmn:textAnnotation id="TextAnnotation_1lw63yu">
-      <bpmn:text>Implement code that:
-Sends a receipt email
-n.a.v. aanlevering additionele informatie</bpmn:text>
+      <bpmn:text>configureer e-mail plugin of implementeer methode om email te versturen</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:association id="Association_1b067vd" sourceRef="VersturenOntvangstbevestigingTask" targetRef="TextAnnotation_1lw63yu" />
-    <bpmn:textAnnotation id="TextAnnotation_0t7kdgz">
-      <bpmn:text>Implement code that:
-Prepares e-mail data</bpmn:text>
-    </bpmn:textAnnotation>
-    <bpmn:association id="Association_1yiu59h" sourceRef="TextAnnotation_0t7kdgz" targetRef="VastleggenMailvariabelenTask" />
-    <bpmn:textAnnotation id="TextAnnotation_13hf9pd">
-      <bpmn:text>Implement code that:
-Sends an 'Information request' e-mail</bpmn:text>
-    </bpmn:textAnnotation>
-    <bpmn:association id="Association_18dwsjo" sourceRef="TextAnnotation_13hf9pd" targetRef="VersturenNotificatieAdditioneleInformatieGewenstTask" />
     <bpmn:textAnnotation id="TextAnnotation_07pxlt5">
-      <bpmn:text>Implement code that:
-Creates a new zaakstatus: additionele informatie gewenst</bpmn:text>
+      <bpmn:text>Implementeer methode om zaakstatus in de zaken API te zetten: additionele informatie gewenst</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:association id="Association_0dg6449" sourceRef="TextAnnotation_07pxlt5" targetRef="ZettenZaakStatusTask1" />
-    <bpmn:textAnnotation id="TextAnnotation_02xovlh">
-      <bpmn:text>Implement code that:
-Creates a new zaakbesluit</bpmn:text>
-    </bpmn:textAnnotation>
-    <bpmn:association id="Association_0ofwq17" sourceRef="TextAnnotation_02xovlh" targetRef="VastleggenBesluitTask1" />
     <bpmn:textAnnotation id="TextAnnotation_0owjwcs">
-      <bpmn:text>Implement code that:
-Prepares e-mail data</bpmn:text>
+      <bpmn:text>Implementeer methode om de benodigde e-mail variabelen voor te bereiden</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:association id="Association_0aifgdr" sourceRef="VastleggenMailvariabelenTask1" targetRef="TextAnnotation_0owjwcs" />
     <bpmn:textAnnotation id="TextAnnotation_03y5n8h">
-      <bpmn:text>Implement code that:
-Sends a 'Decision taken' e-mail</bpmn:text>
+      <bpmn:text>configureer e-mail plugin of implementeer methode om email te versturen</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:association id="Association_10xgdp7" sourceRef="TextAnnotation_03y5n8h" targetRef="VersturenNotificatieBesluitOverAanvraagGenomenTask" />
     <bpmn:textAnnotation id="TextAnnotation_0y0am70">
-      <bpmn:text>Implement code that:
-Creates a new zaakresultaat:
-Afgebroken</bpmn:text>
+      <bpmn:text>Implementeer methode om het zaakresultaat:
+'Afgebroken' te zetten</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:association id="Association_0x80t9j" sourceRef="TextAnnotation_0y0am70" targetRef="ZettenZaakresultaatTask1" />
     <bpmn:textAnnotation id="TextAnnotation_1i08pax">
-      <bpmn:text>Implement code that:
-Creates a new zaakresultaat:
-Geweigerd</bpmn:text>
+      <bpmn:text>Implementeer methode om het zaakresultaat:
+'Geweigerd' te zetten</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:association id="Association_0q3j45u" sourceRef="TextAnnotation_1i08pax" targetRef="ZettenZaakresultaatTask" />
     <bpmn:textAnnotation id="TextAnnotation_0j4awmo">
-      <bpmn:text>Implement code that:
-Creates a new zaakresultaat:
-Verleend</bpmn:text>
+      <bpmn:text>Implementeer methode om het zaakresultaat:
+'Verleend' te zetten</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:association id="Association_0sjzfbp" sourceRef="ZettenZaakresultaatTask2" targetRef="TextAnnotation_0j4awmo" />
     <bpmn:textAnnotation id="TextAnnotation_1qiruy0">
-      <bpmn:text>Implement code that:
-Creates a new zaakstatus: Aanvraag afgerond</bpmn:text>
+      <bpmn:text>Implementeer methode om zaakstatus in de zaken API te zetten: Aanvraag afgerond</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:association id="Association_0q4chuq" sourceRef="TextAnnotation_1qiruy0" targetRef="ZetZaakStatusTask" />
+    <bpmn:textAnnotation id="TextAnnotation_0f9dtnw">
+      <bpmn:text>Implementeer methode om zaakstatus in de zaken API te zetten: aanvraag in behandeling</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_080xq8b" sourceRef="ZettenZaakStatusTask" targetRef="TextAnnotation_0f9dtnw" />
+    <bpmn:textAnnotation id="TextAnnotation_1je9dkp">
+      <bpmn:text>te implementeren: methode waarmee gezocht kan worden naar soortgelijke zaken</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0hrftoe" sourceRef="VindGerelateerdeDossiersTask" targetRef="TextAnnotation_1je9dkp" />
+    <bpmn:textAnnotation id="TextAnnotation_0t7kdgz">
+      <bpmn:text>Implementeer methode om de benodigde e-mail variabelen voor te bereiden</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_1yiu59h" sourceRef="TextAnnotation_0t7kdgz" targetRef="VastleggenMailvariabelenTask" />
+    <bpmn:textAnnotation id="TextAnnotation_13hf9pd">
+      <bpmn:text>configureer e-mail plugin of implementeer methode om email te versturen</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_18dwsjo" sourceRef="TextAnnotation_13hf9pd" targetRef="VersturenNotificatieAdditioneleInformatieGewenstTask" />
+    <bpmn:textAnnotation id="TextAnnotation_19uvymf">
+      <bpmn:text>In deze gebruikerstaak kan de behandelaar een besluit nemen over de aanvraag of een verzoek uitzetten voor meer informatie</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0v83p1q" sourceRef="ControlerenEnAfhandelenAanvraagTask" targetRef="TextAnnotation_19uvymf" />
+    <bpmn:textAnnotation id="TextAnnotation_0xz9piq">
+      <bpmn:text>Implementeer methode om zaakstatus in de zaken API te zetten: Aanvraag afgehandeld</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_00z2wvm" sourceRef="ZettenZaakStatusTask2" targetRef="TextAnnotation_0xz9piq" />
+    <bpmn:textAnnotation id="TextAnnotation_02xovlh">
+      <bpmn:text>Implementeer methode om het besluit in de zaken API op te slaan</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0ofwq17" sourceRef="TextAnnotation_02xovlh" targetRef="VastleggenBesluitTask1" />
+    <bpmn:textAnnotation id="TextAnnotation_0le3cx6">
+      <bpmn:text>In deze gebruikerstaak kan de behandelaar een besluitdocument uploaden, dat als formeel besluit wordt opgeslagen in de Zaken API</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_09luhld" sourceRef="VastleggenBesluitTask" targetRef="TextAnnotation_0le3cx6" />
   </bpmn:process>
   <bpmn:message id="Message_0tcqqya" />
   <bpmn:message id="Message_09ern34" name="start-additionele-informatie-ontvangen-message" />
@@ -406,6 +392,38 @@ Creates a new zaakstatus: Aanvraag afgerond</bpmn:text>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Lane_0z97fu9_di" bpmnElement="BehandelaarLane" isHorizontal="true">
         <dc:Bounds x="170" y="420" width="3068" height="860" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_0f9dtnw_di" bpmnElement="TextAnnotation_0f9dtnw">
+        <dc:Bounds x="780" y="697" width="160" height="70" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1je9dkp_di" bpmnElement="TextAnnotation_1je9dkp">
+        <dc:Bounds x="330" y="690" width="140" height="70" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_04adaea" bpmnElement="TextAnnotation_0t7kdgz">
+        <dc:Bounds x="1210" y="445" width="140" height="70" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0zhlgen" bpmnElement="TextAnnotation_13hf9pd">
+        <dc:Bounds x="1380" y="445" width="140" height="70" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_19uvymf_di" bpmnElement="TextAnnotation_19uvymf">
+        <dc:Bounds x="1050" y="906" width="160" height="84" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_0xz9piq_di" bpmnElement="TextAnnotation_0xz9piq">
+        <dc:Bounds x="1740" y="681" width="160" height="70" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0godnpv" bpmnElement="TextAnnotation_02xovlh">
+        <dc:Bounds x="1560" y="682" width="160" height="55" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_0le3cx6_di" bpmnElement="TextAnnotation_0le3cx6">
+        <dc:Bounds x="1340" y="681" width="220" height="70" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_04hr6qj_di" bpmnElement="VergunningAangevraagdStartEvent">
@@ -580,74 +598,78 @@ Creates a new zaakstatus: Aanvraag afgerond</bpmn:text>
       <bpmndi:BPMNShape id="Event_1w08sv5_di" bpmnElement="VersturenNotificatieBesluitOverAanvraagGenomenEndEvent">
         <dc:Bounds x="2222" y="1072" width="36" height="36" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="TextAnnotation_0f9dtnw_di" bpmnElement="TextAnnotation_0f9dtnw">
-        <dc:Bounds x="780" y="683" width="159.98228744939271" height="55.33063427800269" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="TextAnnotation_10elq1j_di" bpmnElement="TextAnnotation_10elq1j">
-        <dc:Bounds x="1070" y="920" width="140" height="120" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="TextAnnotation_1je9dkp_di" bpmnElement="TextAnnotation_1je9dkp">
-        <dc:Bounds x="330" y="682" width="139.9924089068826" height="70.17543859649122" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_0gncsi9" bpmnElement="TextAnnotation_09rqhr7">
-        <dc:Bounds x="500" y="690" width="139.9924089068826" height="40.48582995951417" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="TextAnnotation_0xz9piq_di" bpmnElement="TextAnnotation_0xz9piq">
-        <dc:Bounds x="1710" y="682" width="159.98228744939271" height="56.99645748987854" />
+        <dc:Bounds x="500" y="690" width="140" height="70" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="TextAnnotation_12ueg38_di" bpmnElement="TextAnnotation_12ueg38">
-        <dc:Bounds x="785" y="552" width="149.98734817813767" height="55.330634278002705" />
+        <dc:Bounds x="785" y="552" width="150" height="98" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="TextAnnotation_1lw63yu_di" bpmnElement="TextAnnotation_1lw63yu">
-        <dc:Bounds x="500" y="545" width="140" height="69" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_04adaea" bpmnElement="TextAnnotation_0t7kdgz">
-        <dc:Bounds x="1210" y="460" width="139.9924089068826" height="40.48582995951417" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_0zhlgen" bpmnElement="TextAnnotation_13hf9pd">
-        <dc:Bounds x="1380" y="452" width="139.9924089068826" height="55.33063427800269" />
+        <dc:Bounds x="500" y="545" width="140" height="70" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="TextAnnotation_07pxlt5_di" bpmnElement="TextAnnotation_07pxlt5">
-        <dc:Bounds x="1710" y="443" width="159.98228744939271" height="73.99207152496626" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_0godnpv" bpmnElement="TextAnnotation_02xovlh">
-        <dc:Bounds x="1540" y="691" width="159.98228744939271" height="40.48582995951416" />
+        <dc:Bounds x="1710" y="443" width="160" height="74" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="TextAnnotation_0owjwcs_di" bpmnElement="TextAnnotation_0owjwcs">
-        <dc:Bounds x="1870" y="1180" width="139.9924089068826" height="40.48582995951417" />
+        <dc:Bounds x="1870" y="1180" width="140" height="70" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_0zmw0c9" bpmnElement="TextAnnotation_03y5n8h">
-        <dc:Bounds x="2031" y="1172" width="139.9924089068826" height="55.330634278002705" />
+        <dc:Bounds x="2031" y="1172" width="140" height="70" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_1pjl8mi" bpmnElement="TextAnnotation_0y0am70">
-        <dc:Bounds x="2650" y="935" width="159.98228744939271" height="70.17543859649122" />
+        <dc:Bounds x="2650" y="935" width="160" height="55" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_0kwggpw" bpmnElement="TextAnnotation_1i08pax">
-        <dc:Bounds x="2650" y="676" width="159.98228744939271" height="70.17543859649122" />
+        <dc:Bounds x="2650" y="676" width="160" height="55" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="TextAnnotation_0j4awmo_di" bpmnElement="TextAnnotation_0j4awmo">
-        <dc:Bounds x="2650" y="445" width="160" height="70" />
+        <dc:Bounds x="2650" y="445" width="160" height="55" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_0blj9wn" bpmnElement="TextAnnotation_1qiruy0">
-        <dc:Bounds x="2910" y="683" width="159.98228744939271" height="56.996457489878544" />
+        <dc:Bounds x="2910" y="683" width="160" height="70" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_080xq8b_di" bpmnElement="Association_080xq8b">
+        <di:waypoint x="861" y="800" />
+        <di:waypoint x="861" y="767" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0hrftoe_di" bpmnElement="Association_0hrftoe">
+        <di:waypoint x="400" y="800" />
+        <di:waypoint x="400" y="760" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_1yiu59h_di" bpmnElement="Association_1yiu59h">
+        <di:waypoint x="1280" y="515" />
+        <di:waypoint x="1280" y="540" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_18dwsjo_di" bpmnElement="Association_18dwsjo">
+        <di:waypoint x="1450" y="515" />
+        <di:waypoint x="1450" y="540" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0v83p1q_di" bpmnElement="Association_0v83p1q">
+        <di:waypoint x="1120" y="880" />
+        <di:waypoint x="1107" y="906" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_00z2wvm_di" bpmnElement="Association_00z2wvm">
+        <di:waypoint x="1799" y="800" />
+        <di:waypoint x="1811" y="751" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0ofwq17_di" bpmnElement="Association_0ofwq17">
+        <di:waypoint x="1635" y="737" />
+        <di:waypoint x="1626" y="800" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_09luhld_di" bpmnElement="Association_09luhld">
+        <di:waypoint x="1433" y="800" />
+        <di:waypoint x="1413" y="751" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Event_1h4g1iy_di" bpmnElement="N6WekenBoundaryEvent">
         <dc:Bounds x="1552" y="262" width="36" height="36" />
         <bpmndi:BPMNLabel>
@@ -819,25 +841,9 @@ Creates a new zaakstatus: Aanvraag afgerond</bpmn:text>
         <di:waypoint x="1840" y="840" />
         <di:waypoint x="1915" y="840" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_080xq8b_di" bpmnElement="Association_080xq8b">
-        <di:waypoint x="861" y="800" />
-        <di:waypoint x="861" y="738" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_054ldq2_di" bpmnElement="Association_054ldq2">
-        <di:waypoint x="1139" y="880" />
-        <di:waypoint x="1140" y="920" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_0hrftoe_di" bpmnElement="Association_0hrftoe">
-        <di:waypoint x="400" y="800" />
-        <di:waypoint x="400" y="752" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Association_01jv4f3_di" bpmnElement="Association_01jv4f3">
-        <di:waypoint x="570" y="730" />
+        <di:waypoint x="570" y="760" />
         <di:waypoint x="570" y="800" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_00z2wvm_di" bpmnElement="Association_00z2wvm">
-        <di:waypoint x="1790" y="800" />
-        <di:waypoint x="1790" y="739" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Association_00h0n9u_di" bpmnElement="Association_00h0n9u">
         <di:waypoint x="950" y="580" />
@@ -847,21 +853,9 @@ Creates a new zaakstatus: Aanvraag afgerond</bpmn:text>
         <di:waypoint x="670" y="580" />
         <di:waypoint x="640" y="580" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_1yiu59h_di" bpmnElement="Association_1yiu59h">
-        <di:waypoint x="1280" y="500" />
-        <di:waypoint x="1280" y="540" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_18dwsjo_di" bpmnElement="Association_18dwsjo">
-        <di:waypoint x="1450" y="507" />
-        <di:waypoint x="1450" y="540" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Association_0dg6449_di" bpmnElement="Association_0dg6449">
         <di:waypoint x="1727" y="517" />
         <di:waypoint x="1670" y="551" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_0ofwq17_di" bpmnElement="Association_0ofwq17">
-        <di:waypoint x="1620" y="731" />
-        <di:waypoint x="1620" y="800" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Association_0aifgdr_di" bpmnElement="Association_0aifgdr">
         <di:waypoint x="1940" y="1130" />
@@ -872,19 +866,19 @@ Creates a new zaakstatus: Aanvraag afgerond</bpmn:text>
         <di:waypoint x="2101" y="1130" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Association_0x80t9j_di" bpmnElement="Association_0x80t9j">
-        <di:waypoint x="2679" y="1005" />
+        <di:waypoint x="2697" y="990" />
         <di:waypoint x="2625" y="1051" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Association_0q3j45u_di" bpmnElement="Association_0q3j45u">
-        <di:waypoint x="2682" y="746" />
+        <di:waypoint x="2698" y="731" />
         <di:waypoint x="2623" y="801" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Association_0sjzfbp_di" bpmnElement="Association_0sjzfbp">
         <di:waypoint x="2624" y="541" />
-        <di:waypoint x="2664" y="515" />
+        <di:waypoint x="2687" y="500" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Association_0q4chuq_di" bpmnElement="Association_0q4chuq">
-        <di:waypoint x="2990" y="740" />
+        <di:waypoint x="2990" y="753" />
         <di:waypoint x="2990" y="800" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="DataOutputAssociation_1hdn5lq_di" bpmnElement="DataOutputAssociation_1hdn5lq">
