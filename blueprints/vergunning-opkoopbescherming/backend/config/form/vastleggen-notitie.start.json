@@ -1,0 +1,44 @@
+{
+    "display": "form",
+    "components": [
+        {
+            "type": "hidden",
+            "properties": {
+                "container": "/notities/-/"
+            },
+            "key": "aanmaaktDoor",
+            "calculateValue": "const currentUser = JSON.parse(localStorage.getItem('userIdentity')); value = currentUser?.firstName + ' ' + currentUser?.lastName ",
+            "input": true
+        },
+        {
+            "label": "Datum notitie",
+            "autoExpand": true,
+            "tableView": true,
+            "properties": {
+                "container": "/notities/-/"
+            },
+            "customDefaultValue": "value = moment()",
+            "key": "datum",
+            "type": "hidden",
+            "input": true
+        },
+        {
+            "label": "Notitie",
+            "autoExpand": true,
+            "tableView": true,
+            "properties": {
+                "container": "/notities/-/"
+            },
+            "key": "notitie",
+            "type": "textarea",
+            "input": true
+        },
+        {
+            "type": "button",
+            "label": "Doorgaan",
+            "disableOnInvalid": true,
+            "tableView": false,
+            "input": true
+        }
+    ]
+}

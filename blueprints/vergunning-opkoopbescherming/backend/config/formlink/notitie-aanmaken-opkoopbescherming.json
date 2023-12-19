@@ -1,0 +1,7 @@
+[
+    {
+        "formName": "vastleggen-notitie.start",
+        "formLinkElementId": "VastleggenNotitieStartEvent",
+        "formAssociationType": "start-event"
+    }
+]

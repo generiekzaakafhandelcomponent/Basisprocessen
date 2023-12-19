@@ -1,0 +1,17 @@
+[
+    {
+        "processDefinitionKey": "vergunning-opkoopbescherming",
+        "canInitializeDocument": true,
+        "startableByUser": false
+    },
+    {
+        "processDefinitionKey": "wijzigen-opkoopbescherming-dossier-informatie",
+        "canInitializeDocument": false,
+        "startableByUser": true
+    },
+    {
+        "processDefinitionKey": "notitie-aanmaken-opkoopbescherming",
+        "canInitializeDocument": false,
+        "startableByUser": true
+    }
+]

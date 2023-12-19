@@ -1,0 +1,100 @@
+{
+    "display": "form",
+    "components": [
+        {
+            "readonly": false,
+            "key": "keycloakUser",
+            "type": "form-io-current-user",
+            "input": false
+        },
+        {
+            "type": "hidden",
+            "key": "aanvraag.dossier.afhandelingGeverifieerdDoor",
+            "calculateValue": "value = data.keycloakUser.voornaam + ' ' + data.keycloakUser.achternaam; console.log(data)",
+            "input": true
+        },
+        {
+            "label": "Container",
+            "tableView": false,
+            "key": "aanvraag.vergunning.resultaat",
+            "type": "container",
+            "input": true,
+            "components": [
+                {
+                    "label": "HTML",
+                    "content": "<h4>Resultaat inhoudelijke beoordeling</h4>\n<section>\n    <dl class=\"row mb-0\">\n        <dd class=\"col-4\">Resultaat</dd>\n        <dt class=\"col-8\">{{ data?.aanvraag?.vergunning?.resultaat?.status === 'VERGUNNING_WORDT_VERLEEND' ? 'Vergunning wordt verleend' : data?.aanvraag?.vergunning?.resultaat?.status === 'VERGUNNING_WORDT_NIET_VERLEEND' ? 'Vergunning wordt niet verleend' : data?.aanvraag?.vergunning?.resultaat?.status === 'ONTHEFFING_WORDT_VERLEEND' ? 'Ontheffing wordt verleend' : data?.aanvraag?.vergunning?.resultaat?.status === 'ONTHEFFING_WORDT_NIET_VERLEEND' ? 'Ontheffing wordt niet verleend' : data?.aanvraag?.vergunning?.resultaat?.status === 'BUITEN_BEHANDELING_GESTELD' ? 'Aanvraag wordt buiten behandeling gesteld' : data?.aanvraag?.vergunning?.resultaat?.status === 'AANVRAAG_INGETROKKEN' ? 'Aanvraag is ingetrokken' : data?.aanvraag?.vergunning?.resultaat?.status === 'AANVRAAG_ONTERECHT' ? 'Aanvraag is onterecht' :'Geen besluit genomen' }}</dt>\n    </dl>\n<dl class=\"row mb-0\">\n        <dd class=\"col-4\">Toelichting</dd>\n        <dt class=\"col-8\">{{ data.aanvraag?.vergunning?.resultaat?.toelichting || '-' }}</dt>\n    </dl> </section>",
+                    "refreshOnChange": false,
+                    "key": "html",
+                    "tag": "div",
+                    "type": "htmlelement",
+                    "input": false,
+                    "tableView": false
+                }
+            ]
+        },
+        {
+            "label": "Akkoord met afhandeling door initiële behandelaar?",
+            "optionsLabelPosition": "right",
+            "inline": false,
+            "tableView": false,
+            "values": [
+                {
+                    "label": "Ja",
+                    "value": true,
+                    "shortcut": ""
+                },
+                {
+                    "label": "Nee",
+                    "value": false,
+                    "shortcut": ""
+                }
+            ],
+            "validate": {
+                "required": true
+            },
+            "key": "aanvraag.inhoudelijkeBeoordeling.resultaatVerificatie",
+            "type": "radio",
+            "input": true
+        },
+        {
+            "label": "Toelichting",
+            "autoExpand": false,
+            "tableView": true,
+            "key": "aanvraag.inhoudelijkeBeoordeling.toelichtingVerificatie",
+            "type": "textarea",
+            "input": true,
+            "logic": [
+                {
+                    "name": "required",
+                    "trigger": {
+                        "type": "simple",
+                        "simple": {
+                            "show": true,
+                            "when": "aanvraag.inhoudelijkeBeoordeling.resultaatVerificatie",
+                            "eq": false
+                        }
+                    },
+                    "actions": [
+                        {
+                            "name": "setRequired",
+                            "type": "property",
+                            "property": {
+                                "label": "Required",
+                                "value": "validate.required",
+                                "type": "boolean"
+                            },
+                            "state": true
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "button",
+            "label": "Doorgaan",
+            "disableOnInvalid": true,
+            "tableView": false,
+            "input": true
+        }
+    ]
+}

@@ -1,0 +1,260 @@
+{
+    "display": "form",
+    "components": [
+        {
+            "label": "Vergunning",
+            "key": "aanvraag",
+            "type": "hidden",
+            "className": "d-none",
+            "input": true,
+            "tableView": false
+        },
+        {
+            "label": "open zaak prefill",
+            "key": "openZaak",
+            "type": "hidden",
+            "className": "d-none",
+            "input": true,
+            "tableView": false
+        },
+        {
+            "label": "additioneleInformatie",
+            "key": "additioneleInformatie",
+            "type": "hidden",
+            "input": true,
+            "tableView": false
+        },
+        {
+            "label": "Columns",
+            "columns": [
+                {
+                    "components": [
+                        {
+                            "tableView": false,
+                            "key": "aanvraag",
+                            "customClass": "mb-5 padding-5",
+                            "type": "container",
+                            "input": true,
+                            "components": [
+                                {
+                                    "label": "HTML",
+                                    "content": "<h4 class=\"border-bottom mb-2 mt-2 font-weight-bolder\">Aanvrager</h4>\n<section>\n    <dl class=\"row mb-0\">\n        <dd class=\"col-6\">BSN</dd>\n        <dt class=\"col-6\">{{ data?.aanvraag?.aanvrager?.bsn || '-' }}</dt>\n    </dl>\n    <dl class=\"row mb-0\">\n        <dd class=\"col-6\">Naam</dd>\n        <dt class=\"col-6\">{{ data?.aanvraag?.aanvrager?.volledigeNaam || '-' }}</dt>\n    </dl>\n    <dl class=\"row\">\n        <dd class=\"col-6\">Adres</dd>\n        <dt class=\"col-6\">{{ data?.aanvraag?.aanvrager?.adres?.straat || '-' }} {{ data?.aanvraag?.aanvrager?.adres?.huisnummer || '-' }} {{ data?.aanvraag?.aanvrager?.adres?.huisnummerToevoeging || '' }}<br/>\n            {{ data?.aanvraag?.aanvrager?.adres?.postcode || '-' }} {{ data?.aanvraag?.aanvrager?.adres?.plaats || '-' }}</dt>\n    </dl>\n    <dl class=\"row mb-0\">\n        <dd class=\"col-6\">Land</dd>\n        <dt class=\"col-6\">{{ data?.aanvraag?.aanvrager?.land || '-' }}</dt>\n    </dl>\n    <dl class=\"row mb-0\">\n        <dd class=\"col-6\">Telefoonnummer</dd>\n        <dt class=\"col-6\">{{ data?.aanvraag?.aanvrager?.telefoonnummer || '-' }}</dt>\n    </dl>\n    <dl class=\"row mb-0\">\n        <dd class=\"col-6\">E-mailadres</dd>\n        <dt class=\"col-6\">{{ data?.aanvraag?.aanvrager?.email }}</dt>\n    </dl>\n</section>",
+                                    "tableView": false,
+                                    "tag": "div",
+                                    "key": "html",
+                                    "type": "htmlelement",
+                                    "input": true
+                                }
+                            ],
+                            "customConditional": "show = data?.aanvraag?.aanvrager?.type == 'particulier'"
+                        },
+                        {
+                            "tableView": false,
+                            "key": "aanvraag",
+                            "customClass": "mb-5 padding-5",
+                            "type": "container",
+                            "input": true,
+                            "components": [
+                                {
+                                    "label": "HTML",
+                                    "content": "<h4 class=\"border-bottom mb-2 mt-2 font-weight-bolder\">Aanvrager</h4>\n<section>\n    <dl class=\"row mb-0\">\n        <dd class=\"col-6\">KvK-nummer</dd>\n        <dt class=\"col-6\">{{ data?.aanvraag?.aanvrager?.kvk || '-' }}</dt>\n    </dl>\n    <dl class=\"row mb-0\">\n        <dd class=\"col-6\">Bedrijfsnaam</dd>\n        <dt class=\"col-6\">{{ data?.aanvraag?.aanvrager?.bedrijfsnaam || '-' }}</dt>\n    </dl>\n    <dl class=\"row\">\n        <dd class=\"col-6\">Adres</dd>\n        <dt class=\"col-6\">{{ data?.aanvraag?.aanvrager?.adres?.straat || '-' }} {{ data?.aanvraag?.aanvrager?.adres?.huisnummer || '-' }} {{ data?.aanvraag?.aanvrager?.adres?.huisnummerToevoeging || '' }}<br/>\n            {{ data?.aanvraag?.aanvrager?.adres?.postcode || '-' }} {{ data?.aanvraag?.aanvrager?.adres?.plaats || '-' }}</dt>\n    </dl>\n    <dl class=\"row mb-0\">\n        <dd class=\"col-6\">Naam contactpersoon</dd>\n        <dt class=\"col-6\">{{ data?.aanvraag?.aanvrager?.voornaam || '-' }} {{ data?.aanvraag?.aanvrager?.tussenvoegsel || '' }}{{ data?.aanvraag?.aanvrager?.tussenvoegsel != '' ? ' ' : ''}}{{ data?.aanvraag?.aanvrager?.achternaam || '' }}</dt>\n    </dl>\n    <dl class=\"row mb-0\">\n        <dd class=\"col-6\">Telefoonnummer contactpersoon</dd>\n        <dt class=\"col-6\">{{ data?.aanvraag?.aanvrager?.telefoonnummer || '-' }}</dt>\n    </dl>\n    <dl class=\"row mb-0\">\n        <dd class=\"col-6\">E-mailadres contactpersoon</dd>\n        <dt class=\"col-6\">{{ data?.aanvraag?.aanvrager?.email }}</dt>\n    </dl>\n</section>",
+                                    "tableView": false,
+                                    "tag": "div",
+                                    "key": "html",
+                                    "type": "htmlelement",
+                                    "input": true
+                                }
+                            ],
+                            "customConditional": "show = data?.aanvraag?.aanvrager?.type == 'organisatie'"
+                        },
+                        {
+                            "tableView": false,
+                            "key": "aanvraag",
+                            "customClass": "mb-5 padding-5",
+                            "type": "container",
+                            "input": true,
+                            "components": [
+                                {
+                                    "label": "HTML",
+                                    "content": "<h4 class=\"border-bottom mb-2 mt-2 font-weight-bolder\">Te verhuren woonruimte</h4>\n<section>\n    <dl class=\"row mb-0\">\n        <dd class=\"col-6\">Adres</dd>\n        <dt class=\"col-6\">{{ data?.aanvraag?.woonruimte?.adres?.straat || '-' }} {{ data?.aanvraag?.woonruimte?.adres?.huisnummer || '-' }} {{ data?.aanvraag?.woonruimte?.adres?.huisnummerToevoeging || '' }}<br/>\n            {{ data?.aanvraag?.woonruimte?.adres?.postcode || '-' }} {{ data?.aanvraag?.woonruimte?.adres?.plaats || '-' }}</dt>\n    </dl>\n</section>",
+                                    "tableView": false,
+                                    "tag": "div",
+                                    "key": "html",
+                                    "type": "htmlelement",
+                                    "input": true
+                                },
+                                {
+                                    "label": "HTML",
+                                    "content": "<h4 class=\"border-bottom mb-2 mt-2 font-weight-bolder\">Vergunning of ontheffing aanvraag</h4>\n<section>\n    <dl class=\"row mb-0\">\n        <dd class=\"col-9\">Gaat u de woning verhuren aan één of meerdere eerste- of tweedegraads familieleden (bloed- of aanverwantschap)?</dd>\n        <dt class=\"col-3\">{{ data?.aanvraag?.vergunning.woningVerhuurdAanFamilie ? 'Ja' : 'Nee' }}</dt>\n    </dl>\n    <dl class=\"row mb-0 {{ data?.aanvraag?.vergunning.woningVerhuurdAanFamilie == true ? '' : 'd-none'}}\">\n        <dd class=\"col-1\"></dd>\n        <dd class=\"col-4\">Soort familie relatie</dd>\n        <dt class=\"col-7\">{{ data?.aanvraag?.vergunning?.familie?.soortRelatie || '-' }}</dt>\n    </dl>\n    <dl class=\"row mb-0 {{ data?.aanvraag?.vergunning.woningVerhuurdAanFamilie == true ? '' : 'd-none'}}\">\n        <dd class=\"col-1\"></dd>\n        <dd class=\"col-4\">Naam</dd>\n        <dt class=\"col-7\">{{ data?.aanvraag?.vergunning?.familie?.voornaam || '-' }} {{ data?.aanvraag?.vergunning?.familie?.tussenvoegsel || '' }}{{ data?.aanvraag?.vergunning?.familie?.tussenvoegsel != '' ? ' ' : '' }}{{ data?.aanvraag?.vergunning?.familie?.achternaam || '-' }}</dt>\n    </dl>\n    <dl class=\"row mb-0 {{ data?.aanvraag?.vergunning.woningVerhuurdAanFamilie == true ? '' : 'd-none'}}\">\n        <dd class=\"col-1\"></dd>\n        <dd class=\"col-4\">Geboorte datum</dd>\n        <dt class=\"col-7\">{{ data?.aanvraag?.vergunning?.familie?.geboorteDatum ? moment(data?.aanvraag?.vergunning?.familie?.geboorteDatum).format('DD-MM-yyyy') :  '-' }}</dt>\n    </dl>\n    <dl class=\"row mb-0 {{ data?.aanvraag?.vergunning.woningVerhuurdAanFamilie == true ? '' : 'd-none'}}\">\n        <dd class=\"col-1\"></dd>\n        <dd class=\"col-4\">Telefoonnummer</dd>\n        <dt class=\"col-7\">{{ data?.aanvraag?.vergunning?.familie?.telefoonnummer || '-' }}</dt>\n    </dl>\n    <dl class=\"row mb-0 {{ data?.aanvraag?.vergunning.woningVerhuurdAanFamilie == true ? '' : 'd-none'}}\">\n        <dd class=\"col-1\"></dd>\n        <dd class=\"col-4\">E-mailadres</dd>\n        <dt class=\"col-7\">{{ data?.aanvraag?.vergunning?.familie?.email || '-' }}</dt>\n    </dl>\n    <dl class=\"row mb-0\">\n        <dd class=\"col-9\">Gaat u de woning tijdelijk verhuren voor maximaal één jaar? Bijvoorbeeld in verband met verblijf in het buitenland.</dd>\n        <dt class=\"col-3\">{{ data?.aanvraag?.vergunning.tijdelijkeHuur ? 'Ja' : 'Nee' }}</dt>\n    </dl>\n    <dl class=\"row mb-0\">\n        <dd class=\"col-9\">Heeft u (de eigenaar) minimaal een jaar op de woning ingeschreven gestaan in de Basisregistratie personen voordat u de woning gaat verhuren?</dd>\n        <dt class=\"col-3\">{{ data?.aanvraag?.vergunning.eigenaarMinimaalEenJaarIngeschrevenBRP ? 'Ja' : 'Nee' }}</dt>\n    </dl>\n    <dl class=\"row mb-0\">\n        <dd class=\"col-9\">Is de woning onlosmakelijk verbonden met een winkel-, kantoor- of bedrijfspand?</dd>\n        <dt class=\"col-3\">{{ data?.aanvraag?.vergunning.woningOnlosmakelijkVerbonden ? 'Ja' : 'Nee' }}</dt>\n    </dl>\n    <dl class=\"row mb-0\">\n        <dd class=\"col-9\">Betreft het een woning die u gelijktijdig met andere woningen aankoopt binnen één complex? Zo ja, gaat dit om vier tot negen woningen?</dd>\n        <dt class=\"col-3\">{{ data?.aanvraag?.vergunning.betreftMeerdereWoningenTegelijkGekocht ? 'Ja' : 'Nee' }}</dt>\n    </dl>\n    <dl class=\"row\">\n        <dd class=\"col-9\">Bent u van plan de woning in gebruik te geven voor een maatschappelijk gewenst doel?</dd>\n        <dt class=\"col-3\">{{ data?.aanvraag?.vergunning.gebruikVoorMaatschappelijkDoel ? 'Ja' : 'Nee' }}</dt>\n    </dl>\n    <div class=\"mb-5 {{ data?.aanvraag?.vergunning.gebruikVoorMaatschappelijkDoel == true ? '' : 'd-none'}}\">\n        <div class=\"mb-1\"><strong>Toelichting op hoe de situatie tot stand is gekomen, de doelstellingen van de eigenaar, en waarom verhuur van deze woning maatschappelijk gewenst is.</strong></div>\n        {{ data?.aanvraag?.vergunning.gebruikVoorMaatschappelijkDoelToelichting || '-' }}\n    </div>\n    <dl class=\"row\">\n        <dd class=\"col-9\">Zijn er omstandigheden die maken dat u het verhuurverbod dat uit de opkoopbescherming voortvloeit redelijkerwijs niet kunt naleven?</dd>\n        <dt class=\"col-3\">{{ data?.aanvraag?.vergunning.kanVerhuurverbodNietNaleven ? 'Ja' : 'Nee' }}</dt>\n    </dl>\n    <div class=\"mb-5 {{ data?.aanvraag?.vergunning.kanVerhuurverbodNietNaleven == true ? '' : 'd-none'}}\">\n        <div class=\"mb-1\"><strong>Beschrijving van de situatie waarom de aanvrager denkt in aanmerking te komen voor een ontheffing.</strong></div>\n        {{ data?.aanvraag?.vergunning.kanVerhuurverbodNietNalevenToelichting || '-' }}\n    </div>\n    <dl class=\"row mb-0\">\n        <dd class=\"col-9\">Woont u zelf in de woning en wilt u de woning delen met een of meerdere personen waar u geen gemeenschappelijke huishouding mee voert?</dd>\n        <dt class=\"col-3\">{{ data?.aanvraag?.vergunning.woontZelfInDeWoning ? 'Ja' : 'Nee' }}</dt>\n    </dl>\n</section>",
+                                    "tableView": false,
+                                    "tag": "div",
+                                    "key": "html",
+                                    "type": "htmlelement",
+                                    "input": true
+                                },
+                                {
+                                    "label": "HTML",
+                                    "content": "<h4 class=\"border-bottom mb-2 mt-2 font-weight-bolder\">Opkoopbescherming</h4>\n<section>\n    <dl class=\"row mb-0\">\n        <dd class=\"col-9\">Wat is de WOZ-waarde van uw woning?</dd>\n        <dt class=\"col-3\">€ {{ data?.aanvraag?.opkoopbescherming?.woz.toFixed(0).toString().replace(/\\B(?=(\\d{3})+(?!\\d))/g, \".\") + ',-' || '-' }}</dt>\n    </dl>\n    <dl class=\"row mb-0\">\n        <dd class=\"col-9\">Wanneer is de akte van levering van de woning ingeschreven in het Kadaster?</dd>\n        <dt class=\"col-3\">{{ data?.aanvraag?.opkoopbescherming?.aankoopDatum ? moment(data?.aanvraag?.opkoopbescherming?.aankoopDatum).format('DD-MM-yyyy') : '-' }}</dt>\n    </dl>\n    <dl class=\"row mb-0\">\n        <dd class=\"col-9\">Is de woning niet of korter dan 6 maanden voorafgaand aan de inschrijving van de akte van levering van de woning in het Kadaster in zijn geheel verhuurd of in gebruik gegeven?</dd>\n        <dt class=\"col-3\">{{ data?.aanvraag?.opkoopbescherming?.woningLangerDan6MaandenLeeg ? 'Ja' : 'Nee' }}</dt>\n    </dl>\n    <dl class=\"row mb-0\">\n        <dd class=\"col-9\">Betreft het een woning die u gelijktijdig met andere woningen aankoopt binnen één complex? En zo ja, gaat dit om tien woningen of meer?</dd>\n        <dt class=\"col-3\">{{ data?.aanvraag?.opkoopbescherming?.betreftMeerdereWoningenBinnenEenComplex ? 'Ja' : 'Nee' }}</dt>\n    </dl>\n    <dl class=\"row mb-0\">\n        <dd class=\"col-9\">Betreft het een woning waarvoor een verhuurverbod is opgenomen in de erfpachtvoorwaarden?</dd>\n        <dt class=\"col-3\">{{ data?.aanvraag?.opkoopbescherming?.betreftWoningWaarvoorVerhuurverbodOpgenomenInErfpachtvoorwaarden ? 'Ja' : 'Nee' }}</dt>\n    </dl>\n    <dl class=\"row mb-0\">\n        <dd class=\"col-9\">Betreft het een woning ontstaan door nieuwbouw of transformatie zonder erfpachtcontract met de gemeente en waarvan de ontwikkeling is gestart na 1 april 2022?</dd>\n        <dt class=\"col-3\">{{ data?.aanvraag?.opkoopbescherming?.betreftWoningOntstaanDoorNieuwbouwOfTransformatie ? 'Ja' : 'Nee' }}</dt>\n    </dl>\n</section>",
+                                    "tableView": false,
+                                    "tag": "div",
+                                    "key": "html",
+                                    "type": "htmlelement",
+                                    "input": true
+                                }
+                            ]
+                        }
+                    ],
+                    "width": 6,
+                    "offset": 0,
+                    "push": 0,
+                    "pull": 0,
+                    "size": "md",
+                    "currentWidth": 6
+                },
+                {
+                    "components": [
+                        {
+                            "tableView": false,
+                            "key": "aanvraag",
+                            "customClass": "mb-5 padding-5",
+                            "type": "container",
+                            "input": true,
+                            "components": [
+                                {
+                                    "tableView": false,
+                                    "customClass": "d-none",
+                                    "key": "openZaak",
+                                    "type": "container",
+                                    "input": true,
+                                    "components": [
+                                        {
+                                            "label": "HTML",
+                                            "content": "<h4 class=\"border-bottom mb-2 mt-2 font-weight-bolder\">OpenZaak informatie</h4>\n<section>\n    <dl class=\"row mb-0\">\n        <dd class=\"col-6\">Openzaak ID</dd>\n        <dt class=\"col-6\">{{ data.openZaak?.zaaknummer || '-'}}</dt>\n    </dl>\n    <dl class=\"row mb-0\">\n        <dd class=\"col-6\">Zaakstatus</dd>\n        <dt class=\"col-6\">{{ data.openZaak?.zaakstatus || '-'}}</dt>\n    </dl>\n    <dl class=\"row mb-0\">\n        <dd class=\"col-6\">Zaakresultaat</dd>\n        <dt class=\"col-6\">{{ data.openZaak?.zaakresultaat || '-' }}</dt>\n    </dl>\n </section>",
+                                            "tableView": false,
+                                            "tag": "div",
+                                            "key": "html",
+                                            "type": "htmlelement",
+                                            "input": true
+                                        }
+                                    ]
+                                },
+                                {
+                                    "label": "HTML",
+                                    "content": "<h4 class=\"border-bottom mb-2 mt-2 font-weight-bolder\">Zaakdossier informatie</h4> <section> <dl class=\"row mb-0\"> <dd class=\"col-6\">Datum aanvraag</dd> <dt class=\"col-6\">{{ data?.aanvraag?.dossier?.aanvraagDatum ? moment(data?.aanvraag?.dossier?.aanvraagDatum).format('DD-MM-yyyy') : '-' }}</dt> </dl> <dl class=\"row mb-0\"> <dd class=\"col-6\">Dossier status</dd> <dt class=\"col-6\">{{ data?.aanvraag?.dossier?.status || '-' }}</dt> </dl> <dl class=\"row mb-0\"> <dd class=\"col-6\">Beschikkingsnummer</dd> <dt class=\"col-6\">{{ data.aanvraag?.inhoudelijkeBeoordeling?.beschikkingsnummer || '-' }}</dt> </dl> </section>",
+                                    "tableView": false,
+                                    "tag": "div",
+                                    "key": "html",
+                                    "type": "htmlelement",
+                                    "input": true
+                                },
+                                {
+                                    "label": "HTML",
+                                    "content": "<h4 class=\"border-bottom mb-2 mt-2 font-weight-bolder\">Meeste recente additionele informatie verzoek</h4>\n<section>\n    <dl class=\"row mb-0\">\n        <dd class=\"col-6\">Additionele informatie benodigd</dd>\n        <dt class=\"col-6\">{{ data?.aanvraag?.vergunning?.additioneleInformatie?.toelichtingVerzoek || '-' }}</dt>\n    </dl>\n    <dl class=\"row mb-0\">\n        <dd class=\"col-6\">Deadline aanleveren additionele informatie</dd>\n        <dt class=\"col-6\">{{ data.aanvraag?.vergunning?.additioneleInformatie?.deadline ? moment(data.aanvraag?.vergunning?.additioneleInformatie?.deadline).format('DD-MM-yyyy') : '-' }}</dt>\n    </dl>\n</section>\n",
+                                    "tableView": false,
+                                    "tag": "div",
+                                    "key": "html",
+                                    "type": "htmlelement",
+                                    "input": true
+                                },
+                                {
+                                    "label": "HTML",
+                                    "content": "<h4 class=\"border-bottom mb-2 mt-2 font-weight-bolder\">Meeste recente additionele informatie reactie</h4>\n<section>\n<dl class=\"row mb-0\">\n        <dd class=\"col-6\">Verzoek geannuleerd op (ivm geen reactie)</dd>\n        <dt class=\"col-6\">{{ data?.aanvraag?.vergunning?.additioneleInformatie?.verzoekGeannuleerdDatum || '-' }}</dt>\n    </dl>\n    <dl class=\"row mb-0\">\n        <dd class=\"col-6\">Datum reactie aanvrager</dd>\n        <dt class=\"col-6\">{{data?.aanvraag?.vergunning?.additioneleInformatie?.toelichtingen && data?.aanvraag?.vergunning?.additioneleInformatie?.toelichtingen.length > 0 && data?.aanvraag?.vergunning?.additioneleInformatie?.toelichtingen.at(-1)?.datum != null ? moment(data?.aanvraag?.vergunning?.additioneleInformatie?.toelichtingen.at(-1)?.datum).format('MM-DD-YYYY HH:mm:ss') : '-'  }}</dt>\n    </dl>\n    <dl class=\"row mb-0\">\n        <dd class=\"col-6\">Reactie aanvrager</dd>\n        <dt class=\"col-6\">{{ data?.aanvraag?.vergunning?.additioneleInformatie?.toelichtingen && data?.aanvraag?.vergunning?.additioneleInformatie?.toelichtingen.length > 0 && data?.aanvraag?.vergunning?.additioneleInformatie?.toelichtingen.at(-1)?.reactie != null ? data?.aanvraag?.vergunning?.additioneleInformatie?.toelichtingen.at(-1)?.reactie : '-'  }}</dt>\n    </dl>\n</section>",
+                                    "tableView": false,
+                                    "tag": "div",
+                                    "key": "html",
+                                    "type": "htmlelement",
+                                    "input": true
+                                },
+                                {
+                                    "label": "HTML",
+                                    "content": "<h4 class=\"border-bottom mb-2 mt-2 font-weight-bolder\">Resultaat inhoudelijke Beoordeling</h4>\n<section>\n    <dl class=\"row mb-0\">\n        <dd class=\"col-6\">Besluit aanvraag voor verhuurvergunning of ontheffing opkoopbescherming</dd>\n        <dt class=\"col-6\">{{ data?.aanvraag?.vergunning?.resultaat?.status === 'VERGUNNING_WORDT_VERLEEND' ? 'Vergunning wordt verleend' : data?.aanvraag?.vergunning?.resultaat?.status === 'VERGUNNING_WORDT_NIET_VERLEEND' ? 'Vergunning wordt niet verleend' : data?.aanvraag?.vergunning?.resultaat?.status === 'ONTHEFFING_WORDT_VERLEEND' ? 'Ontheffing wordt verleend' : data?.aanvraag?.vergunning?.resultaat?.status === 'ONTHEFFING_WORDT_NIET_VERLEEND' ? 'Ontheffing wordt niet verleend' : data?.aanvraag?.vergunning?.resultaat?.status === 'BUITEN_BEHANDELING_GESTELD' ? 'Aanvraag wordt buiten behandeling gesteld' : data?.aanvraag?.vergunning?.resultaat?.status === 'AANVRAAG_INGETROKKEN' ? 'Aanvraag is ingetrokken' : data?.aanvraag?.vergunning?.resultaat?.status === 'AANVRAAG_ONTERECHT' ? 'Aanvraag is onterecht' : '-' }}</dt>\n    </dl>\n    <dl class=\"row mb-0\">\n        <dd class=\"col-6\">Geselecteerde reden</dd>\n        <dt class=\"col-6\">{{ data?.aanvraag?.vergunning?.resultaat?.redenVergunningVerleend || '-' }}</dt>\n    </dl><br/>\n    <dl class=\"row mb-0\">\n        <dd class=\"col-6\">Besluit genomen op</dd>\n        <dt class=\"col-6\">{{ data?.aanvraag?.besluitGenomenOp ? moment(data?.aanvraag?.besluitGenomenOp).format('DD-MM-yyyy') : '-' }}\n        </dt>\n    </dl>\n    <div>\n        <strong>\n            Motivering genomen besluit\n        </strong>\n        <br/>\n        {{ data.aanvraag?.vergunning?.resultaat?.toelichting || '-' }}\n    </div>\n</section>",
+                                    "tableView": false,
+                                    "tag": "div",
+                                    "key": "html",
+                                    "type": "htmlelement",
+                                    "input": true
+                                },
+                                {
+                                    "label": "HTML",
+                                    "content": "<h4 class=\"border-bottom mb-2 mt-2 font-weight-bolder\">Verificatie afhandeling</h4>\n<section>\n    <dl class=\"row mb-0\">\n        <dd class=\"col-6\">Afhandeling geverifieerd door</dd>\n        <dt class=\"col-6\">{{ data?.aanvraag?.dossier?.afhandelingGeverifieerdDoor || '-' }}</dt>\n    </dl>\n    <dl class=\"row mb-0\">\n        <dd class=\"col-6\">Akkoord met afhandeling door initiële behandelaar</dd>\n        <dt class=\"col-6\">{{ data?.aanvraag?.inhoudelijkeBeoordeling?.resultaatVerificatie != null ? data.aanvraag?.inhoudelijkeBeoordeling?.resultaatVerificatie ? 'Ja' : 'Nee' : '-'}}</dt>\n    </dl>\n    <br/>\n    <div class=\"{{ !data?.aanvraag?.inhoudelijkeBeoordeling?.resultaatVerificatie ? '' : 'd-none' }}\">\n        <strong>\n            Toelichting\n        </strong>\n        <br/>\n        {{ data?.aanvraag?.inhoudelijkeBeoordeling?.toelichtingVerificatie || '-' }}\n    </div>\n</section>",
+                                    "tableView": false,
+                                    "tag": "div",
+                                    "key": "html",
+                                    "type": "htmlelement",
+                                    "input": true
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Gerelateerde dossiers",
+                            "tableView": false,
+                            "key": "kinderen",
+                            "type": "container",
+                            "customConditional": "show = (data.gerelateerdeDossiers.length >= 1)",
+                            "input": false,
+                            "components": [
+                                {
+                                    "label": "HTML",
+                                    "customClass": "panel-header",
+                                    "content": "<h4 class=\"border-bottom mb-2 mt-2 font-weight-bolder\">Gerelateerde dossiers</h4>",
+                                    "tableView": false,
+                                    "tag": "div",
+                                    "key": "html",
+                                    "type": "htmlelement",
+                                    "input": true
+                                },
+                                {
+                                    "label": "Gerelateerde dossiers",
+                                    "customClass": "summary-datagrid-borderless",
+                                    "hideLabel": true,
+                                    "reorder": false,
+                                    "addAnotherPosition": "bottom",
+                                    "disableAddingRemovingRows": true,
+                                    "layoutFixed": false,
+                                    "enableRowGroups": false,
+                                    "initEmpty": false,
+                                    "tableView": false,
+                                    "key": "gerelateerdeDossiersShow",
+                                    "defaultValue": [],
+                                    "type": "datagrid",
+                                    "calculateValue": "value = data.gerelateerdeDossiers",
+                                    "input": true,
+                                    "components": [
+                                        {
+                                            "label": "HTML",
+                                            "hideLabel": true,
+                                            "tag": "p",
+                                            "content": "<section> <dl class=\"row mb-0 p-0\"> <dt> {{ '<a href=\"../dossiers/'+ window.location.pathname.split('/').at(2) +'/document/'+row + '/summary\" target=\"_blank\">' + row + '</a>' }} </dt> </dl> </section>",
+                                            "refreshOnChange": false,
+                                            "key": "html",
+                                            "type": "htmlelement",
+                                            "input": false,
+                                            "tableView": false
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "width": 6,
+                    "offset": 0,
+                    "push": 0,
+                    "pull": 0,
+                    "size": "md",
+                    "currentWidth": 6
+                }
+            ],
+            "key": "columns",
+            "type": "columns",
+            "input": false,
+            "tableView": false
+        },
+        {
+            "label": "Dossier",
+            "key": "gerelateerdeDossiers",
+            "type": "hidden",
+            "input": true,
+            "tableView": false
+        }
+    ]
+}

@@ -1,0 +1,88 @@
+[
+    {
+        "title": "",
+        "key": "vergunning.applicantName",
+        "path": "doc:aanvraag.aanvrager.volledigeNaam",
+        "displayType": {
+            "type": "string",
+            "displayTypeParameters": {}
+        },
+        "sortable": true,
+        "defaultSort": null,
+        "order": 0
+    },
+    {
+        "title": "",
+        "key": "vergunning.applicationDate",
+        "path": "case:createdOn",
+        "displayType": {
+            "type": "date",
+            "displayTypeParameters": {
+                "dateFormat": null
+            }
+        },
+        "sortable": true,
+        "defaultSort": "DESC",
+        "order": 5
+    },
+    {
+        "title": "",
+        "key": "vergunning.dossierStatus",
+        "path": "doc:aanvraag.dossier.status",
+        "displayType": {
+            "type": "string",
+            "displayTypeParameters": {}
+        },
+        "sortable": true,
+        "defaultSort": null,
+        "order": 0
+    },
+    {
+        "title": "",
+        "key": "assigneeFullName",
+        "path": "case:assigneeFullName",
+        "displayType": {
+            "type": "string",
+            "displayTypeParameters": {}
+        },
+        "sortable": true,
+        "defaultSort": null,
+        "order": 2
+    },
+    {
+        "title": "",
+        "key": "vergunning.decisionNumber",
+        "path": "doc:aanvraag.inhoudelijkeBeoordeling.beschikkingsnummer",
+        "displayType": {
+            "type": "string",
+            "displayTypeParameters": {}
+        },
+        "sortable": true,
+        "defaultSort": null,
+        "order": 4
+    },
+    {
+        "title": "",
+        "key": "vergunning.besluitGenomenOp",
+        "path": "doc:aanvraag.besluitGenomenOp",
+        "displayType": {
+            "type": "date",
+            "displayTypeParameters": {}
+        },
+        "sortable": true,
+        "defaultSort": null,
+        "order": 5
+    },
+    {
+        "title": "",
+        "key": "vergunning.checkoutVerifiedBy",
+        "path": "doc:aanvraag.dossier.afhandelingGeverifieerdDoor",
+        "displayType": {
+            "type": "string",
+            "displayTypeParameters": {}
+        },
+        "sortable": true,
+        "defaultSort": null,
+        "order": 6
+    }
+]

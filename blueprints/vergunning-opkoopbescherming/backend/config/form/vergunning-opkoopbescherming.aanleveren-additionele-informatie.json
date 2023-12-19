@@ -1,0 +1,51 @@
+{
+    "display": "form",
+    "components": [
+        {
+            "label": "Toelichting richting de aanvrager",
+            "key": "aanvraag.vergunning.additioneleInformatie.toelichtingVerzoek",
+            "type": "hidden",
+            "input": true,
+            "tableView": false
+        },
+        {
+            "content": "<strong>De volgende informatie dient nog aangeleverd te worden, voordat uw aanvraag in behandeling genomen kan worden:</strong> <br/><br/> - {{ data.aanvraag.vergunning.additioneleInformatie.toelichtingVerzoek }}",
+            "label": "HTML",
+            "refreshOnChange": false,
+            "key": "html",
+            "type": "htmlelement",
+            "input": false,
+            "tableView": false
+        },
+        {
+            "type": "valtimo-file",
+            "label": "Stukken",
+            "key": "aanvraag.vergunning.additioneleInformatie.documentatie",
+            "customOptions": {
+                "title": "",
+                "hideTitle": false,
+                "subtitle": "",
+                "maxFileSize": 5,
+                "hideMaxFileSize": false,
+                "camera": false
+            },
+            "input": true,
+            "tableView": false
+        },
+        {
+            "label": "Toelichting",
+            "autoExpand": true,
+            "tableView": true,
+            "key": "aanvraag.vergunning.additioneleInformatie.toelichting",
+            "type": "textarea",
+            "input": true
+        },
+        {
+            "type": "button",
+            "label": "Doorgaan",
+            "disableOnInvalid": true,
+            "tableView": false,
+            "input": true
+        }
+    ]
+}

@@ -1,0 +1,12 @@
+[
+    {
+        "formName": "wijzigen-opkoopbescherming-dossier-informatie.start",
+        "formLinkElementId": "StartWijzigenDossierInformatieStartEvent",
+        "formAssociationType": "start-event"
+    },
+    {
+        "formName": "wijzigen-opkoopbescherming-dossier-informatie.wijzigen-dossier-informatie",
+        "formLinkElementId": "WijzigenDossierInformatieTask",
+        "formAssociationType": "user-task"
+    }
+]

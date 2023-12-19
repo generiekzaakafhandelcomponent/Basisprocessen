@@ -1,0 +1,21 @@
+{
+    "$id": "open-zaak.schema",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "OpenZaak",
+    "properties": {
+        "status": {
+            "type": "string",
+            "description": "Zaak status uit openzaak"
+        },
+        "resultaat": {
+            "type": "string",
+            "description": "Resultaat uit openzaak"
+        },
+        "zaaknummer": {
+            "type": "string",
+            "description": "Zaaknummer uit openzaak"
+        }
+    },
+    "definitions": {
+    }
+}
