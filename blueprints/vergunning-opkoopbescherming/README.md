@@ -3,7 +3,7 @@
 
 ![vergunning-opkoopbescherming](vergunning-opkoopbescherming.png)
 ## Inleiding
-TODO Description
+Dit basisproces kan gebruikt worden om een aanvraag voor een verhuurvergunning bij opkoopbescherming te verwerken. 
 
 ## Installatie
 We gaan uit van een bestaande Valtimo GZAC backend repository. Dit basisproces is getest op Valtimo GZAC 10.7.0.RELEASE.
@@ -20,4 +20,4 @@ Na een refresh van de pagina is het `Vergunning Opkoopbescherming` dossier besch
 
 ## Uitvoeren proces
 
-TODO Guide on how to use the process
+Het proces kan gestart worden door het aanmaken van een nieuw dossier en vervolgens een aanvraagformulier in te vullen. Na het indienen kan een behandelaar vervolgens de aanvraag beoordelen en een besluit nemen. Een optionele 2-ogen mechanisme is in het proces opgenomen om de beoordeling te laten controleren. Na akkoord wordt (mits geïmplementeerd) het besluit opgslagen en de zaak afgesloten.
